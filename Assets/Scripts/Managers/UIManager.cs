@@ -17,7 +17,6 @@ public class UIManager : MonoBehaviour
         {
             if (player.GetHoldingPlant().gameObject.name != plant.gameObject.name)
             {
-                Debug.Log("fuck");
                 player.DestroyHoldingPlant();
                 CreatePlantOnPlayerHand(plant.gameObject);
             }

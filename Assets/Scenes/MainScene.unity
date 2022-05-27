@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -18810,7 +18810,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &525750410
 MonoBehaviour:
@@ -24533,7 +24533,7 @@ MonoBehaviour:
         m_MethodName: SpawnPlantOnHand
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6710665124408456015, guid: d5f96c4e51379b048b34062ad557727e, type: 3}
+          m_ObjectArgument: {fileID: 1227793505769876612, guid: 179c582b7740bc246b3a767338bd2457, type: 3}
           m_ObjectArgumentAssemblyTypeName: Plant, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -34987,13 +34987,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 997783736}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.779582, y: 1.6676489, z: -2.9904783}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.6697903, y: 1.5940493, z: -0.6089554}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1028891810}
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Children: []
+  m_Father: {fileID: 1796058133}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &997783738
 MonoBehaviour:
@@ -35793,11 +35792,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1028891807}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.779582, y: -1.6676489, z: 2.9904783}
+  m_LocalPosition: {x: -2.8902082, y: -0.07359958, z: 2.381523}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 997783737}
-  m_RootOrder: 0
+  m_Father: {fileID: 1796058133}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1030723063
 GameObject:
@@ -41704,7 +41703,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1201303614
 MonoBehaviour:
@@ -52427,7 +52426,7 @@ RectTransform:
   - {fileID: 68176794}
   - {fileID: 102734543}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -55673,7 +55672,7 @@ MonoBehaviour:
         m_MethodName: SpawnPlantOnHand
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 6710665124408456015, guid: d5f96c4e51379b048b34062ad557727e, type: 3}
+          m_ObjectArgument: {fileID: 4232963029736067433, guid: a9b39d9a0286a9144b3ad842d48e4d4c, type: 3}
           m_ObjectArgumentAssemblyTypeName: Plant, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -57048,7 +57047,7 @@ Transform:
   - {fileID: 747880135}
   - {fileID: 712216937}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1715284544
 GameObject:
@@ -60543,6 +60542,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1795861969}
   m_CullTransparentMesh: 1
+--- !u!1 &1796058132
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1796058133}
+  m_Layer: 0
+  m_Name: Managers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1796058133
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1796058132}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.890208, y: 0.073599555, z: -2.381523}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 997783737}
+  - {fileID: 1870683884}
+  - {fileID: 1028891810}
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1796092080
 GameObject:
   m_ObjectHideFlags: 0
@@ -63981,6 +64013,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1870367643}
   m_CullTransparentMesh: 1
+--- !u!1 &1870683883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1870683884}
+  - component: {fileID: 1870683885}
+  m_Layer: 0
+  m_Name: PlantsManager
+  m_TagString: PlantsManager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1870683884
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870683883}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1796058133}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1870683885
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1870683883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b95665ebac96d4783e35e694a474dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprout: {fileID: 7624299711721834818, guid: d0cd65066f9d2dc4291ddb2558d35e91, type: 3}
+  debugPlant: {fileID: 4232963029736067433, guid: a9b39d9a0286a9144b3ad842d48e4d4c, type: 3}
+  debugFlowerPot: {fileID: 2076649180}
 --- !u!1 &1874655921
 GameObject:
   m_ObjectHideFlags: 0
@@ -69638,7 +69716,7 @@ Transform:
   - {fileID: 199426989}
   - {fileID: 1111115998}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2076649180
 MonoBehaviour:

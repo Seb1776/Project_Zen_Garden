@@ -1005,9 +1005,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1227793505769876610}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.839, y: 0.478, z: -1.976}
-  m_LocalScale: {x: -0.25081232, y: 0.25081226, z: 0.25081226}
+  m_LocalScale: {x: -0.06914645, y: 0.06914643, z: 0}
   m_Children:
   - {fileID: 1227793506429346407}
   m_Father: {fileID: 0}
@@ -1036,6 +1036,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed4246f2b1a91c4d8f4a71ce462312a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  plantData: {fileID: 11400000, guid: 148139b22dea59a4a8482cbaef1832df, type: 2}
+  sproutDeAppearAnimation: {fileID: 7400000, guid: 10e4b143a361e4e4ba7677bc140dd41e, type: 2}
   planted: 0
 --- !u!95 &1227793505769876611
 Animator:

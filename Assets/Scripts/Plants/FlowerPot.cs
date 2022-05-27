@@ -5,9 +5,15 @@ using UnityEngine;
 public class FlowerPot : MonoBehaviour
 {
     [SerializeField] Transform plantPlantingPosition;
-
+    
+    PlantsManager plantsManager;
     private Plant hoveringPlant;
     Collider triggerCollider;
+
+    void Awake()
+    {
+        plantsManager = GameObject.FindGameObjectWithTag("PlantsManager").GetComponent<PlantsManager>();
+    }
 
     void Start()
     {
@@ -23,10 +29,13 @@ public class FlowerPot : MonoBehaviour
 
     public void PlantPlant(Plant p)
     {
+        GameObject _s = Instantiate(plantsManager.GetSprout(), plantPlantingPosition.position, Quaternion.identity);
+        _s.transform.position = plantPlantingPosition.position;
         p.transform.position = plantPlantingPosition.position;
         p.transform.parent = transform;
+        _s.transform.parent = transform;
         p.ApplyColorToPlant();
-        p.SetPlanted();
+        p.SetPlanted(_s);
         triggerCollider.enabled = false;
     }
 }
