@@ -10,9 +10,4 @@ public class GameManager : MonoBehaviour
     {
         return mainCam;
     }
-
-    public void Message()
-    {
-        Debug.Log("button");
-    }
 }

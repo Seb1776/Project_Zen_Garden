@@ -5,27 +5,41 @@ using UnityEngine.InputSystem;
 
 public class Plant : MonoBehaviour
 {
-    [SerializeField] private PlantAsset plantData;
+    public PlantAsset plantData;
     [SerializeField] private AnimationClip sproutDeAppearAnimation;
 
     private GameManager manager;
-    [SerializeField] private bool planted;
+    private PlantsManager plantsManager;
+    private bool planted;
     private bool growth;
     private GameObject _sprout;
-    private GameObject _plant;
     private Collider coll;
     private Transform handPosition;
     private Player player;
     private Animator plantAnim;
-    private Vector3 plantFullSize;
+
+    private Vector2Int waterRange, compostRange, fertilizerRange, musicRange;
+    private Vector2 timeRange;
+    private float setTimeRange, currentTimeRange;
+    private bool waitingForInteraction;
+    private bool progressSet;
+    private bool gardenItemChosen;
+    private bool fullyGrown;
+    private GardenItemType? expectedItem = null;
+    private GardenItem itemHolding;
 
     void Awake()
     {
         plantAnim = GetComponent<Animator>();
         coll = GetComponent<Collider>();
+
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        plantsManager = GameObject.FindGameObjectWithTag("PlantsManager").GetComponent<PlantsManager>();
+
         plantAnim.speed = 0f;
+
+        plantsManager.AssignQualityData(this);
     }
 
     void Start()
@@ -37,7 +51,162 @@ public class Plant : MonoBehaviour
     void Update()
     {
         LookInCameraDirection();
+        PlantGrowBehaviour();
+        PlantProgress();
+    }
 
+    public void SetHandPosition(Transform _hand)
+    {
+        handPosition = _hand;
+    }
+
+    public void SetPlantProgress(PlantProcessAsset ppa)
+    {
+        waterRange.y = Random.Range(ppa.waterRange.x, ppa.waterRange.y);
+        compostRange.y = Random.Range(ppa.compostRange.x, ppa.compostRange.y);
+        fertilizerRange.y = Random.Range(ppa.fertilizerRange.x, ppa.fertilizerRange.y);
+        musicRange.y = Random.Range(ppa.musicRange.x, ppa.musicRange.y);
+        timeRange = ppa.timeRange;   
+        GetNewTimeRange();
+        progressSet = true;
+    }
+
+    void PlantProgress()
+    {
+        if (progressSet && !fullyGrown)
+        {
+            if (currentTimeRange < setTimeRange && !waitingForInteraction)
+                currentTimeRange += Time.deltaTime;
+            
+            else if (currentTimeRange >= setTimeRange)
+            {
+                waitingForInteraction = true;
+
+                if (!gardenItemChosen)
+                    ChooseGardenItem();
+            }
+        }
+    }
+
+    void GetNewTimeRange()
+    {
+        setTimeRange = Random.Range(timeRange.x, timeRange.y);
+    }
+
+    void GrowPlant()
+    {   
+        if (!growth)
+        {
+            _sprout.GetComponent<Animator>().SetTrigger("hide");
+            StartCoroutine(GrowPlantAfterSprout());
+        }
+    }
+
+    void ChooseGardenItem()
+    {
+        List<GardenItemType> availableItems = new List<GardenItemType>();
+
+        for (int i = 0; i < 4; i++)
+        {
+            if (i == 0 && !ItemIsComplete(waterRange))
+                availableItems.Add(GardenItemType.Water);
+
+            else if (i == 1 && !ItemIsComplete(compostRange))
+                availableItems.Add(GardenItemType.Compost);
+
+            else if (i == 2 && !ItemIsComplete(fertilizerRange))
+                availableItems.Add(GardenItemType.Fertilizer);
+
+            else if (i == 3 && !ItemIsComplete(musicRange))
+                availableItems.Add(GardenItemType.Music);
+        }
+
+        for (int i = 0; i < availableItems.Count; i++)
+        {
+            if (Random.value >= .5f)
+            {
+                if (availableItems[i] == GardenItemType.Water)
+                {
+                    expectedItem = GardenItemType.Water;
+                    break;
+                }
+
+                else if (availableItems[i] == GardenItemType.Compost)
+                {
+                    expectedItem = GardenItemType.Compost;
+                    break;
+                }
+
+                else if (availableItems[i] == GardenItemType.Fertilizer)
+                {
+                    expectedItem = GardenItemType.Fertilizer;
+                    break;
+                }
+
+                else if (availableItems[i] == GardenItemType.Music)
+                {
+                    expectedItem = GardenItemType.Music;
+                    break;
+                }
+            }
+        }
+
+        gardenItemChosen = true;
+    }
+
+    public void ApplyGardenItem(GardenItemType item)
+    {   
+        if (item == expectedItem)
+        {
+            switch (item)
+            {
+                case GardenItemType.Water:
+                    waterRange.x++;
+                break;
+
+                case GardenItemType.Compost:
+                    compostRange.x++;
+                break;
+
+                case GardenItemType.Fertilizer:
+                    fertilizerRange.x++;
+                break;
+
+                case GardenItemType.Music:
+                    musicRange.x++;
+                break;
+            }
+
+            fullyGrown = CheckForAllRangesCompleted();
+
+            if (!fullyGrown)
+            {
+                currentTimeRange = 0f;
+                waitingForInteraction = false;
+                GetNewTimeRange();
+            }
+        }
+    }
+
+    bool CheckForAllRangesCompleted()
+    {
+        if (ItemIsComplete(waterRange) && ItemIsComplete(compostRange) && ItemIsComplete(fertilizerRange)
+            && ItemIsComplete(musicRange))
+                return true;
+        
+        return false;
+    }
+
+    bool ItemIsComplete(Vector2Int range)
+    {
+        if (range.x >= range.y)
+            return true;
+        
+        return false;
+    }
+
+    void PlantGrowBehaviour()
+    {
         if (!planted && handPosition != null)
             transform.position = handPosition.position;
         
@@ -53,20 +222,6 @@ public class Plant : MonoBehaviour
                 transform.localScale = plantData.initialScale;
                 growth = false;
             }
-        }
-    }
-
-    public void SetHandPosition(Transform _hand)
-    {
-        handPosition = _hand;
-    }
-
-    void GrowPlant()
-    {   
-        if (!growth)
-        {
-            _sprout.GetComponent<Animator>().SetTrigger("hide");
-            StartCoroutine(GrowPlantAfterSprout());
         }
     }
 
@@ -101,7 +256,6 @@ public class Plant : MonoBehaviour
     public void SetPlanted(GameObject _sp)
     {
         _sprout = _sp;
-        coll.enabled = false;
         planted = true;
     }
 

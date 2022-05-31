@@ -3,15 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum GameWorlds 
+{ 
+    AncientEgypt, PirateSeas, WildWest, 
+    FarFuture, DarkAges, BigWaveBeach, 
+    FrostbiteCaves, LostCity, NeonMixtapeTour,
+    JurassicMarsh, ModernDay
+}
+
+public enum PlantQuality
+{
+    Common, Rare, Epic, Legendary, Botanic
+}
+
+public enum GardenItemType
+{
+    Water, Compost, Fertilizer, Music
+}
+
 public class PlantsManager : MonoBehaviour
 {
-    public enum GameWorlds 
-    { 
-        AncientEgypt, PirateSeas, WildWest, 
-        FarFuture, DarkAges, BigWaveBeach, 
-        FrostbiteCaves, LostCity, NeonMixtapeTour,
-        JurassicMarsh, ModernDay
-    }
+    [Header ("Plant Presets")]
+    [SerializeField] private PlantProcessAsset[] plantProcessDatas;
 
     [SerializeField] private GameObject sprout;
     [SerializeField] private Plant debugPlant;
@@ -26,6 +39,23 @@ public class PlantsManager : MonoBehaviour
         }
     }
 
+    public void AssignQualityData(Plant plant)
+    {
+        PlantProcessAsset ppa = null;
+
+        for (int i = 0; i < plantProcessDatas.Length; i++)
+        {
+            if (plant.plantData.plantQuality == plantProcessDatas[i].qualityToApply)
+            {
+                ppa = plantProcessDatas[i];
+                break;
+            }
+        }
+
+        if (ppa != null)
+            plant.SetPlantProgress(ppa);
+    }
+
     public GameObject GetSprout()
     {
         return sprout;
@@ -35,6 +65,6 @@ public class PlantsManager : MonoBehaviour
 [System.Serializable]
 public class World
 {
-    public PlantsManager.GameWorlds world;
+    public GameWorlds world;
     public PlantAsset[] worldPlants;
 }

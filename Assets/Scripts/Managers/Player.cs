@@ -7,10 +7,12 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class Player : MonoBehaviour
 {
     private XRIDefaultInputActions xrDirect;
-    public VRHands leftHand;
+    public VRHandsLeft leftHand;
+    public VRHandsRight rightHand;
     private bool oneTeleporterEnabled;
     private Plant holdingPlant;
     private FlowerPot hoveringFlowerPot;
+    private GardenItem holdingGardenItem;
 
     void Awake()
     {
@@ -37,6 +39,9 @@ public class Player : MonoBehaviour
         leftHand.removePlant.Enable();
         leftHand.removePlant = xrDirect.XRILeftHandInteraction.ButtonA;
         leftHand.removePlant.performed += GetRidOfSelectedPlant;
+
+        rightHand.grabbedItemEffect.Enable();
+        rightHand.grabbedItemEffect = xrDirect.XRIRightHandInteraction.Activate;
     }
 
     public void PlantSelectedPlant(InputAction.CallbackContext ctx)
@@ -60,6 +65,18 @@ public class Player : MonoBehaviour
         Destroy(holdingPlant.gameObject);
         holdingPlant = null;
         hoveringFlowerPot = null;
+    }
+
+    public void SetGardenItem(GardenItem garden)
+    {
+        holdingGardenItem = garden;
+        rightHand.grabbedItemEffect.performed += holdingGardenItem.GardenItemAction;
+    }
+
+    public void DeSetGardenItem()
+    {
+        rightHand.grabbedItemEffect.performed -= holdingGardenItem.GardenItemAction;
+        holdingGardenItem = null;
     }
 
     public void CreatedAPlant(Plant _p)
@@ -101,11 +118,17 @@ public class Player : MonoBehaviour
 }
 
 [System.Serializable]
-public class VRHands
+public class VRHandsLeft
 {
     public XRRayInteractor handInteractor;
     public InputAction move;
     public InputAction plantAction;
     public InputAction removePlant;
     public bool canUse = true;
+}
+
+[System.Serializable]
+public class VRHandsRight
+{
+    public InputAction grabbedItemEffect;
 }

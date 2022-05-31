@@ -4,7 +4,8 @@ using UnityEngine;
 public class PlantAsset : ScriptableObject 
 {
     public string plantName;
-    public PlantsManager.GameWorlds appearsIn;
+    public GameWorlds appearsIn;
+    public PlantQuality plantQuality;
     public int buyPrice;
     public int revenuePrice;
     public Vector3 initialScale;
