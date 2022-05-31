@@ -25,6 +25,8 @@ public class Plant : MonoBehaviour
     private bool progressSet;
     private bool gardenItemChosen;
     private bool fullyGrown;
+    private int growThreshold;
+    private int currentGrowThreshold;
     private GardenItemType? expectedItem = null;
     private GardenItem itemHolding;
 
@@ -53,6 +55,26 @@ public class Plant : MonoBehaviour
         LookInCameraDirection();
         PlantGrowBehaviour();
         PlantProgress();
+        NonVRDebug();
+    }
+
+    void NonVRDebug()
+    {
+        if (waitingForInteraction)
+        {
+            if (Keyboard.current.qKey.wasPressedThisFrame)
+                ApplyGardenItem(GardenItemType.Water);
+            
+            if (Keyboard.current.wKey.wasPressedThisFrame)
+                ApplyGardenItem(GardenItemType.Compost);
+            
+            if (Keyboard.current.eKey.wasPressedThisFrame)
+                ApplyGardenItem(GardenItemType.Fertilizer);
+
+            if (Keyboard.current.rKey.wasPressedThisFrame)
+                ApplyGardenItem(GardenItemType.Music);
+
+        }
     }
 
     public void SetHandPosition(Transform _hand)
@@ -66,7 +88,8 @@ public class Plant : MonoBehaviour
         compostRange.y = Random.Range(ppa.compostRange.x, ppa.compostRange.y);
         fertilizerRange.y = Random.Range(ppa.fertilizerRange.x, ppa.fertilizerRange.y);
         musicRange.y = Random.Range(ppa.musicRange.x, ppa.musicRange.y);
-        timeRange = ppa.timeRange;   
+        timeRange = ppa.timeRange;
+        growThreshold = (int)((waterRange.y + compostRange.y + fertilizerRange.y + musicRange.y) / 2f);
         GetNewTimeRange();
         progressSet = true;
     }
@@ -90,7 +113,7 @@ public class Plant : MonoBehaviour
 
     void GetNewTimeRange()
     {
-        setTimeRange = Random.Range(timeRange.x, timeRange.y);
+        setTimeRange = 2f;//Random.Range(timeRange.x, timeRange.y);
     }
 
     void GrowPlant()
@@ -120,37 +143,22 @@ public class Plant : MonoBehaviour
             else if (i == 3 && !ItemIsComplete(musicRange))
                 availableItems.Add(GardenItemType.Music);
         }
+        
+        int randItemIdx = Random.Range(0, availableItems.Count);
 
-        for (int i = 0; i < availableItems.Count; i++)
-        {
-            if (Random.value >= .5f)
-            {
-                if (availableItems[i] == GardenItemType.Water)
-                {
-                    expectedItem = GardenItemType.Water;
-                    break;
-                }
+        if (availableItems[randItemIdx] == GardenItemType.Water)
+            expectedItem = GardenItemType.Water;
+        
+        if (availableItems[randItemIdx] == GardenItemType.Compost)
+            expectedItem = GardenItemType.Compost;
+        
+        if (availableItems[randItemIdx] == GardenItemType.Fertilizer)
+            expectedItem = GardenItemType.Fertilizer;
+        
+        if (availableItems[randItemIdx] == GardenItemType.Music)
+            expectedItem = GardenItemType.Music;
 
-                else if (availableItems[i] == GardenItemType.Compost)
-                {
-                    expectedItem = GardenItemType.Compost;
-                    break;
-                }
-
-                else if (availableItems[i] == GardenItemType.Fertilizer)
-                {
-                    expectedItem = GardenItemType.Fertilizer;
-                    break;
-                }
-
-                else if (availableItems[i] == GardenItemType.Music)
-                {
-                    expectedItem = GardenItemType.Music;
-                    break;
-                }
-            }
-        }
-
+        Debug.Log(expectedItem + " chosen");
         gardenItemChosen = true;
     }
 
@@ -177,14 +185,22 @@ public class Plant : MonoBehaviour
                 break;
             }
 
-            fullyGrown = CheckForAllRangesCompleted();
+            currentGrowThreshold++;
 
-            if (!fullyGrown)
+            if (currentGrowThreshold >= growThreshold)
+                GrowPlant();
+
+            if (!CheckForAllRangesCompleted())
             {
                 currentTimeRange = 0f;
                 waitingForInteraction = false;
+                gardenItemChosen = false;
+                expectedItem = null;
                 GetNewTimeRange();
             }
+
+            else
+                fullyGrown = true;
         }
     }
 

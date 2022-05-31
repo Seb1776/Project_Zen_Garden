@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 public class GardenItem : MonoBehaviour
@@ -9,6 +10,7 @@ public class GardenItem : MonoBehaviour
     [SerializeField] protected GardenItemType itemType;
     protected Vector3 startPos;
     protected bool canUseItem;
+    [SerializeField] private Text uidebug, actionDebug;
 
     private bool returnToPos;
     private GameManager manager;
@@ -31,23 +33,36 @@ public class GardenItem : MonoBehaviour
     {
         LookInCameraDirection();
 
+        if (grabbed)
+            player.SetGardenItem(this);
+        
+        else
+        {
+            player.DeSetGardenItem();
+            Debug.Log("???");
+        }
+
+        if (uidebug != null)
+            uidebug.text = grabbed.ToString();
+
         if (!grabbed && Vector3.Distance(transform.position, startPos) > 0.1f)
         {
             grabbed = true;
-            player.SetGardenItem(this);
         }
         
-        if (grabbed && !returnToPos && (transform.localRotation.x == 0f && transform.localRotation.z == 0f))
+        if (grabbed && (transform.localRotation.x == 0f && transform.localRotation.z == 0f))
         {
             returnToPos = true;
-            player.DeSetGardenItem();
         }
-        
+
         if (returnToPos)
             GetBackPos();
     }
 
-    public virtual void GardenItemAction(InputAction.CallbackContext ctx) {}
+    public virtual void GardenItemAction(InputAction.CallbackContext ctx) 
+    {
+        actionDebug.text = "works";
+    }
 
     void GetBackPos()
     {
@@ -57,9 +72,9 @@ public class GardenItem : MonoBehaviour
         if (Vector3.Distance(transform.position, startPos) <= 0.001f)
         {
             transform.position = startPos;
-            grabbed = false;
             returnToPos = false;
             coll.enabled = true;
+            grabbed = false;
         }
     }
 

@@ -68,15 +68,26 @@ public class Player : MonoBehaviour
     }
 
     public void SetGardenItem(GardenItem garden)
-    {
-        holdingGardenItem = garden;
-        rightHand.grabbedItemEffect.performed += holdingGardenItem.GardenItemAction;
+    {   
+        if (holdingGardenItem == null)
+        {
+            holdingGardenItem = garden;
+            rightHand.grabbedItemEffect.performed += holdingGardenItem.GardenItemAction;
+        }
     }
 
     public void DeSetGardenItem()
+    {   
+        if (holdingGardenItem != null)
+        {
+            rightHand.grabbedItemEffect.performed -= holdingGardenItem.GardenItemAction;
+            holdingGardenItem = null;
+        }
+    }
+
+    public GardenItem GetHoldingGardenItem()
     {
-        rightHand.grabbedItemEffect.performed -= holdingGardenItem.GardenItemAction;
-        holdingGardenItem = null;
+        return holdingGardenItem;
     }
 
     public void CreatedAPlant(Plant _p)
@@ -130,5 +141,6 @@ public class VRHandsLeft
 [System.Serializable]
 public class VRHandsRight
 {
+    public XRDirectInteractor handInteractor;
     public InputAction grabbedItemEffect;
 }
