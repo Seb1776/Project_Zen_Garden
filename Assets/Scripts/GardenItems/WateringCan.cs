@@ -5,12 +5,8 @@ using UnityEngine.InputSystem;
 
 public class WateringCan : GardenItem
 {
-    [SerializeField] private Transform rayPos;
-    [SerializeField] private float rayLength;
     [SerializeField] private Vector2 acceptableRotationRange;
-    [SerializeField] private LayerMask rayMask;
-    [SerializeField] private bool showGizmo;
-    [SerializeField] private ParticleSystem waterParticles;
+    [SerializeField] private float waterEffectDuration;
 
     public override void Awake()
     {
@@ -30,25 +26,17 @@ public class WateringCan : GardenItem
 
     public override void GardenItemAction(InputAction.CallbackContext ctx)
     {
-        if (canUseItem)
-        {
-            waterParticles.Play();
-        }
+        if (GetBelowFlowerPot() != null)
+        {   
+            FlowerPot fp = GetBelowFlowerPot();
 
-        else
-        {
-            waterParticles.Pause();
+            if (fp.GetPlantedPlant() != null)
+            {
+                StartCoroutine(fp.TriggerWaterEffect(waterEffectDuration));
+                fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Water);
+            }
         }
-
+        
         base.GardenItemAction(ctx);
-    }
-
-    void OnDrawGizmosSelected()
-    {
-        if (showGizmo && rayPos != null)
-        {
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawRay(rayPos.position, transform.TransformDirection(Vector3.left) * rayLength);
-        }
     }
 }

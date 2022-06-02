@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 public class Plant : MonoBehaviour
 {
     public PlantAsset plantData;
-    [SerializeField] private AnimationClip sproutDeAppearAnimation;
 
     private GameManager manager;
     private PlantsManager plantsManager;
@@ -27,6 +26,7 @@ public class Plant : MonoBehaviour
     private bool fullyGrown;
     private int growThreshold;
     private int currentGrowThreshold;
+    public FlowerPot flowerPotIn;
     private GardenItemType? expectedItem = null;
     private GardenItem itemHolding;
 
@@ -54,8 +54,9 @@ public class Plant : MonoBehaviour
     {
         LookInCameraDirection();
         PlantGrowBehaviour();
-        PlantProgress();
-        NonVRDebug();
+
+        if (planted)
+            PlantProgress();
     }
 
     void NonVRDebug()
@@ -122,6 +123,7 @@ public class Plant : MonoBehaviour
         {
             _sprout.GetComponent<Animator>().SetTrigger("hide");
             StartCoroutine(GrowPlantAfterSprout());
+            growth = true;
         }
     }
 
@@ -147,16 +149,28 @@ public class Plant : MonoBehaviour
         int randItemIdx = Random.Range(0, availableItems.Count);
 
         if (availableItems[randItemIdx] == GardenItemType.Water)
+        {
             expectedItem = GardenItemType.Water;
+            flowerPotIn.ActivateWarning(GardenItemType.Water, true);
+        }
         
         if (availableItems[randItemIdx] == GardenItemType.Compost)
+        {
             expectedItem = GardenItemType.Compost;
+            flowerPotIn.ActivateWarning(GardenItemType.Compost, true);
+        }
         
         if (availableItems[randItemIdx] == GardenItemType.Fertilizer)
+        {
             expectedItem = GardenItemType.Fertilizer;
+            flowerPotIn.ActivateWarning(GardenItemType.Fertilizer, true);
+        }
         
         if (availableItems[randItemIdx] == GardenItemType.Music)
+        {
             expectedItem = GardenItemType.Music;
+            flowerPotIn.ActivateWarning(GardenItemType.Music, true);
+        }
 
         Debug.Log(expectedItem + " chosen");
         gardenItemChosen = true;
@@ -185,10 +199,13 @@ public class Plant : MonoBehaviour
                 break;
             }
 
-            currentGrowThreshold++;
+            flowerPotIn.ActivateWarning(item, false);
 
             if (currentGrowThreshold >= growThreshold)
                 GrowPlant();
+            
+            else
+                currentGrowThreshold++;
 
             if (!CheckForAllRangesCompleted())
             {
@@ -208,7 +225,9 @@ public class Plant : MonoBehaviour
     {
         if (ItemIsComplete(waterRange) && ItemIsComplete(compostRange) && ItemIsComplete(fertilizerRange)
             && ItemIsComplete(musicRange))
+            {
                 return true;
+            }
         
         return false;
     }
@@ -243,8 +262,7 @@ public class Plant : MonoBehaviour
 
     IEnumerator GrowPlantAfterSprout()
     {
-        yield return new WaitForSeconds(sproutDeAppearAnimation.length);
-        Destroy(_sprout.gameObject);
+        yield return new WaitForSeconds(1.167f);
         growth = true;
     }
 

@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.Rendering;
 using UnityEngine.InputSystem;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class GardenItem : MonoBehaviour
 {
@@ -10,8 +11,16 @@ public class GardenItem : MonoBehaviour
     [SerializeField] protected GardenItemType itemType;
     protected Vector3 startPos;
     protected bool canUseItem;
-    [SerializeField] private Text uidebug, actionDebug;
 
+    [Header ("Raycast Fields, Leave Empty If Not Using")]
+    [SerializeField] protected LayerMask rayMask;
+    [SerializeField] protected bool showGizmo;
+    [SerializeField] protected Vector3 rayDirection;
+    [SerializeField] protected Transform rayPos;
+    [SerializeField] protected float rayLength;
+
+    private SortingGroup sg;
+    protected XRGrabInteractable grab;
     private bool returnToPos;
     private GameManager manager;
     private Collider coll;
@@ -20,6 +29,8 @@ public class GardenItem : MonoBehaviour
     public virtual void Awake()
     {   
         coll = GetComponent<Collider>();
+        grab = GetComponent<XRGrabInteractable>();
+        sg = GetComponent<SortingGroup>();
 
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -30,7 +41,9 @@ public class GardenItem : MonoBehaviour
     public virtual void Start() {}
 
     public virtual void Update()
-    {
+    {   
+        grabbed = grab.isSelected;
+
         LookInCameraDirection();
 
         if (grabbed)
@@ -38,30 +51,43 @@ public class GardenItem : MonoBehaviour
         
         else
         {
-            player.DeSetGardenItem();
-            Debug.Log("???");
-        }
-
-        if (uidebug != null)
-            uidebug.text = grabbed.ToString();
-
-        if (!grabbed && Vector3.Distance(transform.position, startPos) > 0.1f)
-        {
-            grabbed = true;
-        }
-        
-        if (grabbed && (transform.localRotation.x == 0f && transform.localRotation.z == 0f))
-        {
-            returnToPos = true;
+            player.DeSetGardenItem(this);
+            
+            if (Vector3.Distance(transform.position, startPos) > 0.1f)
+                returnToPos = true;
         }
 
         if (returnToPos)
             GetBackPos();
     }
 
-    public virtual void GardenItemAction(InputAction.CallbackContext ctx) 
+    public virtual void GardenItemAction(InputAction.CallbackContext ctx) {}
+
+    protected FlowerPot GetBelowFlowerPot()
     {
-        actionDebug.text = "works";
+        RaycastHit hit;
+
+        if (Physics.Raycast(rayPos.position, rayPos.transform.TransformDirection(Vector3.forward), out hit, rayLength, rayMask))
+        {
+            if (hit.collider != null)
+            {
+                if (hit.transform.CompareTag("FlowerPot"))
+                {
+                    return hit.transform.GetComponent<FlowerPot>();
+                }
+            }
+        }
+
+        return null;
+    }
+
+    void OnDrawGizmos()
+    {
+        if (showGizmo && rayPos != null)
+        {
+            Gizmos.color = Color.cyan;
+            Gizmos.DrawRay(rayPos.position, rayPos.transform.TransformDirection(Vector3.forward) * rayLength);
+        }
     }
 
     void GetBackPos()
@@ -74,7 +100,6 @@ public class GardenItem : MonoBehaviour
             transform.position = startPos;
             returnToPos = false;
             coll.enabled = true;
-            grabbed = false;
         }
     }
 

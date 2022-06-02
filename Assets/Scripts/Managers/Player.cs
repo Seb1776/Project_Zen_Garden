@@ -47,10 +47,13 @@ public class Player : MonoBehaviour
     public void PlantSelectedPlant(InputAction.CallbackContext ctx)
     {
         if (holdingPlant != null && hoveringFlowerPot != null)
-        {
-            hoveringFlowerPot.PlantPlant(holdingPlant);
-            holdingPlant = null;
-            hoveringFlowerPot = null;
+        {   
+            if (hoveringFlowerPot.GetPlantedPlant() == null)
+            {
+                hoveringFlowerPot.PlantPlant(holdingPlant);
+                holdingPlant = null;
+                hoveringFlowerPot = null;
+            }
         }
     }
 
@@ -76,9 +79,9 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void DeSetGardenItem()
+    public void DeSetGardenItem(GardenItem item)
     {   
-        if (holdingGardenItem != null)
+        if (holdingGardenItem != null && holdingGardenItem == item)
         {
             rightHand.grabbedItemEffect.performed -= holdingGardenItem.GardenItemAction;
             holdingGardenItem = null;
