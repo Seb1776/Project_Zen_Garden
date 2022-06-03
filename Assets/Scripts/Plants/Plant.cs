@@ -78,6 +78,11 @@ public class Plant : MonoBehaviour
         }
     }
 
+    public GardenItemType ExpectedGardenItem()
+    {
+        return (GardenItemType)expectedItem;
+    }
+
     public void SetHandPosition(Transform _hand)
     {
         handPosition = _hand;
@@ -123,7 +128,6 @@ public class Plant : MonoBehaviour
         {
             _sprout.GetComponent<Animator>().SetTrigger("hide");
             StartCoroutine(GrowPlantAfterSprout());
-            growth = true;
         }
     }
 

@@ -30,7 +30,7 @@ public class WateringCan : GardenItem
         {   
             FlowerPot fp = GetBelowFlowerPot();
 
-            if (fp.GetPlantedPlant() != null)
+            if (fp.GetPlantedPlant() != null && fp.GetPlantedPlant().ExpectedGardenItem() == GardenItemType.Water)
             {
                 StartCoroutine(fp.TriggerWaterEffect(waterEffectDuration));
                 fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Water);

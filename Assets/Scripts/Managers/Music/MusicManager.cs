@@ -7,6 +7,7 @@ public class MusicManager : MonoBehaviour
 {
     [SerializeField] private WorldMusic[] assets;
     [SerializeField] private GameWorlds currentWorld;
+    [SerializeField] private AudioClip ageTransitionEffect;
 
     private AudioSource source;
 
@@ -20,7 +21,7 @@ public class MusicManager : MonoBehaviour
         SelectMusicAsset();
     }
 
-    void SelectMusicAsset()
+    public void SelectMusicAsset()
     {
         foreach (WorldMusic wm in assets)
         {
@@ -32,9 +33,20 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    void ChangeMusicAge()
+    public void ChangeMusicAge(MusicAsset worldMusic)
     {
-        
+        StartCoroutine(SwapMusicAge(worldMusic));
+    }
+
+    public IEnumerator SwapMusicAge(MusicAsset worldMusic)
+    {
+        source.Stop();
+        source.clip = null;
+        source.PlayOneShot(ageTransitionEffect);
+
+        yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
+
+        PlayMusic(worldMusic);
     }
 
     void PlayMusic(MusicAsset ma)
@@ -46,11 +58,13 @@ public class MusicManager : MonoBehaviour
             source.loop = false;
             source.clip = ma.worldTracks[randomTrackIdx].startTrack;
             source.Play();
+            //Debug.Log("start track: " + ma.worldTracks[randomTrackIdx].startTrack + ", " + ma.worldTracks[randomTrackIdx].musicTrack);
             StartCoroutine(StartTrack(ma.worldTracks[randomTrackIdx].musicTrack));
         }
 
         else
         {
+            //Debug.Log(ma.worldTracks[randomTrackIdx].musicTrack);
             source.loop = true;
             source.clip = ma.worldTracks[randomTrackIdx].musicTrack;
             source.Play();

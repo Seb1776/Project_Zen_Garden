@@ -31,7 +31,7 @@ public class Compost : GardenItem
         {   
             FlowerPot fp = GetBelowFlowerPot();
 
-            if (fp.GetPlantedPlant() != null)
+            if (fp.GetPlantedPlant() != null && fp.GetPlantedPlant().ExpectedGardenItem() == GardenItemType.Compost)
             {
                 StartCoroutine(fp.TriggerCompostEffect(compostEffectDuration));
                 fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Compost);
