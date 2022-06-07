@@ -568,6 +568,7 @@ GameObject:
   - component: {fileID: 1983987662138579864}
   - component: {fileID: 1983987662138579862}
   - component: {fileID: 1983987662138579863}
+  - component: {fileID: -3532216512191183837}
   m_Layer: 0
   m_Name: CoconutSniper
   m_TagString: Untagged
@@ -621,7 +622,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed4246f2b1a91c4d8f4a71ce462312a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantData: {fileID: 0}
+  plantData: {fileID: 11400000, guid: 2ffda12fbb0940d4081f680b47ac43a8, type: 2}
   flowerPotIn: {fileID: 0}
 --- !u!65 &1983987662138579863
 BoxCollider:
@@ -636,6 +637,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.34746122, y: 0.31813282, z: 0.12261593}
   m_Center: {x: -0.015885731, y: 0.17474373, z: 0.008553996}
+--- !u!210 &-3532216512191183837
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1983987662138579866}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &1983987662156772493
 GameObject:
   m_ObjectHideFlags: 0

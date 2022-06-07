@@ -14,10 +14,12 @@ public class FlowerPot : MonoBehaviour
     
     private PlantsManager plantsManager;
     private Plant plantInSpace;
+    private SeedDatabase seedDatabase;
 
     void Awake()
     {
         plantsManager = GameObject.FindGameObjectWithTag("PlantsManager").GetComponent<PlantsManager>();
+        seedDatabase = GameObject.FindGameObjectWithTag("SeedDatabase").GetComponent<SeedDatabase>();
     }
 
     void Start()

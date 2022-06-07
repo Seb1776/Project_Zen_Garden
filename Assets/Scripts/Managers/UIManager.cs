@@ -7,18 +7,22 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Player player;
+    [SerializeField] private SeedDatabase seedDatabase;
 
     public void SpawnPlantOnHand(Plant plant)
-    {
-        if (player.GetHoldingPlant() == null)
-            CreatePlantOnPlayerHand(plant.gameObject);
-        
-        else
+    {   
+        if (seedDatabase.CanPlant(plant.plantData))
         {
-            if (player.GetHoldingPlant().gameObject.name != plant.gameObject.name)
-            {
-                player.DestroyHoldingPlant();
+            if (player.GetHoldingPlant() == null)
                 CreatePlantOnPlayerHand(plant.gameObject);
+            
+            else
+            {
+                if (player.GetHoldingPlant().gameObject.name != plant.gameObject.name)
+                {
+                    player.DestroyHoldingPlant();
+                    CreatePlantOnPlayerHand(plant.gameObject);
+                }
             }
         }
     }

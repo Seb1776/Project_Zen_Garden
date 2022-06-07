@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 6893422128662379752}
   - component: {fileID: 6893422128662379754}
   - component: {fileID: 6893422128662379753}
+  - component: {fileID: -7137251439705461733}
   m_Layer: 0
   m_Name: JackOLantern
   m_TagString: Untagged
@@ -324,7 +325,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed4246f2b1a91c4d8f4a71ce462312a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  plantData: {fileID: 0}
+  plantData: {fileID: 11400000, guid: 36469570947a2014ea677a99d29e2d81, type: 2}
   flowerPotIn: {fileID: 0}
 --- !u!65 &6893422128662379753
 BoxCollider:
@@ -339,6 +340,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.2467558, y: 1.308445, z: 0.24945086}
   m_Center: {x: 0.0051407814, y: 0.082252026, z: 0}
+--- !u!210 &-7137251439705461733
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6893422128662379766}
+  m_Enabled: 1
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!1 &6893422128688654749
 GameObject:
   m_ObjectHideFlags: 0

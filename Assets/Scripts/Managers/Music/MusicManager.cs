@@ -12,6 +12,7 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private AudioClip ageTransitionEffect;
 
     private Coroutine playLoopCoroutine;
+    private Coroutine swapCoroutine;
     private AudioSource source;
 
     void Awake()
@@ -36,7 +37,7 @@ public class MusicManager : MonoBehaviour
         {
             if (wm.world == currentWorld)
             {
-                ChangeMusicAge(wm.asset);
+                PlayMusic(wm.asset);
                 break;
             }
         }
@@ -44,17 +45,14 @@ public class MusicManager : MonoBehaviour
 
     public void ChangeMusicAge(MusicAsset worldMusic)
     {
-        Debug.Log(playLoopCoroutine);
-
-        if (playLoopCoroutine != null)
+        if (swapCoroutine != null)
         {
-            Debug.Log("stopped coroutine");
-            StopCoroutine(playLoopCoroutine);
-            playLoopCoroutine = StartCoroutine(SwapMusicAge(worldMusic));
+            StopCoroutine(swapCoroutine);
+            swapCoroutine = StartCoroutine(SwapMusicAge(worldMusic));
         }
 
         else
-            playLoopCoroutine = StartCoroutine(SwapMusicAge(worldMusic));
+            swapCoroutine = StartCoroutine(SwapMusicAge(worldMusic));
     }
 
     public IEnumerator SwapMusicAge(MusicAsset worldMusic)
@@ -77,13 +75,19 @@ public class MusicManager : MonoBehaviour
             source.loop = false;
             source.clip = ma.worldTracks[randomTrackIdx].startTrack;
             source.Play();
-            Debug.Log("start track: " + ma.worldTracks[randomTrackIdx].startTrack + ", " + ma.worldTracks[randomTrackIdx].musicTrack);
-            StartCoroutine(StartTrack(ma.worldTracks[randomTrackIdx].musicTrack));
+
+            if (playLoopCoroutine != null)
+            {
+                StopCoroutine(playLoopCoroutine);
+                playLoopCoroutine = StartCoroutine(StartTrack(ma.worldTracks[randomTrackIdx].musicTrack));
+            }
+
+            else
+                playLoopCoroutine = StartCoroutine(StartTrack(ma.worldTracks[randomTrackIdx].musicTrack));
         }
 
         else
         {
-            Debug.Log(ma.worldTracks[randomTrackIdx].musicTrack);
             source.loop = true;
             source.clip = ma.worldTracks[randomTrackIdx].musicTrack;
             source.Play();
@@ -92,8 +96,6 @@ public class MusicManager : MonoBehaviour
 
     IEnumerator StartTrack(AudioClip loopTrack)
     {
-        Debug.Log(loopTrack.name);
-
         while (source.isPlaying)
             yield return null;
 
