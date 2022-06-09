@@ -30,6 +30,10 @@ public class Plant : MonoBehaviour
     private GardenItemType? expectedItem = null;
     private GardenItem itemHolding;
 
+    private float revMulIncreaser;
+    private float revenueMultiplier;
+    private float percentageExtra;
+
     void Awake()
     {
         plantAnim = GetComponent<Animator>();
@@ -48,6 +52,9 @@ public class Plant : MonoBehaviour
     {   
         if (!planted)
             TransparentPlant();
+        
+        revenueMultiplier = 1f / GetAccumulativeRange();
+        revMulIncreaser = 1f / GetAccumulativeRange();
     }
 
     void Update()
@@ -57,25 +64,6 @@ public class Plant : MonoBehaviour
 
         if (planted)
             PlantProgress();
-    }
-
-    void NonVRDebug()
-    {
-        if (waitingForInteraction)
-        {
-            if (Keyboard.current.qKey.wasPressedThisFrame)
-                ApplyGardenItem(GardenItemType.Water);
-            
-            if (Keyboard.current.wKey.wasPressedThisFrame)
-                ApplyGardenItem(GardenItemType.Compost);
-            
-            if (Keyboard.current.eKey.wasPressedThisFrame)
-                ApplyGardenItem(GardenItemType.Fertilizer);
-
-            if (Keyboard.current.rKey.wasPressedThisFrame)
-                ApplyGardenItem(GardenItemType.Music);
-
-        }
     }
 
     public GardenItemType ExpectedGardenItem()
@@ -88,6 +76,21 @@ public class Plant : MonoBehaviour
         handPosition = _hand;
     }
 
+    public int GetActualRevenue()
+    {
+        if (fullyGrown)
+            return (int)(revenueMultiplier * plantData.revenuePrice) + GetExtraRevenue();
+
+        return (int)(revenueMultiplier * plantData.revenuePrice);
+        /*Debug.Log(revenueMultiplier + ", " + plantData.revenuePrice + ", " + plantData.qualityMultiplier + ": " + (int)((revenueMultiplier / plantData.revenuePrice) * plantData.qualityMultiplier));
+        return (int)((revenueMultiplier * plantData.revenuePrice) * plantData.qualityMultiplier);*/
+    }
+
+    public int GetExtraRevenue()
+    {
+        return (int)(GameHelper.GetPercentageFromValue(plantData.revenuePrice, percentageExtra));
+    }
+
     public void SetPlantProgress(PlantProcessAsset ppa)
     {
         waterRange.y = Random.Range(ppa.waterRange.x, ppa.waterRange.y);
@@ -95,6 +98,7 @@ public class Plant : MonoBehaviour
         fertilizerRange.y = Random.Range(ppa.fertilizerRange.x, ppa.fertilizerRange.y);
         musicRange.y = Random.Range(ppa.musicRange.x, ppa.musicRange.y);
         timeRange = ppa.timeRange;
+        percentageExtra = ppa.plantPercentageExtra;
         growThreshold = (int)((waterRange.y + compostRange.y + fertilizerRange.y + musicRange.y) / 2f);
         GetNewTimeRange();
         progressSet = true;
@@ -176,7 +180,6 @@ public class Plant : MonoBehaviour
             flowerPotIn.ActivateWarning(GardenItemType.Music, true);
         }
 
-        Debug.Log(expectedItem + " chosen");
         gardenItemChosen = true;
     }
 
@@ -217,6 +220,9 @@ public class Plant : MonoBehaviour
                 waitingForInteraction = false;
                 gardenItemChosen = false;
                 expectedItem = null;
+
+                revenueMultiplier += revMulIncreaser;
+
                 GetNewTimeRange();
             }
 
@@ -237,6 +243,11 @@ public class Plant : MonoBehaviour
             }
         
         return false;
+    }
+    
+    int GetAccumulativeRange()
+    {
+        return waterRange.y + compostRange.y + fertilizerRange.y + musicRange.y;
     }
 
     bool ItemIsComplete(Vector2Int range)

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
 [RequireComponent(typeof(AudioSource))]
@@ -9,10 +10,12 @@ public class FlowerPot : MonoBehaviour
     [SerializeField] private Transform plantPlantingPosition;
     [SerializeField] private ParticleSystem waterEffect, compostEffect;
     [SerializeField] private GameObject musicPlayer;
+    [SerializeField] private GameObject sellPlantButton;
 
     [Header ("UI")]
     [SerializeField] private GameObject needWaterIcon;
     [SerializeField] private GameObject needCompostIcon, needFertilizerIcon, needMusicIcon;
+    [SerializeField] private Text revenueText;
 
     [Header ("Effect")]
     [SerializeField] private ParticleSystem grownEffect;
@@ -53,11 +56,25 @@ public class FlowerPot : MonoBehaviour
     void SendFlowerPotToPlayer(XRBaseInteractor flower)
     {
         player.SetHoldFlowerPot(this);
+
+        if (plantInSpace != null)
+        {
+            sellPlantButton.SetActive(true);
+            revenueText.text = "Sell For: $ " + plantInSpace.GetActualRevenue().ToString();
+            revenueText.gameObject.SetActive(true);
+        }
     }
 
     void UnSendFlowerPotToPlayer(XRBaseInteractor flower)
     {
         player.SetHoldFlowerPot();
+        sellPlantButton.SetActive(false);
+        revenueText.gameObject.SetActive(false);
+    }
+    
+    public void TriggerPlantSell()
+    {
+        
     }
 
     public Plant GetPlantedPlant()

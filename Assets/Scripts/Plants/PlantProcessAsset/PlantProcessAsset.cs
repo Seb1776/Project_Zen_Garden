@@ -6,4 +6,6 @@ public class PlantProcessAsset : ScriptableObject
     public PlantQuality qualityToApply;
     public Vector2Int waterRange, compostRange, fertilizerRange, musicRange;
     public Vector2 timeRange;
+    [Range(0f, 150f)]
+    public float plantPercentageExtra;
 }

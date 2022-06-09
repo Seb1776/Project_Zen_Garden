@@ -11,3 +11,11 @@ public class GameManager : MonoBehaviour
         return mainCam;
     }
 }
+
+public static class GameHelper
+{
+    public static float GetPercentageFromValue(float value, float perc)
+    {
+        return (perc / value) * 100f;
+    }
+}

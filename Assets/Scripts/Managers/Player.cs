@@ -98,6 +98,15 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SellPlant()
+    {
+        GameObject plant;
+        plant = holdingFlowerPot.GetPlantedPlant().gameObject;
+        currentPlayerCoins += plant.GetComponent<Plant>().plantData.revenuePrice;
+
+        Destroy(plant.gameObject);
+    }
+
     public GardenItem GetHoldingGardenItem()
     {
         return holdingGardenItem;
@@ -156,4 +165,5 @@ public class VRHandsRight
 {
     public XRDirectInteractor handInteractor;
     public InputAction grabbedItemEffect;
+    public InputAction sellPlant;
 }
