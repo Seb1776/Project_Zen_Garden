@@ -6,9 +6,9 @@ public class SeedDatabase : MonoBehaviour
 {
     [SerializeField] private List<UnlockedSeeds> unlockedSeeds = new List<UnlockedSeeds>();
 
-    public void UnlockPlant(PlantAsset plant)
+    public void UnlockPlant(PlantAsset plant, SeedPacket ui)
     {
-        UnlockedSeeds newPlant = new UnlockedSeeds(plant, 1);
+        UnlockedSeeds newPlant = new UnlockedSeeds(plant, 1, ui);
         unlockedSeeds.Add(newPlant);
     }
 
@@ -18,6 +18,7 @@ public class SeedDatabase : MonoBehaviour
         {
             UnlockedSeeds plantTo = GetPlantInList(plant);
             plantTo.amount++;
+            plantTo.uiPacket.UpdatePlantAmount();
         }
     }
 
@@ -27,6 +28,7 @@ public class SeedDatabase : MonoBehaviour
         {   
             UnlockedSeeds plantTo = GetPlantInList(plant);
             plantTo.amount--;
+            plantTo.uiPacket.UpdatePlantAmount();
         }
     }
 
@@ -63,11 +65,13 @@ public class SeedDatabase : MonoBehaviour
 public class UnlockedSeeds
 {
     public PlantAsset plant;
+    public SeedPacket uiPacket;
     public int amount;
 
-    public UnlockedSeeds(PlantAsset plant, int amount)
+    public UnlockedSeeds(PlantAsset plant, int amount, SeedPacket uiPacket)
     {
         this.plant = plant;
         this.amount = amount;
+        this.uiPacket = uiPacket;
     }
 }

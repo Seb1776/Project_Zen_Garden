@@ -14,6 +14,7 @@ public class MusicManager : MonoBehaviour
     private Coroutine playLoopCoroutine;
     private Coroutine swapCoroutine;
     private AudioSource source;
+    private MusicAsset currentAsset;
 
     void Awake()
     {
@@ -37,10 +38,16 @@ public class MusicManager : MonoBehaviour
         {
             if (wm.world == currentWorld)
             {
+                currentAsset = wm.asset;
                 PlayMusic(wm.asset);
                 break;
             }
         }
+    }
+
+    public MusicAsset GetCurrentMusic()
+    {
+        return currentAsset;
     }
 
     public void ChangeMusicAge(MusicAsset worldMusic)
@@ -69,6 +76,7 @@ public class MusicManager : MonoBehaviour
     void PlayMusic(MusicAsset ma)
     {
         int randomTrackIdx = Random.Range(0, ma.worldTracks.Length);
+        currentAsset = ma;
 
         if (ma.worldTracks[randomTrackIdx].startTrack != null)
         {

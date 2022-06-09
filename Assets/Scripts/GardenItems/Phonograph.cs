@@ -15,7 +15,7 @@ public class Phonograph : GardenItem
         {
             if (hoveringFlowerPot.GetPlantedPlant() != null && hoveringFlowerPot.GetPlantedPlant().ExpectedGardenItem() == GardenItemType.Music)
             {
-                StartCoroutine(hoveringFlowerPot.TriggerMusicEffect(phonographDuration));
+                StartCoroutine(hoveringFlowerPot.TriggerMusicEffect());
                 hoveringFlowerPot.GetPlantedPlant().ApplyGardenItem(GardenItemType.Music);
             }
         }

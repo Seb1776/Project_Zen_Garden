@@ -6,6 +6,7 @@ public class PlantAsset : ScriptableObject
     public string plantName;
     public GameWorlds appearsIn;
     public PlantQuality plantQuality;
+    public int unlockPrice;
     public int buyPrice;
     public int revenuePrice;
     public Vector3 initialScale;

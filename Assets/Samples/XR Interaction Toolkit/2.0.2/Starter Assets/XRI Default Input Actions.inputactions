@@ -915,6 +915,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Button A",
+                    "type": "Button",
+                    "id": "e7fbf38a-33d2-4fdb-b182-5f2d16ec371b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -1115,6 +1124,17 @@
                     "action": "Translate Anchor",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "09b6fb21-58e4-4e94-b6d5-c554d2fbc558",
+                    "path": "<XRSimulatedController>/primaryButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Button A",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },

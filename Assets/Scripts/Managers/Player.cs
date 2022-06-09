@@ -11,11 +11,16 @@ public class Player : MonoBehaviour
     public VRHandsRight rightHand;
     private bool oneTeleporterEnabled;
     private Plant holdingPlant;
-    private FlowerPot hoveringFlowerPot;
+    private FlowerPot hoveringFlowerPot, holdingFlowerPot;
     private GardenItem holdingGardenItem;
+    private SeedDatabase seedDatabase;
+    [Header ("Economy")]
+    public int currentPlayerCoins;
 
     void Awake()
     {
+        seedDatabase = GameObject.FindGameObjectWithTag("SeedDatabase").GetComponent<SeedDatabase>();
+
         xrDirect = new XRIDefaultInputActions();
         xrDirect.Enable();
     }
@@ -46,7 +51,7 @@ public class Player : MonoBehaviour
 
     public void PlantSelectedPlant(InputAction.CallbackContext ctx)
     {
-        if (holdingPlant != null && hoveringFlowerPot != null)
+        if ((holdingPlant != null && hoveringFlowerPot != null) && seedDatabase.CanPlant(holdingPlant.plantData))
         {   
             if (hoveringFlowerPot.GetPlantedPlant() == null)
             {
@@ -55,6 +60,11 @@ public class Player : MonoBehaviour
                 hoveringFlowerPot = null;
             }
         }
+    }
+
+    public void SetHoldFlowerPot(FlowerPot pot = null)
+    {
+        holdingFlowerPot = pot;
     }
 
     public void GetRidOfSelectedPlant(InputAction.CallbackContext ctx)

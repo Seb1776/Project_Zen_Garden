@@ -221,7 +221,10 @@ public class Plant : MonoBehaviour
             }
 
             else
+            {
                 fullyGrown = true;
+                flowerPotIn.PlayFullGrown();
+            }
         }
     }
 

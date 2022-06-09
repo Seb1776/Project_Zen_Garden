@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
+[RequireComponent(typeof(AudioSource))]
 public class FlowerPot : MonoBehaviour
 {
     [SerializeField] private Transform plantPlantingPosition;
@@ -11,20 +13,51 @@ public class FlowerPot : MonoBehaviour
     [Header ("UI")]
     [SerializeField] private GameObject needWaterIcon;
     [SerializeField] private GameObject needCompostIcon, needFertilizerIcon, needMusicIcon;
+
+    [Header ("Effect")]
+    [SerializeField] private ParticleSystem grownEffect;
     
+    private Player player;
+    private Collider coll;
     private PlantsManager plantsManager;
     private Plant plantInSpace;
     private SeedDatabase seedDatabase;
+    private AudioSource source;
+    private MusicManager musicManager;
+    private XRGrabInteractable potInteractable;
 
     void Awake()
     {
+        source = GetComponent<AudioSource>();
+        potInteractable = GetComponent<XRGrabInteractable>();
+        coll = GetComponent<Collider>();
+        
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
         plantsManager = GameObject.FindGameObjectWithTag("PlantsManager").GetComponent<PlantsManager>();
         seedDatabase = GameObject.FindGameObjectWithTag("SeedDatabase").GetComponent<SeedDatabase>();
     }
 
+    [System.Obsolete]
     void Start()
     {
+        potInteractable.onSelectEnter.AddListener(SendFlowerPotToPlayer);
+        potInteractable.onSelectExit.AddListener(UnSendFlowerPotToPlayer);
+    }
 
+    void Update()
+    {
+        coll.enabled = !potInteractable.isSelected;
+    }
+
+    void SendFlowerPotToPlayer(XRBaseInteractor flower)
+    {
+        player.SetHoldFlowerPot(this);
+    }
+
+    void UnSendFlowerPotToPlayer(XRBaseInteractor flower)
+    {
+        player.SetHoldFlowerPot();
     }
 
     public Plant GetPlantedPlant()
@@ -68,10 +101,17 @@ public class FlowerPot : MonoBehaviour
         compostEffect.Stop();
     }
 
-    public IEnumerator TriggerMusicEffect(float duration)
+    public void PlayFullGrown()
+    {
+        grownEffect.gameObject.SetActive(true);
+        source.PlayOneShot(musicManager.GetCurrentMusic().grownPlantClip);
+    }
+
+    public IEnumerator TriggerMusicEffect()
     {
         musicPlayer.SetActive(true);
-        yield return new WaitForSeconds(duration);
+        source.PlayOneShot(musicManager.GetCurrentMusic().phonographClip);
+        yield return new WaitForSeconds(musicManager.GetCurrentMusic().phonographClip.length);
         musicPlayer.SetActive(false);
     }
 
@@ -83,6 +123,7 @@ public class FlowerPot : MonoBehaviour
         p.transform.parent = transform;
         p.flowerPotIn = this;
         _s.transform.parent = transform;
+        seedDatabase.UsePlant(p.plantData);
         plantInSpace = p;
         p.ApplyColorToPlant();
         p.SetPlanted(_s);

@@ -8,6 +8,18 @@ public class UIManager : MonoBehaviour
 {
     [SerializeField] private Player player;
     [SerializeField] private SeedDatabase seedDatabase;
+    [Header("UI")]
+    [SerializeField] private Text coins;
+
+    void Update()
+    {
+        PlayerUI();
+    }
+
+    void PlayerUI()
+    {
+        coins.text = "$ " + player.currentPlayerCoins;
+    }
 
     public void SpawnPlantOnHand(Plant plant)
     {   
@@ -24,6 +36,18 @@ public class UIManager : MonoBehaviour
                     CreatePlantOnPlayerHand(plant.gameObject);
                 }
             }
+        }
+    }
+
+    public void BuyPlantAmount(PlantAsset plant)
+    {   
+        if (player.currentPlayerCoins >= plant.buyPrice)
+        {
+            seedDatabase.BuyPlant(plant);
+            player.currentPlayerCoins -= plant.buyPrice;
+
+            if (player.currentPlayerCoins < 0)
+                player.currentPlayerCoins = 0;
         }
     }
 

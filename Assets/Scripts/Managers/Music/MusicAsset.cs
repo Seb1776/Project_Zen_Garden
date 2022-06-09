@@ -4,6 +4,7 @@ using UnityEngine;
 public class MusicAsset : ScriptableObject 
 {
     public MusicCollection[] worldTracks;
+    public AudioClip phonographClip, grownPlantClip;
 }
 
 [System.Serializable]
