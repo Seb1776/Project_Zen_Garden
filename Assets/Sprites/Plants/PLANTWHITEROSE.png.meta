@@ -1,12 +1,84 @@
 fileFormatVersion: 2
 guid: 905d3b26ececf7a48beb08193f82e1bd
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2132325264341754556
+    second: PLANTWHITEROSE_0
+  - first:
+      213: 3065340636918038249
+    second: PLANTWHITEROSE_1
+  - first:
+      213: -8256350354062774811
+    second: PLANTWHITEROSE_2
+  - first:
+      213: -6463439914571412179
+    second: PLANTWHITEROSE_3
+  - first:
+      213: -3605915864839411787
+    second: PLANTWHITEROSE_4
+  - first:
+      213: -6226496223794745953
+    second: PLANTWHITEROSE_5
+  - first:
+      213: 5279365113805218783
+    second: PLANTWHITEROSE_6
+  - first:
+      213: -5641090661771356531
+    second: PLANTWHITEROSE_7
+  - first:
+      213: -8737324527033849670
+    second: PLANTWHITEROSE_8
+  - first:
+      213: 3960282275694813174
+    second: PLANTWHITEROSE_9
+  - first:
+      213: -2462374977725918084
+    second: PLANTWHITEROSE_10
+  - first:
+      213: 933183736553231087
+    second: PLANTWHITEROSE_11
+  - first:
+      213: 7564513090413946904
+    second: PLANTWHITEROSE_12
+  - first:
+      213: -3774271936266476170
+    second: PLANTWHITEROSE_13
+  - first:
+      213: -4143609565933710985
+    second: PLANTWHITEROSE_14
+  - first:
+      213: 8264116014131845372
+    second: PLANTWHITEROSE_15
+  - first:
+      213: -5336462006298739889
+    second: PLANTWHITEROSE_16
+  - first:
+      213: 6472625788756020455
+    second: PLANTWHITEROSE_17
+  - first:
+      213: 6970340695890140052
+    second: PLANTWHITEROSE_18
+  - first:
+      213: -2924899412069316274
+    second: PLANTWHITEROSE_19
+  - first:
+      213: -428162673216039533
+    second: PLANTWHITEROSE_20
+  - first:
+      213: 4019255955612261209
+    second: PLANTWHITEROSE_21
+  - first:
+      213: -6223262774537785206
+    second: PLANTWHITEROSE_22
+  - first:
+      213: 3142870234043837082
+    second: PLANTWHITEROSE_23
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,16 +104,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -50,9 +122,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -68,7 +140,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +173,515 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_0
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 437
+        width: 78
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb26ea6c78a879d10800000000000000
+      internalID: 2132325264341754556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_1
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 466
+        width: 70
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9eeb11381174a8a20800000000000000
+      internalID: 3065340636918038249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 393
+        width: 41
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5edeae4d81d8b6d80800000000000000
+      internalID: -8256350354062774811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 439
+        width: 23
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2dc3e874af3d46a0800000000000000
+      internalID: -6463439914571412179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_4
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 414
+        width: 29
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b72d4a30a635fdc0800000000000000
+      internalID: -3605915864839411787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_5
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 435
+        width: 24
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9d27618caa0799a0800000000000000
+      internalID: -6226496223794745953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_6
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 463
+        width: 31
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd323f78992144940800000000000000
+      internalID: 5279365113805218783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_7
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 491
+        width: 36
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d86585f4ee1d6b1b0800000000000000
+      internalID: -5641090661771356531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_8
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 485
+        width: 34
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab8e6de82a9ceb680800000000000000
+      internalID: -8737324527033849670
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_9
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 449
+        width: 12
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ff901d4fbfb5f630800000000000000
+      internalID: 3960282275694813174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_10
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 443
+        width: 31
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c7416d40103e3ddd0800000000000000
+      internalID: -2462374977725918084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_11
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 407
+        width: 21
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe25d670aa553fc00800000000000000
+      internalID: 933183736553231087
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_12
+      rect:
+        serializedVersion: 2
+        x: 84
+        y: 425
+        width: 31
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8186ae4c39c8af860800000000000000
+      internalID: 7564513090413946904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_13
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 385
+        width: 62
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6756c11cba71f9bc0800000000000000
+      internalID: -3774271936266476170
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 348
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7715c96bd01fe76c0800000000000000
+      internalID: -4143609565933710985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_15
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 503
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf812fccab900b270800000000000000
+      internalID: 8264116014131845372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_16
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 503
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4bf13d341411f5b0800000000000000
+      internalID: -5336462006298739889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_17
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 482
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ecc5d68cd263d950800000000000000
+      internalID: 6472625788756020455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_18
+      rect:
+        serializedVersion: 2
+        x: 20
+        y: 507
+        width: 7
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49b1bf5beef9bb060800000000000000
+      internalID: 6970340695890140052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_19
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 503
+        width: 14
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e490cd34b7ba867d0800000000000000
+      internalID: -2924899412069316274
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_20
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 505
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39550e4315cde0af0800000000000000
+      internalID: -428162673216039533
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_21
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 494
+        width: 8
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95b54a72ff347c730800000000000000
+      internalID: 4019255955612261209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_22
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 502
+        width: 13
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8073c39a7782a9a0800000000000000
+      internalID: -6223262774537785206
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTWHITEROSE_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 473
+        width: 44
+        height: 4
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9ae45383d7bd9b20800000000000000
+      internalID: 3142870234043837082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b89c6b1bc748f8441be34f8a4f0effd0
     internalID: 0
     vertices: []
     indices: 

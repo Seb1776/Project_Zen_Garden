@@ -82,8 +82,6 @@ public class Plant : MonoBehaviour
             return (int)(revenueMultiplier * plantData.revenuePrice) + GetExtraRevenue();
 
         return (int)(revenueMultiplier * plantData.revenuePrice);
-        /*Debug.Log(revenueMultiplier + ", " + plantData.revenuePrice + ", " + plantData.qualityMultiplier + ": " + (int)((revenueMultiplier / plantData.revenuePrice) * plantData.qualityMultiplier));
-        return (int)((revenueMultiplier * plantData.revenuePrice) * plantData.qualityMultiplier);*/
     }
 
     public int GetExtraRevenue()
