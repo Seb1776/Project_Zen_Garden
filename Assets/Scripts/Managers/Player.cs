@@ -47,13 +47,17 @@ public class Player : MonoBehaviour
 
         rightHand.grabbedItemEffect.Enable();
         rightHand.grabbedItemEffect = xrDirect.XRIRightHandInteraction.Activate;
+
+        rightHand.sellPlant.Enable();
+        rightHand.sellPlant = xrDirect.XRIRightHandInteraction.ButtonA;
+        rightHand.sellPlant.performed += SellPlant;
     }
 
     public void PlantSelectedPlant(InputAction.CallbackContext ctx)
     {
         if ((holdingPlant != null && hoveringFlowerPot != null) && seedDatabase.CanPlant(holdingPlant.plantData))
         {   
-            if (hoveringFlowerPot.GetPlantedPlant() == null)
+            if (hoveringFlowerPot.GetPlantedPlant() == null && hoveringFlowerPot.GetIfPlantIsAccepted())
             {
                 hoveringFlowerPot.PlantPlant(holdingPlant);
                 holdingPlant = null;
@@ -98,13 +102,15 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SellPlant()
+    public void SellPlant(InputAction.CallbackContext ctx)
     {
-        GameObject plant;
-        plant = holdingFlowerPot.GetPlantedPlant().gameObject;
-        currentPlayerCoins += plant.GetComponent<Plant>().plantData.revenuePrice;
-
-        Destroy(plant.gameObject);
+        if (holdingFlowerPot != null)
+        {
+            GameObject plant;
+            plant = holdingFlowerPot.GetPlantedPlant().gameObject;
+            currentPlayerCoins += plant.GetComponent<Plant>().plantData.revenuePrice;
+            plant.GetComponent<Plant>().TriggerSellPlant();
+        }
     }
 
     public GardenItem GetHoldingGardenItem()

@@ -1150,7 +1150,7 @@ public partial class @XRIDefaultInputActions : IInputActionCollection2, IDisposa
                 {
                     ""name"": """",
                     ""id"": ""09b6fb21-58e4-4e94-b6d5-c554d2fbc558"",
-                    ""path"": ""<XRSimulatedController>/primaryButton"",
+                    ""path"": ""<XRController>{RightHand}/primaryButton"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

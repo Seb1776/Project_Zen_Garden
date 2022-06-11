@@ -25,6 +25,7 @@ public class Plant : MonoBehaviour
     private bool gardenItemChosen;
     private bool fullyGrown;
     private int growThreshold;
+    private bool selling;
     private int currentGrowThreshold;
     public FlowerPot flowerPotIn;
     private GardenItemType? expectedItem = null;
@@ -64,6 +65,9 @@ public class Plant : MonoBehaviour
 
         if (planted)
             PlantProgress();
+        
+        if (selling)
+            SellPlant();
     }
 
     public GardenItemType ExpectedGardenItem()
@@ -220,6 +224,7 @@ public class Plant : MonoBehaviour
                 expectedItem = null;
 
                 revenueMultiplier += revMulIncreaser;
+                flowerPotIn.UpdatePlantSellPrice(GetActualRevenue());
 
                 GetNewTimeRange();
             }
@@ -228,6 +233,36 @@ public class Plant : MonoBehaviour
             {
                 fullyGrown = true;
                 flowerPotIn.PlayFullGrown();
+            }
+        }
+    }
+
+    public void TriggerSellPlant()
+    {
+        selling = true;
+    }
+
+    public bool CanPlantInFlowerPot(FlowerPotType type)
+    {
+        return plantData.canBePlantedIn.Contains(type);
+    }
+
+    void SellPlant()
+    {
+        if (selling)
+        {
+            if (Vector2.Distance(transform.localScale, Vector3.zero) > 0.01f)
+            {
+                transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 2.5f * Time.deltaTime);
+                flowerPotIn.revenueText.gameObject.SetActive(false);
+                flowerPotIn.sellPlantButton.SetActive(false);
+            }
+
+            else
+            {
+                flowerPotIn.canUseOutline = true;
+                flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+                Destroy(this.gameObject);
             }
         }
     }
