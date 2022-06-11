@@ -76,7 +76,7 @@ public class FlowerPot : MonoBehaviour
 
     public void UpdatePlantSellPrice(int newPrice)
     {
-        revenueText.text = "Sell For: $ " + newPrice.ToString("{0:n0}");
+        revenueText.text = "Sell For: $ " + newPrice.ToString("0,0");
     }
 
     void UnSendFlowerPotToPlayer(XRBaseInteractor flower)

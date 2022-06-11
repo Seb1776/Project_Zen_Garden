@@ -6,6 +6,13 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private Camera mainCam;
 
+    private Player player;
+
+    void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
     public Camera GetMainCamera()
     {
         return mainCam;

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
 [RequireComponent(typeof(AudioSource))]
@@ -23,6 +24,7 @@ public class MusicManager : MonoBehaviour
 
     void Start()
     {
+        SetWorldsPrices();
         SelectMusicAsset();
     }
 
@@ -30,6 +32,18 @@ public class MusicManager : MonoBehaviour
     {
         if (Keyboard.current.tKey.wasPressedThisFrame)
             ChangeMusicAge(debugWorld);
+    }
+
+    void SetWorldsPrices()
+    {
+        foreach (WorldMusic wm in assets)
+        {   
+            if (wm.asset != null)
+            {
+                wm.worldButton.interactable = false;
+                wm.worldPrice.text = "$ " + wm.asset.unlockPrice.ToString("0,0");
+            }
+        }  
     }
 
     public void SelectMusicAsset()
@@ -41,6 +55,18 @@ public class MusicManager : MonoBehaviour
                 currentAsset = wm.asset;
                 PlayMusic(wm.asset);
                 break;
+            }
+        }
+    }
+
+    public void UnlockWorld(MusicAsset world)
+    {
+        foreach (WorldMusic wm in assets)
+        {
+            if (wm.asset == world)
+            {
+                wm.unlockButton.SetActive(false);
+                wm.worldButton.interactable = true;
             }
         }
     }
@@ -118,4 +144,8 @@ public class WorldMusic
 {
     public GameWorlds world;
     public MusicAsset asset;
+    public Button worldButton;
+    public Text worldPrice;
+    public GameObject unlockButton;
+    public bool hasTravelledToThisWorld;
 }
