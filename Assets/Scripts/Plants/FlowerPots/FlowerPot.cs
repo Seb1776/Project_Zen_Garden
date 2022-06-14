@@ -7,7 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public enum FlowerPotType
 {
     Basket, Terracota, Jurassic, Holographic, FutureTech,
-    Bronze, Silver, Golden, DarkEnergy
+    Bronze, Silver, Golden, DarkEnergy, Crystal, Volcanic
 }
 
 [RequireComponent(typeof(AudioSource))]
