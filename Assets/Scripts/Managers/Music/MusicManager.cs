@@ -36,14 +36,14 @@ public class MusicManager : MonoBehaviour
 
     void SetWorldsPrices()
     {
-        foreach (WorldMusic wm in assets)
+        /*foreach (WorldMusic wm in assets)
         {   
             if (wm.asset != null)
             {
                 wm.worldButton.interactable = false;
                 wm.worldPrice.text = "$ " + wm.asset.unlockPrice.ToString("0,0");
             }
-        }  
+        }*/
     }
 
     public void SelectMusicAsset()

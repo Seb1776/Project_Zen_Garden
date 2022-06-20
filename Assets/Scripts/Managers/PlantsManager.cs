@@ -11,7 +11,7 @@ public enum GameWorlds
     JurassicMarsh, ModernDay
 }
 
-public enum PlantQuality
+public enum PlantQualityName
 {
     Common, Rare, Epic, Legendary, Botanic
 }

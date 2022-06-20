@@ -6,7 +6,7 @@ public class PlantAsset : ScriptableObject
 {
     public string plantName;
     public GameWorlds appearsIn;
-    public PlantQuality plantQuality;
+    public PlantQualityData plantQuality;
     public List<FlowerPotType> canBePlantedIn = new List<FlowerPotType>();
     public int unlockPrice;
     public int buyPrice;

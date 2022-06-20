@@ -9,6 +9,7 @@ public class SeedPacket : MonoBehaviour
     private GameObject buyButton;
     private SeedDatabase seedDatabase;
     private Image plantImage;
+    private Image plantQualityImage;
     private Text plantName;
     private Text plantAmount;
     private Text plantBuyPriceText;
@@ -34,11 +35,20 @@ public class SeedPacket : MonoBehaviour
         plantButton = GetComponent<Button>();
         plantImage = transform.GetChild(1).GetComponent<Image>();
         plantName = transform.GetChild(2).GetComponent<Text>();
+        plantQualityImage = transform.GetChild(3).GetComponent<Image>();
         plantAmount = transform.GetChild(4).GetComponent<Text>();
         buyButton = transform.GetChild(5).gameObject;
         buyMoreButton = transform.GetChild(6).gameObject;
         plantBuyPriceText = buyMoreButton.transform.GetChild(1).GetComponent<Text>();
         plantUnlockPrice = buyButton.transform.GetChild(1).GetComponent<Text>();
+        plantQualityImage.GetComponent<Animator>().enabled = false;
+        plantQualityImage.color = plantData.plantQuality.qualityColor;
+        
+        if (plantData.plantQuality.quality == PlantQualityName.Botanic)
+        {
+            plantQualityImage.GetComponent<Animator>().enabled = true;
+            plantQualityImage.GetComponent<Animator>().SetTrigger("rainbow");
+        }
     }
 
     public void BuyPlant()
