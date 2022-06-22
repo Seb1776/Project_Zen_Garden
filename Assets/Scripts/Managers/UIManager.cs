@@ -22,7 +22,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void SpawnPlantOnHand(Plant plant)
-    {   
+    {
         if (seedDatabase.CanPlant(plant.plantData))
         {
             if (player.GetHoldingPlant() == null)
@@ -36,7 +36,12 @@ public class UIManager : MonoBehaviour
                     CreatePlantOnPlayerHand(plant.gameObject);
                 }
             }
+
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("selectplant"));
         }
+
+        else
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("cantselect"));
     }
 
     public void BuyPlantAmount(PlantAsset plant)
@@ -48,7 +53,12 @@ public class UIManager : MonoBehaviour
 
             if (player.currentPlayerCoins < 0)
                 player.currentPlayerCoins = 0;
+            
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("tap"));
         }
+
+        else
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("cantselect"));
     }
 
     void CreatePlantOnPlayerHand(GameObject plant)

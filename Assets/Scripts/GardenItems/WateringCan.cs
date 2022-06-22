@@ -26,14 +26,19 @@ public class WateringCan : GardenItem
 
     public override void GardenItemAction(InputAction.CallbackContext ctx)
     {
-        if (GetBelowFlowerPot() != null)
+        if (GetBelowFlowerPot() != null && canUseItem)
         {   
             FlowerPot fp = GetBelowFlowerPot();
 
-            if (fp.GetPlantedPlant() != null && fp.GetPlantedPlant().ExpectedGardenItem() == GardenItemType.Water)
+            if (fp.canApplyItem)
             {
-                StartCoroutine(fp.TriggerWaterEffect(waterEffectDuration));
-                fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Water);
+                if (fp.GetPlantedPlant() != null && fp.GetPlantedPlant().ExpectedGardenItem() == GardenItemType.Water)
+                {
+                    StartCoroutine(fp.TriggerWaterEffect(waterEffectDuration));
+                    GardenItemSFX();
+                    fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Water);
+                    fp.canApplyItem = false;
+                }
             }
         }
         

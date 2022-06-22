@@ -11,8 +11,9 @@ public class Fertilizer : GardenItem
         {
             FlowerPot fp = GetBelowFlowerPot();
 
-            if (fp.GetPlantedPlant() != null && fp.GetPlantedPlant().ExpectedGardenItem() == GardenItemType.Fertilizer)
+            if (fp.GetPlantedPlant() != null && fp.GetPlantedPlant().ExpectedGardenItem() == GardenItemType.Fertilizer && fp.canApplyItem)
             {
+                GardenItemSFX();
                 fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Fertilizer);
             }
         }

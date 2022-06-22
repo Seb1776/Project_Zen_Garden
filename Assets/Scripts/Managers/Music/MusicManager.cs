@@ -9,7 +9,6 @@ public class MusicManager : MonoBehaviour
 {
     [SerializeField] private WorldMusic[] assets;
     [SerializeField] private GameWorlds currentWorld;
-    [SerializeField] private MusicAsset debugWorld;
     [SerializeField] private AudioClip ageTransitionEffect;
 
     private Coroutine playLoopCoroutine;
@@ -26,12 +25,6 @@ public class MusicManager : MonoBehaviour
     {
         SetWorldsPrices();
         SelectMusicAsset();
-    }
-
-    void Update()
-    {
-        if (Keyboard.current.tKey.wasPressedThisFrame)
-            ChangeMusicAge(debugWorld);
     }
 
     void SetWorldsPrices()

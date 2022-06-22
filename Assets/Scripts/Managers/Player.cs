@@ -63,6 +63,9 @@ public class Player : MonoBehaviour
                 holdingPlant = null;
                 hoveringFlowerPot = null;
             }
+
+            else
+                StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("cantselect"));
         }
     }
 
@@ -74,7 +77,10 @@ public class Player : MonoBehaviour
     public void GetRidOfSelectedPlant(InputAction.CallbackContext ctx)
     {
         if (holdingPlant != null)
+        {
             DestroyHoldingPlant();
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("tap"));
+        }
     }
 
     public void DestroyHoldingPlant()

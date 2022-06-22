@@ -38,6 +38,7 @@ public class FlowerPot : MonoBehaviour
     private XRGrabInteractable potInteractable;
     private bool hoveringPlantIsAccepted;
     public bool canUseOutline = true;
+    public bool canApplyItem;
 
     void Awake()
     {
@@ -111,6 +112,11 @@ public class FlowerPot : MonoBehaviour
                 needMusicIcon.SetActive(activate);
             break;
         }
+
+        if (activate) canApplyItem = true;
+
+        if (activate) canApplyItem = true;
+        else canApplyItem = false;
     }
 
     public IEnumerator TriggerWaterEffect(float duration)
@@ -144,6 +150,7 @@ public class FlowerPot : MonoBehaviour
 
     public void PlantPlant(Plant p)
     {
+        StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantplant"));
         GameObject _s = Instantiate(plantsManager.GetSprout(), plantPlantingPosition.position, Quaternion.identity);
         _s.transform.position = plantPlantingPosition.position;
         p.transform.position = plantPlantingPosition.position;

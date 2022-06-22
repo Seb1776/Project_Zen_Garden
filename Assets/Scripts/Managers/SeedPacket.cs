@@ -58,7 +58,11 @@ public class SeedPacket : MonoBehaviour
             player.currentPlayerCoins -= plantData.unlockPrice;
             seedDatabase.UnlockPlant(plantData, this);
             CheckPlantState();
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("tap"));
         }
+        
+        else
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("cantselect"));
     }
 
     void CheckPlantState()

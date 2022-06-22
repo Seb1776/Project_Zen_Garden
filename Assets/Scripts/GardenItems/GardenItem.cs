@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class GardenItem : MonoBehaviour
 {
+    [SerializeField] private string soundEffect;
     [SerializeField] protected bool grabbed;
     [SerializeField] protected GardenItemType itemType;
     protected Vector3 startPos;
@@ -79,6 +80,11 @@ public class GardenItem : MonoBehaviour
         }
 
         return null;
+    }
+
+    protected void GardenItemSFX()
+    {
+        StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect(soundEffect));
     }
 
     void OnDrawGizmos()

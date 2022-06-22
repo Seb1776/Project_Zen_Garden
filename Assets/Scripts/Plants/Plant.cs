@@ -125,7 +125,7 @@ public class Plant : MonoBehaviour
 
     void GetNewTimeRange()
     {
-        setTimeRange = 2f;//Random.Range(timeRange.x, timeRange.y);
+        Random.Range(timeRange.x, timeRange.y);
     }
 
     void GrowPlant()
@@ -210,7 +210,7 @@ public class Plant : MonoBehaviour
 
             flowerPotIn.ActivateWarning(item, false);
 
-            if (currentGrowThreshold >= growThreshold)
+            if (currentGrowThreshold >= growThreshold && !growth)
                 GrowPlant();
             
             else
@@ -315,6 +315,7 @@ public class Plant : MonoBehaviour
     {
         yield return new WaitForSeconds(1.167f);
         growth = true;
+        StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantgrow"));
     }
 
     void TransparentPlant()
