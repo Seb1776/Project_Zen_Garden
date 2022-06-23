@@ -7,6 +7,8 @@ using UnityEngine.InputSystem;
 [RequireComponent(typeof(AudioSource))]
 public class MusicManager : MonoBehaviour
 {
+    public static MusicManager instance;
+
     [SerializeField] private WorldMusic[] assets;
     [SerializeField] private GameWorlds currentWorld;
     [SerializeField] private AudioClip ageTransitionEffect;
@@ -19,6 +21,9 @@ public class MusicManager : MonoBehaviour
     void Awake()
     {
         source = GetComponent<AudioSource>();
+
+        if (instance != null && instance != this) Destroy(this);
+        else instance = this;
     }
 
     void Start()
@@ -70,15 +75,21 @@ public class MusicManager : MonoBehaviour
     }
 
     public void ChangeMusicAge(MusicAsset worldMusic)
-    {
-        if (swapCoroutine != null)
+    {   
+        if (currentAsset != worldMusic)
         {
-            StopCoroutine(swapCoroutine);
-            swapCoroutine = StartCoroutine(SwapMusicAge(worldMusic));
+            if (swapCoroutine != null)
+            {
+                StopCoroutine(swapCoroutine);
+                swapCoroutine = StartCoroutine(SwapMusicAge(worldMusic));
+            }
+
+            else
+                swapCoroutine = StartCoroutine(SwapMusicAge(worldMusic));
         }
 
         else
-            swapCoroutine = StartCoroutine(SwapMusicAge(worldMusic));
+            SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
     }
 
     public IEnumerator SwapMusicAge(MusicAsset worldMusic)
@@ -86,9 +97,14 @@ public class MusicManager : MonoBehaviour
         source.Stop();
         source.clip = null;
         source.PlayOneShot(ageTransitionEffect);
+        TimeTravelManager.instance.TriggerTransition(true);
+
+        yield return new WaitForSeconds(.2f);
+        TimeTravelManager.instance.ChangeScenario(worldMusic.worldID);
 
         yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
 
+        TimeTravelManager.instance.TriggerTransition(false);
         PlayMusic(worldMusic);
     }
 
@@ -96,6 +112,9 @@ public class MusicManager : MonoBehaviour
     {
         int randomTrackIdx = Random.Range(0, ma.worldTracks.Length);
         currentAsset = ma;
+
+        foreach (FlowerPots fps in SeedDatabase.instance.flowerPots)
+            fps.InitUI();
 
         if (ma.worldTracks[randomTrackIdx].startTrack != null)
         {

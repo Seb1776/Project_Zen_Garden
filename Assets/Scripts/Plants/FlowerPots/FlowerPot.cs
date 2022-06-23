@@ -30,21 +30,32 @@ public class FlowerPot : MonoBehaviour
     
     private Player player;
     private Collider coll;
+    public Collider triggerColl;
     private PlantsManager plantsManager;
     private Plant plantInSpace;
     private SeedDatabase seedDatabase;
     private AudioSource source;
     private MusicManager musicManager;
     private XRGrabInteractable potInteractable;
-    private bool hoveringPlantIsAccepted;
+    private bool hoveringPlantIsAccepted, returnToPos, returning;
     public bool canUseOutline = true;
     public bool canApplyItem;
+    public bool setted;
+    public Vector3 startPos;
+    public FlowerPotHolder hoveringHolder;
+    private Transform handPosition;
 
     void Awake()
     {
         source = GetComponent<AudioSource>();
         potInteractable = GetComponent<XRGrabInteractable>();
         coll = GetComponent<Collider>();
+
+        foreach (Collider c in GetComponents<Collider>())
+            if (c.isTrigger)
+                triggerColl = c;
+
+        triggerColl.enabled = setted;
         
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
@@ -61,7 +72,38 @@ public class FlowerPot : MonoBehaviour
 
     void Update()
     {
-        coll.enabled = !potInteractable.isSelected;
+        if (!returning) coll.enabled = !potInteractable.isSelected;
+
+        if (!setted)
+            transform.position = handPosition.position;
+        
+        if (setted && !potInteractable.isSelected && Vector3.Distance(transform.position, startPos) > 0.01f)
+            returnToPos = true;
+        
+        if (returnToPos)
+            GetBackPos();
+    }
+
+    void GetBackPos()
+    {
+        transform.position = Vector3.Lerp(transform.position, startPos, 2.5f * Time.deltaTime);
+        coll.enabled = false;
+        triggerColl.enabled = false;
+        returning = true;
+
+        if (Vector3.Distance(transform.position, startPos) <= 0.001f)
+        {
+            transform.position = startPos;
+            returnToPos = false;
+            returning = false;
+            coll.enabled = true;
+            triggerColl.enabled = true;
+        }
+    }
+
+    public void SetHandPosition(Transform hand)
+    {
+        handPosition = hand;
     }
 
     void SendFlowerPotToPlayer(XRBaseInteractor flower)
@@ -85,6 +127,11 @@ public class FlowerPot : MonoBehaviour
         player.SetHoldFlowerPot();
         sellPlantButton.SetActive(false);
         revenueText.gameObject.SetActive(false);
+    }
+
+    public FlowerPotHolder GetFPHolder()
+    {
+        return hoveringHolder;
     }
 
     public Plant GetPlantedPlant()
@@ -112,8 +159,6 @@ public class FlowerPot : MonoBehaviour
                 needMusicIcon.SetActive(activate);
             break;
         }
-
-        if (activate) canApplyItem = true;
 
         if (activate) canApplyItem = true;
         else canApplyItem = false;
@@ -172,10 +217,12 @@ public class FlowerPot : MonoBehaviour
         return hoveringPlantIsAccepted;
     }
 
-    void OnTriggerEnter(Collider other) 
+    void OnTriggerStay(Collider other) 
     {
-        if (other.CompareTag("Plant") && canUseOutline)
+        if (other.CompareTag("Plant") && other.GetComponent<Plant>().plantIsAbove == null && canUseOutline)
         {
+            other.GetComponent<Plant>().plantIsAbove = this;
+
             if (other.GetComponent<Plant>().CanPlantInFlowerPot(flowerPotAsset.flowerPotType))
             {
                 outline.ChangeOutlineColor(Color.green, true);
@@ -194,6 +241,7 @@ public class FlowerPot : MonoBehaviour
     {
         if (other.CompareTag("Plant"))
         {
+            other.GetComponent<Plant>().plantIsAbove = null;
             outline.ChangeOutlineColor(Color.white, false);
             hoveringPlantIsAccepted = false;
         }

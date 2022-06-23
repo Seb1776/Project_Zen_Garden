@@ -80,7 +80,7 @@ public class SeedPacket : MonoBehaviour
             plantButton.enabled = true;
             buyButton.gameObject.SetActive(false);
             buyMoreButton.gameObject.SetActive(true);
-            plantBuyPriceText.text = "$ " + plantData.buyPrice.ToString();
+            plantBuyPriceText.text = "$ " + plantData.buyPrice.ToString("0,0");
             UpdatePlantAmount();
         }
 
@@ -91,7 +91,7 @@ public class SeedPacket : MonoBehaviour
             plantButton.enabled = false;
             plantAmount.gameObject.SetActive(false);
             buyMoreButton.gameObject.SetActive(false);
-            plantUnlockPrice.text = "$ " + plantData.unlockPrice.ToString();
+            plantUnlockPrice.text = "$ " + plantData.unlockPrice.ToString("0,0");
         }
     }
 

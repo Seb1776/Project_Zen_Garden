@@ -28,8 +28,49 @@ public class Compost : GardenItem
         
         else
             canUseItem = false;
+        
+        DetectEffect();
 
         base.Update();
+    }
+
+    public override void DetectEffect()
+    {
+        if (GetBelowFlowerPot() != null)
+        {
+            detectedPot = GetBelowFlowerPot();
+
+            if (detectedPot.canApplyItem)
+            {
+                if (detectedPot.GetPlantedPlant() != null && canUseItem)
+                {
+                    Plant p = detectedPot.GetPlantedPlant();
+
+                    if (p.ExpectedGardenItem() == GardenItemType.Compost)
+                        detectedPot.outline.ChangeOutlineColor(Color.green, true);
+                    
+                    else
+                        detectedPot.outline.ChangeOutlineColor(Color.red, true);
+                }
+            }
+        }
+
+        else if (GetBelowFlowerPot() == null && detectedPot != null)
+        {
+            if (!detectedPot.GetPlantedPlant().fullyGrown)
+            {
+                detectedPot.outline.ChangeOutlineColor(Color.white, false);
+                detectedPot = null;
+            }
+
+            else
+            {
+                detectedPot.outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
+                detectedPot = null;
+            }
+        }
+
+        base.DetectEffect();
     }
 
     public override void GardenItemAction(InputAction.CallbackContext ctx)
@@ -38,11 +79,15 @@ public class Compost : GardenItem
         {   
             FlowerPot fp = GetBelowFlowerPot();
 
-            if (fp.GetPlantedPlant() != null && fp.GetPlantedPlant().ExpectedGardenItem() == GardenItemType.Compost && fp.canApplyItem)
+            if (fp.canApplyItem)
             {
-                StartCoroutine(fp.TriggerCompostEffect(compostEffectDuration));
-                GardenItemSFX();
-                fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Compost);
+                if (fp.GetPlantedPlant() != null && fp.GetPlantedPlant().ExpectedGardenItem() == GardenItemType.Compost && fp.canApplyItem)
+                {
+                    fp.canApplyItem = false;
+                    StartCoroutine(fp.TriggerCompostEffect(compostEffectDuration));
+                    GardenItemSFX();
+                    fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Compost);
+                }
             }
         }
         

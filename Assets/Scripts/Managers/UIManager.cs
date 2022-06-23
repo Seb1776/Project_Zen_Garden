@@ -21,9 +21,29 @@ public class UIManager : MonoBehaviour
         coins.text = "$ " + player.currentPlayerCoins;
     }
 
+    public void SpawnFlowerPotOnHand(FlowerPot flowerPot)
+    {
+        if (Player.instance.holdingPlant == null && seedDatabase.CanUseFlowerPot(flowerPot.flowerPotAsset))
+        {
+            if (player.GetHoldingFlowerPot() == null)
+                CreateFlowerPotOnPlayerHand(flowerPot.gameObject);
+            
+            else
+            {
+                if (player.GetHoldingFlowerPot().gameObject.name != flowerPot.gameObject.name)
+                {
+                    player.DestroyHoldingFlowerPot();
+                    CreateFlowerPotOnPlayerHand(flowerPot.gameObject);
+                }
+            }
+
+            seedDatabase.TriggerHolders(true);
+        }
+    }
+
     public void SpawnPlantOnHand(Plant plant)
     {
-        if (seedDatabase.CanPlant(plant.plantData))
+        if (Player.instance.placingFlowerPot == null && seedDatabase.CanPlant(plant.plantData))
         {
             if (player.GetHoldingPlant() == null)
                 CreatePlantOnPlayerHand(plant.gameObject);
@@ -42,6 +62,17 @@ public class UIManager : MonoBehaviour
 
         else
             StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("cantselect"));
+    }
+
+    public void BuyFlowerPot(FlowerPotAsset fpa)
+    {
+        if (player.currentPlayerCoins >= fpa.flowerPotPrice)
+        {
+            seedDatabase.AddFlowerPot(fpa);
+            player.currentPlayerCoins -= fpa.flowerPotPrice;
+
+            SoundEffectsManager.instance.PlaySoundEffectNC("tap");
+        }
     }
 
     public void BuyPlantAmount(PlantAsset plant)
@@ -70,5 +101,15 @@ public class UIManager : MonoBehaviour
         selectPlant.gameObject.name = selectPlant.gameObject.name.Replace("(Clone)", string.Empty);
         selectPlant.GetComponent<Plant>().SetHandPosition(player.leftHand.handInteractor.transform);
         player.CreatedAPlant(selectPlant.GetComponent<Plant>());
+    }
+
+    void CreateFlowerPotOnPlayerHand(GameObject flowerPot)
+    {
+        GameObject selectFlower = Instantiate(flowerPot,
+            player.leftHand.handInteractor.transform.position, Quaternion.identity);
+        
+        selectFlower.gameObject.name = selectFlower.gameObject.name.Replace("(Clone)", string.Empty);
+        selectFlower.GetComponent<FlowerPot>().SetHandPosition(player.leftHand.handInteractor.transform);
+        player.CreatedAFlowerPot(selectFlower.GetComponent<FlowerPot>());
     }
 }

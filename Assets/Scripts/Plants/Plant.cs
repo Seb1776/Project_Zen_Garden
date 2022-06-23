@@ -23,11 +23,11 @@ public class Plant : MonoBehaviour
     private bool waitingForInteraction;
     private bool progressSet;
     private bool gardenItemChosen;
-    private bool fullyGrown;
+    public bool fullyGrown;
     private int growThreshold;
     private bool selling;
     private int currentGrowThreshold;
-    public FlowerPot flowerPotIn;
+    public FlowerPot flowerPotIn, plantIsAbove;
     private GardenItemType? expectedItem = null;
     private GardenItem itemHolding;
 
@@ -95,6 +95,7 @@ public class Plant : MonoBehaviour
 
     public void SetPlantProgress(PlantProcessAsset ppa)
     {
+        Debug.Log(ppa.timeRange.x + " " + ppa.timeRange.y);
         waterRange.y = Random.Range(ppa.waterRange.x, ppa.waterRange.y);
         compostRange.y = Random.Range(ppa.compostRange.x, ppa.compostRange.y);
         fertilizerRange.y = Random.Range(ppa.fertilizerRange.x, ppa.fertilizerRange.y);
@@ -125,7 +126,7 @@ public class Plant : MonoBehaviour
 
     void GetNewTimeRange()
     {
-        Random.Range(timeRange.x, timeRange.y);
+        setTimeRange = Random.Range(timeRange.x, timeRange.y);
     }
 
     void GrowPlant()
@@ -185,6 +186,14 @@ public class Plant : MonoBehaviour
         gardenItemChosen = true;
     }
 
+    public void DeactivateWarnings()
+    {
+        flowerPotIn.ActivateWarning(GardenItemType.Water, false);
+        flowerPotIn.ActivateWarning(GardenItemType.Compost, false);
+        flowerPotIn.ActivateWarning(GardenItemType.Fertilizer, false);
+        flowerPotIn.ActivateWarning(GardenItemType.Music, false);
+    }
+
     public void ApplyGardenItem(GardenItemType item)
     {   
         if (item == expectedItem)
@@ -222,7 +231,8 @@ public class Plant : MonoBehaviour
                 waitingForInteraction = false;
                 gardenItemChosen = false;
                 expectedItem = null;
-
+                flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+                
                 revenueMultiplier += revMulIncreaser;
                 flowerPotIn.UpdatePlantSellPrice(GetActualRevenue());
 
@@ -231,6 +241,7 @@ public class Plant : MonoBehaviour
 
             else
             {
+                flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                 fullyGrown = true;
                 flowerPotIn.PlayFullGrown();
             }
@@ -250,19 +261,31 @@ public class Plant : MonoBehaviour
     void SellPlant()
     {
         if (selling)
-        {
-            if (Vector2.Distance(transform.localScale, Vector3.zero) > 0.01f)
+        {   
+            if (growth)
             {
-                transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 2.5f * Time.deltaTime);
-                flowerPotIn.revenueText.gameObject.SetActive(false);
-                flowerPotIn.sellPlantButton.SetActive(false);
+                if (Vector2.Distance(transform.localScale, Vector3.zero) > 0.01f)
+                {
+                    transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 2.5f * Time.deltaTime);
+                    flowerPotIn.revenueText.gameObject.SetActive(false);
+                    flowerPotIn.sellPlantButton.SetActive(false);
+                }
+
+                else
+                {
+                    flowerPotIn.canUseOutline = true;
+                    flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+                    Destroy(this.gameObject);
+                }
             }
 
             else
             {
-                flowerPotIn.canUseOutline = true;
-                flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
-                Destroy(this.gameObject);
+                _sprout.GetComponent<Animator>().SetTrigger("hide");
+                flowerPotIn.revenueText.gameObject.SetActive(false);
+                flowerPotIn.sellPlantButton.SetActive(false);
+                DeactivateWarnings();
+                StartCoroutine(SellSprout());
             }
         }
     }
@@ -299,23 +322,35 @@ public class Plant : MonoBehaviour
         if (Keyboard.current.kKey.wasPressedThisFrame)
             GrowPlant();
         
-        if (growth)
+        if (!fullyGrown && growth && transform.localScale != plantData.initialScale)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, plantData.initialScale, 2 * Time.deltaTime);
 
             if (Vector3.Distance(transform.localScale, plantData.initialScale) <= 0.001f)
             {
                 transform.localScale = plantData.initialScale;
-                growth = false;
             }
         }
     }
 
     IEnumerator GrowPlantAfterSprout()
+    {   
+
+        if (!growth)
+        {
+            yield return new WaitForSeconds(1.167f);
+            growth = true;
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantgrow"));
+        }
+    }
+
+    IEnumerator SellSprout()
     {
         yield return new WaitForSeconds(1.167f);
-        growth = true;
-        StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantgrow"));
+        flowerPotIn.canUseOutline = true;
+        flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+        Destroy(_sprout.gameObject);
+        Destroy(this.gameObject);
     }
 
     void TransparentPlant()
@@ -351,7 +386,7 @@ public class Plant : MonoBehaviour
         transform.rotation = Quaternion.Euler(new Vector3(0f, transform.eulerAngles.y, 0f));
     }
 
-    void OnTriggerEnter(Collider c)
+    void OnTriggerStay(Collider c)
     {
         if (c.transform.CompareTag("FlowerPot"))
             if (c.GetComponent<FlowerPot>() != null && c.isTrigger)

@@ -22,6 +22,7 @@ public class GardenItem : MonoBehaviour
 
     private SortingGroup sg;
     protected XRGrabInteractable grab;
+    protected FlowerPot detectedPot;
     private bool returnToPos;
     private GameManager manager;
     private Collider coll;
@@ -40,6 +41,8 @@ public class GardenItem : MonoBehaviour
     }
 
     public virtual void Start() {}
+
+    public virtual void DetectEffect() {}
 
     public virtual void Update()
     {   

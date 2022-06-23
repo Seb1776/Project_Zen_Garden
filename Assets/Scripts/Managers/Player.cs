@@ -6,12 +6,14 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Player : MonoBehaviour
 {
+    public static Player instance;
+
     private XRIDefaultInputActions xrDirect;
     public VRHandsLeft leftHand;
     public VRHandsRight rightHand;
     private bool oneTeleporterEnabled;
-    private Plant holdingPlant;
-    private FlowerPot hoveringFlowerPot, holdingFlowerPot;
+    public Plant holdingPlant;
+    public FlowerPot hoveringFlowerPot, holdingFlowerPot, placingFlowerPot;
     private GardenItem holdingGardenItem;
     private SeedDatabase seedDatabase;
     [Header ("Economy")]
@@ -20,6 +22,9 @@ public class Player : MonoBehaviour
     void Awake()
     {
         seedDatabase = GameObject.FindGameObjectWithTag("SeedDatabase").GetComponent<SeedDatabase>();
+
+        if (instance != null && instance != this) Destroy(this);
+        else instance = this;
 
         xrDirect = new XRIDefaultInputActions();
         xrDirect.Enable();
@@ -34,16 +39,19 @@ public class Player : MonoBehaviour
     {
         leftHand.handInteractor.enabled = false;
         leftHand.move.Enable();
-        leftHand.move = xrDirect.XRILeftHandLocomotion.Move;
+        leftHand.move = xrDirect.XRILeftHandInteraction.ButtonA;
         leftHand.move.performed += TeleportEnabler;
+        leftHand.move.canceled += TeleportDisabler;
 
         leftHand.plantAction.Enable();
         leftHand.plantAction = xrDirect.XRILeftHandInteraction.Activate;
         leftHand.plantAction.performed += PlantSelectedPlant;
+        leftHand.plantAction.performed += SetFlowerPot;
 
         leftHand.removePlant.Enable();
-        leftHand.removePlant = xrDirect.XRILeftHandInteraction.ButtonA;
+        leftHand.removePlant = xrDirect.XRILeftHandInteraction.ButtonB;
         leftHand.removePlant.performed += GetRidOfSelectedPlant;
+        leftHand.removePlant.performed += GetRidOfSelectedFlowerPot;
 
         rightHand.grabbedItemEffect.Enable();
         rightHand.grabbedItemEffect = xrDirect.XRIRightHandInteraction.Activate;
@@ -83,11 +91,27 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void GetRidOfSelectedFlowerPot(InputAction.CallbackContext ctx)
+    {
+        if (placingFlowerPot != null)
+        {
+            DestroyHoldingFlowerPot();
+            SeedDatabase.instance.TriggerHolders(false);
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("tap"));
+        }
+    }
+
     public void DestroyHoldingPlant()
     {
         Destroy(holdingPlant.gameObject);
         holdingPlant = null;
         hoveringFlowerPot = null;
+    }
+
+    public void DestroyHoldingFlowerPot()
+    {
+        Destroy(placingFlowerPot.gameObject);
+        placingFlowerPot = null;
     }
 
     public void SetGardenItem(GardenItem garden)
@@ -119,6 +143,22 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SetFlowerPot(InputAction.CallbackContext ctx)
+    {
+        if (placingFlowerPot != null && placingFlowerPot.hoveringHolder != null)
+        {
+            placingFlowerPot.transform.position = placingFlowerPot.hoveringHolder.transform.position;
+            placingFlowerPot.transform.rotation = placingFlowerPot.hoveringHolder.transform.rotation;
+            placingFlowerPot.startPos = placingFlowerPot.transform.position;
+            placingFlowerPot.hoveringHolder.gameObject.SetActive(false);
+            placingFlowerPot.hoveringHolder = null;
+            placingFlowerPot.setted = true;
+            placingFlowerPot.triggerColl.enabled = true;
+            seedDatabase.UseFlowerPot(placingFlowerPot.flowerPotAsset);
+            placingFlowerPot = null;
+        }
+    }
+
     public GardenItem GetHoldingGardenItem()
     {
         return holdingGardenItem;
@@ -129,9 +169,19 @@ public class Player : MonoBehaviour
         holdingPlant = _p;
     }
 
+    public void CreatedAFlowerPot(FlowerPot _fp)
+    {
+        placingFlowerPot = _fp;
+    }
+
     public Plant GetHoldingPlant()
     {
         return holdingPlant;
+    }
+
+    public FlowerPot GetHoldingFlowerPot()
+    {
+        return placingFlowerPot;
     }
 
     public void HoveringAFlowerPot(FlowerPot _fp)
@@ -148,16 +198,21 @@ public class Player : MonoBehaviour
     {   
         if (leftHand.canUse)
         {
-            if (ctx.ReadValue<Vector2>().magnitude > 0.1)
-            {   
-                if (!oneTeleporterEnabled)
-                    oneTeleporterEnabled = true;
-            }
+            if (ctx.performed)
+                oneTeleporterEnabled = true;
+            
+            leftHand.handInteractor.enabled = true;
+        }
+    }
 
-            else
+    void TeleportDisabler(InputAction.CallbackContext ctx)
+    {   
+        if (leftHand.canUse)
+        {
+            if (ctx.performed)
                 oneTeleporterEnabled = false;
             
-            leftHand.handInteractor.enabled = oneTeleporterEnabled;
+            leftHand.handInteractor.enabled = false;
         }
     }
 }
