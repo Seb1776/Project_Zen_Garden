@@ -1,12 +1,84 @@
 fileFormatVersion: 2
 guid: ad3bc9c3bf460354497cd2a4a033e510
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 6589367519559994061
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_0
+  - first:
+      213: 4217665236230222253
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_1
+  - first:
+      213: -1803725731419194418
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_2
+  - first:
+      213: 5656685768042183162
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_3
+  - first:
+      213: 1722586589584219793
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_4
+  - first:
+      213: 6295273607282998765
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_5
+  - first:
+      213: -2327784577519553185
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_6
+  - first:
+      213: -7493111440614875947
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_7
+  - first:
+      213: 6594910829827874860
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_8
+  - first:
+      213: -7894805111344435180
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_9
+  - first:
+      213: 1404326044509915458
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_10
+  - first:
+      213: 810965270204439605
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_11
+  - first:
+      213: 7370656070905117741
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_12
+  - first:
+      213: 2070347608635307981
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_13
+  - first:
+      213: 9138824990063185302
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_14
+  - first:
+      213: -1429828373651696720
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_15
+  - first:
+      213: 4611303938388040275
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_16
+  - first:
+      213: -1851707528884443603
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_17
+  - first:
+      213: -3717208855583298870
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_18
+  - first:
+      213: -1475241918678523914
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_19
+  - first:
+      213: 7311014455244214598
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_20
+  - first:
+      213: -247696258826286231
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_21
+  - first:
+      213: 282446334288587638
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_22
+  - first:
+      213: -9024918263684442799
+    second: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_23
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,16 +104,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -50,9 +122,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -68,7 +140,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +173,515 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_0
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 48
+        width: 78
+        height: 78
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dcaced9d8d2227b50800000000000000
+      internalID: 6589367519559994061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_1
+      rect:
+        serializedVersion: 2
+        x: 459
+        y: 14
+        width: 49
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da1340baf28288a30800000000000000
+      internalID: 4217665236230222253
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_2
+      rect:
+        serializedVersion: 2
+        x: 486
+        y: 194
+        width: 58
+        height: 53
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ecbf68af001e7f6e0800000000000000
+      internalID: -1803725731419194418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_3
+      rect:
+        serializedVersion: 2
+        x: 408
+        y: 72
+        width: 54
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: af979225cb5908e40800000000000000
+      internalID: 5656685768042183162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_4
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 66
+        width: 54
+        height: 49
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 19ed407606bd7e710800000000000000
+      internalID: 1722586589584219793
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_5
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 13
+        width: 50
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dedbef5fdfd4d5750800000000000000
+      internalID: 6295273607282998765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_6
+      rect:
+        serializedVersion: 2
+        x: 563
+        y: 16
+        width: 45
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f557057824c02bfd0800000000000000
+      internalID: -2327784577519553185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_7
+      rect:
+        serializedVersion: 2
+        x: 955
+        y: 645
+        width: 42
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dc1cbf48de130890800000000000000
+      internalID: -7493111440614875947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_8
+      rect:
+        serializedVersion: 2
+        x: 907
+        y: 700
+        width: 66
+        height: 115
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2064495574d58b50800000000000000
+      internalID: 6594910829827874860
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_9
+      rect:
+        serializedVersion: 2
+        x: 970
+        y: 97
+        width: 19
+        height: 30
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41070676494007290800000000000000
+      internalID: -7894805111344435180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_10
+      rect:
+        serializedVersion: 2
+        x: 920
+        y: 162
+        width: 67
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 249c7d7d81b2d7310800000000000000
+      internalID: 1404326044509915458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_11
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 253
+        width: 45
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53cd6b7dd90214b00800000000000000
+      internalID: 810965270204439605
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_12
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 1304
+        width: 29
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2c30e325a4d94660800000000000000
+      internalID: 7370656070905117741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_13
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 1235
+        width: 28
+        height: 62
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc7794e4e2a5bbc10800000000000000
+      internalID: 2070347608635307981
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_14
+      rect:
+        serializedVersion: 2
+        x: 954
+        y: 1117
+        width: 41
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69dcd2da8e0a3de70800000000000000
+      internalID: 9138824990063185302
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_15
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 21
+        width: 67
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b357b27baa382ce0800000000000000
+      internalID: -1429828373651696720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_16
+      rect:
+        serializedVersion: 2
+        x: 845
+        y: 275
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35a9afe0084aeff30800000000000000
+      internalID: 4611303938388040275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_17
+      rect:
+        serializedVersion: 2
+        x: 786
+        y: 875
+        width: 115
+        height: 114
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d262de030d96d46e0800000000000000
+      internalID: -1851707528884443603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_18
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 428
+        width: 153
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aca650f8d32d96cc0800000000000000
+      internalID: -3717208855583298870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_19
+      rect:
+        serializedVersion: 2
+        x: 380
+        y: 374
+        width: 242
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6ff96678a43e68be0800000000000000
+      internalID: -1475241918678523914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_20
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 610
+        width: 278
+        height: 254
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 641d39069e0f57560800000000000000
+      internalID: 7311014455244214598
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1091
+        width: 411
+        height: 327
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96b4770a091009cf0800000000000000
+      internalID: -247696258826286231
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_22
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 807
+        width: 341
+        height: 247
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67be16fc1737be300800000000000000
+      internalID: 282446334288587638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ATLASES_PLANTNARCISSUSSHOOTER_1536_00_PTX_23
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 375
+        width: 350
+        height: 217
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 155572eb7ac01c280800000000000000
+      internalID: -9024918263684442799
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 04cf8b957f57fac469b51f8f516628e5
     internalID: 0
     vertices: []
     indices: 

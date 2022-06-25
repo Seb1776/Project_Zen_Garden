@@ -39,6 +39,9 @@ public class Fertilizer : GardenItem
                     else
                         detectedPot.outline.ChangeOutlineColor(Color.red, true);
                 }
+
+                else
+                    detectedPot.outline.ChangeOutlineColor(Color.white, false);
             }
         }
 

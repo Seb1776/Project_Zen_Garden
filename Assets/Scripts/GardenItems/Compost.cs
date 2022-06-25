@@ -42,7 +42,7 @@ public class Compost : GardenItem
 
             if (detectedPot.canApplyItem)
             {
-                if (detectedPot.GetPlantedPlant() != null && canUseItem)
+                if (canUseItem && detectedPot.GetPlantedPlant() != null)
                 {
                     Plant p = detectedPot.GetPlantedPlant();
 
@@ -52,6 +52,9 @@ public class Compost : GardenItem
                     else
                         detectedPot.outline.ChangeOutlineColor(Color.red, true);
                 }
+
+                else
+                    detectedPot.outline.ChangeOutlineColor(Color.white, false);
             }
         }
 

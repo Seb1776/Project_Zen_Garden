@@ -11,7 +11,7 @@ public class Phonograph : GardenItem
 
     public override void GardenItemAction(InputAction.CallbackContext ctx)
     {
-        if (hoveringFlowerPot != null)
+        if (hoveringFlowerPot != null && hoveringFlowerPot.GetPlantedPlant() != null)
         {   
             if (hoveringFlowerPot.GetComponent<FlowerPot>().canApplyItem)
             {
@@ -30,17 +30,20 @@ public class Phonograph : GardenItem
     void OnTriggerExit(Collider c)
     {
         if (c.CompareTag("FlowerPot"))
-        {
-            if (!detectedPot.GetPlantedPlant().fullyGrown)
+        {   
+            if (hoveringFlowerPot.GetPlantedPlant() != null)
             {
-                hoveringFlowerPot.outline.ChangeOutlineColor(Color.red, false);
-                hoveringFlowerPot = null;
-            }
+                if (!hoveringFlowerPot.GetPlantedPlant().fullyGrown)
+                {
+                    hoveringFlowerPot.outline.ChangeOutlineColor(Color.red, false);
+                    hoveringFlowerPot = null;
+                }
 
-            else
-            {
-                hoveringFlowerPot.outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
-                hoveringFlowerPot = null;
+                else
+                {
+                    hoveringFlowerPot.outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
+                    hoveringFlowerPot = null;
+                }
             }
         }
     }

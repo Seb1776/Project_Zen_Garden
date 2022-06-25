@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public VRHandsLeft leftHand;
     public VRHandsRight rightHand;
     private bool oneTeleporterEnabled;
-    public Plant holdingPlant;
+    public Plant holdingPlant, hoveringPlantedPlant, holdingPlantedPlant;
     public FlowerPot hoveringFlowerPot, holdingFlowerPot, placingFlowerPot;
     private GardenItem holdingGardenItem;
     private SeedDatabase seedDatabase;
