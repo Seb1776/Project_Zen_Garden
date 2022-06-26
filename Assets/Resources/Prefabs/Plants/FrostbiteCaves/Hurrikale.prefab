@@ -2054,6 +2054,7 @@ GameObject:
   - component: {fileID: 5020861382756388376}
   - component: {fileID: 5020861382756388377}
   - component: {fileID: 5020861382756388378}
+  - component: {fileID: 5914018873303552514}
   m_Layer: 0
   m_Name: Hurrikale
   m_TagString: Plant
@@ -2119,6 +2120,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6604916, y: 1.7430538, z: 0.26198298}
   m_Center: {x: -0.06192132, y: 0.96321607, z: 0.006709065}
+--- !u!114 &5914018873303552514
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5020861382756388382}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ed4246f2b1a91c4d8f4a71ce462312a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  plantData: {fileID: 11400000, guid: e8db9f1c653c6f24c8a40382905368ea, type: 2}
+  fullyGrown: 0
+  flowerPotIn: {fileID: 0}
+  plantIsAbove: {fileID: 0}
 --- !u!1 &5020861382878844898
 GameObject:
   m_ObjectHideFlags: 0

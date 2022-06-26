@@ -95,7 +95,6 @@ public class Plant : MonoBehaviour
 
     public void SetPlantProgress(PlantProcessAsset ppa)
     {
-        Debug.Log(ppa.timeRange.x + " " + ppa.timeRange.y);
         waterRange.y = Random.Range(ppa.waterRange.x, ppa.waterRange.y);
         compostRange.y = Random.Range(ppa.compostRange.x, ppa.compostRange.y);
         fertilizerRange.y = Random.Range(ppa.fertilizerRange.x, ppa.fertilizerRange.y);
@@ -275,6 +274,7 @@ public class Plant : MonoBehaviour
                 {
                     flowerPotIn.canUseOutline = true;
                     flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+                    flowerPotIn.triggerColl.enabled = true;
                     Destroy(this.gameObject);
                 }
             }
@@ -349,6 +349,7 @@ public class Plant : MonoBehaviour
         yield return new WaitForSeconds(1.167f);
         flowerPotIn.canUseOutline = true;
         flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+        flowerPotIn.triggerColl.enabled = true;
         Destroy(_sprout.gameObject);
         Destroy(this.gameObject);
     }

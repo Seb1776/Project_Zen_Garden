@@ -80,6 +80,9 @@ public class FlowerPot : MonoBehaviour
         if (setted && !potInteractable.isSelected && Vector3.Distance(transform.position, startPos) > 0.01f)
             returnToPos = true;
         
+        if (GetPlantedPlant() != null && GetPlantedPlant().fullyGrown)
+            outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
+        
         if (returnToPos)
             GetBackPos();
     }
@@ -208,6 +211,7 @@ public class FlowerPot : MonoBehaviour
         canUseOutline = false;
         plantInSpace = p;
         UpdatePlantSellPrice(p.GetActualRevenue());
+        triggerColl.enabled = false;
         p.ApplyColorToPlant();
         p.SetPlanted(_s);
     }

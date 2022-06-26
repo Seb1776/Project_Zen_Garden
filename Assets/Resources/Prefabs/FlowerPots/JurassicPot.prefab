@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 703104790859423508}
   - component: {fileID: 703104790859423510}
   - component: {fileID: 703104790859423511}
+  - component: {fileID: 4587069609972808134}
   m_Layer: 7
   m_Name: WaterEffect
   m_TagString: Untagged
@@ -4905,6 +4906,17 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &4587069609972808134
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703104790859423509}
+  m_Enabled: 1
+  m_SortingLayerID: 278138799
+  m_SortingLayer: 3
+  m_SortingOrder: 0
 --- !u!1 &703104790912195188
 GameObject:
   m_ObjectHideFlags: 0
@@ -6528,6 +6540,7 @@ GameObject:
   - component: {fileID: 703104792104678521}
   - component: {fileID: 703104792104678523}
   - component: {fileID: 703104792104678520}
+  - component: {fileID: 6464516948121196181}
   m_Layer: 7
   m_Name: CompostEffect
   m_TagString: Untagged
@@ -11330,6 +11343,17 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &6464516948121196181
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 703104792104678526}
+  m_Enabled: 1
+  m_SortingLayerID: 278138799
+  m_SortingLayer: 3
+  m_SortingOrder: 0
 --- !u!1 &703104792182418154
 GameObject:
   m_ObjectHideFlags: 0
@@ -12227,8 +12251,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 703104792728770413}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 278138799
+  m_SortingLayer: 3
   m_SortingOrder: 0
 --- !u!95 &703104792728770415
 Animator:

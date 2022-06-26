@@ -953,8 +953,8 @@ SortingGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 427554359327492312}
   m_Enabled: 1
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 278138799
+  m_SortingLayer: 3
   m_SortingOrder: 0
 --- !u!95 &427554359327492314
 Animator:
@@ -1720,7 +1720,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ca7a3aa2806184aaea76b66ed0cf47, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flowerPotAsset: {fileID: 11400000, guid: 7567e5c8289b2aa4cb75e6a2edba1d44, type: 2}
+  flowerPotAsset: {fileID: 11400000, guid: d1d38f3f009796347895acdd2239c17d, type: 2}
   plantPlantingPosition: {fileID: 427554359268336152}
   waterEffect: {fileID: 427554360560667263}
   compostEffect: {fileID: 427554360135532119}
@@ -2009,6 +2009,7 @@ GameObject:
   - component: {fileID: 427554360135532117}
   - component: {fileID: 427554360135532119}
   - component: {fileID: 427554360135532118}
+  - component: {fileID: 6451387547051556355}
   m_Layer: 7
   m_Name: CompostEffect
   m_TagString: Untagged
@@ -6811,6 +6812,17 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &6451387547051556355
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427554360135532116}
+  m_Enabled: 1
+  m_SortingLayerID: 278138799
+  m_SortingLayer: 3
+  m_SortingOrder: 0
 --- !u!1 &427554360211425281
 GameObject:
   m_ObjectHideFlags: 0
@@ -7418,6 +7430,7 @@ GameObject:
   - component: {fileID: 427554360560667261}
   - component: {fileID: 427554360560667263}
   - component: {fileID: 427554360560667262}
+  - component: {fileID: 9034727470720396675}
   m_Layer: 7
   m_Name: WaterEffect
   m_TagString: Untagged
@@ -12220,6 +12233,17 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!210 &9034727470720396675
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 427554360560667260}
+  m_Enabled: 1
+  m_SortingLayerID: 278138799
+  m_SortingLayer: 3
+  m_SortingOrder: 0
 --- !u!1 &427554360647288486
 GameObject:
   m_ObjectHideFlags: 0

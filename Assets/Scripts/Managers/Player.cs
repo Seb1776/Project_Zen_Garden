@@ -103,6 +103,9 @@ public class Player : MonoBehaviour
 
     public void DestroyHoldingPlant()
     {
+        if (holdingPlant.plantIsAbove != null)
+            holdingPlant.plantIsAbove.outline.ChangeOutlineColor(Color.white, false);
+
         Destroy(holdingPlant.gameObject);
         holdingPlant = null;
         hoveringFlowerPot = null;

@@ -47,13 +47,13 @@ public class Fertilizer : GardenItem
 
         else if (GetBelowFlowerPot() == null && detectedPot != null)
         {
-            if (!detectedPot.GetPlantedPlant().fullyGrown)
+            if (detectedPot.GetPlantedPlant() != null && !detectedPot.GetPlantedPlant().fullyGrown)
             {
                 detectedPot.outline.ChangeOutlineColor(Color.white, false);
                 detectedPot = null;
             }
 
-            else
+            else if (detectedPot.GetPlantedPlant() != null && detectedPot.GetPlantedPlant().fullyGrown)
             {
                 detectedPot.outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
                 detectedPot = null;

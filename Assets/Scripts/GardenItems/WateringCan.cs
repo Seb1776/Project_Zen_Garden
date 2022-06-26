@@ -50,18 +50,21 @@ public class WateringCan : GardenItem
             }
         }
 
-        else if (GetBelowFlowerPot() == null && detectedPot != null)
+        else
         {   
-            if (!detectedPot.GetPlantedPlant().fullyGrown)
+            if (detectedPot != null && detectedPot.GetPlantedPlant() != null)
             {
-                detectedPot.outline.ChangeOutlineColor(Color.white, false);
-                detectedPot = null;
-            }
+                if (!detectedPot.GetPlantedPlant().fullyGrown)
+                {
+                    detectedPot.outline.ChangeOutlineColor(Color.white, false);
+                    detectedPot = null;
+                }
 
-            else
-            {
-                detectedPot.outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
-                detectedPot = null;
+                else if (detectedPot.GetPlantedPlant() != null && detectedPot.GetPlantedPlant().fullyGrown)
+                {
+                    detectedPot.outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
+                    detectedPot = null;
+                }
             }
         }
 
