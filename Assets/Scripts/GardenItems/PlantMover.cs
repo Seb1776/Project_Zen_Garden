@@ -3,20 +3,50 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
-public class PlantMover : MonoBehaviour
+public class PlantMover : GardenItem
 {
-    private XRGrabInteractable plantInteractable;
+    private XRGrabInteractable moverInteractable;
+    private Plant grabbedPlant;
 
-    void SendHoveredPlantedPlant(XRBaseInteractor interactor)
+    [System.Obsolete]
+    public override void Start()
     {
+        moverInteractable = GetComponent<XRGrabInteractable>();
 
+        moverInteractable.onSelectExit.AddListener(ReturnPlantToOriginalLocation);
+
+        base.Start();
     }
 
-    void OnTriggerEnter(Collider other)
+    void ReturnPlantToOriginalLocation(XRBaseInteractor i)
+    {
+        if (grabbedPlant != null)
+        {
+            grabbedPlant.flowerPotIn.RePlantPlant(grabbedPlant);
+            Player.instance.RecievePlantedPlant(null);
+        }
+    }
+
+    void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Plant"))
         {
-            Debug.Log(other.gameObject.name);
+            grabbedPlant.flowerPotIn.outline.ChangeOutlineColor(Color.yellow, false);
+            grabbedPlant = null;
+            Player.instance.RecievePlantedPlant(grabbedPlant);
+        }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Plant"))
+        {   
+            if (grabbedPlant == null)
+            {
+                grabbedPlant = other.transform.GetComponent<Plant>();
+                grabbedPlant.flowerPotIn.outline.ChangeOutlineColor(Color.yellow, true);
+                Player.instance.RecievePlantedPlant(grabbedPlant);
+            }
         }
     }
 }

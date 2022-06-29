@@ -45,7 +45,10 @@ public class SeedDatabase : MonoBehaviour
     public void TriggerHolders(bool act)
     {
         foreach (FlowerPotHolder fph in holders)
+        {
             fph.canShowEffect = act;
+            if (!act) fph.outline.ChangeOutlineColor(Color.white, false);
+        }
     }
 
     public bool CanUseFlowerPot(FlowerPotAsset fpa)

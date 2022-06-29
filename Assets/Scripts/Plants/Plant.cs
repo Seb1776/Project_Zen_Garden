@@ -15,14 +15,16 @@ public class Plant : MonoBehaviour
     private Collider coll;
     private Transform handPosition;
     private Player player;
-    private Animator plantAnim;
+    public Animator plantAnim;
 
     private Vector2Int waterRange, compostRange, fertilizerRange, musicRange;
     private Vector2 timeRange;
+    private Vector3 outsideScale;
     private float setTimeRange, currentTimeRange;
     private bool waitingForInteraction;
     private bool progressSet;
-    private bool gardenItemChosen;
+    private bool gardenItemChosen, canReplant;
+    public bool replanting;
     public bool fullyGrown;
     private int growThreshold;
     private bool selling;
@@ -44,18 +46,20 @@ public class Plant : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         plantsManager = GameObject.FindGameObjectWithTag("PlantsManager").GetComponent<PlantsManager>();
 
-        plantAnim.speed = 0f;
-
         plantsManager.AssignQualityData(this);
+
+        outsideScale = transform.localScale;
     }
 
     void Start()
     {   
         if (!planted)
-            TransparentPlant();
+            ApplyColorToPlant(new Color(1f, 1f, 1f, .5f));
         
         revenueMultiplier = 1f / GetAccumulativeRange();
         revMulIncreaser = 1f / GetAccumulativeRange();
+
+        plantAnim.speed = 0f;
     }
 
     void Update()
@@ -73,6 +77,32 @@ public class Plant : MonoBehaviour
     public GardenItemType ExpectedGardenItem()
     {
         return (GardenItemType)expectedItem;
+    }
+
+    public void TriggerReplant()
+    {   
+        if (canReplant)
+        {
+            DeactivateWarnings();
+            transform.parent = null;
+            flowerPotIn.triggerColl.enabled = true;
+            flowerPotIn.canUseOutline = true;
+            flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+            planted = false;
+            replanting = true;
+            ApplyColorToPlant(new Color(1f, 1f, 1f, .5f));
+            plantAnim.speed = 0f;
+        }
+    }
+
+    public void RemovePlant()
+    {
+        SoundEffectsManager.instance.PlaySoundEffectNC("removeplant");
+        DeactivateWarnings();
+        flowerPotIn.canUseOutline = true;
+        flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+        flowerPotIn.triggerColl.enabled = true;
+        Destroy(this.gameObject);
     }
 
     public void SetHandPosition(Transform _hand)
@@ -135,6 +165,11 @@ public class Plant : MonoBehaviour
             _sprout.GetComponent<Animator>().SetTrigger("hide");
             StartCoroutine(GrowPlantAfterSprout());
         }
+    }
+
+    public bool ExpectingGardenItem()
+    {
+        return currentTimeRange >= setTimeRange;
     }
 
     void ChooseGardenItem()
@@ -242,6 +277,7 @@ public class Plant : MonoBehaviour
             {
                 flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                 fullyGrown = true;
+                currentTimeRange = 0f;
                 flowerPotIn.PlayFullGrown();
             }
         }
@@ -322,13 +358,14 @@ public class Plant : MonoBehaviour
         if (Keyboard.current.kKey.wasPressedThisFrame)
             GrowPlant();
         
-        if (!fullyGrown && growth && transform.localScale != plantData.initialScale)
+        if (!fullyGrown && growth && !replanting && transform.localScale != plantData.initialScale)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, plantData.initialScale, 2 * Time.deltaTime);
 
             if (Vector3.Distance(transform.localScale, plantData.initialScale) <= 0.001f)
             {
                 transform.localScale = plantData.initialScale;
+                canReplant = true;
             }
         }
     }
@@ -354,30 +391,21 @@ public class Plant : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    void TransparentPlant()
+    public void ApplyColorToPlant(Color c)
     {
         foreach (SpriteRenderer sr in transform.GetComponentsInChildren<SpriteRenderer>())
         {
-            Color transp = new Color(1f, 1f, 1f, .5f);
-            sr.color = transp;
-        }
-    }
-
-    public void ApplyColorToPlant()
-    {
-       foreach (SpriteRenderer sr in transform.GetComponentsInChildren<SpriteRenderer>())
-        {
-            Color transp = new Color(1f, 1f, 1f, 1f);
-            sr.color = transp;
+            sr.color = c;
         }
 
-        transform.localScale = Vector3.zero;
         plantAnim.speed = 1f;
     }
 
-    public void SetPlanted(GameObject _sp)
+    public void SetPlanted(GameObject _sp = null)
     {
-        _sprout = _sp;
+        if (_sp != null)
+            _sprout = _sp;
+
         planted = true;
     }
 
@@ -390,8 +418,10 @@ public class Plant : MonoBehaviour
     void OnTriggerStay(Collider c)
     {
         if (c.transform.CompareTag("FlowerPot"))
+        {
             if (c.GetComponent<FlowerPot>() != null && c.isTrigger)
                 player.HoveringAFlowerPot(c.GetComponent<FlowerPot>());
+        }
     }
 
     void OnTriggerExit(Collider c)

@@ -6,7 +6,7 @@ public class FlowerPotHolder : MonoBehaviour
 {   
     public bool canShowEffect;
 
-    private OutlineEffect outline;
+    public OutlineEffect outline;
 
     void Start()
     {
@@ -21,6 +21,9 @@ public class FlowerPotHolder : MonoBehaviour
             {
                 outline.ChangeOutlineColor(Color.green, true);
                 other.transform.GetComponent<FlowerPot>().hoveringHolder = this;
+
+                if (other.transform.GetComponent<FlowerPot>().setted)
+                    other.transform.GetComponent<FlowerPot>().reAssignable = true;
             }
         }
     }
@@ -33,6 +36,9 @@ public class FlowerPotHolder : MonoBehaviour
             {
                 outline.ChangeOutlineColor(Color.green, false);
                 other.transform.GetComponent<FlowerPot>().hoveringHolder = null;
+
+                if (other.transform.GetComponent<FlowerPot>().setted)
+                    other.transform.GetComponent<FlowerPot>().reAssignable = false;
             }
         }
     }

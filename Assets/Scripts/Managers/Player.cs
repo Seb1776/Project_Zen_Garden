@@ -12,8 +12,9 @@ public class Player : MonoBehaviour
     public VRHandsLeft leftHand;
     public VRHandsRight rightHand;
     private bool oneTeleporterEnabled;
-    public Plant holdingPlant, hoveringPlantedPlant, holdingPlantedPlant;
-    public FlowerPot hoveringFlowerPot, holdingFlowerPot, placingFlowerPot;
+    public Plant holdingPlant, hoveringPlantedPlant, holdingPlantedPlant, removingPlant;
+    public FlowerPot hoveringFlowerPot, holdingFlowerPot, placingFlowerPot, holdingPlacedFlower, removingFlower;
+    private bool grabbedPlantedPlant, grabbedPlacedFlower;
     private GardenItem holdingGardenItem;
     private SeedDatabase seedDatabase;
     [Header ("Economy")]
@@ -55,10 +56,23 @@ public class Player : MonoBehaviour
 
         rightHand.grabbedItemEffect.Enable();
         rightHand.grabbedItemEffect = xrDirect.XRIRightHandInteraction.Activate;
+        rightHand.grabbedItemEffect.performed += GrabPlantedPlant;
+        rightHand.grabbedItemEffect.performed += RePlantGrabbedPlant;
+        rightHand.grabbedItemEffect.performed += DeleteFlowerPot;
+        rightHand.grabbedItemEffect.performed += DeletePlant;
 
         rightHand.sellPlant.Enable();
         rightHand.sellPlant = xrDirect.XRIRightHandInteraction.ButtonA;
         rightHand.sellPlant.performed += SellPlant;
+    }
+
+    public void GrabPlantedPlant(InputAction.CallbackContext ctx)
+    {
+        if (holdingPlantedPlant != null)
+        {
+            holdingPlantedPlant.SetHandPosition(rightHand.handInteractor.transform);
+            holdingPlantedPlant.TriggerReplant();
+        }
     }
 
     public void PlantSelectedPlant(InputAction.CallbackContext ctx)
@@ -77,9 +91,41 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void RePlantGrabbedPlant(InputAction.CallbackContext ctx)
+    {
+        if (holdingPlantedPlant != null && hoveringFlowerPot != null)
+        {
+            if (hoveringFlowerPot.GetIfPlantIsAccepted())
+            {
+                hoveringFlowerPot.RePlantPlant(holdingPlantedPlant);
+                holdingPlantedPlant = null;
+                hoveringFlowerPot = null;
+            }
+
+            else
+                StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("cantselect"));
+        }
+    }
+
     public void SetHoldFlowerPot(FlowerPot pot = null)
     {
+        Debug.Log(pot);
         holdingFlowerPot = pot;
+    }
+
+    public void RecievePlantedPlant(Plant p)
+    {   
+        if (!grabbedPlantedPlant && p != null)
+        {
+            holdingPlantedPlant = p;
+            grabbedPlantedPlant = true;
+        }
+
+        else if (p == null)
+        {
+            holdingPlantedPlant = null;
+            grabbedPlantedPlant = false;
+        }
     }
 
     public void GetRidOfSelectedPlant(InputAction.CallbackContext ctx)
@@ -99,6 +145,28 @@ public class Player : MonoBehaviour
             SeedDatabase.instance.TriggerHolders(false);
             StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("tap"));
         }
+    }
+
+    public void DeletePlant(InputAction.CallbackContext ctx)
+    {
+        if (removingPlant != null)
+            removingPlant.RemovePlant();
+    }
+
+    public void DeleteFlowerPot(InputAction.CallbackContext ctx)
+    {
+        if (removingFlower != null)
+            removingFlower.RemoveFlowerPot();
+    }
+
+    public void RecieveToDeleteFlowerPot(FlowerPot fp)
+    {
+        removingFlower = fp;
+    }
+
+    public void RecieveToDeletePlant(Plant p)
+    {
+        removingPlant = p;
     }
 
     public void DestroyHoldingPlant()
@@ -154,10 +222,13 @@ public class Player : MonoBehaviour
             placingFlowerPot.transform.rotation = placingFlowerPot.hoveringHolder.transform.rotation;
             placingFlowerPot.startPos = placingFlowerPot.transform.position;
             placingFlowerPot.hoveringHolder.gameObject.SetActive(false);
+            placingFlowerPot.inPositionOfHolder = placingFlowerPot.hoveringHolder;
             placingFlowerPot.hoveringHolder = null;
             placingFlowerPot.setted = true;
             placingFlowerPot.triggerColl.enabled = true;
             seedDatabase.UseFlowerPot(placingFlowerPot.flowerPotAsset);
+            seedDatabase.TriggerHolders(false);
+            SoundEffectsManager.instance.PlaySoundEffectNC("ceramic");
             placingFlowerPot = null;
         }
     }

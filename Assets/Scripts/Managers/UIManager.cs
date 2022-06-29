@@ -25,6 +25,8 @@ public class UIManager : MonoBehaviour
     {
         if (Player.instance.holdingPlant == null && seedDatabase.CanUseFlowerPot(flowerPot.flowerPotAsset))
         {
+            SoundEffectsManager.instance.PlaySoundEffectNC("click");
+
             if (player.GetHoldingFlowerPot() == null)
                 CreateFlowerPotOnPlayerHand(flowerPot.gameObject);
             
@@ -76,7 +78,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void BuyPlantAmount(PlantAsset plant)
-    {   
+    {
         if (player.currentPlayerCoins >= plant.buyPrice)
         {
             seedDatabase.BuyPlant(plant);
@@ -84,7 +86,7 @@ public class UIManager : MonoBehaviour
 
             if (player.currentPlayerCoins < 0)
                 player.currentPlayerCoins = 0;
-            
+
             StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("tap"));
         }
 
