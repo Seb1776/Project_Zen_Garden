@@ -10,6 +10,8 @@ public class SeedDatabase : MonoBehaviour
     [NonReorderable] public FlowerPots[] flowerPots;
     [SerializeField] private FlowerPotHolder[] holders;
     [SerializeField] private List<UnlockedSeeds> unlockedSeeds = new List<UnlockedSeeds>();
+    [SerializeField] private WaterAmount waterUI;
+    [SerializeField] private GenericGardenAmount compostUI, fertilizerUI, phonographUI;
 
     void Awake()
     {
@@ -40,6 +42,54 @@ public class SeedDatabase : MonoBehaviour
         }
 
         return null;
+    }
+
+    public void GardenUse(GardenItemType git, bool add)
+    {
+        switch (git)
+        {
+            case GardenItemType.Water:
+                if (add) waterUI.AddAmount();
+                else waterUI.RemoveAmount();
+            break;
+
+            case GardenItemType.Compost:
+                if (add) compostUI.AddAmount();
+                else compostUI.RemoveAmount();
+            break;
+
+            case GardenItemType.Fertilizer:
+                if (add) fertilizerUI.AddAmount();
+                else fertilizerUI.RemoveAmount();
+            break;
+
+            case GardenItemType.Music:
+                if (add) phonographUI.AddAmount();
+                else phonographUI.RemoveAmount();
+            break;
+        }
+    }
+
+    public void UpdateGardenUI(GardenItemType git)
+    {
+        switch (git)
+        {
+            case GardenItemType.Water:
+                waterUI.UpdateUI();
+            break;
+
+            case GardenItemType.Compost:
+                compostUI.UpdateUI();
+            break;
+
+            case GardenItemType.Fertilizer:
+                fertilizerUI.UpdateUI();
+            break;
+
+            case GardenItemType.Music:
+                phonographUI.UpdateUI();
+            break;
+        }
     }
 
     public void TriggerHolders(bool act)
@@ -183,5 +233,42 @@ public class FlowerPots
     public void SetUI()
     {
         boughtAmount.text = "x" + amount;
+    }
+}
+
+[System.Serializable]
+public class WaterAmount : GenericGardenAmount
+{
+    public Slider amountSlider;
+}
+
+[System.Serializable]
+public class GenericGardenAmount
+{
+    public int maxAmount;
+    public int currentAmount;
+    public int gardenPrice;
+    public Text textAmount;
+
+    public void AddAmount()
+    {
+        if (currentAmount < maxAmount)
+            currentAmount++;
+    }
+
+    public void RemoveAmount()
+    {
+        if (currentAmount > 0)
+            currentAmount--;
+    }
+
+    public virtual void UpdateUI()
+    {
+        textAmount.text = "x" + currentAmount;
+    }
+
+    public bool IsAvaible()
+    {
+        return currentAmount > 0;
     }
 }

@@ -12,6 +12,7 @@ public class GardenItem : MonoBehaviour
     [SerializeField] protected GardenItemType itemType;
     protected Vector3 startPos;
     protected bool canUseItem;
+    protected bool isUsable;
 
     [Header ("Raycast Fields, Leave Empty If Not Using")]
     [SerializeField] protected LayerMask rayMask;
