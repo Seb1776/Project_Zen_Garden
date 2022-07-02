@@ -20,6 +20,10 @@ public class Phonograph : GardenItem
                     hoveringFlowerPot.GetComponent<FlowerPot>().canApplyItem = false;
                     StartCoroutine(hoveringFlowerPot.TriggerMusicEffect());
                     hoveringFlowerPot.GetPlantedPlant().ApplyGardenItem(GardenItemType.Music);
+                    SeedDatabase.instance.GardenUse(GardenItemType.Music, false);
+                    
+                    foreach (GardenItem gi in SeedDatabase.instance.phonographUI.items)
+                        gi.CheckForUsability();
                 }
             }
         }
@@ -52,6 +56,25 @@ public class Phonograph : GardenItem
                     hoveringFlowerPot = null;
             }
         }
+    }
+
+    public override void CheckForUsability()
+    {
+        if (!SeedDatabase.instance.GardenIsAvailable(GardenItemType.Music))
+        {
+            coll.enabled = false;
+            grab.enabled = false;
+            SetColors(new Color(.5f, .5f, .5f, 1f));
+        }
+
+        else
+        {
+            coll.enabled = true;
+            grab.enabled = true;
+            SetColors(new Color(1f, 1f, 1f, 1f));
+        }
+
+        base.CheckForUsability();
     }
 
     void PhonographData(FlowerPot fp)

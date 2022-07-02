@@ -34,6 +34,25 @@ public class Compost : GardenItem
         base.Update();
     }
 
+    public override void CheckForUsability()
+    {
+        if (!SeedDatabase.instance.GardenIsAvailable(GardenItemType.Compost))
+        {
+            coll.enabled = false;
+            grab.enabled = false;
+            SetColors(new Color(.5f, .5f, .5f, 1f));
+        }
+
+        else
+        {
+            coll.enabled = true;
+            grab.enabled = true;
+            SetColors(new Color(1f, 1f, 1f, 1f));
+        }
+
+        base.CheckForUsability();
+    }
+
     public override void DetectEffect()
     {
         if (GetBelowFlowerPot() != null)
@@ -90,6 +109,10 @@ public class Compost : GardenItem
                     StartCoroutine(fp.TriggerCompostEffect(compostEffectDuration));
                     GardenItemSFX();
                     fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Compost);
+                    SeedDatabase.instance.GardenUse(GardenItemType.Compost, false);
+                    
+                    foreach (GardenItem gi in SeedDatabase.instance.compostUI.items)
+                        gi.CheckForUsability();
                 }
             }
         }

@@ -43,6 +43,101 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void BuyGardenItem(string _git)
+    {
+        GardenItemType? git = null;
+
+        switch (_git)
+        {
+            case "water":
+                git = GardenItemType.Water;
+            break;
+
+            case "compost":
+                git = GardenItemType.Compost;
+            break;
+
+            case "fertilizer":
+                git = GardenItemType.Fertilizer;
+            break;
+
+            case "phonograph":
+                git = GardenItemType.Music;
+            break;
+        }
+
+        switch (git)
+        {
+            case GardenItemType.Water:
+                if (Player.instance.currentPlayerCoins >= SeedDatabase.instance.waterUI.gardenPrice &&
+                    SeedDatabase.instance.GardenIsBuyable(GardenItemType.Water))
+                {
+                    SeedDatabase.instance.GardenUse(GardenItemType.Water, true);
+
+                    foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
+                        gi.CheckForUsability();
+
+                    Player.instance.currentPlayerCoins -= SeedDatabase.instance.waterUI.gardenPrice;
+                    SoundEffectsManager.instance.PlaySoundEffectNC("money");
+                }
+
+                else
+                    SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
+            break;
+
+            case GardenItemType.Compost:
+                if (Player.instance.currentPlayerCoins >= SeedDatabase.instance.compostUI.gardenPrice &&
+                    SeedDatabase.instance.GardenIsBuyable(GardenItemType.Compost))
+                {
+                    SeedDatabase.instance.GardenUse(GardenItemType.Compost, true);
+
+                    foreach (GardenItem gi in SeedDatabase.instance.compostUI.items)
+                        gi.CheckForUsability();
+
+                    Player.instance.currentPlayerCoins -= SeedDatabase.instance.compostUI.gardenPrice;
+                    SoundEffectsManager.instance.PlaySoundEffectNC("money");
+                }
+
+                else
+                    SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
+            break;
+
+            case GardenItemType.Fertilizer:
+                if (Player.instance.currentPlayerCoins >= SeedDatabase.instance.fertilizerUI.gardenPrice &&
+                    SeedDatabase.instance.GardenIsBuyable(GardenItemType.Fertilizer))
+                {
+                    SeedDatabase.instance.GardenUse(GardenItemType.Fertilizer, true);
+
+                    foreach (GardenItem gi in SeedDatabase.instance.fertilizerUI.items)
+                        gi.CheckForUsability();
+
+                    Player.instance.currentPlayerCoins -= SeedDatabase.instance.fertilizerUI.gardenPrice;
+                    SoundEffectsManager.instance.PlaySoundEffectNC("money");
+                }
+
+                else
+                    SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
+            break;
+
+            case GardenItemType.Music:
+                if (Player.instance.currentPlayerCoins >= SeedDatabase.instance.phonographUI.gardenPrice &&
+                    SeedDatabase.instance.GardenIsBuyable(GardenItemType.Music))
+                {
+                    SeedDatabase.instance.GardenUse(GardenItemType.Music, true);
+
+                    foreach (GardenItem gi in SeedDatabase.instance.phonographUI.items)
+                        gi.CheckForUsability();
+
+                    Player.instance.currentPlayerCoins -= SeedDatabase.instance.phonographUI.gardenPrice;
+                    SoundEffectsManager.instance.PlaySoundEffectNC("money");
+                }
+
+                else
+                    SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
+            break;
+        }
+    }
+
     public void SpawnPlantOnHand(Plant plant)
     {
         if (Player.instance.placingFlowerPot == null && seedDatabase.CanPlant(plant.plantData))

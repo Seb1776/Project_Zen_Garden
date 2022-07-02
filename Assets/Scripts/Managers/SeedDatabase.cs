@@ -10,8 +10,7 @@ public class SeedDatabase : MonoBehaviour
     [NonReorderable] public FlowerPots[] flowerPots;
     [SerializeField] private FlowerPotHolder[] holders;
     [SerializeField] private List<UnlockedSeeds> unlockedSeeds = new List<UnlockedSeeds>();
-    [SerializeField] private WaterAmount waterUI;
-    [SerializeField] private GenericGardenAmount compostUI, fertilizerUI, phonographUI;
+    public GardenAmount waterUI, compostUI, fertilizerUI, phonographUI;
 
     void Awake()
     {
@@ -23,6 +22,11 @@ public class SeedDatabase : MonoBehaviour
     {
         foreach (FlowerPots fps in flowerPots)
             fps.InitUI();
+        
+        waterUI.UpdateUI();
+        compostUI.UpdateUI();
+        fertilizerUI.UpdateUI();
+        phonographUI.UpdateUI();
     }
 
     void Update()
@@ -49,47 +53,73 @@ public class SeedDatabase : MonoBehaviour
         switch (git)
         {
             case GardenItemType.Water:
-                if (add) waterUI.AddAmount();
+                if (add) waterUI.RefillAmount();
                 else waterUI.RemoveAmount();
+
+                waterUI.UpdateUI();
             break;
 
             case GardenItemType.Compost:
                 if (add) compostUI.AddAmount();
                 else compostUI.RemoveAmount();
+
+                compostUI.UpdateUI();
             break;
 
             case GardenItemType.Fertilizer:
                 if (add) fertilizerUI.AddAmount();
                 else fertilizerUI.RemoveAmount();
+
+                fertilizerUI.UpdateUI();
             break;
 
             case GardenItemType.Music:
                 if (add) phonographUI.AddAmount();
                 else phonographUI.RemoveAmount();
+
+                phonographUI.UpdateUI();
             break;
         }
     }
 
-    public void UpdateGardenUI(GardenItemType git)
+    public bool GardenIsAvailable(GardenItemType git)
     {
         switch (git)
         {
             case GardenItemType.Water:
-                waterUI.UpdateUI();
-            break;
+                return waterUI.IsAvaible();
 
             case GardenItemType.Compost:
-                compostUI.UpdateUI();
-            break;
+                return compostUI.IsAvaible();
 
             case GardenItemType.Fertilizer:
-                fertilizerUI.UpdateUI();
-            break;
+                return fertilizerUI.IsAvaible();
 
             case GardenItemType.Music:
-                phonographUI.UpdateUI();
-            break;
+                return phonographUI.IsAvaible();
         }
+
+        return false;
+    }
+
+    public bool GardenIsBuyable(GardenItemType git)
+    {
+        switch (git)
+        {
+            case GardenItemType.Water:
+                return waterUI.IsBuyable();
+
+            case GardenItemType.Compost:
+                return compostUI.IsBuyable();
+
+            case GardenItemType.Fertilizer:
+                return fertilizerUI.IsBuyable();
+
+            case GardenItemType.Music:
+                return phonographUI.IsBuyable();
+        }
+
+        return false;
     }
 
     public void TriggerHolders(bool act)
@@ -237,23 +267,24 @@ public class FlowerPots
 }
 
 [System.Serializable]
-public class WaterAmount : GenericGardenAmount
+public class GardenAmount
 {
-    public Slider amountSlider;
-}
-
-[System.Serializable]
-public class GenericGardenAmount
-{
-    public int maxAmount;
-    public int currentAmount;
     public int gardenPrice;
-    public Text textAmount;
+    public int maxAmount, currentAmount;
+    public bool usesText;
+    public Text priceText;
+    public GardenItem[] items;
+    public GardenAmountUI[] UI;
 
     public void AddAmount()
     {
         if (currentAmount < maxAmount)
             currentAmount++;
+    }
+
+    public void RefillAmount()
+    {
+        currentAmount = maxAmount;
     }
 
     public void RemoveAmount()
@@ -264,11 +295,35 @@ public class GenericGardenAmount
 
     public virtual void UpdateUI()
     {
-        textAmount.text = "x" + currentAmount;
+        priceText.text = "$ " + gardenPrice.ToString("0,0");
+
+        foreach (GardenAmountUI gaui in UI)
+        {
+            if (!usesText)
+            {
+                gaui.sliderAmount.maxValue = maxAmount;
+                gaui.sliderAmount.value = currentAmount;
+                gaui.sliderAmount.minValue = 0;
+            }
+
+            else gaui.amountText.text = "x" + currentAmount;
+        }
     }
 
     public bool IsAvaible()
     {
-        return currentAmount > 0;
+        return currentAmount > 0 && currentAmount <= maxAmount;
     }
+
+    public bool IsBuyable()
+    {
+        return currentAmount < maxAmount;
+    }
+}
+
+[System.Serializable]
+public class GardenAmountUI
+{
+    public Text amountText;
+    public Slider sliderAmount;
 }

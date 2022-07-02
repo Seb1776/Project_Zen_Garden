@@ -71,6 +71,25 @@ public class WateringCan : GardenItem
         base.DetectEffect();
     }
 
+    public override void CheckForUsability()
+    {
+        if (!SeedDatabase.instance.GardenIsAvailable(GardenItemType.Water))
+        {
+            coll.enabled = false;
+            grab.enabled = false;
+            SetColors(new Color(.5f, .5f, .5f, 1f));
+        }
+
+        else
+        {
+            coll.enabled = true;
+            grab.enabled = true;
+            SetColors(new Color(1f, 1f, 1f, 1f));
+        }
+
+        base.CheckForUsability();
+    }
+
     public override void GardenItemAction(InputAction.CallbackContext ctx)
     {
         if (GetBelowFlowerPot() != null && canUseItem)
@@ -85,6 +104,10 @@ public class WateringCan : GardenItem
                     StartCoroutine(fp.TriggerWaterEffect(waterEffectDuration));
                     GardenItemSFX();
                     fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Water);
+                    SeedDatabase.instance.GardenUse(GardenItemType.Water, false);
+                    
+                    foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
+                        gi.CheckForUsability();
                 }
             }
         }

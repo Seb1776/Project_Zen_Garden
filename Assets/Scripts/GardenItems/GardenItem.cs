@@ -22,11 +22,12 @@ public class GardenItem : MonoBehaviour
     [SerializeField] protected float rayLength;
 
     private SortingGroup sg;
+    private List<SpriteRenderer> sprites = new List<SpriteRenderer>();
     protected XRGrabInteractable grab;
     protected FlowerPot detectedPot;
     private bool returnToPos;
     private GameManager manager;
-    private Collider coll;
+    protected Collider coll;
     protected Player player;
 
     public virtual void Awake()
@@ -37,6 +38,9 @@ public class GardenItem : MonoBehaviour
 
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        foreach (SpriteRenderer sr in GetComponentsInChildren<SpriteRenderer>())
+            sprites.Add(sr);
         
         startPos = transform.position;
     }
@@ -66,6 +70,8 @@ public class GardenItem : MonoBehaviour
             GetBackPos();
     }
 
+    public virtual void CheckForUsability() { }
+
     public virtual void GardenItemAction(InputAction.CallbackContext ctx) {}
 
     protected FlowerPot GetBelowFlowerPot()
@@ -84,6 +90,12 @@ public class GardenItem : MonoBehaviour
         }
 
         return null;
+    }
+
+    protected void SetColors(Color c)
+    {
+        foreach (SpriteRenderer sr in sprites)
+            sr.color = c;
     }
 
     protected void GardenItemSFX()

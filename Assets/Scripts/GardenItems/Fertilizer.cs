@@ -21,6 +21,25 @@ public class Fertilizer : GardenItem
         base.Update();
     }
 
+    public override void CheckForUsability()
+    {
+        if (!SeedDatabase.instance.GardenIsAvailable(GardenItemType.Fertilizer))
+        {
+            coll.enabled = false;
+            grab.enabled = false;
+            SetColors(new Color(.5f, .5f, .5f, 1f));
+        }
+
+        else
+        {
+            coll.enabled = true;
+            grab.enabled = true;
+            SetColors(new Color(1f, 1f, 1f, 1f));
+        }
+
+        base.CheckForUsability();
+    }
+
     public override void DetectEffect()
     {
         if (GetBelowFlowerPot() != null)
@@ -76,6 +95,10 @@ public class Fertilizer : GardenItem
                 GardenItemSFX();
                 fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Fertilizer);
                 fp.outline.ChangeOutlineColor(Color.red, false);
+                SeedDatabase.instance.GardenUse(GardenItemType.Fertilizer, false);
+                
+                foreach (GardenItem gi in SeedDatabase.instance.fertilizerUI.items)
+                    gi.CheckForUsability();
             }
         }
 
