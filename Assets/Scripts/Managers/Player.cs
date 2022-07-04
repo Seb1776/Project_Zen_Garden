@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private bool oneTeleporterEnabled;
     public Plant holdingPlant, hoveringPlantedPlant, holdingPlantedPlant, removingPlant;
     public FlowerPot hoveringFlowerPot, holdingFlowerPot, placingFlowerPot, holdingPlacedFlower, removingFlower;
+    public Pinata holdingPinata;
     private bool grabbedPlantedPlant, grabbedPlacedFlower;
     private GardenItem holdingGardenItem;
     private SeedDatabase seedDatabase;
@@ -60,10 +61,12 @@ public class Player : MonoBehaviour
         rightHand.grabbedItemEffect.performed += RePlantGrabbedPlant;
         rightHand.grabbedItemEffect.performed += DeleteFlowerPot;
         rightHand.grabbedItemEffect.performed += DeletePlant;
+        rightHand.grabbedItemEffect.performed += SquishPinata;
 
         rightHand.sellPlant.Enable();
         rightHand.sellPlant = xrDirect.XRIRightHandInteraction.ButtonA;
         rightHand.sellPlant.performed += SellPlant;
+        rightHand.sellPlant.performed += SquishPinata;
     }
 
     public void GrabPlantedPlant(InputAction.CallbackContext ctx)
@@ -169,6 +172,12 @@ public class Player : MonoBehaviour
         removingPlant = p;
     }
 
+    public void SquishPinata(InputAction.CallbackContext ctx)
+    {
+        if (holdingPinata != null)
+            holdingPinata.Squish();
+    }
+
     public void DestroyHoldingPlant()
     {
         if (holdingPlant.plantIsAbove != null)
@@ -231,6 +240,11 @@ public class Player : MonoBehaviour
             SoundEffectsManager.instance.PlaySoundEffectNC("ceramic");
             placingFlowerPot = null;
         }
+    }
+
+    public void RecievePinata(Pinata pinata = null)
+    {
+        holdingPinata = pinata;
     }
 
     public GardenItem GetHoldingGardenItem()
