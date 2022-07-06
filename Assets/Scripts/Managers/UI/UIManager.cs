@@ -6,10 +6,25 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class UIManager : MonoBehaviour
 {
+    public static UIManager instance;
+
     [SerializeField] private Player player;
     [SerializeField] private SeedDatabase seedDatabase;
+    [SerializeField] private GameObject pinata;
+    [SerializeField] private GameObject uiCover;
+    public string preSelectedPinataSize;
+    public Transform pinataGridPanel;
+    public Text pinataRewardText;
+    public GameObject pinataRewardPanel;
     [Header("UI")]
     [SerializeField] private Text coins;
+    private GameObject creaPinata;
+
+    void Awake()
+    {
+        if (instance != null && instance != this) Destroy(this);
+        else instance = this;
+    }
 
     void Update()
     {
@@ -187,6 +202,26 @@ public class UIManager : MonoBehaviour
 
         else
             StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("cantselect"));
+    }
+
+    public void SetPinataSize(string pinataSize)
+    {
+        preSelectedPinataSize = pinataSize;
+    }
+    public void CreatePinata()
+    {
+        creaPinata = Instantiate(pinata, pinata.transform.position, Quaternion.identity);
+        creaPinata.GetComponent<Pinata>().SetPinataSize(preSelectedPinataSize);
+        Transform globParent = creaPinata.transform.GetChild(2);
+        pinataRewardText = globParent.GetChild(6).GetComponent<Text>();
+        pinataGridPanel = globParent.GetChild(7);
+        uiCover.SetActive(true);
+    }
+
+    public void DestroyPinata()
+    {
+        Destroy(creaPinata.gameObject);
+        uiCover.SetActive(false);
     }
 
     void CreatePlantOnPlayerHand(GameObject plant)

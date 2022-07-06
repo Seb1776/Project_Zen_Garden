@@ -7,6 +7,8 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     [SerializeField] private Camera mainCam;
+    [Header ("Environment")]
+    [SerializeField] private float skySpeed;
 
     private Player player;
 
@@ -19,6 +21,11 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
+    void Update()
+    {
+        RenderSettings.skybox.SetFloat("_Rotation", skySpeed * Time.time);
     }
 
     public Camera GetMainCamera()

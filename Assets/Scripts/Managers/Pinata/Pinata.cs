@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.UI;
 
 public class Pinata : MonoBehaviour
 {
     [SerializeField] private PinataAsset pinataData;
+    [SerializeField] private SpriteRenderer pinataImage;
     [SerializeField] private Canvas worldCanvas;
     [SerializeField] private string debugSize;
     [SerializeField] private GameObject pinataExplosion;
 
-    private PinataSizeCategory selectedCategory;
+    private List<PlantGot> showPlants = new List<PlantGot>();
+    private PinataSize selectedCategory;
     private int squishes, currentSquishes;
+    private int totalGivenSeeds;
     private XRGrabInteractable grab;
     private Vector3 startPos;
     private bool returnToPos, squishCooldown, canGrab;
@@ -39,7 +43,6 @@ public class Pinata : MonoBehaviour
     {
         grab.onSelectEnter.AddListener(SendPinataToPlayer);
         grab.onSelectExit.AddListener(UnSendPinataToPlayer);
-        SetPinataSize(debugSize);
     }
 
     void Update()
@@ -54,24 +57,72 @@ public class Pinata : MonoBehaviour
         }
     }
 
+    void SetRewardPlants()
+    {
+        int unlockedPlants = 0;
+
+        foreach (PlantAsset pa in pinataData.plantsThatCanAppear)
+            if (SeedDatabase.instance.PlayerOwnsPlant(pa))
+                unlockedPlants++;
+
+        if (unlockedPlants >= pinataData.minUnlockedPlantsToUse)
+        {
+            int plantsToShow = Random.Range(selectedCategory.plantsToAppearRange.x, selectedCategory.plantsToAppearRange.y);
+            List<PlantGot> notSelectedPlants = new List<PlantGot>();
+
+            for (int i = 0; i < pinataData.plantsThatCanAppear.Length; i++)
+            {
+                notSelectedPlants.Add(new PlantGot(pinataData.plantsThatCanAppear[i], 
+                    Random.Range(selectedCategory.seedsToGiveRange.x, selectedCategory.seedsToGiveRange.y)));
+            }
+            
+            for (int i = 0; i < plantsToShow; i++)
+            {
+                int randomPlant = Random.Range(0, notSelectedPlants.Count);
+                showPlants.Add(notSelectedPlants[randomPlant]);
+                notSelectedPlants.Remove(notSelectedPlants[randomPlant]);
+            }
+        }
+    }
+
+    public void CreateRewards()
+    {
+        for (int i = 0; i < showPlants.Count; i++)
+        {
+            GameObject prp = Instantiate(UIManager.instance.pinataRewardPanel, UIManager.instance.pinataRewardPanel.transform.position, Quaternion.identity, UIManager.instance.pinataGridPanel);
+            prp.transform.GetChild(0).GetComponent<Text>().text = showPlants[i].plant.plantName;
+            prp.transform.GetChild(1).GetComponent<Text>().text = showPlants[i].gotSeeds.ToString() + " Seedpackets";
+            prp.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+            prp.transform.localPosition = new Vector3(prp.transform.position.x, prp.transform.position.y, 0f);
+            SeedDatabase.instance.BuyPlant(showPlants[i].plant, showPlants[i].gotSeeds);
+            totalGivenSeeds += showPlants[i].gotSeeds;
+        }
+
+        UIManager.instance.pinataRewardText.text = "You got " + totalGivenSeeds + " seeds!";
+    }
+
     public void SetPinataSize(string size)
     {
+        pinataImage.sprite = pinataData.pinataSprite;
+
         switch (size)
         {
-            case "s": selectedCategory = PinataSizeCategory.S; break;
-            case "m": selectedCategory = PinataSizeCategory.M; break;
-            case "l": selectedCategory = PinataSizeCategory.L; break;
-            case "xl": selectedCategory = PinataSizeCategory.XL; break;
+            case "s": selectedCategory = pinataData.sizes[0]; break;
+            case "m": selectedCategory = pinataData.sizes[1]; break;
+            case "l": selectedCategory = pinataData.sizes[2]; break;
+            case "xl": selectedCategory = pinataData.sizes[3]; break;
         }
 
         for (int i = 0; i < pinataData.sizes.Length; i++)
         {   
-            if (pinataData.sizes[i].pinataSize == selectedCategory)
+            if (pinataData.sizes[i].pinataSize == selectedCategory.pinataSize)
             {
                 squishes = Random.Range(pinataData.sizes[i].squishesRange.x, pinataData.sizes[i].squishesRange.y);
                 break;
             }
         }
+
+        SetRewardPlants();
     }
 
     public void Squish()
@@ -84,13 +135,16 @@ public class Pinata : MonoBehaviour
                 grab.enabled = false;
                 sr.enabled = false;
                 Player.instance.RecievePinata(null);
-                Instantiate(pinataExplosion, transform.position, Quaternion.identity);
-                Debug.Log("Pinata Explodes");
+                SoundEffectsManager.instance.PlaySoundEffectNC("explosion");
+                SoundEffectsManager.instance.PlaySoundEffectNC("prize");
+                Instantiate(pinataExplosion, objTo.transform.position, Quaternion.identity);
+                CreateRewards();
             }
 
             else
             {
                 currentSquishes++;
+                SoundEffectsManager.instance.PlaySoundEffectNC("coffee");
 
                 if (GameHelper.GetRandomBool()) anim.SetTrigger("squishA");
                 else anim.SetTrigger("squishB");
@@ -134,5 +188,17 @@ public class Pinata : MonoBehaviour
             if (currentSquishes < squishes)
                 coll.enabled = true;
         }
+    }
+}
+
+public class PlantGot
+{
+    public PlantAsset plant;
+    public int gotSeeds;
+
+    public PlantGot(PlantAsset plant, int gotSeeds)
+    {
+        this.plant = plant;
+        this.gotSeeds = gotSeeds;
     }
 }

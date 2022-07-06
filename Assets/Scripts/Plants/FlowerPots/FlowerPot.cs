@@ -142,6 +142,7 @@ public class FlowerPot : MonoBehaviour
             inPositionOfHolder.gameObject.SetActive(true);
             hoveringHolder.gameObject.SetActive(false);
             inPositionOfHolder = hoveringHolder;
+            transform.rotation = inPositionOfHolder.transform.rotation;
             hoveringHolder = null;
             reAssignable = false;
         }

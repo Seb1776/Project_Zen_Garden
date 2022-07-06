@@ -35,6 +35,11 @@ public class SeedDatabase : MonoBehaviour
             fps.SetUI();
     }
 
+    public void CheckToUnlock()
+    {
+
+    }
+
     public FlowerPots GetFlowerPotData(FlowerPotAsset fpa)
     {
         foreach (FlowerPots fp in flowerPots)
@@ -164,12 +169,18 @@ public class SeedDatabase : MonoBehaviour
         unlockedSeeds.Add(newPlant);
     }
 
-    public void BuyPlant(PlantAsset plant)
+    public void BuyPlant(PlantAsset plant, int specAmount = 0)
     {
         if (PlayerOwnsPlant(plant))
         {
             UnlockedSeeds plantTo = GetPlantInList(plant);
-            plantTo.amount++;
+
+            if (specAmount == 0)
+                plantTo.amount++;
+            
+            else
+                plantTo.amount += specAmount;
+
             plantTo.uiPacket.UpdatePlantAmount();
         }
     }
