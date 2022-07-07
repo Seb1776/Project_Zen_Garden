@@ -15,12 +15,30 @@ MonoBehaviour:
   worldID: dark
   world: 4
   worldTracks:
-  - startTrack: {fileID: 8300000, guid: 0c339367c8f0f86419b7f19cd81f2cb6, type: 3}
-    musicTrack: {fileID: 8300000, guid: 50671bd77ceab544bbaeb4a5e48430d6, type: 3}
-  - startTrack: {fileID: 0}
-    musicTrack: {fileID: 8300000, guid: 65b77af5a34265b4b86c364482785704, type: 3}
-  - startTrack: {fileID: 8300000, guid: 09b3764d2ecc90449a719029b0850909, type: 3}
-    musicTrack: {fileID: 8300000, guid: a53ab0046ceebad4d882d992eae31e51, type: 3}
+    enteredFirstTime:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 10ec3d6912e0f764ebc4b53f9c103a52, type: 3}
+    firstWave:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 101ffebba812da04a8b9e0220c07485b, type: 3}
+    midWaveA:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 8bc4f1b30f54e134193f1290f499cf39, type: 3}
+    midWaveB:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 814f622e78b09934cb8ffe8d0a0f381f, type: 3}
+    finalWave:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 26d88c4ac05a57542a1749f6a08e9b18, type: 3}
+    ultimateBattle:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 5522b35aed3012848a3f0aac8c60a4bf, type: 3}
+    minigame:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 11b37e881359de94e8c6f9ac5a20efcf, type: 3}
+    loonboon:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 247b451a4f46bca469e2176af7786ca1, type: 3}
   phonographClip: {fileID: 8300000, guid: 961ff09a1ebfd30438744285e05c1681, type: 3}
   grownPlantClip: {fileID: 8300000, guid: 0ccac8d3d2b31dc40ae3b70d911c8fe7, type: 3}
   unlockPrice: 500

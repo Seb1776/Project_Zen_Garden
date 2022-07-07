@@ -12,15 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b53dbc10e280d4286729eb3d4d79ea, type: 3}
   m_Name: NeonMixtapeTour
   m_EditorClassIdentifier: 
-  worldID: 
+  worldID: neon
   world: 8
   worldTracks:
-  - startTrack: {fileID: 8300000, guid: 4ff70b08f0d910843a627d0101489a4d, type: 3}
-    musicTrack: {fileID: 8300000, guid: 4295b51c8fcf22b489d674a4f6036225, type: 3}
-  - startTrack: {fileID: 0}
-    musicTrack: {fileID: 8300000, guid: 7313faaf594f11b4c8b8852e5070192c, type: 3}
-  - startTrack: {fileID: 8300000, guid: 357522e6b9925b74a8f02568de04806c, type: 3}
-    musicTrack: {fileID: 8300000, guid: aedca325c558f6b48a0a7e396cf1190d, type: 3}
+    enteredFirstTime:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: ed04af89f3c85f34bb7c893ad4602b9d, type: 3}
+    firstWave:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    midWaveA:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    midWaveB:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    finalWave:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    ultimateBattle:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 6eec003fac794d748af65d8eb90a1dd3, type: 3}
+    minigame:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: c77e83c9e4af8d74ba33b071cf505ee1, type: 3}
+    loonboon:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 3fe280ac190754a49895ed69ec8c11bc, type: 3}
   phonographClip: {fileID: 8300000, guid: 55927ea4bdc79d44dbafa6a138acff19, type: 3}
   grownPlantClip: {fileID: 8300000, guid: eec3d807747b93444bc2d0e1b578a00a, type: 3}
   unlockPrice: 250

@@ -45,6 +45,22 @@ public class TimeTravelManager : MonoBehaviour
         loading = false;
     }
 
+    public bool HasEnteredBefore(string id)
+    {
+        for (int i = 0; i < worlds.Length; i++)
+            if (worlds[i].ageID == id)
+                return worlds[i].hasEntered;
+
+        return false;
+    }
+
+    public void PlayerEnteredWorld(string id)
+    {
+        for (int i = 0; i < worlds.Length; i++)
+            if (worlds[i].ageID == id)
+                worlds[i].hasEntered = true;
+    }
+
     public void TriggerTransition(bool trigger)
     {
         transition.SetBool("warp", trigger);
@@ -55,6 +71,8 @@ public class TimeTravelManager : MonoBehaviour
 public class AgeTime
 {
     public string ageID;
+    public bool hasEntered;
+    public MusicAsset worldMusic;
     public GameObject props;
     public Material skyboxMaterial;
 }
