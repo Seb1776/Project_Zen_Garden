@@ -40,6 +40,9 @@ public class TimeTravelManager : MonoBehaviour
             RenderSettings.skybox = selectedAge.skyboxMaterial;
             selectedAge.props.SetActive(true);
             currentProps = selectedAge.props;
+            RenderSettings.ambientSkyColor = selectedAge.sky;
+            RenderSettings.ambientEquatorColor = selectedAge.equator;
+            RenderSettings.ambientGroundColor = selectedAge.ground;
         }
 
         loading = false;
@@ -71,6 +74,8 @@ public class TimeTravelManager : MonoBehaviour
 public class AgeTime
 {
     public string ageID;
+    [ColorUsage(false, true)]
+    public Color sky, equator, ground;
     public bool hasEntered;
     public MusicAsset worldMusic;
     public GameObject props;

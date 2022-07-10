@@ -15699,6 +15699,36 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
+    path: Main/Body/SpringEnd
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Main/Body/SpringEnd
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Main/Body/SpringEnd
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
     path: Main/Head/Hair/HairB
     classID: 4
     script: {fileID: 0}
@@ -15729,7 +15759,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Main/Head/Hair/HairD
+    path: Main/Head/HeadLeafs/HeadLeafA
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15739,7 +15769,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Main/Head/Hair/HairD
+    path: Main/Head/HeadLeafs/HeadLeafA
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15749,7 +15779,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Main/Head/Hair/HairD
+    path: Main/Head/HeadLeafs/HeadLeafA
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15759,7 +15789,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Main/Head/HeadLeafs/HeadLeafC
+    path: Main/Head/Hair/HairC
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15769,7 +15799,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Main/Head/HeadLeafs/HeadLeafC
+    path: Main/Head/Hair/HairC
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15779,7 +15809,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Main/Head/HeadLeafs/HeadLeafC
+    path: Main/Head/Hair/HairC
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15789,7 +15819,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Main/Head/HeadLeafs/HeadLeafA
+    path: Main/Head/RotoDetailA
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15799,7 +15829,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Main/Head/HeadLeafs/HeadLeafA
+    path: Main/Head/RotoDetailA
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15809,7 +15839,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Main/Head/HeadLeafs/HeadLeafA
+    path: Main/Head/RotoDetailA
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15879,7 +15909,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Main/Head/Hair/HairC
+    path: Main/Head/Hair/HairD
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15889,7 +15919,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Main/Head/Hair/HairC
+    path: Main/Head/Hair/HairD
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -15899,97 +15929,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Main/Head/Hair/HairC
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Main/Head/HeadLeafs/HeadLeafB
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Main/Head/HeadLeafs/HeadLeafB
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Main/Head/HeadLeafs/HeadLeafB
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Main/Leafs/LeafB
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Main/Leafs/LeafB
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Main/Leafs/LeafB
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Main/Body/SpringEnd
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.y
-    path: Main/Body/SpringEnd
-    classID: 4
-    script: {fileID: 0}
-  - curve:
-      serializedVersion: 2
-      m_Curve: []
-      m_PreInfinity: 2
-      m_PostInfinity: 2
-      m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: Main/Body/SpringEnd
+    path: Main/Head/Hair/HairD
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -16028,8 +15968,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: Main/Head/RotoDetailA
+    attribute: m_LocalEulerAngles.z
+    path: Main/Head/HeadLeafs/HeadLeafB
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -16039,7 +15979,17 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Main/Head/RotoDetailA
+    path: Main/Head/HeadLeafs/HeadLeafB
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Main/Head/HeadLeafs/HeadLeafB
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -16049,7 +15999,57 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Main/Head/RotoDetailA
+    path: Main/Head/HeadLeafs/HeadLeafC
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Main/Head/HeadLeafs/HeadLeafC
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Main/Head/HeadLeafs/HeadLeafC
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.x
+    path: Main/Leafs/LeafB
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.y
+    path: Main/Leafs/LeafB
+    classID: 4
+    script: {fileID: 0}
+  - curve:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    attribute: m_LocalEulerAngles.z
+    path: Main/Leafs/LeafB
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 0

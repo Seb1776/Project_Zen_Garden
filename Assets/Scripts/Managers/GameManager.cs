@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         RenderSettings.skybox.SetFloat("_Rotation", skySpeed * Time.time);
+        //RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Skybox;
     }
 
     public Camera GetMainCamera()

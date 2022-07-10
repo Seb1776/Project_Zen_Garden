@@ -12,15 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b53dbc10e280d4286729eb3d4d79ea, type: 3}
   m_Name: LostCity
   m_EditorClassIdentifier: 
-  worldID: 
+  worldID: jungle
   world: 7
   worldTracks:
-  - startTrack: {fileID: 8300000, guid: 7bc802be6e34e2844bef18c1f26ef58b, type: 3}
-    musicTrack: {fileID: 8300000, guid: 36892cccb5bcdad4185692c6851849cf, type: 3}
-  - startTrack: {fileID: 0}
-    musicTrack: {fileID: 8300000, guid: 10610eb911744c248a823a13a1d178d2, type: 3}
-  - startTrack: {fileID: 8300000, guid: 868a7d2d21807ae44bf5bd1ba915ed92, type: 3}
-    musicTrack: {fileID: 8300000, guid: f531fd5ed3034044e8a757e4b4ab2bf7, type: 3}
+    enteredFirstTime:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 233419c810ea7c64ab9b3ff7b60d38ee, type: 3}
+    firstWave:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 11919ce401a65514ca2651c82e7e63e5, type: 3}
+    midWaveA:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 6d980a5f508a9d24aa3c79d1e214f923, type: 3}
+    midWaveB:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 08bfa0934044a9842999fcb0f01b8457, type: 3}
+    finalWave:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 3a1a2b24f0535d34ca4fab2610e52a00, type: 3}
+    ultimateBattle:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 5fd4f14c47236634abf6f8afc8d5b204, type: 3}
+    minigame:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 1285967cc0a8bb642b16bada7ec92bf6, type: 3}
+    loonboon:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 34c44bcdf0c05c345a155a6d55cb62e3, type: 3}
   phonographClip: {fileID: 8300000, guid: 4eb009e29d3483248809f8b4109f8c29, type: 3}
   grownPlantClip: {fileID: 8300000, guid: ffb9540fa4d0e9f4798b990f31ae918a, type: 3}
   unlockPrice: 5500
