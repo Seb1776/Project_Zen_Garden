@@ -12,9 +12,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b53dbc10e280d4286729eb3d4d79ea, type: 3}
   m_Name: ModernDay
   m_EditorClassIdentifier: 
-  worldID: 
+  worldID: modern
   world: 10
-  worldTracks: []
-  phonographClip: {fileID: 0}
-  grownPlantClip: {fileID: 0}
+  worldTracks:
+    enteredFirstTime:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 0608fb8c17d16874192fd397c141e875, type: 3}
+    firstWave:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 6eb5e5516c68d354fbeb39a60abfa7d5, type: 3}
+    midWaveA:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 1e39933d0417d05469fc54e88fd764de, type: 3}
+    midWaveB:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 7d7a62ef058413d4e9dcc6c97b268f54, type: 3}
+    finalWave:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 179eb1f06743f064cb5c3fa63c921ff4, type: 3}
+    ultimateBattle:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 52f6b0b241b4c044aa1ed3916e884d6a, type: 3}
+    minigame:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 1c48aca098712ff47bd5a10e65042ab8, type: 3}
+    loonboon:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 0e6a8e71477faad4a91e05babfd30106, type: 3}
+  phonographClip: {fileID: 8300000, guid: 4d811547c851ff04cad42b98f23b08a5, type: 3}
+  grownPlantClip: {fileID: 8300000, guid: 515c4e77fc889c740a36238b180887a0, type: 3}
   unlockPrice: 0

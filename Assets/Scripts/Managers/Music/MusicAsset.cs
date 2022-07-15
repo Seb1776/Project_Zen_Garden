@@ -7,7 +7,9 @@ public class MusicAsset : ScriptableObject
     public string worldID;
     public GameWorlds world;
     public MusicCollection worldTracks;
+    public MusicCollectionPresent presentWorldTracks;
     public AudioClip phonographClip, grownPlantClip;
+    public bool isPresent;
     public int unlockPrice;
 
     public MusicSet GetMusicSet(string set)
@@ -22,6 +24,29 @@ public class MusicAsset : ScriptableObject
             case "ultimate": return worldTracks.ultimateBattle;
             case "minigame": return worldTracks.minigame;
             case "loonboon": return worldTracks.loonboon;
+        }
+
+        return null;
+    }
+
+    public MusicSet GetMusicSetP(string set)
+    {
+        switch (set)
+        {
+            case "first": return presentWorldTracks.entered;
+            case "seeds": return presentWorldTracks.seeds;
+            case "fronta": return presentWorldTracks.frontDay;
+            case "frontb": return presentWorldTracks.frontNight;
+            case "backa": return presentWorldTracks.backDay;
+            case "backb": return presentWorldTracks.backNight;
+            case "roofa": return presentWorldTracks.roofDay;
+            case "roofb": return presentWorldTracks.roofNight;
+            case "minigame": return presentWorldTracks.minigame;
+            case "loonboon": return presentWorldTracks.loonboon;
+            case "ultimatea": return presentWorldTracks.ultimateA;
+            case "ultimateb": return presentWorldTracks.ultimateB;
+            case "cerebrawl": return presentWorldTracks.cerebrawl;
+            case "brainiac": return presentWorldTracks.brainiac;
         }
 
         return null;
@@ -54,6 +79,26 @@ public class MusicCollection
     public MusicSet midWaveA, midWaveB;
     public MusicSet finalWave;
     public MusicSet ultimateBattle, minigame, loonboon;
+}
+
+[System.Serializable]
+public class MusicCollectionPresent
+{
+    [Header ("Entered")]
+    public MusicSet entered;
+    public MusicSet seeds;
+    [Header ("Front")]
+    public MusicSet frontDay;
+    public MusicSet frontNight;
+    [Header ("Back")]
+    public MusicSet backDay;
+    public MusicSet backNight;
+    [Header ("Roof")]
+    public MusicSet roofDay;
+    public MusicSet roofNight;
+    [Header ("Special")]
+    public MusicSet minigame; 
+    public MusicSet ultimateA, ultimateB, loonboon, cerebrawl, brainiac;
 }
 
 [System.Serializable]

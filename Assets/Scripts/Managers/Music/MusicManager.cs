@@ -14,13 +14,19 @@ public class MusicManager : MonoBehaviour
     [SerializeField] private GameWorlds currentWorld;
     [SerializeField] private AudioClip ageTransitionEffect;
     [SerializeField] private GameWorlds changeTo;
+    [SerializeField] private MusicAsset throwback;
 
+    //NormalMusic
     private List<MusicOrder> musicOrder = new List<MusicOrder>();
     private int currentMusicOrderIdx; private bool playingMusicOrder;
     private List<MusicOrder> s_musicOrder = new List<MusicOrder>();
     private int currentSMusicOrderIdx; private bool playingSMusicOrder;
     private List<MusicOrder> challengesMusic = new List<MusicOrder>();
     private int currentChallengeOrderIdx; private bool playingChallengeOrder;
+    //PresentMusic
+    private List<MusicOrder> currentPresentOrder = new List<MusicOrder>();
+    private int currentPresentOrderIdx; private bool playingPresentOrder;
+    public string currentPresentContext;
     private Coroutine playLoopCoroutine;
     private Coroutine swapCoroutine;
     private Coroutine mainCoroutine;
@@ -40,8 +46,17 @@ public class MusicManager : MonoBehaviour
     {
         SetWorldsPrices();
         SelectMusicAsset(currentWorld);
-        GetMusicOrdersFromWorld(currentAsset);
-        ChooseNewMusicOrder();
+
+        if (currentAsset.world == GameWorlds.ThrowbackToThePresent)
+        {
+            PopulatePresentMusic("day");
+        }
+
+        else
+        {
+            GetMusicOrdersFromWorld(currentAsset);
+            ChooseNewMusicOrder();
+        }
     }
 
     public void ChangeMusic(MusicAsset newAge)
@@ -50,7 +65,6 @@ public class MusicManager : MonoBehaviour
         SelectMusicAsset(currentAsset.world);
         GetMusicOrdersFromWorld(currentAsset);
         ChooseNewMusicOrder();
-        Debug.Log("w");
     }
 
     void SetWorldsPrices()
@@ -105,6 +119,16 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    public float GetListDuration()
+    {
+        float full = 0f;
+
+        foreach (MusicOrder mo in currentPresentOrder)
+            full += mo.musicSet.main.length;
+
+        return full;
+    }
+
     public void ChooseNewMusicOrder()
     {
         currentMusicOrderIdx = 0;
@@ -149,6 +173,82 @@ public class MusicManager : MonoBehaviour
         }
     }
 
+    public void PopulatePresentMusic(string time)
+    {
+        playingChallengeOrder = false;
+        currentChallengeOrderIdx = 0;
+        playingMusicOrder = false;
+        currentMusicOrderIdx = 0;
+        playingSMusicOrder = false;
+        currentSMusicOrderIdx = 0;
+
+        currentPresentOrder.Clear();
+        currentPresentOrderIdx = 0;
+        playingPresentOrder = false;
+
+        if (!TimeTravelManager.instance.HasEnteredBefore(currentAsset.worldID))
+            currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("first"), false));
+
+        currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("seeds"), false));
+
+        switch (currentPresentContext)
+        {
+            case "front":
+                if (time == "day")
+                {
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("fronta"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("loonboon"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("ultimatea"), false));
+                }
+
+                else
+                {
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("frontb"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("cerebrawl"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("minigame"), false));
+                }
+            break;
+
+            case "back":
+                if (time == "day")
+                {
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("backa"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("loonboon"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("ultimateb"), false));
+                }
+
+                else
+                {
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("backb"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("cerebrawl"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("minigame"), false));
+                }
+            break;
+
+            case "roof":
+                if (time == "day")
+                {
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("roofa"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("minigame"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("ultimateb"), false));
+                }
+
+                else
+                {
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("roofb"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("ultimatea"), false));
+                    currentPresentOrder.Add(new MusicOrder(currentAsset.GetMusicSetP("brainiac"), false));
+                }
+            break;
+        }
+
+        Debug.Log(currentPresentOrder.Count);
+        playingPresentOrder = true;
+        if (time == "day") DayNightManager.instance.TriggerDay();
+        else DayNightManager.instance.TriggerNight();
+        PlayMusicOrder();
+    }
+
     public void PlayMusicOrder()
     {
         if (playingMusicOrder)
@@ -167,6 +267,13 @@ public class MusicManager : MonoBehaviour
         {
             PlayMusicSet(challengesMusic[currentChallengeOrderIdx].musicSet);
             currentChallengeOrderIdx++;
+        }
+
+        else if (playingPresentOrder)
+        {
+            Debug.Log("here");
+            PlayMusicSet(currentPresentOrder[currentPresentOrderIdx].musicSet);
+            currentPresentOrderIdx++;
         }
     }
 
@@ -206,6 +313,20 @@ public class MusicManager : MonoBehaviour
 
             else
                 PlayMusicOrder();
+        }
+
+        if (playingPresentOrder)
+        {
+            if (currentPresentOrderIdx < currentPresentOrder.Count)
+                PlayMusicOrder();
+            
+            else
+            {
+                if (DayNightManager.instance.day) DayNightManager.instance.TriggerNight(currentPresentContext == "back");
+                else DayNightManager.instance.TriggerDay(currentPresentContext == "back");
+
+                PopulatePresentMusic(DayNightManager.instance.day ? "day" : "night");
+            }
         }
     }
 
@@ -308,6 +429,26 @@ public class MusicManager : MonoBehaviour
             SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
     }
 
+    public void ChangeToPresent(string presentContext)
+    {
+        if (currentPresentContext != presentContext)
+        {
+            currentPresentContext = presentContext;
+
+            if (swapCoroutine != null)
+            {
+                StopCoroutine(swapCoroutine);
+                swapCoroutine = StartCoroutine(SwapMusicAge(throwback));
+            }
+
+            else
+                swapCoroutine = StartCoroutine(SwapMusicAge(throwback));
+        }
+
+        else
+            SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
+    }
+
     public IEnumerator SwapMusicAge(MusicAsset worldMusic)
     {
         if (playLoopCoroutine != null) StopCoroutine(playLoopCoroutine);
@@ -319,12 +460,26 @@ public class MusicManager : MonoBehaviour
         TimeTravelManager.instance.TriggerTransition(true);
 
         yield return new WaitForSeconds(.2f);
-        TimeTravelManager.instance.ChangeScenario(worldMusic.worldID);
+
+        if (worldMusic.world != GameWorlds.ThrowbackToThePresent)
+            TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
+        
+        else
+            TimeTravelManager.instance.ChangeScenario(currentPresentContext, true);
 
         yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
 
         TimeTravelManager.instance.TriggerTransition(false);
-        ChangeMusic(worldMusic);
+        
+        if (worldMusic.world != GameWorlds.ThrowbackToThePresent)
+        {
+            ChangeMusic(worldMusic);
+        }
+        
+        else
+        {
+            PopulatePresentMusic("day");
+        }
     }
 }
 

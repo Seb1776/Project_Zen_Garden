@@ -10,6 +10,9 @@ public class TimeTravelManager : MonoBehaviour
     [SerializeField] private AgeTime[] worlds;
     [SerializeField] private Animator transition;
     [SerializeField] private GameObject currentProps;
+    [Header ("Present Decos")]
+    [SerializeField] private GameObject frontYard; 
+    [SerializeField] private GameObject backYard, roofYard;
 
     private bool loading, doneLoading;
 
@@ -20,7 +23,7 @@ public class TimeTravelManager : MonoBehaviour
         else instance = this;
     }
 
-    public void ChangeScenario(string _world)
+    public void ChangeScenario(string _world, bool present)
     {
         loading = true;
         AgeTime selectedAge = null;
@@ -34,15 +37,44 @@ public class TimeTravelManager : MonoBehaviour
             }
         }
 
-        if (selectedAge != null)
+        if (!present)
         {
-            currentProps.SetActive(false);
-            RenderSettings.skybox = selectedAge.skyboxMaterial;
-            selectedAge.props.SetActive(true);
-            currentProps = selectedAge.props;
-            RenderSettings.ambientSkyColor = selectedAge.sky;
-            RenderSettings.ambientEquatorColor = selectedAge.equator;
-            RenderSettings.ambientGroundColor = selectedAge.ground;
+            if (selectedAge != null)
+            {
+                currentProps.SetActive(false);
+                RenderSettings.skybox = selectedAge.skyboxMaterial;
+                selectedAge.props.SetActive(true);
+                currentProps = selectedAge.props;
+                RenderSettings.ambientSkyColor = selectedAge.sky;
+                RenderSettings.ambientEquatorColor = selectedAge.equator;
+                RenderSettings.ambientGroundColor = selectedAge.ground;
+            }
+        }
+
+        else
+        {   
+            if (_world == "front" || _world == "back" || _world == "roof")
+            {
+                currentProps.SetActive(false);
+
+                switch(_world)
+                {
+                    case "front":
+                        frontYard.SetActive(true);
+                        currentProps = frontYard;
+                    break;
+
+                    case "back":
+                        backYard.SetActive(true);
+                        currentProps = backYard;
+                    break;
+
+                    case "roof":
+                        roofYard.SetActive(true);
+                        currentProps = roofYard;
+                    break;
+                }
+            }
         }
 
         loading = false;
