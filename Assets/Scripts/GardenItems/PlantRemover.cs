@@ -68,6 +68,7 @@ public class PlantRemover : GardenItem
                 if (other.CompareTag("Plant"))
                 {
                     detectedPlant = other.transform.GetComponent<Plant>();
+                    detectedPlant.flowerPotIn.selectedByShovel = true;
                     Player.instance.RecieveToDeletePlant(detectedPlant);
                     detectedPlant.flowerPotIn.outline.ChangeOutlineColor(Color.black, true);
                 }
@@ -75,6 +76,7 @@ public class PlantRemover : GardenItem
                 else if (other.CompareTag("FlowerPot"))
                 {
                     detectedFlowerPot = other.transform.GetComponent<FlowerPot>();
+                    detectedFlowerPot.selectedByShovel = true;
                     Player.instance.RecieveToDeleteFlowerPot(detectedFlowerPot);
                     detectedFlowerPot.outline.ChangeOutlineColor(Color.gray, true);
                 }
@@ -86,6 +88,7 @@ public class PlantRemover : GardenItem
                 {
                     detectedPlant = null;
                     detectedFlowerPot = other.transform.GetComponent<FlowerPot>();
+                    detectedFlowerPot.selectedByShovel = true;
                     detectedFlowerPot.outline.ChangeOutlineColor(Color.gray, true);
                     Player.instance.RecieveToDeletePlant(detectedPlant);
                     Player.instance.RecieveToDeleteFlowerPot(detectedFlowerPot);
@@ -98,6 +101,7 @@ public class PlantRemover : GardenItem
                 {
                     detectedFlowerPot = null;
                     detectedPlant = other.transform.GetComponent<Plant>();
+                    detectedPlant.flowerPotIn.selectedByShovel = true;
                     detectedPlant.flowerPotIn.outline.ChangeOutlineColor(Color.black, true);
                     Player.instance.RecieveToDeletePlant(detectedPlant);
                     Player.instance.RecieveToDeleteFlowerPot(detectedFlowerPot);
@@ -110,6 +114,7 @@ public class PlantRemover : GardenItem
     {   
         if (detectedPlant != null && other.CompareTag("Plant"))
         {
+            detectedPlant.flowerPotIn.selectedByShovel = false;
             detectedPlant.flowerPotIn.outline.ChangeOutlineColor(Color.gray, false);
             detectedPlant = null;
             Player.instance.RecieveToDeletePlant(null);
@@ -117,6 +122,7 @@ public class PlantRemover : GardenItem
 
         else if (detectedFlowerPot != null && other.CompareTag("FlowerPot"))
         {
+            detectedFlowerPot.selectedByShovel = false;
             detectedFlowerPot.outline.ChangeOutlineColor(Color.gray, false);
             detectedFlowerPot = null;
             Player.instance.RecieveToDeleteFlowerPot(null);

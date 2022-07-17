@@ -6339,11 +6339,15 @@ MonoBehaviour:
   revenueText: {fileID: 2194608837371119812}
   grownEffect: {fileID: 6883324495891937056, guid: 46a2ff6117ae86c4697e4603355fcefb, type: 3}
   triggerColl: {fileID: 0}
+  plantInSpace: {fileID: 0}
   canUseOutline: 1
+  selectedByShovel: 0
   canApplyItem: 0
   setted: 0
+  reAssignable: 0
   startPos: {x: 0, y: 0, z: 0}
   hoveringHolder: {fileID: 0}
+  inPositionOfHolder: {fileID: 0}
 --- !u!65 &2194608837631845681
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6413,7 +6417,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0

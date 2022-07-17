@@ -311,6 +311,7 @@ public class Plant : MonoBehaviour
                     flowerPotIn.canUseOutline = true;
                     flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                     flowerPotIn.triggerColl.enabled = true;
+                    flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                     Destroy(this.gameObject);
                 }
             }

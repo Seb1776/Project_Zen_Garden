@@ -39,6 +39,7 @@ public class FlowerPot : MonoBehaviour
     private XRGrabInteractable potInteractable;
     private bool hoveringPlantIsAccepted, returnToPos, returning;
     public bool canUseOutline = true;
+    public bool selectedByShovel;
     public bool canApplyItem;
     public bool setted, reAssignable;
     public Vector3 startPos;
@@ -76,7 +77,7 @@ public class FlowerPot : MonoBehaviour
         if (setted && !potInteractable.isSelected && Vector3.Distance(transform.position, startPos) > 0.01f)
             returnToPos = true;
         
-        if (GetPlantedPlant() != null && (GetPlantedPlant().fullyGrown && !GetPlantedPlant().replanting))
+        if (GetPlantedPlant() != null && (GetPlantedPlant().fullyGrown && !GetPlantedPlant().replanting) && !selectedByShovel)
             outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
         
         if (returnToPos)
@@ -233,6 +234,7 @@ public class FlowerPot : MonoBehaviour
         p.SetPlanted();
         p.ApplyColorToPlant(new Color(1f, 1f, 1f, 1f));
         outline.ChangeOutlineColor(Color.white, false);
+        UpdatePlantSellPrice(p.GetActualRevenue());
         triggerColl.enabled = false;
         p.plantAnim.speed = 1f;
         p.flowerPotIn = this;
