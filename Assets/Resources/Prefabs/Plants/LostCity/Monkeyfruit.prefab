@@ -812,6 +812,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: 77e395f9085873246967674b40c3624a, type: 2}
+  plantAnim: {fileID: 0}
+  replanting: 0
   fullyGrown: 0
   flowerPotIn: {fileID: 0}
   plantIsAbove: {fileID: 0}
@@ -826,8 +828,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.64778817, y: 0.64155424, z: 0.14596409}
-  m_Center: {x: -0.01090914, y: 0.41299194, z: 0.0031170277}
+  m_Size: {x: 0.64778817, y: 0.64155424, z: 0.07598652}
+  m_Center: {x: -0.01090914, y: 0.41299194, z: 0.007490442}
 --- !u!1 &6000888121767416624
 GameObject:
   m_ObjectHideFlags: 0

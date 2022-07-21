@@ -16,6 +16,7 @@ public class SeedPacket : MonoBehaviour
     private Text plantUnlockPrice;
     private Button plantButton;
     private GameObject buyMoreButton;
+    private bool settedData;
 
     [SerializeField] private Player player;
 
@@ -28,6 +29,12 @@ public class SeedPacket : MonoBehaviour
     {
         SetPlantUIData();
         CheckPlantState();
+    }
+
+    void OnEnable()
+    {   
+        if (settedData)
+            CheckForBotanic();
     }
 
     void SetPlantUIData()
@@ -43,7 +50,13 @@ public class SeedPacket : MonoBehaviour
         plantUnlockPrice = buyButton.transform.GetChild(1).GetComponent<Text>();
         plantQualityImage.GetComponent<Animator>().enabled = false;
         plantQualityImage.color = plantData.plantQuality.qualityColor;
-        
+        CheckForBotanic();
+
+        settedData = true;
+    }
+
+    void CheckForBotanic()
+    {
         if (plantData.plantQuality.quality == PlantQualityName.Botanic)
         {
             plantQualityImage.GetComponent<Animator>().enabled = true;

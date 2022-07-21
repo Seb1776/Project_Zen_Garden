@@ -12,6 +12,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private SeedDatabase seedDatabase;
     [SerializeField] private GameObject pinata;
     [SerializeField] private GameObject uiCover;
+    [SerializeField] private GameObject[] plantSections;
     public string preSelectedPinataSize;
     public Transform pinataGridPanel;
     public Text pinataRewardText;
@@ -19,6 +20,7 @@ public class UIManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Text coins;
     private GameObject creaPinata;
+    [SerializeField] private string activePlants;
 
     void Awake()
     {
@@ -204,10 +206,39 @@ public class UIManager : MonoBehaviour
             StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("cantselect"));
     }
 
+    public void ChangePlantsFromWorld(string world)
+    {   
+        if (world != activePlants)
+        {
+            foreach (GameObject g in plantSections)
+                g.SetActive(false);
+
+            switch (world)
+            {
+                case "modern": plantSections[0].SetActive(true); break;
+                case "jurassic": plantSections[1].SetActive(true); break;
+                case "neon": plantSections[2].SetActive(true); break;
+                case "dark": plantSections[3].SetActive(true); break;
+                case "pirate": plantSections[4].SetActive(true); break;
+                case "future": plantSections[5].SetActive(true); break;
+                case "lost": plantSections[6].SetActive(true); break;
+                case "west": plantSections[7].SetActive(true); break;
+                case "beach": plantSections[8].SetActive(true); break;
+                case "frostbite": plantSections[9].SetActive(true); break;
+                case "egypt": plantSections[10].SetActive(true); break;
+                case "present": plantSections[11].SetActive(true); break;
+            }
+        }
+
+        else
+            SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
+    }
+
     public void SetPinataSize(string pinataSize)
     {
         preSelectedPinataSize = pinataSize;
     }
+
     public void CreatePinata()
     {
         creaPinata = Instantiate(pinata, pinata.transform.position, Quaternion.identity);
