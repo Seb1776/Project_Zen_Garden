@@ -254,14 +254,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6934442332559041723}
-  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.021, y: 1.0242093, z: 0.142}
   m_LocalScale: {x: -0.37406215, y: 0.3740621, z: 0.3740621}
   m_Children:
   - {fileID: 6934442332424371578}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &6934442332559041719
 Animator:
   serializedVersion: 3
@@ -318,6 +318,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: 06bdc98669f097743b0c955f3c2b4a4b, type: 2}
+  plantAnim: {fileID: 0}
+  replanting: 0
   fullyGrown: 0
   flowerPotIn: {fileID: 0}
   plantIsAbove: {fileID: 0}

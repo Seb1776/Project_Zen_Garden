@@ -10,6 +10,8 @@ public class TimeTravelManager : MonoBehaviour
     [SerializeField] private AgeTime[] worlds;
     [SerializeField] private Animator transition;
     [SerializeField] private GameObject currentProps;
+    [SerializeField] private GameObject currentTables;
+    [SerializeField] private float worldTablesYOffset;
     [Header ("Present Decos")]
     [SerializeField] private GameObject frontYard; 
     [SerializeField] private GameObject backYard, roofYard;
@@ -43,6 +45,8 @@ public class TimeTravelManager : MonoBehaviour
             {
                 currentProps.SetActive(false);
                 RenderSettings.skybox = selectedAge.skyboxMaterial;
+                currentTables.transform.localPosition += new Vector3(currentTables.transform.localPosition.x,
+                    worldTablesYOffset, currentTables.transform.localPosition.z);
                 selectedAge.props.SetActive(true);
                 currentProps = selectedAge.props;
                 RenderSettings.ambientSkyColor = selectedAge.sky;
@@ -112,4 +116,5 @@ public class AgeTime
     public MusicAsset worldMusic;
     public GameObject props;
     public Material skyboxMaterial;
+    public GameObject worldTables;
 }

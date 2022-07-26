@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class SeedPacket : MonoBehaviour
 {
     [SerializeField] private PlantAsset plantData;
+    [SerializeField] private GameObject alamancEquivalent;
     private GameObject buyButton;
     private SeedDatabase seedDatabase;
     private Image plantImage;
@@ -70,6 +71,7 @@ public class SeedPacket : MonoBehaviour
         {
             player.currentPlayerCoins -= plantData.unlockPrice;
             seedDatabase.UnlockPlant(plantData, this);
+            alamancEquivalent.SetActive(true);
             CheckPlantState();
             StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("tap"));
         }

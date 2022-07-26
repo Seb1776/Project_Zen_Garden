@@ -15,12 +15,22 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject[] plantSections;
     public string preSelectedPinataSize;
     public Transform pinataGridPanel;
-    public Text pinataRewardText;
     public GameObject pinataRewardPanel;
     [Header("UI")]
     [SerializeField] private Text coins;
     private GameObject creaPinata;
     [SerializeField] private string activePlants;
+    [Header("Almanac UI")]
+    [SerializeField] private Text plantNameT;
+    [SerializeField] private Text plantBuyPriceT, plantSellPriceT, plantExtraPercT, plantQualityT, plantFlowerPotsT, plantDescT;
+    [SerializeField] private Image plantBackGround;
+    [SerializeField] private Transform plantSpawn;
+    [Header("Pinatas UI")]
+    [SerializeField] private GameObject pinataMenu;
+    [SerializeField] private GameObject pinataContinueButton;
+    [SerializeField] private GameObject pinataSeedBankParent;
+    public Text pinataRewardText;
+    private Plant spawnedUIPlant;
 
     void Awake()
     {
@@ -153,6 +163,113 @@ public class UIManager : MonoBehaviour
                     SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
             break;
         }
+    }
+
+    public void SetPlantInAlmanac(PlantAsset pa)
+    {
+        if (spawnedUIPlant != null)
+            Destroy(spawnedUIPlant.gameObject);
+
+        spawnedUIPlant = Instantiate(pa.uiPlant.gameObject, plantSpawn.position, Quaternion.Euler(new Vector3(0f, 0f, 0f))).GetComponent<Plant>();
+        spawnedUIPlant.enabled = false;
+        spawnedUIPlant.transform.parent = plantSpawn;
+        spawnedUIPlant.transform.localRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
+
+        plantNameT.text = pa.plantName;
+        plantBuyPriceT.text = "$ " + pa.buyPrice.ToString("N0");
+        plantSellPriceT.text = "$ " + pa.revenuePrice.ToString("N0");
+        plantBackGround.sprite = pa.plantBackg;
+        plantQualityT.text = GetStringedPlantQuality(pa.plantQuality.quality, true);
+
+        PlantProcessAsset ppa = Resources.Load<PlantProcessAsset>("PlantProcessAsset/" + GetStringedPlantQuality(pa.plantQuality.quality, false));
+        Debug.Log(ppa + " " + ("PlantProcessAsset/" + GetStringedPlantQuality(pa.plantQuality.quality, false)));
+
+
+        if (ppa != null)
+            plantExtraPercT.text = "% " + ppa.plantPercentageExtra;
+        
+        if (pa.canBePlantedIn.Count > 1)
+        {
+            plantFlowerPotsT.text = GetStringedFlowerPot(pa.canBePlantedIn[0]) + ", ";
+
+            for (int i = 1; i < pa.canBePlantedIn.Count - 1; i++)
+                plantFlowerPotsT.text += GetStringedFlowerPot(pa.canBePlantedIn[i]) + ", ";
+            
+            plantFlowerPotsT.text += GetStringedFlowerPot(pa.canBePlantedIn[pa.canBePlantedIn.Count - 1]);
+        }
+
+        else
+            plantFlowerPotsT.text = GetStringedFlowerPot(pa.canBePlantedIn[0]);
+
+        spawnedUIPlant.transform.localScale = new Vector3(-spawnedUIPlant.transform.localScale.x, spawnedUIPlant.transform.localScale.y);
+    }
+
+    public void ActivatePinataContinueButton()
+    {
+        pinataContinueButton.SetActive(true);
+        pinataSeedBankParent.SetActive(true);
+    }
+
+    public void ActivatePinataMenu()
+    {
+        pinataMenu.SetActive(true);
+    }
+
+    public void DeActivatePinataMenu()
+    {
+        pinataMenu.SetActive(false);
+        pinataContinueButton.SetActive(false);
+        pinataRewardText.text = "Grab and Squish the Pinata with the Button B and the Trigger!";
+        pinataSeedBankParent.SetActive(false);
+    }
+
+    public string GetStringedFlowerPot(FlowerPotType fpt)
+    {
+        switch (fpt)
+        {
+            case FlowerPotType.Basket: return "BASKET";
+            case FlowerPotType.Bronze: return "BRONZE";
+            case FlowerPotType.Crystal: return "CRYSTAL WATER";
+            case FlowerPotType.DarkEnergy: return "DARK ENERGY";
+            case FlowerPotType.FutureTech: return "FUTURE-TECH";
+            case FlowerPotType.Golden: return "GOLDEN";
+            case FlowerPotType.Holographic: return "HOLOGRAPHIC";
+            case FlowerPotType.Jurassic: return "JURASSIC";
+            case FlowerPotType.Silver: return "SILVER";
+            case FlowerPotType.Terracota: return "TERRACOTA";
+            case FlowerPotType.Volcanic: return "VOLCANIC";
+        }
+
+        return string.Empty;
+    }
+
+    public string GetStringedPlantQuality(PlantQualityName pqd, bool capit)
+    {
+        if (capit)
+        {
+            switch (pqd)
+            {
+                case PlantQualityName.Common: return "COMMON";
+                case PlantQualityName.Rare: return "RARE";
+                case PlantQualityName.Epic: return "EPIC";
+                case PlantQualityName.Legendary: return "LEGENDARY";
+                case PlantQualityName.Botanic: return "BOTANIC";
+            }
+        }
+
+        else
+        {
+            switch (pqd)
+            {
+                case PlantQualityName.Common: return "Common";
+                case PlantQualityName.Rare: return "Rare";
+                case PlantQualityName.Epic: return "Epic";
+                case PlantQualityName.Legendary: return "Legendary";
+                case PlantQualityName.Botanic: return "Botanic";
+            }
+        }
+
+        return string.Empty;
     }
 
     public void SpawnPlantOnHand(Plant plant)

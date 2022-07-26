@@ -32,8 +32,8 @@ public class Pinata : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = objTo.GetComponent<SpriteRenderer>();
 
-        worldCanvas = transform.GetChild(1).GetComponent<Canvas>();
-        worldCanvas.worldCamera = GameManager.instance.GetMainCamera();
+        /*worldCanvas = transform.GetChild(1).GetComponent<Canvas>();
+        worldCanvas.worldCamera = GameManager.instance.GetMainCamera();*/
         startPos = objTo.position;
         StartCoroutine(InitialAnimation());
     }
@@ -43,10 +43,11 @@ public class Pinata : MonoBehaviour
     {
         grab.onSelectEnter.AddListener(SendPinataToPlayer);
         grab.onSelectExit.AddListener(UnSendPinataToPlayer);
+        SetPinataSize(debugSize);
     }
 
     void Update()
-    {   
+    {
         if (canGrab)
         {
             if (!grab.isSelected && Vector3.Distance(objTo.position, startPos) > 0.1f)
@@ -89,9 +90,9 @@ public class Pinata : MonoBehaviour
     {
         for (int i = 0; i < showPlants.Count; i++)
         {
-            GameObject prp = Instantiate(UIManager.instance.pinataRewardPanel, UIManager.instance.pinataRewardPanel.transform.position, Quaternion.identity, UIManager.instance.pinataGridPanel);
-            prp.transform.GetChild(0).GetComponent<Text>().text = showPlants[i].plant.plantName;
-            prp.transform.GetChild(1).GetComponent<Text>().text = showPlants[i].gotSeeds.ToString() + " Seedpackets";
+            GameObject seedPacket = Resources.Load<GameObject>("Prefabs/UI/" + showPlants[i].plant.name);
+            GameObject prp = Instantiate(seedPacket, seedPacket.transform.position, Quaternion.identity, UIManager.instance.pinataGridPanel);
+            prp.transform.GetChild(3).GetComponent<Text>().text = "x " + showPlants[i].gotSeeds.ToString();
             prp.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
             prp.transform.localPosition = new Vector3(prp.transform.position.x, prp.transform.position.y, 0f);
             SeedDatabase.instance.BuyPlant(showPlants[i].plant, showPlants[i].gotSeeds);
@@ -103,8 +104,6 @@ public class Pinata : MonoBehaviour
 
     public void SetPinataSize(string size)
     {
-        pinataImage.sprite = pinataData.pinataSprite;
-
         switch (size)
         {
             case "s": selectedCategory = pinataData.sizes[0]; break;
@@ -138,6 +137,7 @@ public class Pinata : MonoBehaviour
                 SoundEffectsManager.instance.PlaySoundEffectNC("explosion");
                 SoundEffectsManager.instance.PlaySoundEffectNC("prize");
                 Instantiate(pinataExplosion, objTo.transform.position, Quaternion.identity);
+                UIManager.instance.ActivatePinataContinueButton();
                 CreateRewards();
             }
 

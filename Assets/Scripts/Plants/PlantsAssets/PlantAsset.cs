@@ -5,6 +5,9 @@ using UnityEngine;
 public class PlantAsset : ScriptableObject 
 {
     public string plantName;
+    public string plantDescription;
+    public Plant uiPlant;
+    public Sprite plantBackg;
     public GameWorlds appearsIn;
     public PlantQualityData plantQuality;
     public List<FlowerPotType> canBePlantedIn = new List<FlowerPotType>();
