@@ -17,6 +17,7 @@ public class FlowerPot : MonoBehaviour
     [SerializeField] private Transform plantPlantingPosition;
     [SerializeField] private ParticleSystem waterEffect, compostEffect;
     [SerializeField] private GameObject musicPlayer;
+    public string createdIn;
     public OutlineEffect outline;
     public GameObject sellPlantButton;
 
@@ -74,13 +75,14 @@ public class FlowerPot : MonoBehaviour
         if (!setted)
             transform.position = handPosition.position;
         
-        if (setted && !potInteractable.isSelected && Vector3.Distance(transform.position, startPos) > 0.01f)
+        if (setted && !potInteractable.isSelected && MusicManager.instance.currentWorld.ToString() == createdIn && 
+            Vector3.Distance(transform.position, startPos) > 0.01f)
             returnToPos = true;
         
         if (GetPlantedPlant() != null && (GetPlantedPlant().fullyGrown && !GetPlantedPlant().replanting) && !selectedByShovel)
             outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
         
-        if (returnToPos)
+        if (returnToPos && MusicManager.instance.currentWorld.ToString() == createdIn)
             GetBackPos();
     }
 
@@ -140,10 +142,13 @@ public class FlowerPot : MonoBehaviour
         if (reAssignable)
         {
             startPos = hoveringHolder.transform.position;
-            inPositionOfHolder.gameObject.SetActive(true);
-            hoveringHolder.gameObject.SetActive(false);
+            inPositionOfHolder.transform.GetChild(0).gameObject.SetActive(true);
+            inPositionOfHolder.GetComponent<BoxCollider>().enabled = true;
+            hoveringHolder.transform.GetChild(0).gameObject.SetActive(false);
+            hoveringHolder.GetComponent<BoxCollider>().enabled = false;
             inPositionOfHolder = hoveringHolder;
             transform.rotation = inPositionOfHolder.transform.rotation;
+            transform.parent = inPositionOfHolder.gardenParent;
             hoveringHolder = null;
             reAssignable = false;
         }

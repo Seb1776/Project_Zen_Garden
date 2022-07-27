@@ -13,12 +13,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pinata;
     [SerializeField] private GameObject uiCover;
     [SerializeField] private GameObject[] plantSections;
-    public string preSelectedPinataSize;
     public Transform pinataGridPanel;
     public GameObject pinataRewardPanel;
     [Header("UI")]
     [SerializeField] private Text coins;
-    private GameObject creaPinata;
+    private Pinata creaPinata;
     [SerializeField] private string activePlants;
     [Header("Almanac UI")]
     [SerializeField] private Text plantNameT;
@@ -27,8 +26,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Transform plantSpawn;
     [Header("Pinatas UI")]
     [SerializeField] private GameObject pinataMenu;
+    [SerializeField] private Image pinataImage;
     [SerializeField] private GameObject pinataContinueButton;
-    [SerializeField] private GameObject pinataSeedBankParent;
     public Text pinataRewardText;
     private Plant spawnedUIPlant;
 
@@ -207,12 +206,12 @@ public class UIManager : MonoBehaviour
     public void ActivatePinataContinueButton()
     {
         pinataContinueButton.SetActive(true);
-        pinataSeedBankParent.SetActive(true);
     }
 
     public void ActivatePinataMenu()
     {
         pinataMenu.SetActive(true);
+        pinataImage.sprite = creaPinata.sr.sprite;
     }
 
     public void DeActivatePinataMenu()
@@ -220,7 +219,8 @@ public class UIManager : MonoBehaviour
         pinataMenu.SetActive(false);
         pinataContinueButton.SetActive(false);
         pinataRewardText.text = "Grab and Squish the Pinata with the Button B and the Trigger!";
-        pinataSeedBankParent.SetActive(false);
+        creaPinata.DeleteAllCreatedRewards();
+        Destroy(creaPinata.gameObject);
     }
 
     public string GetStringedFlowerPot(FlowerPotType fpt)
@@ -351,25 +351,19 @@ public class UIManager : MonoBehaviour
             SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
     }
 
-    public void SetPinataSize(string pinataSize)
-    {
-        preSelectedPinataSize = pinataSize;
-    }
+    public void SelectSPinata(PinataAsset pa) => CreatePinata("s", pa.pinataGameObject);
 
-    public void CreatePinata()
-    {
-        creaPinata = Instantiate(pinata, pinata.transform.position, Quaternion.identity);
-        creaPinata.GetComponent<Pinata>().SetPinataSize(preSelectedPinataSize);
-        Transform globParent = creaPinata.transform.GetChild(2);
-        pinataRewardText = globParent.GetChild(6).GetComponent<Text>();
-        pinataGridPanel = globParent.GetChild(7);
-        uiCover.SetActive(true);
-    }
+    public void SelectMPinata(PinataAsset pa) => CreatePinata("m", pa.pinataGameObject);
 
-    public void DestroyPinata()
+    public void SelectLPinata(PinataAsset pa) => CreatePinata("l", pa.pinataGameObject);
+
+    public void SelectXLPinata(PinataAsset pa) => CreatePinata("xl", pa.pinataGameObject);
+
+    public void CreatePinata(string pinataSize, GameObject pinataG)
     {
-        Destroy(creaPinata.gameObject);
-        uiCover.SetActive(false);
+        creaPinata = Instantiate(pinataG, pinataG.transform.position, Quaternion.identity).GetComponent<Pinata>();
+        creaPinata.SetPinataSize(pinataSize);
+        ActivatePinataMenu();
     }
 
     void CreatePlantOnPlayerHand(GameObject plant)

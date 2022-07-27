@@ -21,6 +21,15 @@ public class SoundEffectsManager : MonoBehaviour
         StartCoroutine(PlaySoundEffect(_id));
     }
 
+    public AudioClip GetSoundEffect (string _id)
+    {
+        foreach (SoundEffect se in soundEffects)
+            if (se.audioID == _id)
+                return se.clip;
+
+        return null;
+    }
+
     public IEnumerator PlaySoundEffect(string _id)
     {
         AudioClip _p = null;

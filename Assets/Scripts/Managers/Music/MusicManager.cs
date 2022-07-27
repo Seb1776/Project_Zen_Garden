@@ -11,7 +11,7 @@ public class MusicManager : MonoBehaviour
     public static MusicManager instance;
 
     [SerializeField] private WorldMusic[] assets;
-    [SerializeField] private GameWorlds currentWorld;
+    public GameWorlds currentWorld;
     [SerializeField] private AudioClip ageTransitionEffect;
     [SerializeField] private GameWorlds changeTo;
     [SerializeField] private MusicAsset throwback;
@@ -457,9 +457,13 @@ public class MusicManager : MonoBehaviour
         source.Stop();
         source.clip = null;
         source.PlayOneShot(ageTransitionEffect);
+        currentWorld = worldMusic.world;
         TimeTravelManager.instance.TriggerTransition(true);
 
-        yield return new WaitForSeconds(.2f);
+        Player.instance.SafetyNetsWhenHolding();
+        Player.instance.RightHandEnabler(false);
+
+        yield return new WaitForSeconds(.45f);
 
         if (worldMusic.world != GameWorlds.ThrowbackToThePresent)
             TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
@@ -470,16 +474,14 @@ public class MusicManager : MonoBehaviour
         yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
 
         TimeTravelManager.instance.TriggerTransition(false);
+
+        Player.instance.RightHandEnabler(true);
         
         if (worldMusic.world != GameWorlds.ThrowbackToThePresent)
-        {
             ChangeMusic(worldMusic);
-        }
         
         else
-        {
             PopulatePresentMusic("day");
-        }
     }
 }
 

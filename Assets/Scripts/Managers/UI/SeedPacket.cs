@@ -7,6 +7,7 @@ public class SeedPacket : MonoBehaviour
 {
     [SerializeField] private PlantAsset plantData;
     [SerializeField] private GameObject alamancEquivalent;
+    [SerializeField] private bool autoUnlock;
     private GameObject buyButton;
     private SeedDatabase seedDatabase;
     private Image plantImage;
@@ -21,15 +22,17 @@ public class SeedPacket : MonoBehaviour
 
     [SerializeField] private Player player;
 
-    void Awake()
+    public void SeedPacketStart()
     {
         seedDatabase = GameObject.FindGameObjectWithTag("SeedDatabase").GetComponent<SeedDatabase>();
-    }
-
-    void Start()
-    {
         SetPlantUIData();
         CheckPlantState();
+
+        if (autoUnlock)
+        {
+            seedDatabase.UnlockPlant(plantData, this);
+            alamancEquivalent.SetActive(true);
+        }
     }
 
     void OnEnable()

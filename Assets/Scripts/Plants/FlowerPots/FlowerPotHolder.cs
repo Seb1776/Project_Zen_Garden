@@ -5,12 +5,14 @@ using UnityEngine;
 public class FlowerPotHolder : MonoBehaviour
 {   
     public bool canShowEffect;
+    public Transform gardenParent;
 
     public OutlineEffect outline;
 
     void Start()
     {
         outline = transform.GetChild(0).GetComponent<OutlineEffect>();
+        gardenParent = transform.parent;
     }
 
     void OnTriggerStay(Collider other) 

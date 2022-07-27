@@ -85,6 +85,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4765410516224321192}
   - component: {fileID: 4765410516224321195}
+  - component: {fileID: 6902645442731774611}
   m_Layer: 5
   m_Name: EscapeRoot
   m_TagString: Untagged
@@ -128,6 +129,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ShowMaskGraphic: 1
+--- !u!95 &6902645442731774611
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4765410516224321193}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: bf46ab2b95381d849a189e7ce183d950, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4765410516245563331
 GameObject:
   m_ObjectHideFlags: 0

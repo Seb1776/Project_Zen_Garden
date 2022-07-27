@@ -131,6 +131,27 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void SafetyNetsWhenHolding()
+    {
+        if (holdingPlant != null)
+        {
+            DestroyHoldingPlant();
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("tap"));
+        }
+
+        if (placingFlowerPot != null)
+        {
+            DestroyHoldingFlowerPot();
+            SeedDatabase.instance.TriggerHolders(false);
+            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("tap"));
+        }
+    }
+
+    public void RightHandEnabler(bool en)
+    {
+        rightHand.handInteractor.enabled = en;
+    }
+
     public void GetRidOfSelectedPlant(InputAction.CallbackContext ctx)
     {
         if (holdingPlant != null)
@@ -230,8 +251,11 @@ public class Player : MonoBehaviour
             placingFlowerPot.transform.position = placingFlowerPot.hoveringHolder.transform.position;
             placingFlowerPot.transform.rotation = placingFlowerPot.hoveringHolder.transform.rotation;
             placingFlowerPot.startPos = placingFlowerPot.transform.position;
-            placingFlowerPot.hoveringHolder.gameObject.SetActive(false);
+            placingFlowerPot.hoveringHolder.transform.GetChild(0).gameObject.SetActive(false);
+            placingFlowerPot.hoveringHolder.GetComponent<BoxCollider>().enabled = false;
             placingFlowerPot.inPositionOfHolder = placingFlowerPot.hoveringHolder;
+            placingFlowerPot.transform.parent = placingFlowerPot.hoveringHolder.transform;
+            placingFlowerPot.createdIn = MusicManager.instance.currentWorld.ToString();
             placingFlowerPot.hoveringHolder = null;
             placingFlowerPot.setted = true;
             placingFlowerPot.triggerColl.enabled = true;

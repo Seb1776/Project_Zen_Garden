@@ -8,10 +8,10 @@ public class Pinata : MonoBehaviour
 {
     [SerializeField] private PinataAsset pinataData;
     [SerializeField] private SpriteRenderer pinataImage;
-    [SerializeField] private Canvas worldCanvas;
     [SerializeField] private string debugSize;
     [SerializeField] private GameObject pinataExplosion;
 
+    private List<GameObject> createdRewards = new List<GameObject>();
     private List<PlantGot> showPlants = new List<PlantGot>();
     private PinataSize selectedCategory;
     private int squishes, currentSquishes;
@@ -19,7 +19,7 @@ public class Pinata : MonoBehaviour
     private XRGrabInteractable grab;
     private Vector3 startPos;
     private bool returnToPos, squishCooldown, canGrab;
-    private SpriteRenderer sr;
+    public SpriteRenderer sr;
     private Collider coll;
     private Transform objTo;
     private Animator anim;
@@ -32,8 +32,6 @@ public class Pinata : MonoBehaviour
         anim = GetComponent<Animator>();
         sr = objTo.GetComponent<SpriteRenderer>();
 
-        /*worldCanvas = transform.GetChild(1).GetComponent<Canvas>();
-        worldCanvas.worldCamera = GameManager.instance.GetMainCamera();*/
         startPos = objTo.position;
         StartCoroutine(InitialAnimation());
     }
@@ -43,7 +41,6 @@ public class Pinata : MonoBehaviour
     {
         grab.onSelectEnter.AddListener(SendPinataToPlayer);
         grab.onSelectExit.AddListener(UnSendPinataToPlayer);
-        SetPinataSize(debugSize);
     }
 
     void Update()
@@ -86,20 +83,33 @@ public class Pinata : MonoBehaviour
         }
     }
 
-    public void CreateRewards()
+    public void DeleteAllCreatedRewards()
+    {
+        foreach (GameObject g in createdRewards)
+            Destroy(g.gameObject);
+    }
+
+    public IEnumerator CreateRewards()
     {
         for (int i = 0; i < showPlants.Count; i++)
+            totalGivenSeeds += showPlants[i].gotSeeds;
+
+        for (int i = 0; i < showPlants.Count; i++)
         {
+            SoundEffectsManager.instance.PlaySoundEffectNC("selectplant");
             GameObject seedPacket = Resources.Load<GameObject>("Prefabs/UI/" + showPlants[i].plant.name);
             GameObject prp = Instantiate(seedPacket, seedPacket.transform.position, Quaternion.identity, UIManager.instance.pinataGridPanel);
+            createdRewards.Add(prp);
             prp.transform.GetChild(3).GetComponent<Text>().text = "x " + showPlants[i].gotSeeds.ToString();
             prp.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
             prp.transform.localPosition = new Vector3(prp.transform.position.x, prp.transform.position.y, 0f);
             SeedDatabase.instance.BuyPlant(showPlants[i].plant, showPlants[i].gotSeeds);
-            totalGivenSeeds += showPlants[i].gotSeeds;
+            yield return new WaitForSeconds(SoundEffectsManager.instance.GetSoundEffect("selectplant").length + .5f);
         }
 
+        SoundEffectsManager.instance.PlaySoundEffectNC("prize");
         UIManager.instance.pinataRewardText.text = "You got " + totalGivenSeeds + " seeds!";
+        UIManager.instance.ActivatePinataContinueButton();
     }
 
     public void SetPinataSize(string size)
@@ -137,8 +147,7 @@ public class Pinata : MonoBehaviour
                 SoundEffectsManager.instance.PlaySoundEffectNC("explosion");
                 SoundEffectsManager.instance.PlaySoundEffectNC("prize");
                 Instantiate(pinataExplosion, objTo.transform.position, Quaternion.identity);
-                UIManager.instance.ActivatePinataContinueButton();
-                CreateRewards();
+                StartCoroutine(CreateRewards());
             }
 
             else

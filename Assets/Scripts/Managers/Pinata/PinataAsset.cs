@@ -4,7 +4,8 @@ using UnityEngine;
 public class PinataAsset : ScriptableObject 
 {
     [NonReorderable] public PinataSize[] sizes;
-    public Sprite pinataSprite;
+    public Sprite pinataImage;
+    public GameObject pinataGameObject;
     public PlantAsset[] plantsThatCanAppear;
     public int minUnlockedPlantsToUse;
 }

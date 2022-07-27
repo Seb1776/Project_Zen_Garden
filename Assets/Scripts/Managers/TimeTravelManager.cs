@@ -45,10 +45,11 @@ public class TimeTravelManager : MonoBehaviour
             {
                 currentProps.SetActive(false);
                 RenderSettings.skybox = selectedAge.skyboxMaterial;
-                currentTables.transform.localPosition += new Vector3(currentTables.transform.localPosition.x,
-                    worldTablesYOffset, currentTables.transform.localPosition.z);
+                currentTables.transform.localPosition += new Vector3(0f, worldTablesYOffset, 0f);
                 selectedAge.props.SetActive(true);
                 currentProps = selectedAge.props;
+                currentTables = selectedAge.worldTables;
+                currentTables.transform.localPosition -= new Vector3(0f, worldTablesYOffset, 0f);
                 RenderSettings.ambientSkyColor = selectedAge.sky;
                 RenderSettings.ambientEquatorColor = selectedAge.equator;
                 RenderSettings.ambientGroundColor = selectedAge.ground;
