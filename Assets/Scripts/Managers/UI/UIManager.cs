@@ -178,6 +178,7 @@ public class UIManager : MonoBehaviour
         plantBuyPriceT.text = "$ " + pa.buyPrice.ToString("N0");
         plantSellPriceT.text = "$ " + pa.revenuePrice.ToString("N0");
         plantBackGround.sprite = pa.plantBackg;
+        plantDescT.text = pa.plantDescription;
         plantQualityT.text = GetStringedPlantQuality(pa.plantQuality.quality, true);
 
         PlantProcessAsset ppa = Resources.Load<PlantProcessAsset>("PlantProcessAsset/" + GetStringedPlantQuality(pa.plantQuality.quality, false));
