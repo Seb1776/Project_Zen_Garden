@@ -1,12 +1,48 @@
 fileFormatVersion: 2
 guid: ae8127fc5066d3c4d93b93c519916f74
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 1076761600773838572
+    second: PLANTFISHHOOKGRASS_1536_00_0
+  - first:
+      213: 4456069853584868179
+    second: PLANTFISHHOOKGRASS_1536_00_1
+  - first:
+      213: 1986987194391594571
+    second: PLANTFISHHOOKGRASS_1536_00_2
+  - first:
+      213: -7819052797723432078
+    second: PLANTFISHHOOKGRASS_1536_00_3
+  - first:
+      213: 4712872578692822604
+    second: PLANTFISHHOOKGRASS_1536_00_4
+  - first:
+      213: 354236713536375457
+    second: PLANTFISHHOOKGRASS_1536_00_5
+  - first:
+      213: -5067790208444284542
+    second: PLANTFISHHOOKGRASS_1536_00_6
+  - first:
+      213: -4898167442630778535
+    second: PLANTFISHHOOKGRASS_1536_00_7
+  - first:
+      213: 7769505223039030669
+    second: PLANTFISHHOOKGRASS_1536_00_8
+  - first:
+      213: -2240650510146140446
+    second: PLANTFISHHOOKGRASS_1536_00_9
+  - first:
+      213: -1268304729394726433
+    second: PLANTFISHHOOKGRASS_1536_00_10
+  - first:
+      213: 336246079362000447
+    second: PLANTFISHHOOKGRASS_1536_00_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,16 +68,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -50,9 +86,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -68,7 +104,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +137,263 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 439
+        width: 114
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ce6d7e198fc61fe00800000000000000
+      internalID: 1076761600773838572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_1
+      rect:
+        serializedVersion: 2
+        x: 443
+        y: 44
+        width: 138
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 353c04d2ce327dd30800000000000000
+      internalID: 4456069853584868179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_2
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 22
+        width: 66
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b4606f66352339b10800000000000000
+      internalID: 1986987194391594571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_3
+      rect:
+        serializedVersion: 2
+        x: 587
+        y: 46
+        width: 105
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27baba758e42d7390800000000000000
+      internalID: -7819052797723432078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_4
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 47
+        width: 66
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c463aa4f3ac776140800000000000000
+      internalID: 4712872578692822604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_5
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 45
+        width: 82
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1aaccb40a608ae400800000000000000
+      internalID: 354236713536375457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 249
+        width: 114
+        height: 122
+      alignment: 9
+      pivot: {x: 0.32535905, y: 0.10170834}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 281c97dd7a79ba9b0800000000000000
+      internalID: -5067790208444284542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_7
+      rect:
+        serializedVersion: 2
+        x: 945
+        y: 961
+        width: 41
+        height: 51
+      alignment: 9
+      pivot: {x: 0.36145467, y: 0.8564154}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 951eb9b99a6360cb0800000000000000
+      internalID: -4898167442630778535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_8
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 693
+        width: 53
+        height: 56
+      alignment: 9
+      pivot: {x: 0.0980881, y: 0.9209562}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d8598c3f5d3d2db60800000000000000
+      internalID: 7769505223039030669
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_9
+      rect:
+        serializedVersion: 2
+        x: 523
+        y: 194
+        width: 111
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e601f48b3c97e0e0800000000000000
+      internalID: -2240650510146140446
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_10
+      rect:
+        serializedVersion: 2
+        x: 474
+        y: 853
+        width: 49
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fd9ba718193166ee0800000000000000
+      internalID: -1268304729394726433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTFISHHOOKGRASS_1536_00_11
+      rect:
+        serializedVersion: 2
+        x: 943
+        y: 643
+        width: 44
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f366d7517069aa400800000000000000
+      internalID: 336246079362000447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 9171c0370b246774b940787e71a74140
     internalID: 0
     vertices: []
     indices: 

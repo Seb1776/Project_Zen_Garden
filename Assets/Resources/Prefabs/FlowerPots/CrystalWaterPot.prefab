@@ -5766,6 +5766,7 @@ GameObject:
   - component: {fileID: 1771928435525620648}
   - component: {fileID: 1771928435525620649}
   - component: {fileID: 1771928435525620654}
+  - component: {fileID: 1861112143}
   m_Layer: 7
   m_Name: CrystalWaterPot
   m_TagString: FlowerPot
@@ -5780,7 +5781,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1771928435525620652}
-  m_LocalRotation: {x: 0.000000081460335, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.111, y: -1.265, z: -0.723}
   m_LocalScale: {x: 2.9850216, y: 2.9850216, z: 2.9850216}
   m_Children:
@@ -5955,6 +5956,7 @@ MonoBehaviour:
   waterEffect: {fileID: 1771928435512068509}
   compostEffect: {fileID: 1771928436756676676}
   musicPlayer: {fileID: 1771928435071955931}
+  createdIn: 
   outline: {fileID: 1771928435982132803}
   sellPlantButton: {fileID: 1771928435122075236}
   needWaterIcon: {fileID: 1771928436148007201}
@@ -6082,6 +6084,17 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!210 &1861112143
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1771928435525620652}
+  m_Enabled: 1
+  m_SortingLayerID: 278138799
+  m_SortingLayer: 3
+  m_SortingOrder: 0
 --- !u!1 &1771928435530324691
 GameObject:
   m_ObjectHideFlags: 0
