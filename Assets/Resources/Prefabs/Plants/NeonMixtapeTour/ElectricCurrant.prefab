@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 4321668265113438521, guid: 5436079750741744aba0c4a724d4bb3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -187,7 +187,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -3288866693341491150, guid: 5436079750741744aba0c4a724d4bb3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -352,7 +352,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2448564621485744367, guid: 5436079750741744aba0c4a724d4bb3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -486,9 +486,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 942606979734380203}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 1.839, y: 0.478, z: -1.976}
-  m_LocalScale: {x: -0.30547008, y: 0.30547, z: 0.30547}
+  m_LocalScale: {x: -0.30547017, y: 0.30547, z: 0.30547008}
   m_Children:
   - {fileID: 942606978484691606}
   - {fileID: 942606979813566759}
@@ -520,7 +520,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: e90e1c5200b5ec94abb6e3fd13ea0f2d, type: 2}
+  plantAnim: {fileID: 0}
+  replanting: 0
+  fullyGrown: 0
   flowerPotIn: {fileID: 0}
+  plantIsAbove: {fileID: 0}
 --- !u!95 &942606979734380205
 Animator:
   serializedVersion: 3
@@ -551,8 +555,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.9103869, y: 1.3002061, z: 0.39510772}
-  m_Center: {x: -0.004480835, y: 0.73, z: -0.02464404}
+  m_Size: {x: 0.9103869, y: 1.3002061, z: 0.049793195}
+  m_Center: {x: -0.004480835, y: 0.73, z: -0.01872179}
 --- !u!1 &942606979813566758
 GameObject:
   m_ObjectHideFlags: 0
@@ -655,7 +659,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 6375678109530584960, guid: 5436079750741744aba0c4a724d4bb3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1049,7 +1053,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -751900354369840527, guid: 5436079750741744aba0c4a724d4bb3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1244,7 +1248,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 2
+  m_SortingOrder: 3
   m_Sprite: {fileID: -3288866693341491150, guid: 5436079750741744aba0c4a724d4bb3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1409,7 +1413,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_Sprite: {fileID: -2448564621485744367, guid: 5436079750741744aba0c4a724d4bb3c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1597,6 +1601,7 @@ GameObject:
   - component: {fileID: 1737820207968099244}
   - component: {fileID: 1737820207968068108}
   - component: {fileID: 1737820207959570218}
+  - component: {fileID: 278585673}
   m_Layer: 0
   m_Name: ElectricEffect
   m_TagString: Untagged
@@ -1612,7 +1617,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737820207948268234}
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.01140102, y: 0.39, z: 0.29}
+  m_LocalPosition: {x: -0.011, y: 0.39, z: -0.231}
   m_LocalScale: {x: 3.2736428, y: 3.2736442, z: 3.2736442}
   m_Children:
   - {fileID: 1737820207948701422}
@@ -1835,7 +1840,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.5
+      scalar: 0.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -6243,8 +6248,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -526628201
+  m_SortingLayer: 1
   m_SortingOrder: -4
   m_RenderMode: 1
   m_SortMode: 0
@@ -6284,6 +6289,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyDeactivate: 0
+--- !u!210 &278585673
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737820207948268234}
+  m_Enabled: 1
+  m_SortingLayerID: -526628201
+  m_SortingLayer: 1
+  m_SortingOrder: 0
 --- !u!1 &1737820207948268238
 GameObject:
   m_ObjectHideFlags: 0
@@ -6296,6 +6312,7 @@ GameObject:
   - component: {fileID: 1737820207968099246}
   - component: {fileID: 1737820207968068110}
   - component: {fileID: 1737820207959570222}
+  - component: {fileID: 278585672}
   m_Layer: 0
   m_Name: Bubble
   m_TagString: Untagged
@@ -6533,7 +6550,7 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 0.25
       minScalar: 1
       maxCurve:
         serializedVersion: 2
@@ -11080,8 +11097,8 @@ ParticleSystemRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -526628201
+  m_SortingLayer: 1
   m_SortingOrder: -5
   m_RenderMode: 0
   m_SortMode: 1
@@ -11121,3 +11138,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnlyDeactivate: 0
+--- !u!210 &278585672
+SortingGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1737820207948268238}
+  m_Enabled: 1
+  m_SortingLayerID: -526628201
+  m_SortingLayer: 1
+  m_SortingOrder: 0
