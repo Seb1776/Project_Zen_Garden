@@ -19,7 +19,7 @@ public class Player : MonoBehaviour
     private GardenItem holdingGardenItem;
     private SeedDatabase seedDatabase;
     [Header ("Economy")]
-    public int currentPlayerCoins;
+    [SerializeField] private int currentPlayerCoins;
 
     void Awake()
     {
@@ -76,6 +76,26 @@ public class Player : MonoBehaviour
             holdingPlantedPlant.SetHandPosition(rightHand.handInteractor.transform);
             holdingPlantedPlant.TriggerReplant();
         }
+    }
+
+    public void SpendMoney(int amount)
+    {
+        currentPlayerCoins -= amount;
+    }
+
+    public bool CanSpendMoney(int amount)
+    {
+        return GetPlayerMoney() >= amount;
+    }
+
+    public void AddMoney(int amount)
+    {
+        currentPlayerCoins += amount;
+    }
+
+    public int GetPlayerMoney()
+    {
+        return currentPlayerCoins;
     }
 
     public void PlantSelectedPlant(InputAction.CallbackContext ctx)
@@ -239,7 +259,7 @@ public class Player : MonoBehaviour
         {
             GameObject plant;
             plant = holdingFlowerPot.GetPlantedPlant().gameObject;
-            currentPlayerCoins += plant.GetComponent<Plant>().plantData.revenuePrice;
+            AddMoney(plant.GetComponent<Plant>().plantData.revenuePrice);
             plant.GetComponent<Plant>().TriggerSellPlant();
         }
     }

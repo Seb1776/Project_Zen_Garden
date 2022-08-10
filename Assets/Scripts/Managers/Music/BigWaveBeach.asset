@@ -14,75 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldID: beach
   world: 5
-  worldTracks:
-    enteredFirstTime:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: a08b54ee07767bb4793833b4ad9a3240, type: 3}
-    firstWave:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 1fba7f0df2a78744faf19e1ea1c5b7f6, type: 3}
-    midWaveA:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: e34df3c24f157c64db0e0eac25681758, type: 3}
-    midWaveB:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 716461de506a7ba41917233786dfd267, type: 3}
-    finalWave:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 1f1c85c12b85e30469d522acc509747a, type: 3}
-    ultimateBattle:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 91972d5321b8df545af045b3fd733227, type: 3}
-    minigame:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 56e31a5ae985f69478b79d9750b678eb, type: 3}
-    loonboon:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: d49822b164840d04abc3be816f38870b, type: 3}
-  presentWorldTracks:
-    entered:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    seeds:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    frontDay:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    frontNight:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    backDay:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    backNight:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    roofDay:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    roofNight:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    minigame:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    ultimateA:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    ultimateB:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    loonboon:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    cerebrawl:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    brainiac:
-      start: {fileID: 0}
-      main: {fileID: 0}
-  phonographClip: {fileID: 0}
-  grownPlantClip: {fileID: 0}
+  normalTracks:
+  - {fileID: 8300000, guid: a08b54ee07767bb4793833b4ad9a3240, type: 3}
+  - {fileID: 8300000, guid: 1fba7f0df2a78744faf19e1ea1c5b7f6, type: 3}
+  - {fileID: 8300000, guid: e34df3c24f157c64db0e0eac25681758, type: 3}
+  - {fileID: 8300000, guid: 716461de506a7ba41917233786dfd267, type: 3}
+  - {fileID: 8300000, guid: 1f1c85c12b85e30469d522acc509747a, type: 3}
+  specialTracks:
+  - {fileID: 8300000, guid: 56e31a5ae985f69478b79d9750b678eb, type: 3}
+  - {fileID: 8300000, guid: 91972d5321b8df545af045b3fd733227, type: 3}
+  - {fileID: 8300000, guid: d49822b164840d04abc3be816f38870b, type: 3}
+  phonographClip: {fileID: 8300000, guid: a967c63f030009d4dade2f42a605592f, type: 3}
+  grownPlantClip: {fileID: 8300000, guid: 2849385b49569984daec2b487e3633d4, type: 3}
   isPresent: 0
   unlockPrice: 10500

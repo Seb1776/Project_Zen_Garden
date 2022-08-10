@@ -6,74 +6,60 @@ public class MusicAsset : ScriptableObject
 {
     public string worldID;
     public GameWorlds world;
-    public MusicCollection worldTracks;
-    public MusicCollectionPresent presentWorldTracks;
+    public List<AudioClip> normalTracks = new List<AudioClip>();
+    public List<AudioClip> specialTracks = new List<AudioClip>();
     public AudioClip phonographClip, grownPlantClip;
     public bool isPresent;
     public int unlockPrice;
 
-    public MusicSet GetMusicSet(string set)
+    public List<AudioClip> GetMusicClips(SetMusicMode context, bool random)
     {
-        switch (set)
+        List<AudioClip> retList = new List<AudioClip>();
+
+        switch (context)
         {
-            case "seeds": return worldTracks.enteredFirstTime;
-            case "first": return worldTracks.firstWave;
-            case "mida": return worldTracks.midWaveA;
-            case "midb": return worldTracks.midWaveB;
-            case "final": return worldTracks.finalWave;
-            case "ultimate": return worldTracks.ultimateBattle;
-            case "minigame": return worldTracks.minigame;
-            case "loonboon": return worldTracks.loonboon;
+            case SetMusicMode.Start:
+                foreach (AudioClip ac in normalTracks)
+                    retList.Add(ac);
+            break;
+
+            case SetMusicMode.Main:
+                for (int i = 1; i < normalTracks.Count; i++)
+                    retList.Add(normalTracks[i]);
+            break;
+
+            case SetMusicMode.Special:
+                if (!random)
+                {
+                    foreach (AudioClip ac in specialTracks)
+                        retList.Add(ac);
+                }
+                
+                else
+                {
+                    List<AudioClip> unused = new List<AudioClip>();
+
+                    foreach (AudioClip ac in specialTracks)
+                        unused.Add(ac);
+                    
+                    for (int i = 0; i < unused.Count + 2; i++)
+                    {
+                        int randInt = Random.Range(0, unused.Count);
+                        retList.Add(unused[randInt]);
+                        unused.Remove(unused[randInt]);
+                    }
+                }
+            break;
         }
 
-        return null;
-    }
-
-    public MusicSet GetMusicSetP(string set)
-    {
-        switch (set)
-        {
-            case "first": return presentWorldTracks.entered;
-            case "seeds": return presentWorldTracks.seeds;
-            case "fronta": return presentWorldTracks.frontDay;
-            case "frontb": return presentWorldTracks.frontNight;
-            case "backa": return presentWorldTracks.backDay;
-            case "backb": return presentWorldTracks.backNight;
-            case "roofa": return presentWorldTracks.roofDay;
-            case "roofb": return presentWorldTracks.roofNight;
-            case "minigame": return presentWorldTracks.minigame;
-            case "loonboon": return presentWorldTracks.loonboon;
-            case "ultimatea": return presentWorldTracks.ultimateA;
-            case "ultimateb": return presentWorldTracks.ultimateB;
-            case "cerebrawl": return presentWorldTracks.cerebrawl;
-            case "brainiac": return presentWorldTracks.brainiac;
-        }
-
-        return null;
-    }
-
-    public List<MusicSet> GetRandomChallenges()
-    {
-        List<MusicSet> ret = new List<MusicSet>();
-        List<MusicSet> unu = new List<MusicSet>();
-
-        unu.Add(GetMusicSet("ultimate")); unu.Add(GetMusicSet("minigame"));
-        unu.Add(GetMusicSet("loonboon"));
-
-        for (int i = 0; i < 3; i++)
-        {
-            int rand = Random.Range(0, unu.Count);
-            ret.Add(unu[rand]);
-            unu.Remove(unu[rand]);
-        }
-
-        return ret;
+        return retList;
     }
 }
 
 [System.Serializable]
 public class MusicCollection
 {
+    public List<AudioClip> musicCollectionTracks = new List<AudioClip>();
     public MusicSet enteredFirstTime;
     public MusicSet firstWave;
     public MusicSet midWaveA, midWaveB;
@@ -105,4 +91,9 @@ public class MusicCollectionPresent
 public class MusicSet
 {
     public AudioClip start, main;
+}
+
+public enum SetMusicMode
+{
+    Start, Main, Special
 }

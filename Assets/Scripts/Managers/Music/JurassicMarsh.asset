@@ -14,31 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldID: jurassic
   world: 9
-  worldTracks:
-    enteredFirstTime:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 49eba34785f3dc3469e214c65a373a5e, type: 3}
-    firstWave:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 6d531f4b59a237f4d821eff752e4210f, type: 3}
-    midWaveA:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 6f8e477f10bc96b4999bc5396ad2f60e, type: 3}
-    midWaveB:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: e2b1fe2a9ed5ed841976b4eae85226d6, type: 3}
-    finalWave:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 88ae9d15999b5b343ae4418d0fce9800, type: 3}
-    ultimateBattle:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: a6d52dfe11db9374b9afd83acfef0112, type: 3}
-    minigame:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 9aface613f16a89438fefbb5f8154835, type: 3}
-    loonboon:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 007a6206e7b42fc4d88e2fb9a926c7be, type: 3}
+  normalTracks:
+  - {fileID: 8300000, guid: 49eba34785f3dc3469e214c65a373a5e, type: 3}
+  - {fileID: 8300000, guid: 6d531f4b59a237f4d821eff752e4210f, type: 3}
+  - {fileID: 8300000, guid: 6f8e477f10bc96b4999bc5396ad2f60e, type: 3}
+  - {fileID: 8300000, guid: e2b1fe2a9ed5ed841976b4eae85226d6, type: 3}
+  - {fileID: 8300000, guid: 88ae9d15999b5b343ae4418d0fce9800, type: 3}
+  specialTracks:
+  - {fileID: 8300000, guid: 9aface613f16a89438fefbb5f8154835, type: 3}
+  - {fileID: 8300000, guid: a6d52dfe11db9374b9afd83acfef0112, type: 3}
+  - {fileID: 8300000, guid: 007a6206e7b42fc4d88e2fb9a926c7be, type: 3}
   phonographClip: {fileID: 8300000, guid: 8ead2ba98e02f2d4fa0249bd1bf3e95b, type: 3}
   grownPlantClip: {fileID: 8300000, guid: 18c14910d441a124aac90f10c7873ed6, type: 3}
-  unlockPrice: 150
+  isPresent: 0
+  unlockPrice: 550

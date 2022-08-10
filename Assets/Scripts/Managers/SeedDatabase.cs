@@ -11,6 +11,8 @@ public class SeedDatabase : MonoBehaviour
     [SerializeField] private FlowerPotHolder[] holders;
     [SerializeField] private List<UnlockedSeeds> unlockedSeeds = new List<UnlockedSeeds>();
     public GardenAmount waterUI, compostUI, fertilizerUI, phonographUI;
+    [SerializeField] private GameObject jurassicBlock;
+    [SerializeField] private Button[] disablableTutorialSeeds;
 
     void Awake()
     {
@@ -33,11 +35,6 @@ public class SeedDatabase : MonoBehaviour
     {
         foreach (FlowerPots fps in flowerPots)
             fps.SetUI();
-    }
-
-    public void CheckToUnlock()
-    {
-
     }
 
     public FlowerPots GetFlowerPotData(FlowerPotAsset fpa)
@@ -154,6 +151,11 @@ public class SeedDatabase : MonoBehaviour
         }
     }
 
+    public int GetTotalUnlockedPlants()
+    {
+        return unlockedSeeds.Count;
+    }
+
     public void UseFlowerPot(FlowerPotAsset fpa)
     {
         if (GetFlowerPotData(fpa) != null)
@@ -167,6 +169,18 @@ public class SeedDatabase : MonoBehaviour
     {
         UnlockedSeeds newPlant = new UnlockedSeeds(plant, 1, ui);
         unlockedSeeds.Add(newPlant);
+
+        if (GameManager.instance.onTutorial && GetTotalUnlockedPlants() >= 5)
+        {
+            jurassicBlock.SetActive(false);
+            SoundEffectsManager.instance.PlaySoundEffectNC("prize");
+        }
+    }
+
+    public void TutorialPlantsSet(bool activate)
+    {
+       foreach (Button b in disablableTutorialSeeds)
+            b.interactable = activate;
     }
 
     public void BuyPlant(PlantAsset plant, int specAmount = 0)

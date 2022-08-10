@@ -8,7 +8,8 @@ public enum GameWorlds
     AncientEgypt, PirateSeas, WildWest, 
     FarFuture, DarkAges, BigWaveBeach, 
     FrostbiteCaves, LostCity, NeonMixtapeTour,
-    JurassicMarsh, ModernDay, ThrowbackToThePresent
+    JurassicMarsh, ModernDay, ThrowbackToThePresent,
+    Tutorial
 }
 
 public enum PlantQualityName

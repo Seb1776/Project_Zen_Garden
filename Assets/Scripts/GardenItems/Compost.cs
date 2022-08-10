@@ -112,6 +112,7 @@ public class Compost : GardenItem
                     SeedDatabase.instance.GardenUse(GardenItemType.Compost, false);
                     
                     foreach (GardenItem gi in SeedDatabase.instance.compostUI.items)
+                        //if (gi.gameObject.transform.parent.gameObject != null && gi.gameObject.transform.parent.gameObject.activeSelf)
                         gi.CheckForUsability();
                 }
             }

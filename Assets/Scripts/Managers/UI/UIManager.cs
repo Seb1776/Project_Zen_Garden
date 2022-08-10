@@ -44,7 +44,7 @@ public class UIManager : MonoBehaviour
 
     void PlayerUI()
     {
-        coins.text = "$ " + player.currentPlayerCoins;
+        coins.text = "$ " + player.GetPlayerMoney();
     }
 
     public void SpawnFlowerPotOnHand(FlowerPot flowerPot)
@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
         switch (git)
         {
             case GardenItemType.Water:
-                if (Player.instance.currentPlayerCoins >= SeedDatabase.instance.waterUI.gardenPrice &&
+                if (Player.instance.CanSpendMoney(SeedDatabase.instance.waterUI.gardenPrice) &&
                     SeedDatabase.instance.GardenIsBuyable(GardenItemType.Water))
                 {
                     SeedDatabase.instance.GardenUse(GardenItemType.Water, true);
@@ -103,7 +103,7 @@ public class UIManager : MonoBehaviour
                     foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
                         gi.CheckForUsability();
 
-                    Player.instance.currentPlayerCoins -= SeedDatabase.instance.waterUI.gardenPrice;
+                    Player.instance.SpendMoney(SeedDatabase.instance.waterUI.gardenPrice);
                     SoundEffectsManager.instance.PlaySoundEffectNC("money");
                 }
 
@@ -112,7 +112,7 @@ public class UIManager : MonoBehaviour
             break;
 
             case GardenItemType.Compost:
-                if (Player.instance.currentPlayerCoins >= SeedDatabase.instance.compostUI.gardenPrice &&
+                if (Player.instance.CanSpendMoney(SeedDatabase.instance.compostUI.gardenPrice) &&
                     SeedDatabase.instance.GardenIsBuyable(GardenItemType.Compost))
                 {
                     SeedDatabase.instance.GardenUse(GardenItemType.Compost, true);
@@ -120,7 +120,7 @@ public class UIManager : MonoBehaviour
                     foreach (GardenItem gi in SeedDatabase.instance.compostUI.items)
                         gi.CheckForUsability();
 
-                    Player.instance.currentPlayerCoins -= SeedDatabase.instance.compostUI.gardenPrice;
+                    Player.instance.SpendMoney(SeedDatabase.instance.compostUI.gardenPrice);
                     SoundEffectsManager.instance.PlaySoundEffectNC("money");
                 }
 
@@ -129,7 +129,7 @@ public class UIManager : MonoBehaviour
             break;
 
             case GardenItemType.Fertilizer:
-                if (Player.instance.currentPlayerCoins >= SeedDatabase.instance.fertilizerUI.gardenPrice &&
+                if (Player.instance.CanSpendMoney(SeedDatabase.instance.fertilizerUI.gardenPrice) &&
                     SeedDatabase.instance.GardenIsBuyable(GardenItemType.Fertilizer))
                 {
                     SeedDatabase.instance.GardenUse(GardenItemType.Fertilizer, true);
@@ -137,7 +137,7 @@ public class UIManager : MonoBehaviour
                     foreach (GardenItem gi in SeedDatabase.instance.fertilizerUI.items)
                         gi.CheckForUsability();
 
-                    Player.instance.currentPlayerCoins -= SeedDatabase.instance.fertilizerUI.gardenPrice;
+                    Player.instance.SpendMoney(SeedDatabase.instance.fertilizerUI.gardenPrice);
                     SoundEffectsManager.instance.PlaySoundEffectNC("money");
                 }
 
@@ -146,7 +146,7 @@ public class UIManager : MonoBehaviour
             break;
 
             case GardenItemType.Music:
-                if (Player.instance.currentPlayerCoins >= SeedDatabase.instance.phonographUI.gardenPrice &&
+                if (Player.instance.CanSpendMoney(SeedDatabase.instance.phonographUI.gardenPrice) &&
                     SeedDatabase.instance.GardenIsBuyable(GardenItemType.Music))
                 {
                     SeedDatabase.instance.GardenUse(GardenItemType.Music, true);
@@ -154,7 +154,7 @@ public class UIManager : MonoBehaviour
                     foreach (GardenItem gi in SeedDatabase.instance.phonographUI.items)
                         gi.CheckForUsability();
 
-                    Player.instance.currentPlayerCoins -= SeedDatabase.instance.phonographUI.gardenPrice;
+                    Player.instance.SpendMoney(SeedDatabase.instance.phonographUI.gardenPrice);
                     SoundEffectsManager.instance.PlaySoundEffectNC("money");
                 }
 
@@ -298,10 +298,10 @@ public class UIManager : MonoBehaviour
 
     public void BuyFlowerPot(FlowerPotAsset fpa)
     {
-        if (player.currentPlayerCoins >= fpa.flowerPotPrice)
+        if (player.CanSpendMoney(fpa.flowerPotPrice))
         {
             seedDatabase.AddFlowerPot(fpa);
-            player.currentPlayerCoins -= fpa.flowerPotPrice;
+            player.SpendMoney(fpa.flowerPotPrice);
 
             SoundEffectsManager.instance.PlaySoundEffectNC("tap");
         }
@@ -309,13 +309,10 @@ public class UIManager : MonoBehaviour
 
     public void BuyPlantAmount(PlantAsset plant)
     {
-        if (player.currentPlayerCoins >= plant.buyPrice)
+        if (player.CanSpendMoney(plant.buyPrice))
         {
             seedDatabase.BuyPlant(plant);
-            player.currentPlayerCoins -= plant.buyPrice;
-
-            if (player.currentPlayerCoins < 0)
-                player.currentPlayerCoins = 0;
+            player.SpendMoney(plant.buyPrice);
 
             StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("tap"));
         }

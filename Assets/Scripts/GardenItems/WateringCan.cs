@@ -13,6 +13,15 @@ public class WateringCan : GardenItem
         base.Awake();
     }
 
+    public override void Start()
+    {
+        foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
+            if (gi.gameObject.transform.parent.gameObject != null && gi.gameObject.transform.parent.gameObject.activeSelf)
+                Debug.Log(gi.gameObject.transform.parent.gameObject);
+
+        base.Start();
+    }
+
     public override void Update()
     {
         if (transform.eulerAngles.z >= acceptableRotationRange.x && transform.eulerAngles.z <= acceptableRotationRange.y)
@@ -107,7 +116,8 @@ public class WateringCan : GardenItem
                     SeedDatabase.instance.GardenUse(GardenItemType.Water, false);
                     
                     foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
-                        gi.CheckForUsability();
+                        //if (gi.gameObject.transform.parent.gameObject != null && gi.gameObject.transform.parent.gameObject.activeSelf)
+                            gi.CheckForUsability();
                 }
             }
         }

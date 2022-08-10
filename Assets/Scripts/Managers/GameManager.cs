@@ -9,6 +9,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Camera mainCam;
     [Header ("Environment")]
     [SerializeField] private float skySpeed;
+    [Header ("Tutorial Stuff")]
+    public bool onTutorial;
+    [SerializeField] private GameObject jurassicMarshBlocker;
+    [SerializeField] private GameObject tutorial;
 
     private Player player;
 
@@ -21,6 +25,9 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+
+        if (onTutorial)
+            TriggerTutorial(true);
     }
 
     void Update()
@@ -32,6 +39,11 @@ public class GameManager : MonoBehaviour
     public Camera GetMainCamera()
     {
         return mainCam;
+    }
+
+    public void TriggerTutorial(bool activate)
+    {
+        tutorial.SetActive(activate);
     }
 }
 

@@ -1,12 +1,39 @@
 fileFormatVersion: 2
 guid: 9efb044e5f6ca3541aa0c61883c2033c
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2160078183581922722
+    second: UI_UNIVERSE_LOCK_1536_00_0
+  - first:
+      213: -4324628655720177991
+    second: UI_UNIVERSE_LOCK_1536_00_1
+  - first:
+      213: 5698881450896261358
+    second: UI_UNIVERSE_LOCK_1536_00_2
+  - first:
+      213: 8282625798725210962
+    second: UI_UNIVERSE_LOCK_1536_00_3
+  - first:
+      213: 1077610182515897716
+    second: UI_UNIVERSE_LOCK_1536_00_4
+  - first:
+      213: 1736631156014931157
+    second: UI_UNIVERSE_LOCK_1536_00_5
+  - first:
+      213: -6641374440789569703
+    second: UI_UNIVERSE_LOCK_1536_00_6
+  - first:
+      213: -3573582210600866197
+    second: UI_UNIVERSE_LOCK_1536_00_7
+  - first:
+      213: 5489744588447266294
+    second: UI_UNIVERSE_LOCK_1536_00_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,16 +59,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -50,9 +77,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -68,7 +95,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +128,200 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: UI_UNIVERSE_LOCK_1536_00_0
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 509
+        width: 259
+        height: 237
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a5b873d9a32afd10800000000000000
+      internalID: 2160078183581922722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_UNIVERSE_LOCK_1536_00_1
+      rect:
+        serializedVersion: 2
+        x: 442
+        y: 328
+        width: 95
+        height: 134
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bed2568625dbf3c0800000000000000
+      internalID: -4324628655720177991
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_UNIVERSE_LOCK_1536_00_2
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 311
+        width: 206
+        height: 151
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee00cb15c7e761f40800000000000000
+      internalID: 5698881450896261358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_UNIVERSE_LOCK_1536_00_3
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 436
+        width: 77
+        height: 122
+      alignment: 9
+      pivot: {x: 0.37890467, y: 0.88747567}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 253908cd74cc1f270800000000000000
+      internalID: 8282625798725210962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_UNIVERSE_LOCK_1536_00_4
+      rect:
+        serializedVersion: 2
+        x: 859
+        y: 871
+        width: 159
+        height: 150
+      alignment: 9
+      pivot: {x: 0.90099025, y: 0.749904}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 475343760c074fe00800000000000000
+      internalID: 1077610182515897716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_UNIVERSE_LOCK_1536_00_5
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 325
+        width: 230
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5dc5528d5d0c91810800000000000000
+      internalID: 1736631156014931157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_UNIVERSE_LOCK_1536_00_6
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 756
+        width: 283
+        height: 261
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 95f0164322915d3a0800000000000000
+      internalID: -6641374440789569703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_UNIVERSE_LOCK_1536_00_7
+      rect:
+        serializedVersion: 2
+        x: 831
+        y: 568
+        width: 181
+        height: 174
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6eea71c9e5186ec0800000000000000
+      internalID: -3573582210600866197
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: UI_UNIVERSE_LOCK_1536_00_8
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 313
+        width: 99
+        height: 143
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6f5b5060e9d7f2c40800000000000000
+      internalID: 5489744588447266294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 

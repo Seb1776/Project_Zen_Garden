@@ -23,7 +23,8 @@ public class Phonograph : GardenItem
                     SeedDatabase.instance.GardenUse(GardenItemType.Music, false);
                     
                     foreach (GardenItem gi in SeedDatabase.instance.phonographUI.items)
-                        gi.CheckForUsability();
+                        //if (gi.gameObject.transform.parent.gameObject != null && gi.gameObject.transform.parent.gameObject.activeSelf)
+                            gi.CheckForUsability();
                 }
             }
         }

@@ -85,12 +85,20 @@ public class TimeTravelManager : MonoBehaviour
         loading = false;
     }
 
+    public void SetAsEntered(string id)
+    {
+        for (int i = 0; i < worlds.Length; i++)
+            if (worlds[i].ageID == id)
+                if (!worlds[i].hasEntered)
+                    worlds[i].hasEntered = true;
+    }
+
     public bool HasEnteredBefore(string id)
     {
         for (int i = 0; i < worlds.Length; i++)
             if (worlds[i].ageID == id)
                 return worlds[i].hasEntered;
-
+        
         return false;
     }
 

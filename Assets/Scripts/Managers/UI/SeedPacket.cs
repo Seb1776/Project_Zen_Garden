@@ -70,9 +70,9 @@ public class SeedPacket : MonoBehaviour
 
     public void BuyPlant()
     {
-        if (player.currentPlayerCoins >= plantData.unlockPrice)
+        if (player.CanSpendMoney(plantData.unlockPrice))
         {
-            player.currentPlayerCoins -= plantData.unlockPrice;
+            player.SpendMoney(plantData.unlockPrice);
             seedDatabase.UnlockPlant(plantData, this);
             alamancEquivalent.SetActive(true);
             CheckPlantState();
