@@ -1,12 +1,111 @@
 fileFormatVersion: 2
 guid: e1eca93c17d8c0040a9488bc6c579bb7
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 5992458042407353340
+    second: PLANT_BANANADANCER_0
+  - first:
+      213: 7136024006708016665
+    second: PLANT_BANANADANCER_1
+  - first:
+      213: -1291205562119599640
+    second: PLANT_BANANADANCER_2
+  - first:
+      213: -3836918435783598621
+    second: PLANT_BANANADANCER_3
+  - first:
+      213: 1087330638509999309
+    second: PLANT_BANANADANCER_4
+  - first:
+      213: -3353452289562921930
+    second: PLANT_BANANADANCER_5
+  - first:
+      213: -7014707402546737801
+    second: PLANT_BANANADANCER_6
+  - first:
+      213: 8967857588734690182
+    second: PLANT_BANANADANCER_7
+  - first:
+      213: -3153609577121703725
+    second: PLANT_BANANADANCER_8
+  - first:
+      213: -6832793819679323260
+    second: PLANT_BANANADANCER_9
+  - first:
+      213: 4888445760558704082
+    second: PLANT_BANANADANCER_10
+  - first:
+      213: -1146390941787130724
+    second: PLANT_BANANADANCER_11
+  - first:
+      213: -1621866387499619376
+    second: PLANT_BANANADANCER_12
+  - first:
+      213: 5509420679125092586
+    second: PLANT_BANANADANCER_13
+  - first:
+      213: -5138029792007304990
+    second: PLANT_BANANADANCER_14
+  - first:
+      213: 4595579962619701583
+    second: PLANT_BANANADANCER_15
+  - first:
+      213: 8806874443839000064
+    second: PLANT_BANANADANCER_16
+  - first:
+      213: -8195182566097700923
+    second: PLANT_BANANADANCER_17
+  - first:
+      213: 6310871659691387696
+    second: PLANT_BANANADANCER_18
+  - first:
+      213: -944608211189689593
+    second: PLANT_BANANADANCER_19
+  - first:
+      213: -3425883392336597812
+    second: PLANT_BANANADANCER_20
+  - first:
+      213: 7363135183247133477
+    second: PLANT_BANANADANCER_21
+  - first:
+      213: -6414441992611029029
+    second: PLANT_BANANADANCER_22
+  - first:
+      213: -996564778640768078
+    second: PLANT_BANANADANCER_23
+  - first:
+      213: 729515646478336149
+    second: PLANT_BANANADANCER_24
+  - first:
+      213: 7471097518973240944
+    second: PLANT_BANANADANCER_25
+  - first:
+      213: 6831105475769070151
+    second: PLANT_BANANADANCER_26
+  - first:
+      213: 7789478673727825265
+    second: PLANT_BANANADANCER_27
+  - first:
+      213: 3822783974514491035
+    second: PLANT_BANANADANCER_28
+  - first:
+      213: -305890574203646004
+    second: PLANT_BANANADANCER_29
+  - first:
+      213: -8092202010961885698
+    second: PLANT_BANANADANCER_30
+  - first:
+      213: -4799875215301225577
+    second: PLANT_BANANADANCER_31
+  - first:
+      213: 5716664386668475294
+    second: PLANT_BANANADANCER_32
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,16 +131,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -50,9 +149,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -68,7 +167,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +200,704 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_0
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 24
+        width: 45
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cfb7f1517dc792350800000000000000
+      internalID: 5992458042407353340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_1
+      rect:
+        serializedVersion: 2
+        x: 371
+        y: 18
+        width: 16
+        height: 23
+      alignment: 9
+      pivot: {x: 0.08449173, y: 0.0788148}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 916bd7c9600480360800000000000000
+      internalID: 7136024006708016665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_2
+      rect:
+        serializedVersion: 2
+        x: 326
+        y: 21
+        width: 20
+        height: 20
+      alignment: 9
+      pivot: {x: 0.84823453, y: 0.21191502}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8e94ad1e167b41ee0800000000000000
+      internalID: -1291205562119599640
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_3
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 3
+        width: 14
+        height: 25
+      alignment: 9
+      pivot: {x: 0.731496, y: 0.077266425}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ed98f2f20780cac0800000000000000
+      internalID: -3836918435783598621
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_4
+      rect:
+        serializedVersion: 2
+        x: 403
+        y: 13
+        width: 45
+        height: 39
+      alignment: 9
+      pivot: {x: 0.9544969, y: 0.6357637}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dc489cd6479f61f00800000000000000
+      internalID: 1087330638509999309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_5
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 16
+        width: 35
+        height: 35
+      alignment: 9
+      pivot: {x: 0.9024924, y: 0.021617508}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 634b165f8e42671d0800000000000000
+      internalID: -3353452289562921930
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_6
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 53
+        width: 47
+        height: 40
+      alignment: 9
+      pivot: {x: 0.7445612, y: 0.9559431}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77d06eb68c0c6ae90800000000000000
+      internalID: -7014707402546737801
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_7
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 19
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68382d496fa347c70800000000000000
+      internalID: 8967857588734690182
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_8
+      rect:
+        serializedVersion: 2
+        x: 164
+        y: 6
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3d814635cc02c34d0800000000000000
+      internalID: -3153609577121703725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_9
+      rect:
+        serializedVersion: 2
+        x: 187
+        y: 25
+        width: 33
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48b8782093a0d21a0800000000000000
+      internalID: -6832793819679323260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_10
+      rect:
+        serializedVersion: 2
+        x: 618
+        y: 6
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d5add5e48f37d340800000000000000
+      internalID: 4888445760558704082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_11
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 21
+        width: 28
+        height: 25
+      alignment: 9
+      pivot: {x: 0.0634504, y: 0.08590378}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c947d0523833710f0800000000000000
+      internalID: -1146390941787130724
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_12
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 69
+        width: 30
+        height: 28
+      alignment: 9
+      pivot: {x: 0.91160077, y: 0.067906514}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0db60f31d19fd79e0800000000000000
+      internalID: -1621866387499619376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_13
+      rect:
+        serializedVersion: 2
+        x: 554
+        y: 15
+        width: 19
+        height: 30
+      alignment: 9
+      pivot: {x: 0.08753084, y: 0.07866478}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae84171eae4657c40800000000000000
+      internalID: 5509420679125092586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_14
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 25
+        width: 35
+        height: 25
+      alignment: 9
+      pivot: {x: 0.9543302, y: 0.12271576}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e8c70a602d02b8b0800000000000000
+      internalID: -5138029792007304990
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_15
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 27
+        width: 10
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f49a9d8a0a7c6cf30800000000000000
+      internalID: 4595579962619701583
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_16
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 11
+        width: 10
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00e4d7655ad483a70800000000000000
+      internalID: 8806874443839000064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_17
+      rect:
+        serializedVersion: 2
+        x: 188
+        y: 109
+        width: 16
+        height: 11
+      alignment: 9
+      pivot: {x: 0.04271412, y: 0.41472486}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c7b54640ecd44e80800000000000000
+      internalID: -8195182566097700923
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_18
+      rect:
+        serializedVersion: 2
+        x: 206
+        y: 110
+        width: 18
+        height: 10
+      alignment: 9
+      pivot: {x: 0.09526147, y: 0.33115616}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03b2cfa8658b49750800000000000000
+      internalID: 6310871659691387696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_19
+      rect:
+        serializedVersion: 2
+        x: 921
+        y: 9
+        width: 18
+        height: 12
+      alignment: 9
+      pivot: {x: 0.9222717, y: 0.477379}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7031f1036d314e2f0800000000000000
+      internalID: -944608211189689593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_20
+      rect:
+        serializedVersion: 2
+        x: 942
+        y: 9
+        width: 18
+        height: 12
+      alignment: 9
+      pivot: {x: 0.9373542, y: 0.49246016}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccceddda431d470d0800000000000000
+      internalID: -3425883392336597812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_21
+      rect:
+        serializedVersion: 2
+        x: 758
+        y: 344
+        width: 19
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52b40a6007c1f2660800000000000000
+      internalID: 7363135183247133477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_22
+      rect:
+        serializedVersion: 2
+        x: 780
+        y: 343
+        width: 15
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdf121e2ef25bf6a0800000000000000
+      internalID: -6414441992611029029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_23
+      rect:
+        serializedVersion: 2
+        x: 798
+        y: 345
+        width: 9
+        height: 5
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2b383752d9d7b22f0800000000000000
+      internalID: -996564778640768078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_24
+      rect:
+        serializedVersion: 2
+        x: 451
+        y: 18
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5904e668d92cf1a00800000000000000
+      internalID: 729515646478336149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_25
+      rect:
+        serializedVersion: 2
+        x: 489
+        y: 21
+        width: 27
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 076c3b42c9baea760800000000000000
+      internalID: 7471097518973240944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_26
+      rect:
+        serializedVersion: 2
+        x: 518
+        y: 27
+        width: 34
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 742f07acc36fcce50800000000000000
+      internalID: 6831105475769070151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_27
+      rect:
+        serializedVersion: 2
+        x: 686
+        y: 13
+        width: 21
+        height: 33
+      alignment: 9
+      pivot: {x: 0.8408959, y: 0.040101197}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17527055599c91c60800000000000000
+      internalID: 7789478673727825265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_28
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 11
+        width: 11
+        height: 12
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9efdf555c14d0530800000000000000
+      internalID: 3822783974514491035
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_29
+      rect:
+        serializedVersion: 2
+        x: 968
+        y: 15
+        width: 24
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccf8378b42241cbf0800000000000000
+      internalID: -305890574203646004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_30
+      rect:
+        serializedVersion: 2
+        x: 536
+        y: 11
+        width: 14
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef54ae53529b2bf80800000000000000
+      internalID: -8092202010961885698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_31
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 14
+        width: 16
+        height: 36
+      alignment: 9
+      pivot: {x: 0.30810213, y: 0.02617807}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 793d4c92cea636db0800000000000000
+      internalID: -4799875215301225577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANT_BANANADANCER_32
+      rect:
+        serializedVersion: 2
+        x: 257
+        y: 119
+        width: 31
+        height: 30
+      alignment: 9
+      pivot: {x: 0.049553655, y: 0.8996882}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e933083b8fba55f40800000000000000
+      internalID: 5716664386668475294
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 6227faeed7521dc49b45679e2b49f035
     internalID: 0
     vertices: []
     indices: 
