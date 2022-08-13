@@ -324,8 +324,11 @@ public class MusicManager : MonoBehaviour
         else
             TimeTravelManager.instance.ChangeScenario(currentPresentContext, true);
 
-        if (GetNextWorld(worldMusic) != null && !TimeTravelManager.instance.HasEnteredBefore(worldMusic.worldID)) 
+        if (GetNextWorld(worldMusic) != null && !TimeTravelManager.instance.HasEnteredBefore(worldMusic.worldID))
+        {
+            GetWorldData(worldMusic).plantsButton.interactable = true;
             GetNextWorld(worldMusic).unlockFirstPanel.SetActive(false);
+        }
 
         yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
 
@@ -362,6 +365,7 @@ public class WorldMusic
     public Animator worldLock;
     public Text worldPrice;
     public Image[] plantImages;
+    public Button plantsButton;
     public GameObject unlockFirstPanel;
     public GameObject unlockButton;
 }
