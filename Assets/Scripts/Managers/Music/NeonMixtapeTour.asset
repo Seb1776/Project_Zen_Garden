@@ -14,74 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldID: neon
   world: 8
-  worldTracks:
-    enteredFirstTime:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: ed04af89f3c85f34bb7c893ad4602b9d, type: 3}
-    firstWave:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    midWaveA:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    midWaveB:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    finalWave:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    ultimateBattle:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 6eec003fac794d748af65d8eb90a1dd3, type: 3}
-    minigame:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: c77e83c9e4af8d74ba33b071cf505ee1, type: 3}
-    loonboon:
-      start: {fileID: 0}
-      main: {fileID: 8300000, guid: 3fe280ac190754a49895ed69ec8c11bc, type: 3}
-  presentWorldTracks:
-    entered:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    seeds:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    frontDay:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    frontNight:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    backDay:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    backNight:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    roofDay:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    roofNight:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    minigame:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    ultimateA:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    ultimateB:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    loonboon:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    cerebrawl:
-      start: {fileID: 0}
-      main: {fileID: 0}
-    brainiac:
-      start: {fileID: 0}
-      main: {fileID: 0}
+  normalTracks:
+  - {fileID: 8300000, guid: ed04af89f3c85f34bb7c893ad4602b9d, type: 3}
+  specialTracks:
+  - {fileID: 8300000, guid: 3fe280ac190754a49895ed69ec8c11bc, type: 3}
+  - {fileID: 8300000, guid: c77e83c9e4af8d74ba33b071cf505ee1, type: 3}
+  - {fileID: 8300000, guid: 6eec003fac794d748af65d8eb90a1dd3, type: 3}
   phonographClip: {fileID: 8300000, guid: 55927ea4bdc79d44dbafa6a138acff19, type: 3}
   grownPlantClip: {fileID: 8300000, guid: eec3d807747b93444bc2d0e1b578a00a, type: 3}
   isPresent: 0

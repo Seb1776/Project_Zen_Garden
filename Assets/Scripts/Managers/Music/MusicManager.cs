@@ -330,6 +330,8 @@ public class MusicManager : MonoBehaviour
             GetNextWorld(worldMusic).unlockFirstPanel.SetActive(false);
         }
 
+        SeedDatabase.instance.IgnorPosOfGardenItems(true);
+
         yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
 
         if (GameManager.instance.onTutorial)
@@ -351,8 +353,9 @@ public class MusicManager : MonoBehaviour
         fullModernDayPanel.SetActive(true);
         modernDayTutorialPanel.SetActive(false);
         tutorialGarden.SetActive(false);
-        tutorialGardening.transform.position -= new Vector3(0f, -1.75f, 0f);
-        fullGardening.transform.position += new Vector3(0f, -1.75f, 0f);
+        tutorialGardening.transform.localPosition = new Vector3(0f, -1.75f, 0f);
+        fullGardening.transform.localPosition = new Vector3(0f, 0f, 0f);
+        SeedDatabase.instance.IgnorPosOfGardenItems(false, true);
     }
 }
 

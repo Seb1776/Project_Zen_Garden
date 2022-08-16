@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class GardenItem : MonoBehaviour
 {
+    public bool ignorePos;
     [SerializeField] private string soundEffect;
     [SerializeField] protected bool grabbed;
     [SerializeField] protected GardenItemType itemType;
@@ -66,8 +67,13 @@ public class GardenItem : MonoBehaviour
                 returnToPos = true;
         }
 
-        if (returnToPos)
+        if (returnToPos && !ignorePos)
             GetBackPos();
+    }
+
+    public void UpdateReturnPosition()
+    {
+        startPos = transform.position;
     }
 
     public virtual void CheckForUsability() { }

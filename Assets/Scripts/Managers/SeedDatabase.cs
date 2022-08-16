@@ -177,6 +177,37 @@ public class SeedDatabase : MonoBehaviour
         }
     }
 
+    public void IgnorPosOfGardenItems(bool ignore, bool updatePos = false)
+    {
+        foreach (GardenItem gi in waterUI.items)
+        {
+            gi.ignorePos = ignore;
+
+            if (updatePos) gi.UpdateReturnPosition();
+        }
+
+        foreach (GardenItem gi in compostUI.items)
+        {
+            gi.ignorePos = ignore;
+
+            if (updatePos) gi.UpdateReturnPosition();
+        }
+
+        foreach (GardenItem gi in fertilizerUI.items)
+        {
+            gi.ignorePos = ignore;
+
+            if (updatePos) gi.UpdateReturnPosition();
+        }
+
+        foreach (GardenItem gi in phonographUI.items)
+        {
+            gi.ignorePos = ignore;
+
+            if (updatePos) gi.UpdateReturnPosition();
+        }
+    }
+
     public void TutorialPlantsSet(bool activate)
     {
        foreach (Button b in disablableTutorialSeeds)
