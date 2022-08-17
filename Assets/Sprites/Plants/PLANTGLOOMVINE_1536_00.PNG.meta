@@ -1,12 +1,54 @@
 fileFormatVersion: 2
 guid: dc6f68001fdbdc64f9a5204633c6aa71
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 4672095167312032226
+    second: PLANTGLOOMVINE_1536_00_0
+  - first:
+      213: -3525028157763216286
+    second: PLANTGLOOMVINE_1536_00_1
+  - first:
+      213: 7834281417955195419
+    second: PLANTGLOOMVINE_1536_00_2
+  - first:
+      213: 1982605813753643102
+    second: PLANTGLOOMVINE_1536_00_3
+  - first:
+      213: 6585890030976183500
+    second: PLANTGLOOMVINE_1536_00_4
+  - first:
+      213: -2081377675771990684
+    second: PLANTGLOOMVINE_1536_00_5
+  - first:
+      213: -3452051657507211306
+    second: PLANTGLOOMVINE_1536_00_6
+  - first:
+      213: 3932392776481286064
+    second: PLANTGLOOMVINE_1536_00_7
+  - first:
+      213: 352437167498655503
+    second: PLANTGLOOMVINE_1536_00_8
+  - first:
+      213: -2851288438641383238
+    second: PLANTGLOOMVINE_1536_00_9
+  - first:
+      213: 1730353561837893086
+    second: PLANTGLOOMVINE_1536_00_10
+  - first:
+      213: 8111035461969012280
+    second: PLANTGLOOMVINE_1536_00_11
+  - first:
+      213: -586951367678928918
+    second: PLANTGLOOMVINE_1536_00_12
+  - first:
+      213: 3534042795902157254
+    second: PLANTGLOOMVINE_1536_00_13
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,16 +74,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -50,9 +92,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -68,7 +110,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +143,305 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_0
+      rect:
+        serializedVersion: 2
+        x: 178
+        y: 324
+        width: 170
+        height: 45
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e1f3740dcd96d040800000000000000
+      internalID: 4672095167312032226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_1
+      rect:
+        serializedVersion: 2
+        x: 167
+        y: 243
+        width: 183
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 26c16412195941fc0800000000000000
+      internalID: -3525028157763216286
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_2
+      rect:
+        serializedVersion: 2
+        x: 465
+        y: 82
+        width: 30
+        height: 23
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1ab9ab1175f8bc60800000000000000
+      internalID: 7834281417955195419
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_3
+      rect:
+        serializedVersion: 2
+        x: 424
+        y: 110
+        width: 35
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e50096abb71a38b10800000000000000
+      internalID: 1982605813753643102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_4
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 144
+        width: 46
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ccc2f12f618c56b50800000000000000
+      internalID: 6585890030976183500
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_5
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 196
+        width: 58
+        height: 41
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 46dae2018067d13e0800000000000000
+      internalID: -2081377675771990684
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_6
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 188
+        width: 53
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d7fbf7ae49d710d0800000000000000
+      internalID: -3452051657507211306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_7
+      rect:
+        serializedVersion: 2
+        x: 320
+        y: 159
+        width: 55
+        height: 31
+      alignment: 9
+      pivot: {x: 0.9689814, y: 0.5211984}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b7aa7f356aa29630800000000000000
+      internalID: 3932392776481286064
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_8
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 126
+        width: 47
+        height: 27
+      alignment: 9
+      pivot: {x: 0.032004498, y: 0.64733154}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f07f66e8cbb14e400800000000000000
+      internalID: 352437167498655503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_9
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 111
+        width: 40
+        height: 27
+      alignment: 9
+      pivot: {x: 0.9508463, y: 0.064985484}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ab82a9695403e68d0800000000000000
+      internalID: -2851288438641383238
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_10
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 96
+        width: 37
+        height: 24
+      alignment: 9
+      pivot: {x: 0.8502296, y: 0.23383522}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed5fd2d8563730810800000000000000
+      internalID: 1730353561837893086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_11
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 126
+        width: 45
+        height: 27
+      alignment: 9
+      pivot: {x: 0.019219292, y: 0.44710794}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 836624f47cf209070800000000000000
+      internalID: 8111035461969012280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_12
+      rect:
+        serializedVersion: 2
+        x: 473
+        y: 341
+        width: 36
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ae7511547dabad7f0800000000000000
+      internalID: -586951367678928918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGLOOMVINE_1536_00_13
+      rect:
+        serializedVersion: 2
+        x: 475
+        y: 478
+        width: 31
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6c1c6ced2317b0130800000000000000
+      internalID: 3534042795902157254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: c29ef8be28753544b957091b0737d399
     internalID: 0
     vertices: []
     indices: 
