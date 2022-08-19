@@ -46,6 +46,7 @@ public class MusicManager : MonoBehaviour
         SetWorldsPrices();
         SelectMusicAsset(currentWorld);
         ChooseNewMusicOrder();
+        Debug.Log(GetCurrentMusic());
     }
 
     public void ChangeMusic(MusicAsset newAge)
@@ -141,7 +142,9 @@ public class MusicManager : MonoBehaviour
         if (playingMusicOrder)
         {
             PlayMusicSet(musicOrder[currentMusicOrderIdx]);
-            currentMusicOrderIdx++;
+            
+            if (musicOrder.Count != 0)
+                currentMusicOrderIdx++;
         }
     }
 
