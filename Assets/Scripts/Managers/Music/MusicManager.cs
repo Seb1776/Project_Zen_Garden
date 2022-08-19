@@ -86,11 +86,20 @@ public class MusicManager : MonoBehaviour
         else if (TimeTravelManager.instance.HasEnteredBefore(currentAsset.worldID))
         {
             if (playingContext == string.Empty || playingContext == "")
-            {
-                if (GameHelper.GetRandomBool())
+            {   
+                if (currentAsset.GetMusicClips(SetMusicMode.Main, false).Count > 0)
                 {
-                    musicOrder = currentAsset.GetMusicClips(SetMusicMode.Main, false);
-                    playingContext = "main";
+                    if (GameHelper.GetRandomBool())
+                    {
+                        musicOrder = currentAsset.GetMusicClips(SetMusicMode.Main, false);
+                        playingContext = "main";
+                    }
+
+                    else
+                    {
+                        musicOrder = currentAsset.GetMusicClips(SetMusicMode.Special, true);
+                        playingContext = "special";
+                    }
                 }
 
                 else
@@ -101,17 +110,26 @@ public class MusicManager : MonoBehaviour
             }
 
             else
-            {
-                if (playingContext == "main")
+            {   
+                if (currentAsset.GetMusicClips(SetMusicMode.Main, false).Count > 0)
+                {
+                    if (playingContext == "main")
+                    {
+                        musicOrder = currentAsset.GetMusicClips(SetMusicMode.Special, true);
+                        playingContext = "special";
+                    }
+                    
+                    else
+                    {
+                        musicOrder = currentAsset.GetMusicClips(SetMusicMode.Main, false);
+                        playingContext = "main";
+                    }
+                }
+
+                else
                 {
                     musicOrder = currentAsset.GetMusicClips(SetMusicMode.Special, true);
                     playingContext = "special";
-                }
-                
-                else
-                {
-                    musicOrder = currentAsset.GetMusicClips(SetMusicMode.Main, false);
-                    playingContext = "main";
                 }
             }
         }
