@@ -5,6 +5,7 @@ using UnityEngine;
 public class FlowerPotHolder : MonoBehaviour
 {   
     public bool canShowEffect;
+    public int holderIdx;
     public Transform gardenParent;
 
     public OutlineEffect outline;
