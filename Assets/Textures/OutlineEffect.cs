@@ -13,6 +13,11 @@ public class OutlineEffect : MonoBehaviour
 
     void Start()
     {
+        StartStuff();
+    }
+
+    public void StartStuff()
+    {
         outlineRenderer = CreateOutline(outlineMaterial, outlineScaleFactor, outlineColor);
         outlineRenderer.enabled = false;
     }

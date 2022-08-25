@@ -15,10 +15,6 @@ public class WateringCan : GardenItem
 
     public override void Start()
     {
-        foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
-            if (gi.gameObject.transform.parent.gameObject != null && gi.gameObject.transform.parent.gameObject.activeSelf)
-                Debug.Log(gi.gameObject.transform.parent.gameObject);
-
         base.Start();
     }
 
@@ -116,8 +112,10 @@ public class WateringCan : GardenItem
                     SeedDatabase.instance.GardenUse(GardenItemType.Water, false);
                     
                     foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
-                        //if (gi.gameObject.transform.parent.gameObject != null && gi.gameObject.transform.parent.gameObject.activeSelf)
-                            gi.CheckForUsability();
+                    {
+                        gi.CheckForUsability();
+                        SeedDatabase.instance.SendGardenDataToCollector();
+                    }
                 }
             }
         }

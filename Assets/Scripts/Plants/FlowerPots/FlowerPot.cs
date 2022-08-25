@@ -14,7 +14,7 @@ public enum FlowerPotType
 public class FlowerPot : MonoBehaviour
 {
     public FlowerPotAsset flowerPotAsset;
-    [SerializeField] private Transform plantPlantingPosition;
+    public Transform plantPlantingPosition;
     [SerializeField] private ParticleSystem waterEffect, compostEffect;
     [SerializeField] private GameObject musicPlayer;
     public string createdIn;
@@ -104,12 +104,16 @@ public class FlowerPot : MonoBehaviour
     }
 
     public void RemoveFlowerPot()
-    {   
-        inPositionOfHolder.gameObject.SetActive(true);
+    {
+        inPositionOfHolder.transform.GetChild(0).gameObject.SetActive(true);
+        inPositionOfHolder.GetComponent<Collider>().enabled = true;
+
         SoundEffectsManager.instance.PlaySoundEffectNC("ceramic");
         
         if (plantInSpace != null)
             plantInSpace.RemovePlant();
+        
+        DataCollector.instance.RemoveFlowerPot(MusicManager.instance.GetCurrentMusic().world, this);
 
         Destroy(this.gameObject);
     }
@@ -270,8 +274,35 @@ public class FlowerPot : MonoBehaviour
         triggerColl.enabled = false;
         p.ApplyColorToPlant(new Color(1f, 1f, 1f, 1f));
         p.SetPlanted(_s);
+        DataCollector.instance.AddPlant(MusicManager.instance.GetCurrentMusic().world, this, p);
         p.plantIsAbove = null;
         p.transform.localScale = Vector3.zero;
+    }
+
+    public void PlantPlantFromLoad(GameObject plantPref, PlantSpot plantData)
+    {
+        GameObject _s = Instantiate(plantsManager.GetSprout(), plantPlantingPosition.position, Quaternion.identity);
+        _s.transform.position = plantPlantingPosition.position;
+        Plant p = Instantiate(plantPref, plantPref.transform.position, Quaternion.identity).GetComponent<Plant>();
+        p.transform.position = plantPlantingPosition.position;
+        p.transform.parent = transform;
+        p.flowerPotIn = this;
+        _s.transform.parent = transform;
+        
+        if (outline.outlineRenderer == null)
+            outline.StartStuff();
+
+        outline.outlineRenderer.enabled = false;
+        hoveringPlantIsAccepted = false;
+        canUseOutline = false;
+        plantInSpace = p;
+        UpdatePlantSellPrice(p.GetActualRevenue());
+        triggerColl.enabled = false;
+        p.ApplyColorToPlant(new Color(1f, 1f, 1f, 1f));
+        p.SetPlanted(_s);
+        p.plantIsAbove = null;
+        p.transform.localScale = Vector3.zero;
+        p.SetPlantDataFromLoad(plantData);
     }
 
     public bool GetIfPlantIsAccepted()

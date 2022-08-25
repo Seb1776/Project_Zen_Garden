@@ -17,7 +17,7 @@ public class Plant : MonoBehaviour
     private Player player;
     public Animator plantAnim;
 
-    private Vector2Int waterRange, compostRange, fertilizerRange, musicRange;
+    public Vector2Int waterRange, compostRange, fertilizerRange, musicRange;
     private Vector2 timeRange;
     private Vector3 outsideScale;
     private float setTimeRange, currentTimeRange;
@@ -52,14 +52,15 @@ public class Plant : MonoBehaviour
     }
 
     void Start()
-    {   
+    {
         if (!planted)
+        {
             ApplyColorToPlant(new Color(1f, 1f, 1f, .5f));
+            plantAnim.speed = 0f;
+        }
         
         revenueMultiplier = 1f / GetAccumulativeRange();
         revMulIncreaser = 1f / GetAccumulativeRange();
-
-        plantAnim.speed = 0f;
     }
 
     void Update()
@@ -72,6 +73,48 @@ public class Plant : MonoBehaviour
         
         if (selling)
             SellPlant();
+    }
+
+    public void SetPlantDataFromLoad(PlantSpot data)
+    {
+        planted = false;
+
+        waterRange = new Vector2Int(data.waterCurrentUses, data.waterTotalUses);
+        compostRange = new Vector2Int(data.compostCurrentUses, data.compostTotalUses);
+        fertilizerRange = new Vector2Int(data.fertilizerCurrentUses, data.fertilizerTotalUses);
+        musicRange = new Vector2Int(data.phonographCurrentUses, data.phonographTotalUses);
+        currentTimeRange = 0f;
+
+        switch(data.plantLastRequire)
+        {
+            case "Water":
+                expectedItem = GardenItemType.Water;
+            break;
+
+            case "Compost":
+                expectedItem = GardenItemType.Compost;
+            break;
+
+            case "Fertilizer":
+                expectedItem = GardenItemType.Fertilizer;
+            break;
+
+            case "Music":
+                expectedItem = GardenItemType.Music;
+            break;
+        }
+
+        if (data.plantIsGrown)
+            GrowPlant(false);
+        
+        if (data.plantIsFullyGrown)
+        {
+            flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+            fullyGrown = true;
+            currentTimeRange = 0f;
+        }
+
+        planted = true;
     }
 
     public GardenItemType ExpectedGardenItem()
@@ -98,6 +141,7 @@ public class Plant : MonoBehaviour
     public void RemovePlant()
     {
         SoundEffectsManager.instance.PlaySoundEffectNC("removeplant");
+        DataCollector.instance.RemovePlant(MusicManager.instance.GetCurrentMusic().world, flowerPotIn);
         DeactivateWarnings();
         flowerPotIn.canUseOutline = true;
         flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
@@ -158,12 +202,12 @@ public class Plant : MonoBehaviour
         setTimeRange = Random.Range(timeRange.x, timeRange.y);
     }
 
-    void GrowPlant()
+    public void GrowPlant(bool playSound = true)
     {   
         if (!growth)
         {
             _sprout.GetComponent<Animator>().SetTrigger("hide");
-            StartCoroutine(GrowPlantAfterSprout());
+            StartCoroutine(GrowPlantAfterSprout(playSound));
         }
     }
 
@@ -176,48 +220,75 @@ public class Plant : MonoBehaviour
     {
         List<GardenItemType> availableItems = new List<GardenItemType>();
 
-        for (int i = 0; i < 4; i++)
+        if (expectedItem == null)
         {
-            if (i == 0 && !ItemIsComplete(waterRange))
-                availableItems.Add(GardenItemType.Water);
+            for (int i = 0; i < 4; i++)
+            {
+                if (i == 0 && !ItemIsComplete(waterRange))
+                    availableItems.Add(GardenItemType.Water);
 
-            else if (i == 1 && !ItemIsComplete(compostRange))
-                availableItems.Add(GardenItemType.Compost);
+                else if (i == 1 && !ItemIsComplete(compostRange))
+                    availableItems.Add(GardenItemType.Compost);
 
-            else if (i == 2 && !ItemIsComplete(fertilizerRange))
-                availableItems.Add(GardenItemType.Fertilizer);
+                else if (i == 2 && !ItemIsComplete(fertilizerRange))
+                    availableItems.Add(GardenItemType.Fertilizer);
 
-            else if (i == 3 && !ItemIsComplete(musicRange))
-                availableItems.Add(GardenItemType.Music);
+                else if (i == 3 && !ItemIsComplete(musicRange))
+                    availableItems.Add(GardenItemType.Music);
+            }
+            
+            int randItemIdx = Random.Range(0, availableItems.Count);
+
+            if (availableItems[randItemIdx] == GardenItemType.Water)
+            {
+                expectedItem = GardenItemType.Water;
+                flowerPotIn.ActivateWarning(GardenItemType.Water, true);
+            }
+            
+            if (availableItems[randItemIdx] == GardenItemType.Compost)
+            {
+                expectedItem = GardenItemType.Compost;
+                flowerPotIn.ActivateWarning(GardenItemType.Compost, true);
+            }
+            
+            if (availableItems[randItemIdx] == GardenItemType.Fertilizer)
+            {
+                expectedItem = GardenItemType.Fertilizer;
+                flowerPotIn.ActivateWarning(GardenItemType.Fertilizer, true);
+            }
+            
+            if (availableItems[randItemIdx] == GardenItemType.Music)
+            {
+                expectedItem = GardenItemType.Music;
+                flowerPotIn.ActivateWarning(GardenItemType.Music, true);
+            }
         }
-        
-        int randItemIdx = Random.Range(0, availableItems.Count);
 
-        if (availableItems[randItemIdx] == GardenItemType.Water)
+        else
         {
-            expectedItem = GardenItemType.Water;
-            flowerPotIn.ActivateWarning(GardenItemType.Water, true);
-        }
-        
-        if (availableItems[randItemIdx] == GardenItemType.Compost)
-        {
-            expectedItem = GardenItemType.Compost;
-            flowerPotIn.ActivateWarning(GardenItemType.Compost, true);
-        }
-        
-        if (availableItems[randItemIdx] == GardenItemType.Fertilizer)
-        {
-            expectedItem = GardenItemType.Fertilizer;
-            flowerPotIn.ActivateWarning(GardenItemType.Fertilizer, true);
-        }
-        
-        if (availableItems[randItemIdx] == GardenItemType.Music)
-        {
-            expectedItem = GardenItemType.Music;
-            flowerPotIn.ActivateWarning(GardenItemType.Music, true);
+            switch (expectedItem)
+            {
+                case GardenItemType.Water:
+                    flowerPotIn.ActivateWarning(GardenItemType.Water, true);
+                break;
+
+                case GardenItemType.Compost:
+                    flowerPotIn.ActivateWarning(GardenItemType.Compost, true);
+                break;
+
+                case GardenItemType.Fertilizer:
+                    flowerPotIn.ActivateWarning(GardenItemType.Fertilizer, true);
+                break;
+
+                case GardenItemType.Music:
+                    flowerPotIn.ActivateWarning(GardenItemType.Music, true);
+                break;
+            }
         }
 
+        DataCollector.instance.SetPlantGardenState(MusicManager.instance.GetCurrentMusic().world, expectedItem.ToString(), flowerPotIn);
         gardenItemChosen = true;
+        expectedItem = null;
     }
 
     public void DeactivateWarnings()
@@ -236,18 +307,34 @@ public class Plant : MonoBehaviour
             {
                 case GardenItemType.Water:
                     waterRange.x++;
+
+                    DataCollector.instance.SetPlantGardenData(
+                        MusicManager.instance.GetCurrentMusic().world, flowerPotIn, expectedItem.ToString(), waterRange.x
+                    );
                 break;
 
                 case GardenItemType.Compost:
                     compostRange.x++;
+
+                    DataCollector.instance.SetPlantGardenData(
+                        MusicManager.instance.GetCurrentMusic().world, flowerPotIn, expectedItem.ToString(), compostRange.x
+                    );
                 break;
 
                 case GardenItemType.Fertilizer:
                     fertilizerRange.x++;
+
+                    DataCollector.instance.SetPlantGardenData(
+                        MusicManager.instance.GetCurrentMusic().world, flowerPotIn, expectedItem.ToString(), fertilizerRange.x
+                    );
                 break;
 
                 case GardenItemType.Music:
                     musicRange.x++;
+
+                    DataCollector.instance.SetPlantGardenData(
+                        MusicManager.instance.GetCurrentMusic().world, flowerPotIn, expectedItem.ToString(), musicRange.x
+                    );
                 break;
             }
 
@@ -266,7 +353,7 @@ public class Plant : MonoBehaviour
                 gardenItemChosen = false;
                 expectedItem = null;
                 flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
-                
+
                 revenueMultiplier += revMulIncreaser;
                 flowerPotIn.UpdatePlantSellPrice(GetActualRevenue());
 
@@ -356,9 +443,6 @@ public class Plant : MonoBehaviour
         if (!planted && handPosition != null)
             transform.position = handPosition.position;
         
-        if (Keyboard.current.kKey.wasPressedThisFrame)
-            GrowPlant();
-        
         if (!fullyGrown && growth && !replanting && transform.localScale != plantData.initialScale)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, plantData.initialScale, 2 * Time.deltaTime);
@@ -371,14 +455,13 @@ public class Plant : MonoBehaviour
         }
     }
 
-    IEnumerator GrowPlantAfterSprout()
+    IEnumerator GrowPlantAfterSprout(bool playSound = true)
     {   
-
         if (!growth)
         {
             yield return new WaitForSeconds(1.167f);
             growth = true;
-            StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantgrow"));
+            if (playSound) StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantgrow"));
         }
     }
 

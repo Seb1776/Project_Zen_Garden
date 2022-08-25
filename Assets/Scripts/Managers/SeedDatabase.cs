@@ -10,6 +10,7 @@ public class SeedDatabase : MonoBehaviour
     [NonReorderable] public FlowerPots[] flowerPots;
     [SerializeField] private FlowerPotHolder[] holders;
     [SerializeField] private List<UnlockedSeeds> unlockedSeeds = new List<UnlockedSeeds>();
+    [SerializeField] private SeedPacket[] allSeeds;
     public GardenAmount waterUI, compostUI, fertilizerUI, phonographUI;
     [SerializeField] private GameObject jurassicBlock;
     [SerializeField] private Button[] disablableTutorialSeeds;
@@ -18,6 +19,8 @@ public class SeedDatabase : MonoBehaviour
     {
         if (instance != null && instance != this) Destroy(this);
         else instance = this;
+
+        CreateHoldersIDs();
     }
 
     void Start()
@@ -31,10 +34,36 @@ public class SeedDatabase : MonoBehaviour
         phonographUI.UpdateUI();
     }
 
+    public void SendGardenDataToCollector()
+    {
+        DataCollector.instance.playerWaters = waterUI.currentAmount;
+        DataCollector.instance.playerComposts = compostUI.currentAmount;
+        DataCollector.instance.playerFertilizer = fertilizerUI.currentAmount;
+        DataCollector.instance.playerPhonographs = phonographUI.currentAmount;
+    }
+
+    public void SetGardenDataFromCollector(int water, int compost, int fertilizer, int phonograph)
+    {
+        waterUI.currentAmount = water;
+        compostUI.currentAmount = compost;
+        fertilizerUI.currentAmount = fertilizer;
+        phonographUI.currentAmount = phonograph;
+    }
+
     void Update()
     {
         foreach (FlowerPots fps in flowerPots)
             fps.SetUI();
+    }
+
+    void CreateHoldersIDs()
+    {
+        for (int i = 0; i < holders.Length; i++)
+        {
+            holders[i].holderIdx = i;
+            holders[i].StartStuff();
+            holders[i].outline.StartStuff();
+        }
     }
 
     public FlowerPots GetFlowerPotData(FlowerPotAsset fpa)
@@ -129,7 +158,9 @@ public class SeedDatabase : MonoBehaviour
         foreach (FlowerPotHolder fph in holders)
         {
             fph.canShowEffect = act;
-            if (!act) fph.outline.ChangeOutlineColor(Color.white, false);
+
+            if (!act && fph.outline != null)
+                fph.outline.ChangeOutlineColor(Color.white, false);
         }
     }
 
@@ -165,10 +196,13 @@ public class SeedDatabase : MonoBehaviour
         }
     }
 
-    public void UnlockPlant(PlantAsset plant, SeedPacket ui)
+    public void UnlockPlant(PlantAsset plant, SeedPacket ui, bool loading = false)
     {
         UnlockedSeeds newPlant = new UnlockedSeeds(plant, 1, ui);
         unlockedSeeds.Add(newPlant);
+
+        if (!loading)
+            DataCollector.instance.AddNewSeedPacket(plant.name, plant.appearsIn.ToString(), 1);
 
         if (GameManager.instance.onTutorial && GetTotalUnlockedPlants() >= 5)
         {
@@ -226,6 +260,7 @@ public class SeedDatabase : MonoBehaviour
             else
                 plantTo.amount += specAmount;
 
+            DataCollector.instance.UpdateSeedPacket(plant.name, plantTo.amount);
             plantTo.uiPacket.UpdatePlantAmount();
         }
     }
@@ -238,6 +273,35 @@ public class SeedDatabase : MonoBehaviour
             plantTo.amount--;
             plantTo.uiPacket.UpdatePlantAmount();
         }
+    }
+
+    public void SetPlantAssetFromData(SeedDataContainer sdc)
+    {
+        PlantAsset pa = Resources.Load<PlantAsset>("PlantsAssets/" + sdc.plantWorld + "/" + sdc.plantAssetName);
+        
+        if (pa != null)
+        {
+            SeedPacket sp = GetPlantUISeedPacket(pa.name);
+            
+            if (sp != null)
+            {
+                UnlockPlant(pa, sp, true);
+                UnlockedSeeds us = GetPlantInList(pa);
+                us.amount = sdc.plantAmount;
+            }
+
+            else
+                Debug.LogError("The name might be wrong. " + pa.name);
+        }
+    }
+
+    SeedPacket GetPlantUISeedPacket(string plantName)
+    {
+        for (int i = 0; i < allSeeds.Length; i++)
+            if (allSeeds[i].gameObject.name == plantName)
+                return allSeeds[i];
+
+        return null;
     }
 
     public bool CanPlant(PlantAsset plant)

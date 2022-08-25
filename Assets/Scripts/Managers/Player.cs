@@ -276,6 +276,7 @@ public class Player : MonoBehaviour
             placingFlowerPot.inPositionOfHolder = placingFlowerPot.hoveringHolder;
             placingFlowerPot.transform.parent = placingFlowerPot.hoveringHolder.transform;
             placingFlowerPot.createdIn = MusicManager.instance.currentWorld.ToString();
+            DataCollector.instance.AddFlowerPot(MusicManager.instance.GetCurrentMusic().world, placingFlowerPot);
             placingFlowerPot.hoveringHolder = null;
             placingFlowerPot.setted = true;
             placingFlowerPot.triggerColl.enabled = true;

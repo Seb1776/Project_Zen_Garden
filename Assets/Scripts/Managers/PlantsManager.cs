@@ -24,12 +24,20 @@ public enum GardenItemType
 
 public class PlantsManager : MonoBehaviour
 {
+    public static PlantsManager instance;
+
     [Header ("Plant Presets")]
     [SerializeField] private PlantProcessAsset[] plantProcessDatas;
 
     [SerializeField] private GameObject sprout;
     [SerializeField] private Plant debugPlant;
     [SerializeField] private FlowerPot debugFlowerPot;
+
+    void Awake()
+    {
+        if (instance != null && instance != this) Destroy(this);
+        else instance = this;
+    }
 
     void Update()
     {

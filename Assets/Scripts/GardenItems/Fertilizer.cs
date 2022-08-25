@@ -98,8 +98,10 @@ public class Fertilizer : GardenItem
                 SeedDatabase.instance.GardenUse(GardenItemType.Fertilizer, false);
                 
                 foreach (GardenItem gi in SeedDatabase.instance.fertilizerUI.items)
-                    //if (gi.gameObject.transform.parent.gameObject != null && gi.gameObject.transform.parent.gameObject.activeSelf)
-                        gi.CheckForUsability();
+                {
+                    gi.CheckForUsability();
+                    SeedDatabase.instance.SendGardenDataToCollector();
+                }
             }
         }
 

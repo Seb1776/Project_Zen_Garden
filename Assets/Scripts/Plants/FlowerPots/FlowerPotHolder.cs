@@ -12,6 +12,11 @@ public class FlowerPotHolder : MonoBehaviour
 
     void Start()
     {
+        
+    }
+
+    public void StartStuff()
+    {
         outline = transform.GetChild(0).GetComponent<OutlineEffect>();
         gardenParent = transform.parent;
     }
