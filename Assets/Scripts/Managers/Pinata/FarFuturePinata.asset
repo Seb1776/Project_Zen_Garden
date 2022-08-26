@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055023d53e6f58c4e845685dc90ce865, type: 3}
+  m_Name: FarFuturePinata
+  m_EditorClassIdentifier: 
+  sizes:
+  - pinataPrice: 500
+    minUnlockedPlantsToUse: 5
+    pinataSize: 0
+    squishesRange: {x: 3, y: 5}
+    plantsToAppearRange: {x: 2, y: 5}
+    seedsToGiveRange: {x: 5, y: 8}
+  - pinataPrice: 1250
+    minUnlockedPlantsToUse: 9
+    pinataSize: 1
+    squishesRange: {x: 5, y: 8}
+    plantsToAppearRange: {x: 5, y: 9}
+    seedsToGiveRange: {x: 8, y: 10}
+  - pinataPrice: 2000
+    minUnlockedPlantsToUse: 13
+    pinataSize: 2
+    squishesRange: {x: 8, y: 10}
+    plantsToAppearRange: {x: 9, y: 13}
+    seedsToGiveRange: {x: 12, y: 15}
+  - pinataPrice: 2700
+    minUnlockedPlantsToUse: 15
+    pinataSize: 3
+    squishesRange: {x: 11, y: 13}
+    plantsToAppearRange: {x: 12, y: 15}
+    seedsToGiveRange: {x: 16, y: 20}
+  pinataImage: {fileID: -3157079198908394129, guid: c06e8d560c8639b4ebea08043548e7bc, type: 3}
+  pinataGameObject: {fileID: 7636636756824789020, guid: 4ba978b5aeefcaf419bd5f1d6c2e3074, type: 3}
+  plantsThatCanAppear:
+  - {fileID: 11400000, guid: 593ded3bf464dba4b81041c1e5354ac3, type: 2}
+  - {fileID: 11400000, guid: f6d0d4b2531832e48bc856c57155b21c, type: 2}
+  - {fileID: 11400000, guid: 58000598fa05a9e4682e957df56e8551, type: 2}
+  - {fileID: 11400000, guid: 39e4c22c6ef45c743af02a850e7e41db, type: 2}
+  - {fileID: 11400000, guid: 3c07ed1c71b0c214c9f1927292815b40, type: 2}
+  - {fileID: 11400000, guid: 7bb06ad3d0e53484e8d425e4e12fbaf1, type: 2}
+  - {fileID: 11400000, guid: 3f1700ce817077d4b9742435bc04c3e6, type: 2}
+  - {fileID: 11400000, guid: e95cf27174cc9d948a7d564260e45108, type: 2}
+  - {fileID: 11400000, guid: 05c9f895019cb084e9c932aec01bb86e, type: 2}
+  - {fileID: 11400000, guid: 854b5b25188cec348a4fe51740c51a1d, type: 2}
+  - {fileID: 11400000, guid: 878cec181ebd4e149a29492eac3586d8, type: 2}
+  - {fileID: 11400000, guid: 31c7d075720e0de43bdbbba8d659ad61, type: 2}
+  - {fileID: 11400000, guid: 17a02c1357e61a8468c37ae409e0df64, type: 2}
+  - {fileID: 11400000, guid: a36a8681895cc4544a744feb9445c2c7, type: 2}
+  - {fileID: 11400000, guid: 1b90d7b716cca2e4da656bf340cb7937, type: 2}
+  - {fileID: 11400000, guid: ed9030e6c400e3141a32060d4eb2caf3, type: 2}
+  - {fileID: 11400000, guid: e47a8d0fd43500d4f8bf35fc738fbe1c, type: 2}

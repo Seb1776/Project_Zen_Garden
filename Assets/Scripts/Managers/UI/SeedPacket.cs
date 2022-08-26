@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class SeedPacket : MonoBehaviour
 {
     [SerializeField] private PlantAsset plantData;
-    [SerializeField] private GameObject alamancEquivalent;
+    public GameObject alamancEquivalent;
     [SerializeField] private bool autoUnlock;
     private GameObject buyButton;
     private SeedDatabase seedDatabase;

@@ -30,7 +30,7 @@ public class Plant : MonoBehaviour
     private bool selling;
     private int currentGrowThreshold;
     public FlowerPot flowerPotIn, plantIsAbove;
-    private GardenItemType? expectedItem = null;
+    private GardenItemType expectedItem = GardenItemType.None;
     private GardenItem itemHolding;
 
     private float revMulIncreaser;
@@ -85,36 +85,69 @@ public class Plant : MonoBehaviour
         musicRange = new Vector2Int(data.phonographCurrentUses, data.phonographTotalUses);
         currentTimeRange = 0f;
 
-        switch(data.plantLastRequire)
-        {
-            case "Water":
-                expectedItem = GardenItemType.Water;
-            break;
-
-            case "Compost":
-                expectedItem = GardenItemType.Compost;
-            break;
-
-            case "Fertilizer":
-                expectedItem = GardenItemType.Fertilizer;
-            break;
-
-            case "Music":
-                expectedItem = GardenItemType.Music;
-            break;
-        }
-
         if (data.plantIsGrown)
-            GrowPlant(false);
+            GrowPlant(false, data.plantIsFullyGrown);
         
-        if (data.plantIsFullyGrown)
+        if (!data.plantIsFullyGrown)
         {
-            flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
-            fullyGrown = true;
-            currentTimeRange = 0f;
-        }
+            switch(data.plantLastRequire)
+            {
+                case "Water":
+                    expectedItem = GardenItemType.Water;
+                break;
 
-        planted = true;
+                case "Compost":
+                    expectedItem = GardenItemType.Compost;
+                break;
+
+                case "Fertilizer":
+                    expectedItem = GardenItemType.Fertilizer;
+                break;
+
+                case "Music":
+                    expectedItem = GardenItemType.Music;
+                break;
+            }
+
+            planted = true;
+        }
+    }
+
+    public void GrowPlant(bool playSound = true, bool triggerFullGrown = false)
+    {   
+        if (!growth)
+        {
+            _sprout.GetComponent<Animator>().SetTrigger("hide");
+            StartCoroutine(GrowPlantAfterSprout(playSound, triggerFullGrown));
+        }
+    }
+
+    IEnumerator GrowPlantAfterSprout(bool playSound = true, bool triggerFullyGrown = false)
+    {   
+        if (!growth)
+        {
+            yield return new WaitForSeconds(1.167f);
+
+            growth = true;
+
+            if (playSound) StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantgrow"));
+
+            if (triggerFullyGrown)
+            {
+                yield return new WaitForSeconds(1.167f + 1f);
+                flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+                SetPlanted();
+                ApplyColorToPlant(new Color(1f, 1f, 1f, 1f));
+                fullyGrown = true;
+                plantAnim.speed = 1f;
+                currentTimeRange = -50f;
+            }
+
+            else
+            {
+                DataCollector.instance.SetPlantFullGrownData(plantData.appearsIn, flowerPotIn, growth, fullyGrown);
+            }
+        }
     }
 
     public GardenItemType ExpectedGardenItem()
@@ -202,15 +235,6 @@ public class Plant : MonoBehaviour
         setTimeRange = Random.Range(timeRange.x, timeRange.y);
     }
 
-    public void GrowPlant(bool playSound = true)
-    {   
-        if (!growth)
-        {
-            _sprout.GetComponent<Animator>().SetTrigger("hide");
-            StartCoroutine(GrowPlantAfterSprout(playSound));
-        }
-    }
-
     public bool ExpectingGardenItem()
     {
         return currentTimeRange >= setTimeRange;
@@ -220,7 +244,7 @@ public class Plant : MonoBehaviour
     {
         List<GardenItemType> availableItems = new List<GardenItemType>();
 
-        if (expectedItem == null)
+        if (expectedItem == GardenItemType.None && !fullyGrown)
         {
             for (int i = 0; i < 4; i++)
             {
@@ -264,7 +288,7 @@ public class Plant : MonoBehaviour
             }
         }
 
-        else
+        else if (expectedItem != GardenItemType.None && !fullyGrown)
         {
             switch (expectedItem)
             {
@@ -288,7 +312,6 @@ public class Plant : MonoBehaviour
 
         DataCollector.instance.SetPlantGardenState(MusicManager.instance.GetCurrentMusic().world, expectedItem.ToString(), flowerPotIn);
         gardenItemChosen = true;
-        expectedItem = null;
     }
 
     public void DeactivateWarnings()
@@ -351,19 +374,22 @@ public class Plant : MonoBehaviour
                 currentTimeRange = 0f;
                 waitingForInteraction = false;
                 gardenItemChosen = false;
-                expectedItem = null;
                 flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
 
                 revenueMultiplier += revMulIncreaser;
                 flowerPotIn.UpdatePlantSellPrice(GetActualRevenue());
 
                 GetNewTimeRange();
+
+                expectedItem = GardenItemType.None;
+                DataCollector.instance.SetPlantGardenState(MusicManager.instance.GetCurrentMusic().world, expectedItem.ToString(), flowerPotIn);
             }
 
             else
             {
                 flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                 fullyGrown = true;
+                DataCollector.instance.SetPlantFullGrownData(plantData.appearsIn, flowerPotIn, growth, fullyGrown);
                 currentTimeRange = 0f;
                 flowerPotIn.PlayFullGrown();
             }
@@ -452,16 +478,6 @@ public class Plant : MonoBehaviour
                 transform.localScale = plantData.initialScale;
                 canReplant = true;
             }
-        }
-    }
-
-    IEnumerator GrowPlantAfterSprout(bool playSound = true)
-    {   
-        if (!growth)
-        {
-            yield return new WaitForSeconds(1.167f);
-            growth = true;
-            if (playSound) StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantgrow"));
         }
     }
 

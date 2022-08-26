@@ -179,6 +179,16 @@ public class SeedDatabase : MonoBehaviour
         {
             FlowerPots fp = GetFlowerPotData(fpa);
             fp.amount++;
+            DataCollector.instance.UpdateFlowerPotData(fpa.flowerPotType, fp.amount);
+        }
+    }
+
+    public void SetFlowerPotsFromLoad(FlowerPotDataContainer fpdc)
+    {
+        for (int i = 0; i < flowerPots.Length; i++)
+        {
+            if (flowerPots[i].pot.flowerPotAsset.flowerPotType == fpdc.flowerPotType)
+                flowerPots[i].amount = fpdc.amount;
         }
     }
 
@@ -202,7 +212,10 @@ public class SeedDatabase : MonoBehaviour
         unlockedSeeds.Add(newPlant);
 
         if (!loading)
+        {
             DataCollector.instance.AddNewSeedPacket(plant.name, plant.appearsIn.ToString(), 1);
+            UIManager.instance.CheckAvailabilityForPinatas();
+        }
 
         if (GameManager.instance.onTutorial && GetTotalUnlockedPlants() >= 5)
         {
@@ -287,6 +300,7 @@ public class SeedDatabase : MonoBehaviour
             {
                 UnlockPlant(pa, sp, true);
                 UnlockedSeeds us = GetPlantInList(pa);
+                us.uiPacket.alamancEquivalent.SetActive(true);
                 us.amount = sdc.plantAmount;
             }
 

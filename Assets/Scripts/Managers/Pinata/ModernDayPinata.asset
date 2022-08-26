@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055023d53e6f58c4e845685dc90ce865, type: 3}
+  m_Name: ModernDayPinata
+  m_EditorClassIdentifier: 
+  sizes:
+  - pinataPrice: 500
+    minUnlockedPlantsToUse: 5
+    pinataSize: 0
+    squishesRange: {x: 3, y: 5}
+    plantsToAppearRange: {x: 2, y: 5}
+    seedsToGiveRange: {x: 5, y: 8}
+  - pinataPrice: 1250
+    minUnlockedPlantsToUse: 9
+    pinataSize: 1
+    squishesRange: {x: 5, y: 8}
+    plantsToAppearRange: {x: 5, y: 9}
+    seedsToGiveRange: {x: 8, y: 10}
+  - pinataPrice: 2000
+    minUnlockedPlantsToUse: 13
+    pinataSize: 2
+    squishesRange: {x: 8, y: 10}
+    plantsToAppearRange: {x: 9, y: 13}
+    seedsToGiveRange: {x: 12, y: 15}
+  - pinataPrice: 2700
+    minUnlockedPlantsToUse: 15
+    pinataSize: 3
+    squishesRange: {x: 11, y: 13}
+    plantsToAppearRange: {x: 12, y: 15}
+    seedsToGiveRange: {x: 16, y: 20}
+  pinataImage: {fileID: -3157079198908394129, guid: c06e8d560c8639b4ebea08043548e7bc, type: 3}
+  pinataGameObject: {fileID: 7636636756824789020, guid: 3f64429bfe78807429c22f1827263f0f, type: 3}
+  plantsThatCanAppear:
+  - {fileID: 11400000, guid: 88f70796fcf43e04fa50216871f21ad8, type: 2}
+  - {fileID: 11400000, guid: 8e6049de36d1e3c45a22b9bcaa4f5d31, type: 2}
+  - {fileID: 11400000, guid: 56d75c13fbcd26c4db9000e027f1bc1e, type: 2}
+  - {fileID: 11400000, guid: 0e7b29c7c5cd7b24fb114934d32ffedb, type: 2}
+  - {fileID: 11400000, guid: 676cef9aa7d96b74b8622b0ac7711351, type: 2}
+  - {fileID: 11400000, guid: fa1cd3872dbdce648beb0a1532f2a8d7, type: 2}

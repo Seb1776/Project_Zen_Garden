@@ -7,13 +7,13 @@ public class PinataAsset : ScriptableObject
     public Sprite pinataImage;
     public GameObject pinataGameObject;
     public PlantAsset[] plantsThatCanAppear;
-    public int minUnlockedPlantsToUse;
 }
 
 [System.Serializable]
 public class PinataSize
 {
     public int pinataPrice;
+    public int minUnlockedPlantsToUse;
     public PinataSizeCategory pinataSize;
     public Vector2Int squishesRange;
     public Vector2Int plantsToAppearRange;

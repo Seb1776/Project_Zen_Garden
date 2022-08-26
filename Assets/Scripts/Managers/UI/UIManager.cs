@@ -28,6 +28,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pinataMenu;
     [SerializeField] private Image pinataImage;
     [SerializeField] private GameObject pinataContinueButton;
+    [SerializeField] [NonReorderable] private PinatasUI[] pinatasUI;
     public Text pinataRewardText;
     private Plant spawnedUIPlant;
 
@@ -202,6 +203,32 @@ public class UIManager : MonoBehaviour
             plantFlowerPotsT.text = GetStringedFlowerPot(pa.canBePlantedIn[0]);
 
         spawnedUIPlant.transform.localScale = new Vector3(-spawnedUIPlant.transform.localScale.x, spawnedUIPlant.transform.localScale.y);
+    }
+
+    public void CheckAvailabilityForPinatas()
+    {
+        for (int i = 0; i < pinatasUI.Length; i++)
+        {
+            for (int j = 0; j < pinatasUI[i].pinataAsset.sizes.Length; j++)
+            {
+                int currentlyUnlocked = 0;
+
+                for (int k = 0; k < pinatasUI[i].pinataAsset.plantsThatCanAppear.Length; k++)
+                {
+                    if (SeedDatabase.instance.PlayerOwnsPlant(pinatasUI[i].pinataAsset.plantsThatCanAppear[k]))
+                    {
+                        Debug.Log(pinatasUI[i].pinataAsset.plantsThatCanAppear[k].plantName);
+                        currentlyUnlocked++;
+                    }
+                }
+
+                if (currentlyUnlocked >= pinatasUI[i].pinataAsset.sizes[j].minUnlockedPlantsToUse)
+                    pinatasUI[i].SetAvailability(j, true);
+                
+                else
+                    pinatasUI[i].SetAvailability(j, false);
+            }
+        }
     }
 
     public void ActivatePinataContinueButton()
@@ -384,4 +411,31 @@ public class UIManager : MonoBehaviour
         selectFlower.GetComponent<FlowerPot>().SetHandPosition(player.leftHand.handInteractor.transform);
         player.CreatedAFlowerPot(selectFlower.GetComponent<FlowerPot>());
     }
+}
+
+[System.Serializable]
+public class PinatasUI
+{
+    public PinataAsset pinataAsset;
+    [NonReorderable]
+    public PinatasButtons[] buttons;
+
+    public void SetAvailability(int index, bool set)
+    {
+        buttons[index].buyButton.interactable = set;
+        buttons[index].coin.SetActive(set);
+
+        if (set)
+            buttons[index].availabilityText.text = pinataAsset.sizes[index].pinataPrice.ToString("N0");
+        else
+            buttons[index].availabilityText.text = "Not Enough Plants!";
+    }
+}
+
+[System.Serializable]
+public class PinatasButtons
+{
+    public Button buyButton;
+    public Text availabilityText;
+    public GameObject coin;
 }

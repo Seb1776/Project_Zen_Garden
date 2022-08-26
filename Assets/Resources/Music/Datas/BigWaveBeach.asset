@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b53dbc10e280d4286729eb3d4d79ea, type: 3}
+  m_Name: BigWaveBeach
+  m_EditorClassIdentifier: 
+  worldID: beach
+  world: 5
+  normalTracks:
+  - {fileID: 8300000, guid: a08b54ee07767bb4793833b4ad9a3240, type: 3}
+  - {fileID: 8300000, guid: 1fba7f0df2a78744faf19e1ea1c5b7f6, type: 3}
+  - {fileID: 8300000, guid: e34df3c24f157c64db0e0eac25681758, type: 3}
+  - {fileID: 8300000, guid: 716461de506a7ba41917233786dfd267, type: 3}
+  - {fileID: 8300000, guid: 1f1c85c12b85e30469d522acc509747a, type: 3}
+  specialTracks:
+  - {fileID: 8300000, guid: 56e31a5ae985f69478b79d9750b678eb, type: 3}
+  - {fileID: 8300000, guid: 91972d5321b8df545af045b3fd733227, type: 3}
+  - {fileID: 8300000, guid: d49822b164840d04abc3be816f38870b, type: 3}
+  phonographClip: {fileID: 8300000, guid: a967c63f030009d4dade2f42a605592f, type: 3}
+  grownPlantClip: {fileID: 8300000, guid: 2849385b49569984daec2b487e3633d4, type: 3}
+  isPresent: 0
+  unlockPrice: 10500

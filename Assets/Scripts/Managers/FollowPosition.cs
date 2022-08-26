@@ -8,6 +8,9 @@ public class FollowPosition : MonoBehaviour
     
     void Update()
     {
+        if (target == null)
+            target = GameObject.FindGameObjectWithTag("Player").transform.GetChild(0).GetChild(0).transform;
+
         transform.position = target.position;
     }
 }

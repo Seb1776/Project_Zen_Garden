@@ -14,21 +14,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizes:
   - pinataPrice: 500
+    minUnlockedPlantsToUse: 5
     pinataSize: 0
     squishesRange: {x: 3, y: 5}
     plantsToAppearRange: {x: 2, y: 5}
     seedsToGiveRange: {x: 5, y: 8}
   - pinataPrice: 1250
+    minUnlockedPlantsToUse: 9
     pinataSize: 1
     squishesRange: {x: 5, y: 8}
     plantsToAppearRange: {x: 5, y: 9}
     seedsToGiveRange: {x: 8, y: 10}
   - pinataPrice: 2000
+    minUnlockedPlantsToUse: 13
     pinataSize: 2
     squishesRange: {x: 8, y: 10}
     plantsToAppearRange: {x: 9, y: 13}
     seedsToGiveRange: {x: 12, y: 15}
   - pinataPrice: 2700
+    minUnlockedPlantsToUse: 15
     pinataSize: 3
     squishesRange: {x: 11, y: 13}
     plantsToAppearRange: {x: 12, y: 15}
@@ -52,4 +56,3 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 7d5e5af960f3c414ab179ce96afcc2c4, type: 2}
   - {fileID: 11400000, guid: cc990c24e00fb8246baa9db8046dac3c, type: 2}
   - {fileID: 11400000, guid: 06bdc98669f097743b0c955f3c2b4a4b, type: 2}
-  minUnlockedPlantsToUse: 5

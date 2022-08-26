@@ -19,7 +19,7 @@ public enum PlantQualityName
 
 public enum GardenItemType
 {
-    Water, Compost, Fertilizer, Music
+    Water, Compost, Fertilizer, Music, None
 }
 
 public class PlantsManager : MonoBehaviour

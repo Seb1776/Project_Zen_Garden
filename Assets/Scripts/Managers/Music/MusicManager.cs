@@ -357,6 +357,8 @@ public class MusicManager : MonoBehaviour
         if (GameManager.instance.onTutorial)
             RemoveTutorialStuff();
 
+        DataCollector.instance.SetLastVisitedWorld(GetCurrentMusic().world);
+
         TimeTravelManager.instance.TriggerTransition(false);
 
         Player.instance.RightHandEnabler(true);
@@ -364,9 +366,19 @@ public class MusicManager : MonoBehaviour
         ChangeMusic(worldMusic);
     }
 
+    public void ChangeWithoutTransition(MusicAsset worldMusic)
+    {   
+        if (worldMusic.worldID != "tutorial")
+        {
+            TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
+            SeedDatabase.instance.IgnorPosOfGardenItems(true);
+        }
+    }
+
     void RemoveTutorialStuff()
     {
         GameManager.instance.onTutorial = false;
+        DataCollector.instance.SetTutorialState(false);
 
         SeedDatabase.instance.TutorialPlantsSet(true);
         modernDayUnlockPanel.SetActive(true);

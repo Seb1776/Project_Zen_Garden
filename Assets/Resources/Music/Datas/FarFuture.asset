@@ -1,0 +1,88 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3b53dbc10e280d4286729eb3d4d79ea, type: 3}
+  m_Name: FarFuture
+  m_EditorClassIdentifier: 
+  worldID: future
+  world: 3
+  worldTracks:
+    enteredFirstTime:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 39ccd96fcb79f2f459a1f348e98aa83d, type: 3}
+    firstWave:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 6b75930d9ed312f45bcc0d711afcf442, type: 3}
+    midWaveA:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 80373076ffdf2c84f8c8866b47f17826, type: 3}
+    midWaveB:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: c554596d9eec2d14abaab71b774da159, type: 3}
+    finalWave:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 6d130c7d2ad7f0a46a31a60e89e1848d, type: 3}
+    ultimateBattle:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 8073398c9ccc84043b01ec721a324605, type: 3}
+    minigame:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: 19215e2e827903e498407fbfe9a30cdc, type: 3}
+    loonboon:
+      start: {fileID: 0}
+      main: {fileID: 8300000, guid: a20a41a1c59259f4d8a2c1bd4f89c61d, type: 3}
+  presentWorldTracks:
+    entered:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    seeds:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    frontDay:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    frontNight:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    backDay:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    backNight:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    roofDay:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    roofNight:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    minigame:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    ultimateA:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    ultimateB:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    loonboon:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    cerebrawl:
+      start: {fileID: 0}
+      main: {fileID: 0}
+    brainiac:
+      start: {fileID: 0}
+      main: {fileID: 0}
+  phonographClip: {fileID: 8300000, guid: 3c8e2cd88182ba04aabde9f21985b9d1, type: 3}
+  grownPlantClip: {fileID: 8300000, guid: 11fb253975017c14face7cca100bfff1, type: 3}
+  isPresent: 0
+  unlockPrice: 3500

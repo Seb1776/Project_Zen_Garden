@@ -6,6 +6,9 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public string gardenName;
+    public float spentTime;
+    public bool startCounting;
     [SerializeField] private Camera mainCam;
     [Header ("Environment")]
     [SerializeField] private float skySpeed;
@@ -25,15 +28,25 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-
-        if (onTutorial)
-            TriggerTutorial(true);
     }
 
     void Update()
     {
         RenderSettings.skybox.SetFloat("_Rotation", skySpeed * Time.time);
-        //RenderSettings.ambientMode = UnityEngine.Rendering.AmbientMode.Skybox;
+        
+        if (startCounting)
+            spentTime += Time.deltaTime;
+    }
+
+    public float GetSpentTime()
+    {
+        return spentTime;
+    }
+
+    public void FirstTimeTutorial()
+    {
+        onTutorial = true;
+        TriggerTutorial(true);
     }
 
     public Camera GetMainCamera()

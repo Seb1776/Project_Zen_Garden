@@ -63,7 +63,7 @@ public class Pinata : MonoBehaviour
             if (SeedDatabase.instance.PlayerOwnsPlant(pa))
                 unlockedPlants++;
 
-        if (unlockedPlants >= pinataData.minUnlockedPlantsToUse)
+        if (unlockedPlants >= selectedCategory.minUnlockedPlantsToUse)
         {
             int plantsToShow = Random.Range(selectedCategory.plantsToAppearRange.x, selectedCategory.plantsToAppearRange.y);
             List<PlantGot> notSelectedPlants = new List<PlantGot>();
