@@ -10,18 +10,20 @@ public class SerializableData
     public List<GardenTable> savedTables = new List<GardenTable>();
     public List<SeedDataContainer> savedSeeds = new List<SeedDataContainer>();
     public List<FlowerPotDataContainer> flowerPotsDatas = new List<FlowerPotDataContainer>();
+    public List<GameWorlds> unlockedWorlds = new List<GameWorlds>();
     public int playerWaters, playerComposts, playerFertilizer, playerPhonographs;
     public string gardenName, playerLastWorld;
     public bool isOnTutorial;
     public float spentTime;
 
     public SerializableData (List<GardenTable> savedTables, List<SeedDataContainer> savedSeeds, List<FlowerPotDataContainer> flowerPotDatas,
-        int playerWaters, int playerComposts, int playerFertilizer, int playerPhonographs, string gardenName, string playerLastWorld, bool isOnTutorial,
+        List<GameWorlds> unlockedWorlds, int playerWaters, int playerComposts, int playerFertilizer, int playerPhonographs, string gardenName, string playerLastWorld, bool isOnTutorial,
         float spentTime)
     {
         this.savedTables = savedTables;
         this.savedSeeds = savedSeeds;
         this.flowerPotsDatas = flowerPotDatas;
+        this.unlockedWorlds = unlockedWorlds;
         this.playerWaters = playerWaters; this.playerComposts = playerComposts; this.playerFertilizer = playerFertilizer;
         this.playerPhonographs = playerPhonographs;
         this.gardenName = gardenName;
@@ -69,6 +71,7 @@ public class DataCollector : MonoBehaviour
     public List<SeedDataContainer> seeds = new List<SeedDataContainer>();
     public List<FlowerPotDataContainer> flowerPotsDatas = new List<FlowerPotDataContainer>();
     public List<WorldHolders> worldHolders = new List<WorldHolders>();
+    public List<GameWorlds> unlockedWorlds = new List<GameWorlds>();
     public float playerCoins;
     public string gameFileLetter;
     public int playerWaters, playerComposts, playerFertilizer, playerPhonographs;
@@ -93,7 +96,7 @@ public class DataCollector : MonoBehaviour
         playerCoins = Player.instance.GetPlayerMoney();
         SeedDatabase.instance.SendGardenDataToCollector();
         spentTime = GameManager.instance.GetSpentTime();
-        SerializableData zenData = new SerializableData(worldTables, seeds, flowerPotsDatas, playerWaters, playerComposts, playerFertilizer, playerPhonographs, 
+        SerializableData zenData = new SerializableData(worldTables, seeds, flowerPotsDatas, unlockedWorlds, playerWaters, playerComposts, playerFertilizer, playerPhonographs, 
             gardenName, playerLastWorld, isOnTutorial, spentTime);
 
         using (StreamWriter stream = new StreamWriter(Application.persistentDataPath + "/ZenGardenVR_" + gameFileLetter + ".json"))
@@ -116,12 +119,11 @@ public class DataCollector : MonoBehaviour
                 worldTables = loadedData.savedTables;
                 seeds = loadedData.savedSeeds;
                 flowerPotsDatas = loadedData.flowerPotsDatas;
+                unlockedWorlds = loadedData.unlockedWorlds;
                 GameManager.instance.spentTime = loadedData.spentTime;
                 MusicAsset ma = Resources.Load<MusicAsset>("Music/Datas/" + loadedData.playerLastWorld);
                 MusicManager.instance.ChangeWithoutTransition(ma);
-
-                if (loadedData.isOnTutorial)
-                    SetTutorialState(true);
+                SetTutorialState(loadedData.isOnTutorial);
 
                 RecreateData(loadedData);
             }
@@ -130,9 +132,11 @@ public class DataCollector : MonoBehaviour
         else
         {
             SetTutorialState(true);
+            playerLastWorld = "Tutorial";
             GameManager.instance.FirstTimeTutorial();
             SeedDatabase.instance.SendGardenDataToCollector();
             UIManager.instance.CheckAvailabilityForPinatas();
+            MusicManager.instance.ChangeWithoutTransition(Resources.Load<MusicAsset>("Music/Datas/Tutorial"));
 
             SetGardenName(mm.newSetGardenName);
             mm.newSetGardenName = string.Empty;
@@ -142,7 +146,7 @@ public class DataCollector : MonoBehaviour
 
         mm.transitionBall.SetTrigger("detransition");
         GameManager.instance.startCounting = true;
-        StartCoroutine(WaitToDeleteMain(5f, mm.gameObject, mm.transitionBall.gameObject));
+        StartCoroutine(WaitToDeleteMain(7f, mm.gameObject, mm.transitionBall.gameObject));
     }
 
     IEnumerator WaitToDeleteMain(float delay, GameObject _a, GameObject _b)
@@ -150,6 +154,11 @@ public class DataCollector : MonoBehaviour
         Destroy(_a.gameObject);
         yield return new WaitForSeconds(delay);
         Destroy(_b.gameObject);
+    }
+
+    public void AddUnlockedWorld(GameWorlds worlds)
+    {
+        unlockedWorlds.Add(worlds);
     }
 
     void RecreateData(SerializableData sd)
@@ -160,6 +169,7 @@ public class DataCollector : MonoBehaviour
             {
                 FlowerPot fpPref = Resources.Load<FlowerPot>("Prefabs/FlowerPots/" + worldTables[i].flowerPotsOnTable[j].flowerPotInSpace);
                 FlowerPot createdFlowerPot = SetSpecificFlowerPot(worldTables[i].GetFlowerPotHolder(worldTables[i].flowerPotsOnTable[j].holderIdx), fpPref);
+                createdFlowerPot.createdIn = worldTables[i].correspondingWorld.ToString();
 
                 if (worldTables[i].flowerPotsOnTable[j].plantInSpace.plantName != string.Empty)
                 {
@@ -170,16 +180,26 @@ public class DataCollector : MonoBehaviour
         }
 
         for (int i = 0; i < seeds.Count; i++)
-        {   
             if (seeds[i].plantAssetName != "Peashooter")
-            {
                 SeedDatabase.instance.SetPlantAssetFromData(seeds[i]);
-            }
-        }
 
         for (int i = 0; i < flowerPotsDatas.Count; i++)
-        {
             SeedDatabase.instance.SetFlowerPotsFromLoad(flowerPotsDatas[i]);
+        
+        for (int i = 0; i < unlockedWorlds.Count; i++)
+        {   
+            MusicAsset ma = Resources.Load<MusicAsset>("Music/Datas/" + unlockedWorlds[i].ToString());
+
+            if (ma.world == GameWorlds.JurassicMarsh)
+                SeedDatabase.instance.jurassicBlock.SetActive(false);
+
+            MusicManager.instance.DeactivateWorldLock(ma);
+        }
+
+        for (int i = 0; i < unlockedWorlds.Count; i++)
+        {
+            MusicAsset ma = Resources.Load<MusicAsset>("Music/Datas/" + unlockedWorlds[i].ToString());
+            MusicManager.instance.CheckNextWorldPanelToOpen(ma);
         }
 
         SeedDatabase.instance.SetGardenDataFromCollector(sd.playerWaters, sd.playerComposts, sd.playerFertilizer, sd.playerPhonographs);
@@ -195,6 +215,15 @@ public class DataCollector : MonoBehaviour
         
         foreach (GardenItem gi in SeedDatabase.instance.phonographUI.items)
             gi.CheckForUsability();
+        
+        if (!sd.isOnTutorial)
+            MusicManager.instance.RemoveTutorialStuff();
+        
+        else
+        {
+            if (SeedDatabase.instance.GetTotalUnlockedPlants() >= 5)
+                SeedDatabase.instance.jurassicBlock.SetActive(false);
+        }
 
         UIManager.instance.CheckAvailabilityForPinatas();
         playerLastWorld = sd.playerLastWorld;
@@ -206,6 +235,7 @@ public class DataCollector : MonoBehaviour
     public void SetTutorialState(bool onTutorial)
     {
         isOnTutorial = onTutorial;
+        GameManager.instance.onTutorial = onTutorial;
     }
 
     public void SetGardenName(string name)
@@ -266,6 +296,28 @@ public class DataCollector : MonoBehaviour
         return fp;
     }
 
+    public void SetPlantRevenueMult(GameWorlds world, FlowerPot flowerPot, float mult)
+    {
+        if (GetTableFromWorld(world) != null)
+        {
+            GardenTable _gt = GetTableFromWorld(world);
+            FlowerPotSpot fps = _gt.GetFlowerPotSpot(flowerPot.inPositionOfHolder.holderIdx);
+
+            if (fps != null) fps.SetPlantRevenueMult(mult);
+        }
+    }
+
+    public void SetPlantGrowThreshold(GameWorlds world, FlowerPot flowerPot, int grow)
+    {
+        if (GetTableFromWorld(world) != null)
+        {
+            GardenTable _gt = GetTableFromWorld(world);
+            FlowerPotSpot fps = _gt.GetFlowerPotSpot(flowerPot.inPositionOfHolder.holderIdx);
+
+            if (fps != null) fps.SetPlantGrowThreshold(grow);
+        }
+    }
+
     public void SetSpecificPlant(FlowerPot flowerPot, GameObject plant, PlantSpot plantSpot)
     {
         flowerPot.PlantPlantFromLoad(plant, plantSpot);
@@ -276,7 +328,7 @@ public class DataCollector : MonoBehaviour
         if (GetTableFromWorld(world) != null)
         {
             GardenTable _gt = GetTableFromWorld(world);
-            _gt.AddFlowerPot(flowerPot.flowerPotAsset.flowerPotName, flowerPot.inPositionOfHolder.holderIdx);
+            _gt.AddFlowerPot(flowerPot.flowerPotAsset.flowerPotName, flowerPot.inPositionOfHolder.holderIdx, flowerPot.createdIn);
         }
     }
 
@@ -370,9 +422,9 @@ public class GardenTable
     [NonReorderable]
     public List<FlowerPotSpot> flowerPotsOnTable = new List<FlowerPotSpot>();
 
-    public void AddFlowerPot(string flowerPot, int holderIdx)
+    public void AddFlowerPot(string flowerPot, int holderIdx, string createdIn)
     {
-        flowerPotsOnTable.Add(new FlowerPotSpot(flowerPot, holderIdx));
+        flowerPotsOnTable.Add(new FlowerPotSpot(flowerPot, holderIdx, createdIn));
     }
 
     public void RemoveFlowerPot(int flowerPotIdx)
@@ -406,8 +458,10 @@ public class GardenTable
     public FlowerPotSpot GetFlowerPotSpot(int _holderIdx)
     {
         for (int i = 0; i < flowerPotsOnTable.Count; i++)
+        {
             if (flowerPotsOnTable[i].holderIdx == _holderIdx)
                 return flowerPotsOnTable[i];
+        }
 
         Debug.LogError("Couldn't find Flower Pot Spot with Holder Index: " + _holderIdx);
         return null;
@@ -418,13 +472,15 @@ public class GardenTable
 public class FlowerPotSpot
 {
     public string flowerPotInSpace = string.Empty;
+    public string fpCreatedIn = string.Empty;
     public int holderIdx;
     public PlantSpot plantInSpace = new PlantSpot();
 
-    public FlowerPotSpot (string flowerPotInSpace, int holderIdx)
+    public FlowerPotSpot (string flowerPotInSpace, int holderIdx, string fpCreatedIn)
     {
         this.flowerPotInSpace = flowerPotInSpace;
         this.holderIdx = holderIdx;
+        this.fpCreatedIn = fpCreatedIn;
     }
 
     public void AddPlant(Plant plant)
@@ -433,6 +489,8 @@ public class FlowerPotSpot
 
         _plantInSpace.plantName = plant.plantData.name;
         _plantInSpace.plantWorld = plant.plantData.appearsIn.ToString();
+        _plantInSpace.plantGrowThreshold = plant.currentGrowThreshold;
+        _plantInSpace.plantMultRevenue = plant.revenueMultiplier;
         _plantInSpace.waterTotalUses = plant.waterRange.y; plantInSpace.waterCurrentUses = plant.waterRange.x;
         _plantInSpace.compostTotalUses = plant.compostRange.y; plantInSpace.compostCurrentUses = plant.compostRange.x;
         _plantInSpace.fertilizerTotalUses = plant.fertilizerRange.y; plantInSpace.fertilizerCurrentUses = plant.fertilizerRange.x;
@@ -480,11 +538,22 @@ public class FlowerPotSpot
         BlankPlantSpace();
     }
 
+    public void SetPlantGrowThreshold(int grow)
+    {
+        plantInSpace.plantGrowThreshold = grow;
+    }
+
+    public void SetPlantRevenueMult(float mult)
+    {
+        plantInSpace.plantMultRevenue = mult;
+    }
+
     void BlankPlantSpace()
     {
         plantInSpace.plantName = string.Empty;
         plantInSpace.plantWorld = string.Empty;
         plantInSpace.plantLastRequire = string.Empty;
+        plantInSpace.plantGrowThreshold = 0; plantInSpace.plantMultRevenue = 0f;
         plantInSpace.waterTotalUses = plantInSpace.waterCurrentUses = 0;
         plantInSpace.compostTotalUses = plantInSpace.compostCurrentUses = 0;
         plantInSpace.fertilizerTotalUses = plantInSpace.fertilizerCurrentUses = 0;
@@ -498,6 +567,8 @@ public class PlantSpot
     public string plantName = string.Empty;
     public string plantWorld = string.Empty;
     public string plantLastRequire = string.Empty;
+    public int plantGrowThreshold;
+    public float plantMultRevenue;
     public int waterTotalUses, compostTotalUses, fertilizerTotalUses, phonographTotalUses;
     public int waterCurrentUses, compostCurrentUses, fertilizerCurrentUses, phonographCurrentUses;
     public bool plantIsGrown, plantIsFullyGrown;

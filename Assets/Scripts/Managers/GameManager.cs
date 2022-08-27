@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public string gardenName;
     public float spentTime;
     public bool startCounting;
+    public GameObject gameCanvas, gardenCanvas;
     [SerializeField] private Camera mainCam;
     [Header ("Environment")]
     [SerializeField] private float skySpeed;

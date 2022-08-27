@@ -274,6 +274,7 @@ public class FlowerPot : MonoBehaviour
         triggerColl.enabled = false;
         p.ApplyColorToPlant(new Color(1f, 1f, 1f, 1f));
         p.SetPlanted(_s);
+        p.expectedItem = GardenItemType.None;
         DataCollector.instance.AddPlant(MusicManager.instance.GetCurrentMusic().world, this, p);
         p.plantIsAbove = null;
         p.transform.localScale = Vector3.zero;

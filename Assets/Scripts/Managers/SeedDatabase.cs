@@ -12,7 +12,7 @@ public class SeedDatabase : MonoBehaviour
     [SerializeField] private List<UnlockedSeeds> unlockedSeeds = new List<UnlockedSeeds>();
     [SerializeField] private SeedPacket[] allSeeds;
     public GardenAmount waterUI, compostUI, fertilizerUI, phonographUI;
-    [SerializeField] private GameObject jurassicBlock;
+    public GameObject jurassicBlock;
     [SerializeField] private Button[] disablableTutorialSeeds;
 
     void Awake()

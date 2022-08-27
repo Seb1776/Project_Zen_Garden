@@ -231,15 +231,90 @@ public class MusicManager : MonoBehaviour
     public void UnlockWorld(MusicAsset world)
     {
         foreach (WorldMusic wm in assets)
-        {   
+        {
             if (Player.instance.CanSpendMoney(wm.asset.unlockPrice))
             {
                 if (wm.asset == world)
                 {
+                    DataCollector.instance.AddUnlockedWorld(world.world);
                     StartCoroutine(WorldLock(world));
                 }
             }
         }
+    }
+
+    public void DeactivateWorldLock(MusicAsset world)
+    {
+        foreach (Image i in GetWorldData(world).plantImages)
+            i.color = new Color(1f, 1f, 1f, 1f);
+
+        if (GetWorldData(world).worldLock != null)
+            GetWorldData(world).worldLock.gameObject.SetActive(false);
+
+        if (GetWorldData(world).unlockButton != null)
+            GetWorldData(world).unlockButton.SetActive(false);
+
+        GetWorldData(world).worldButton.interactable = true;
+
+        if (GetWorldData(world).plantsButton != null)
+            GetWorldData(world).plantsButton.interactable = true;
+
+        if (GetWorldData(world).unlockFirstPanel != null)
+            GetWorldData(world).unlockFirstPanel.SetActive(false);
+    }
+
+    public void CheckNextWorldPanelToOpen(MusicAsset worldToCheck)
+    {
+        if (GetNextWorld(worldToCheck) != null && !TimeTravelManager.instance.HasEnteredBefore(worldToCheck.worldID))
+        {   
+            if (GetNextWorld(worldToCheck).unlockFirstPanel.activeSelf)
+                GetNextWorld(worldToCheck).unlockFirstPanel.SetActive(false);
+        }
+    }
+
+    public IEnumerator SwapMusicAge(MusicAsset worldMusic)
+    {
+        if (playLoopCoroutine != null) StopCoroutine(playLoopCoroutine);
+        if (mainCoroutine != null) StopCoroutine(mainCoroutine);
+
+        source.Stop();
+        source.clip = null;
+        source.PlayOneShot(ageTransitionEffect);
+        currentWorld = worldMusic.world;
+        TimeTravelManager.instance.TriggerTransition(true);
+        playingContext = string.Empty;
+
+        Player.instance.SafetyNetsWhenHolding();
+        Player.instance.RightHandEnabler(false);
+
+        yield return new WaitForSeconds(.45f);
+
+        if (worldMusic.world != GameWorlds.ThrowbackToThePresent)
+            TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
+        
+        else
+            TimeTravelManager.instance.ChangeScenario(currentPresentContext, true);
+
+        if (GetNextWorld(worldMusic) != null && !TimeTravelManager.instance.HasEnteredBefore(worldMusic.worldID))
+        {
+            GetWorldData(worldMusic).plantsButton.interactable = true;
+            GetNextWorld(worldMusic).unlockFirstPanel.SetActive(false);
+        }
+
+        SeedDatabase.instance.IgnorPosOfGardenItems(true);
+
+        yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
+
+        if (GameManager.instance.onTutorial)
+            RemoveTutorialStuff();
+
+        DataCollector.instance.SetLastVisitedWorld(GetCurrentMusic().world);
+
+        TimeTravelManager.instance.TriggerTransition(false);
+
+        Player.instance.RightHandEnabler(true);
+
+        ChangeMusic(worldMusic);
     }
 
     IEnumerator WorldLock(MusicAsset world)
@@ -255,7 +330,6 @@ public class MusicManager : MonoBehaviour
 
         GetWorldData(world).unlockButton.SetActive(false);
         GetWorldData(world).worldButton.interactable = true;
-
     }
 
     WorldMusic GetWorldData(MusicAsset worldAsset)
@@ -321,61 +395,19 @@ public class MusicManager : MonoBehaviour
             SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
     }
 
-    public IEnumerator SwapMusicAge(MusicAsset worldMusic)
-    {
-        if (playLoopCoroutine != null) StopCoroutine(playLoopCoroutine);
-        if (mainCoroutine != null) StopCoroutine(mainCoroutine);
-
-        source.Stop();
-        source.clip = null;
-        source.PlayOneShot(ageTransitionEffect);
-        currentWorld = worldMusic.world;
-        TimeTravelManager.instance.TriggerTransition(true);
-        playingContext = string.Empty;
-
-        Player.instance.SafetyNetsWhenHolding();
-        Player.instance.RightHandEnabler(false);
-
-        yield return new WaitForSeconds(.45f);
-
-        if (worldMusic.world != GameWorlds.ThrowbackToThePresent)
-            TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
+    public void ChangeWithoutTransition(MusicAsset worldMusic)
+    {   
+        if (worldMusic.world != GameWorlds.Tutorial)
+            TimeTravelManager.instance.SetAsEntered(worldMusic.worldID);
         
-        else
-            TimeTravelManager.instance.ChangeScenario(currentPresentContext, true);
+        currentWorld = worldMusic.world;
 
-        if (GetNextWorld(worldMusic) != null && !TimeTravelManager.instance.HasEnteredBefore(worldMusic.worldID))
-        {
-            GetWorldData(worldMusic).plantsButton.interactable = true;
-            GetNextWorld(worldMusic).unlockFirstPanel.SetActive(false);
-        }
-
-        SeedDatabase.instance.IgnorPosOfGardenItems(true);
-
-        yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
-
-        if (GameManager.instance.onTutorial)
-            RemoveTutorialStuff();
-
-        DataCollector.instance.SetLastVisitedWorld(GetCurrentMusic().world);
-
-        TimeTravelManager.instance.TriggerTransition(false);
-
-        Player.instance.RightHandEnabler(true);
-
+        TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
+        //SeedDatabase.instance.IgnorPosOfGardenItems(true);
         ChangeMusic(worldMusic);
     }
 
-    public void ChangeWithoutTransition(MusicAsset worldMusic)
-    {   
-        if (worldMusic.worldID != "tutorial")
-        {
-            TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
-            SeedDatabase.instance.IgnorPosOfGardenItems(true);
-        }
-    }
-
-    void RemoveTutorialStuff()
+    public void RemoveTutorialStuff()
     {
         GameManager.instance.onTutorial = false;
         DataCollector.instance.SetTutorialState(false);

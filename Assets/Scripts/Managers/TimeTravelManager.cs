@@ -12,6 +12,12 @@ public class TimeTravelManager : MonoBehaviour
     [SerializeField] private GameObject currentProps;
     [SerializeField] private GameObject currentTables;
     [SerializeField] private float worldTablesYOffset;
+    [SerializeField] private GameObject normalTeleport, bigTeleport;
+    [SerializeField] Vector3 canvasNormalPos, canvasModernDayPos, gardenCanvasNormalPos, gardenCanvasMDPos;
+    [SerializeField] private float modernDayGardenTablesYOffset;
+    [SerializeField] private GardenItem[] mdGardenItems;
+    [SerializeField] private GardenItem[] normalGardenItems;
+    [SerializeField] private GardenItem[] tutorialGardenItems;
     [Header ("Present Decos")]
     [SerializeField] private GameObject frontYard; 
     [SerializeField] private GameObject backYard, roofYard;
@@ -45,11 +51,60 @@ public class TimeTravelManager : MonoBehaviour
             {
                 currentProps.SetActive(false);
                 RenderSettings.skybox = selectedAge.skyboxMaterial;
-                currentTables.transform.localPosition += new Vector3(0f, worldTablesYOffset, 0f);
+
+                Player.instance.transform.localPosition = new Vector3(1.26699996f, 0f, 1.24300003f);
+
+                if (selectedAge.worldMusic.world == GameWorlds.ModernDay)
+                {
+                    GameManager.instance.gameCanvas.transform.localPosition = canvasModernDayPos;
+                    GameManager.instance.gardenCanvas.transform.localPosition = gardenCanvasMDPos;
+
+                    foreach (GardenItem gi in mdGardenItems)
+                        gi.ignorePos = true;
+                    
+                    foreach (GardenItem gi in normalGardenItems)
+                        gi.ignorePos = false;
+
+                    bigTeleport.SetActive(true);
+                    normalTeleport.SetActive(false);
+                }
+
+                else
+                {
+                    GameManager.instance.gameCanvas.transform.localPosition = canvasNormalPos;
+                    GameManager.instance.gardenCanvas.transform.localPosition = gardenCanvasNormalPos;
+
+                    if (selectedAge.worldMusic.world != GameWorlds.Tutorial)
+                    {
+                        foreach (GardenItem gi in mdGardenItems)
+                            gi.ignorePos = false;
+                        
+                        foreach (GardenItem gi in normalGardenItems)
+                            gi.ignorePos = true;
+                    }
+
+                    else
+                        foreach (GardenItem gi in tutorialGardenItems)
+                            gi.ignorePos = false;
+
+                    bigTeleport.SetActive(false);
+                    normalTeleport.SetActive(true);
+                }
+
+                if (currentTables.gameObject.name != "MDGarden")
+                    currentTables.transform.localPosition += new Vector3(0f, worldTablesYOffset, 0f);
+                else
+                    currentTables.transform.localPosition += new Vector3(0f, modernDayGardenTablesYOffset, 0f);
+
                 selectedAge.props.SetActive(true);
                 currentProps = selectedAge.props;
                 currentTables = selectedAge.worldTables;
-                currentTables.transform.localPosition -= new Vector3(0f, worldTablesYOffset, 0f);
+
+                if (selectedAge.worldMusic.world != GameWorlds.ModernDay)
+                    currentTables.transform.localPosition -= new Vector3(0f, worldTablesYOffset, 0f);
+                else
+                    currentTables.transform.localPosition -= new Vector3(0f, modernDayGardenTablesYOffset, 0f);
+
                 RenderSettings.ambientSkyColor = selectedAge.sky;
                 RenderSettings.ambientEquatorColor = selectedAge.equator;
                 RenderSettings.ambientGroundColor = selectedAge.ground;

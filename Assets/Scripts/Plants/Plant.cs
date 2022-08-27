@@ -28,13 +28,13 @@ public class Plant : MonoBehaviour
     public bool fullyGrown;
     private int growThreshold;
     private bool selling;
-    private int currentGrowThreshold;
+    public int currentGrowThreshold;
     public FlowerPot flowerPotIn, plantIsAbove;
-    private GardenItemType expectedItem = GardenItemType.None;
+    public GardenItemType expectedItem = GardenItemType.None;
     private GardenItem itemHolding;
 
     private float revMulIncreaser;
-    private float revenueMultiplier;
+    public float revenueMultiplier;
     private float percentageExtra;
 
     void Awake()
@@ -58,7 +58,7 @@ public class Plant : MonoBehaviour
             ApplyColorToPlant(new Color(1f, 1f, 1f, .5f));
             plantAnim.speed = 0f;
         }
-        
+
         revenueMultiplier = 1f / GetAccumulativeRange();
         revMulIncreaser = 1f / GetAccumulativeRange();
     }
@@ -83,6 +83,8 @@ public class Plant : MonoBehaviour
         compostRange = new Vector2Int(data.compostCurrentUses, data.compostTotalUses);
         fertilizerRange = new Vector2Int(data.fertilizerCurrentUses, data.fertilizerTotalUses);
         musicRange = new Vector2Int(data.phonographCurrentUses, data.phonographTotalUses);
+        currentGrowThreshold = data.plantGrowThreshold;
+        revenueMultiplier = data.plantMultRevenue;
         currentTimeRange = 0f;
 
         if (data.plantIsGrown)
@@ -145,7 +147,7 @@ public class Plant : MonoBehaviour
 
             else
             {
-                DataCollector.instance.SetPlantFullGrownData(plantData.appearsIn, flowerPotIn, growth, fullyGrown);
+                DataCollector.instance.SetPlantFullGrownData(MusicManager.instance.GetCurrentMusic().world, flowerPotIn, growth, fullyGrown);
             }
         }
     }
@@ -367,7 +369,10 @@ public class Plant : MonoBehaviour
                 GrowPlant();
             
             else
+            {
                 currentGrowThreshold++;
+                DataCollector.instance.SetPlantGrowThreshold(MusicManager.instance.GetCurrentMusic().world, flowerPotIn, currentGrowThreshold);
+            }
 
             if (!CheckForAllRangesCompleted())
             {
@@ -377,6 +382,7 @@ public class Plant : MonoBehaviour
                 flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
 
                 revenueMultiplier += revMulIncreaser;
+                DataCollector.instance.SetPlantRevenueMult(MusicManager.instance.GetCurrentMusic().world, flowerPotIn, revenueMultiplier);
                 flowerPotIn.UpdatePlantSellPrice(GetActualRevenue());
 
                 GetNewTimeRange();
@@ -389,7 +395,7 @@ public class Plant : MonoBehaviour
             {
                 flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                 fullyGrown = true;
-                DataCollector.instance.SetPlantFullGrownData(plantData.appearsIn, flowerPotIn, growth, fullyGrown);
+                DataCollector.instance.SetPlantFullGrownData(MusicManager.instance.GetCurrentMusic().world, flowerPotIn, growth, fullyGrown);
                 currentTimeRange = 0f;
                 flowerPotIn.PlayFullGrown();
             }
@@ -421,6 +427,7 @@ public class Plant : MonoBehaviour
 
                 else
                 {
+                    DataCollector.instance.RemovePlant(MusicManager.instance.GetCurrentMusic().world, flowerPotIn);
                     flowerPotIn.canUseOutline = true;
                     flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                     flowerPotIn.triggerColl.enabled = true;
@@ -434,6 +441,7 @@ public class Plant : MonoBehaviour
                 _sprout.GetComponent<Animator>().SetTrigger("hide");
                 flowerPotIn.revenueText.gameObject.SetActive(false);
                 flowerPotIn.sellPlantButton.SetActive(false);
+                DataCollector.instance.RemovePlant(MusicManager.instance.GetCurrentMusic().world, flowerPotIn);
                 DeactivateWarnings();
                 StartCoroutine(SellSprout());
             }

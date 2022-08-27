@@ -217,7 +217,6 @@ public class UIManager : MonoBehaviour
                 {
                     if (SeedDatabase.instance.PlayerOwnsPlant(pinatasUI[i].pinataAsset.plantsThatCanAppear[k]))
                     {
-                        Debug.Log(pinatasUI[i].pinataAsset.plantsThatCanAppear[k].plantName);
                         currentlyUnlocked++;
                     }
                 }

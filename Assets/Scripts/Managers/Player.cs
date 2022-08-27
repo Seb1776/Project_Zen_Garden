@@ -132,7 +132,6 @@ public class Player : MonoBehaviour
 
     public void SetHoldFlowerPot(FlowerPot pot = null)
     {
-        Debug.Log(pot);
         holdingFlowerPot = pot;
     }
 
@@ -268,6 +267,7 @@ public class Player : MonoBehaviour
     {
         if (placingFlowerPot != null && placingFlowerPot.hoveringHolder != null)
         {
+            DataCollector.instance.UpdateFlowerPotData(placingFlowerPot.flowerPotAsset.flowerPotType, SeedDatabase.instance.GetFlowerPotData(placingFlowerPot.flowerPotAsset).amount - 1);
             placingFlowerPot.transform.position = placingFlowerPot.hoveringHolder.transform.position;
             placingFlowerPot.transform.rotation = placingFlowerPot.hoveringHolder.transform.rotation;
             placingFlowerPot.startPos = placingFlowerPot.transform.position;
