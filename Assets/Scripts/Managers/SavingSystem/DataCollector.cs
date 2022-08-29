@@ -138,7 +138,7 @@ public class DataCollector : MonoBehaviour
             GameManager.instance.FirstTimeTutorial();
             SeedDatabase.instance.SendGardenDataToCollector();
             UIManager.instance.CheckAvailabilityForPinatas();
-            //MusicManager.instance.ChangeWithoutTransition(Resources.Load<MusicAsset>("Music/Datas/Tutorial"));
+            MusicManager.instance.ChangeWithoutTransition(Resources.Load<MusicAsset>("Music/Datas/Tutorial"));
 
             SetGardenName(mm.newSetGardenName);
             mm.newSetGardenName = string.Empty;

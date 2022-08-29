@@ -44,8 +44,6 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         SetWorldsPrices();
-        SelectMusicAsset(currentWorld);
-        ChooseNewMusicOrder();
     }
 
     public void ChangeMusic(MusicAsset newAge)
@@ -333,7 +331,9 @@ public class MusicManager : MonoBehaviour
     public void ChangeWithoutTransition(MusicAsset worldMusic)
     {   
         if (worldMusic.world != GameWorlds.Tutorial)
+        {
             TimeTravelManager.instance.SetAsEntered(worldMusic.worldID);
+        }
         
         currentWorld = worldMusic.world;
 

@@ -29,6 +29,7 @@ public class MusicAsset : ScriptableObject
             break;
 
             case SetMusicMode.Special:
+
                 if (!random)
                 {
                     foreach (AudioClip ac in specialTracks)
