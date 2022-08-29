@@ -11,6 +11,7 @@ public class SeedDatabase : MonoBehaviour
     [SerializeField] private FlowerPotHolder[] holders;
     [SerializeField] private List<UnlockedSeeds> unlockedSeeds = new List<UnlockedSeeds>();
     [SerializeField] private SeedPacket[] allSeeds;
+    [SerializeField] private GardenItem[] modernDayGardenItems;
     public GardenAmount waterUI, compostUI, fertilizerUI, phonographUI;
     public GameObject jurassicBlock;
     [SerializeField] private Button[] disablableTutorialSeeds;
@@ -221,37 +222,6 @@ public class SeedDatabase : MonoBehaviour
         {
             jurassicBlock.SetActive(false);
             SoundEffectsManager.instance.PlaySoundEffectNC("prize");
-        }
-    }
-
-    public void IgnorPosOfGardenItems(bool ignore, bool updatePos = false)
-    {
-        foreach (GardenItem gi in waterUI.items)
-        {
-            gi.ignorePos = ignore;
-
-            if (updatePos) gi.UpdateReturnPosition();
-        }
-
-        foreach (GardenItem gi in compostUI.items)
-        {
-            gi.ignorePos = ignore;
-
-            if (updatePos) gi.UpdateReturnPosition();
-        }
-
-        foreach (GardenItem gi in fertilizerUI.items)
-        {
-            gi.ignorePos = ignore;
-
-            if (updatePos) gi.UpdateReturnPosition();
-        }
-
-        foreach (GardenItem gi in phonographUI.items)
-        {
-            gi.ignorePos = ignore;
-
-            if (updatePos) gi.UpdateReturnPosition();
         }
     }
 

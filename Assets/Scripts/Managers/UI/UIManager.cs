@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.XR.Interaction.Toolkit;
+using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
@@ -68,6 +68,20 @@ public class UIManager : MonoBehaviour
 
             seedDatabase.TriggerHolders(true);
         }
+    }
+
+    public void BackToStartMenu()
+    {
+        DataCollector.instance.SaveData();
+        StartCoroutine(LoadScene(0));
+    }
+
+    IEnumerator LoadScene(int index)
+    {
+        AsyncOperation asyncOp = SceneManager.LoadSceneAsync(index);
+
+        while (!asyncOp.isDone)
+            yield return null;
     }
 
     public void BuyGardenItem(string _git)
@@ -183,8 +197,6 @@ public class UIManager : MonoBehaviour
         plantQualityT.text = GetStringedPlantQuality(pa.plantQuality.quality, true);
 
         PlantProcessAsset ppa = Resources.Load<PlantProcessAsset>("PlantProcessAsset/" + GetStringedPlantQuality(pa.plantQuality.quality, false));
-        Debug.Log(ppa + " " + ("PlantProcessAsset/" + GetStringedPlantQuality(pa.plantQuality.quality, false)));
-
 
         if (ppa != null)
             plantExtraPercT.text = "% " + ppa.plantPercentageExtra;

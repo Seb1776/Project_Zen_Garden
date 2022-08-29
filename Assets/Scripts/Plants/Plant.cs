@@ -113,6 +113,8 @@ public class Plant : MonoBehaviour
 
             planted = true;
         }
+
+        flowerPotIn.UpdatePlantSellPrice(GetActualRevenue());
     }
 
     public void GrowPlant(bool playSound = true, bool triggerFullGrown = false)
@@ -147,7 +149,7 @@ public class Plant : MonoBehaviour
 
             else
             {
-                DataCollector.instance.SetPlantFullGrownData(MusicManager.instance.GetCurrentMusic().world, flowerPotIn, growth, fullyGrown);
+                DataCollector.instance.SetPlantFullGrownData(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, growth, fullyGrown);
             }
         }
     }
@@ -312,7 +314,7 @@ public class Plant : MonoBehaviour
             }
         }
 
-        DataCollector.instance.SetPlantGardenState(MusicManager.instance.GetCurrentMusic().world, expectedItem.ToString(), flowerPotIn);
+        DataCollector.instance.SetPlantGardenState(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), expectedItem.ToString(), flowerPotIn);
         gardenItemChosen = true;
     }
 
@@ -334,7 +336,7 @@ public class Plant : MonoBehaviour
                     waterRange.x++;
 
                     DataCollector.instance.SetPlantGardenData(
-                        MusicManager.instance.GetCurrentMusic().world, flowerPotIn, expectedItem.ToString(), waterRange.x
+                        GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, expectedItem.ToString(), waterRange.x
                     );
                 break;
 
@@ -342,7 +344,7 @@ public class Plant : MonoBehaviour
                     compostRange.x++;
 
                     DataCollector.instance.SetPlantGardenData(
-                        MusicManager.instance.GetCurrentMusic().world, flowerPotIn, expectedItem.ToString(), compostRange.x
+                        GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, expectedItem.ToString(), compostRange.x
                     );
                 break;
 
@@ -350,7 +352,7 @@ public class Plant : MonoBehaviour
                     fertilizerRange.x++;
 
                     DataCollector.instance.SetPlantGardenData(
-                        MusicManager.instance.GetCurrentMusic().world, flowerPotIn, expectedItem.ToString(), fertilizerRange.x
+                        GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, expectedItem.ToString(), fertilizerRange.x
                     );
                 break;
 
@@ -358,7 +360,7 @@ public class Plant : MonoBehaviour
                     musicRange.x++;
 
                     DataCollector.instance.SetPlantGardenData(
-                        MusicManager.instance.GetCurrentMusic().world, flowerPotIn, expectedItem.ToString(), musicRange.x
+                        GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, expectedItem.ToString(), musicRange.x
                     );
                 break;
             }
@@ -371,7 +373,7 @@ public class Plant : MonoBehaviour
             else
             {
                 currentGrowThreshold++;
-                DataCollector.instance.SetPlantGrowThreshold(MusicManager.instance.GetCurrentMusic().world, flowerPotIn, currentGrowThreshold);
+                DataCollector.instance.SetPlantGrowThreshold(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, currentGrowThreshold);
             }
 
             if (!CheckForAllRangesCompleted())
@@ -382,20 +384,20 @@ public class Plant : MonoBehaviour
                 flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
 
                 revenueMultiplier += revMulIncreaser;
-                DataCollector.instance.SetPlantRevenueMult(MusicManager.instance.GetCurrentMusic().world, flowerPotIn, revenueMultiplier);
+                DataCollector.instance.SetPlantRevenueMult(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, revenueMultiplier);
                 flowerPotIn.UpdatePlantSellPrice(GetActualRevenue());
 
                 GetNewTimeRange();
 
                 expectedItem = GardenItemType.None;
-                DataCollector.instance.SetPlantGardenState(MusicManager.instance.GetCurrentMusic().world, expectedItem.ToString(), flowerPotIn);
+                DataCollector.instance.SetPlantGardenState(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), expectedItem.ToString(), flowerPotIn);
             }
 
             else
             {
                 flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                 fullyGrown = true;
-                DataCollector.instance.SetPlantFullGrownData(MusicManager.instance.GetCurrentMusic().world, flowerPotIn, growth, fullyGrown);
+                DataCollector.instance.SetPlantFullGrownData(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, growth, fullyGrown);
                 currentTimeRange = 0f;
                 flowerPotIn.PlayFullGrown();
             }

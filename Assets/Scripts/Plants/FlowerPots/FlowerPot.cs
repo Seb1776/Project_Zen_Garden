@@ -76,8 +76,8 @@ public class FlowerPot : MonoBehaviour
             transform.position = handPosition.position;
         
         if (setted && !potInteractable.isSelected && MusicManager.instance.currentWorld.ToString() == createdIn && 
-            Vector3.Distance(transform.position, startPos) > 0.01f)
-            returnToPos = true;
+            Vector3.Distance(transform.localPosition, startPos) > 0.01f)
+                returnToPos = true;
         
         if (GetPlantedPlant() != null && (GetPlantedPlant().fullyGrown && !GetPlantedPlant().replanting) && !selectedByShovel)
             outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
@@ -145,6 +145,7 @@ public class FlowerPot : MonoBehaviour
     {
         if (reAssignable)
         {
+            DataCollector.instance.UdpateFlowerPotHolder(GameManager.instance.GetGameWorldFromString(createdIn), inPositionOfHolder, hoveringHolder);
             startPos = hoveringHolder.transform.position;
             inPositionOfHolder.transform.GetChild(0).gameObject.SetActive(true);
             inPositionOfHolder.GetComponent<BoxCollider>().enabled = true;
@@ -236,7 +237,6 @@ public class FlowerPot : MonoBehaviour
     public void RePlantPlant(Plant p)
     {
         StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantplant"));
-
         p.flowerPotIn.plantInSpace = null;
         p.transform.position = plantPlantingPosition.position;
         p.transform.parent = transform;
@@ -276,6 +276,7 @@ public class FlowerPot : MonoBehaviour
         p.SetPlanted(_s);
         p.expectedItem = GardenItemType.None;
         DataCollector.instance.AddPlant(MusicManager.instance.GetCurrentMusic().world, this, p);
+        DataCollector.instance.UpdateSeedPacket(p.plantData.name, SeedDatabase.instance.GetPlantInList(p.plantData).amount);
         p.plantIsAbove = null;
         p.transform.localScale = Vector3.zero;
     }

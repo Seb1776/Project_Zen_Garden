@@ -71,9 +71,9 @@ public class GardenItem : MonoBehaviour
             GetBackPos();
     }
 
-    public void UpdateReturnPosition()
+    public void UpdateReturnPosition(Vector3 specificPos)
     {
-        startPos = transform.position;
+        transform.position = specificPos;
     }
 
     public virtual void CheckForUsability() { }

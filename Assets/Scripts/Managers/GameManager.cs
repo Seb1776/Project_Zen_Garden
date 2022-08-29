@@ -59,6 +59,27 @@ public class GameManager : MonoBehaviour
     {
         tutorial.SetActive(activate);
     }
+
+    public GameWorlds GetGameWorldFromString(string world)
+    {
+        switch (world)
+        {
+            case "AncientEgypt": return GameWorlds.AncientEgypt;
+            case "PirateSeas": return GameWorlds.PirateSeas;
+            case "WildWest": return GameWorlds.WildWest;
+            case "FarFuture": return GameWorlds.FarFuture;
+            case "DarkAges": return GameWorlds.DarkAges;
+            case "BigWaveBeach": return GameWorlds.BigWaveBeach;
+            case "FrostbiteCaves": return GameWorlds.FrostbiteCaves;
+            case "LostCity": return GameWorlds.LostCity;
+            case "NeonMixtapeTour": return GameWorlds.NeonMixtapeTour;
+            case "JurassicMarsh": return GameWorlds.JurassicMarsh;
+            case "ModernDay": return GameWorlds.ModernDay;
+            case "Tutorial": return GameWorlds.Tutorial;
+        }
+
+        return GameWorlds.ThrowbackToThePresent;
+    }
 }
 
 public static class GameHelper

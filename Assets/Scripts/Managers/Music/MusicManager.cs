@@ -272,51 +272,6 @@ public class MusicManager : MonoBehaviour
         }
     }
 
-    public IEnumerator SwapMusicAge(MusicAsset worldMusic)
-    {
-        if (playLoopCoroutine != null) StopCoroutine(playLoopCoroutine);
-        if (mainCoroutine != null) StopCoroutine(mainCoroutine);
-
-        source.Stop();
-        source.clip = null;
-        source.PlayOneShot(ageTransitionEffect);
-        currentWorld = worldMusic.world;
-        TimeTravelManager.instance.TriggerTransition(true);
-        playingContext = string.Empty;
-
-        Player.instance.SafetyNetsWhenHolding();
-        Player.instance.RightHandEnabler(false);
-
-        yield return new WaitForSeconds(.45f);
-
-        if (worldMusic.world != GameWorlds.ThrowbackToThePresent)
-            TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
-        
-        else
-            TimeTravelManager.instance.ChangeScenario(currentPresentContext, true);
-
-        if (GetNextWorld(worldMusic) != null && !TimeTravelManager.instance.HasEnteredBefore(worldMusic.worldID))
-        {
-            GetWorldData(worldMusic).plantsButton.interactable = true;
-            GetNextWorld(worldMusic).unlockFirstPanel.SetActive(false);
-        }
-
-        SeedDatabase.instance.IgnorPosOfGardenItems(true);
-
-        yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
-
-        if (GameManager.instance.onTutorial)
-            RemoveTutorialStuff();
-
-        DataCollector.instance.SetLastVisitedWorld(GetCurrentMusic().world);
-
-        TimeTravelManager.instance.TriggerTransition(false);
-
-        Player.instance.RightHandEnabler(true);
-
-        ChangeMusic(worldMusic);
-    }
-
     IEnumerator WorldLock(MusicAsset world)
     {
         SoundEffectsManager.instance.PlaySoundEffectNC("prize");
@@ -375,26 +330,6 @@ public class MusicManager : MonoBehaviour
             SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
     }
 
-    public void ChangeToPresent(string presentContext)
-    {
-        if (currentPresentContext != presentContext)
-        {
-            currentPresentContext = presentContext;
-
-            if (swapCoroutine != null)
-            {
-                StopCoroutine(swapCoroutine);
-                swapCoroutine = StartCoroutine(SwapMusicAge(throwback));
-            }
-
-            else
-                swapCoroutine = StartCoroutine(SwapMusicAge(throwback));
-        }
-
-        else
-            SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
-    }
-
     public void ChangeWithoutTransition(MusicAsset worldMusic)
     {   
         if (worldMusic.world != GameWorlds.Tutorial)
@@ -402,9 +337,65 @@ public class MusicManager : MonoBehaviour
         
         currentWorld = worldMusic.world;
 
+        SetTablesInTimeTravel(worldMusic);
         TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
-        //SeedDatabase.instance.IgnorPosOfGardenItems(true);
         ChangeMusic(worldMusic);
+    }
+
+    public void SetTablesInTimeTravel(MusicAsset active)
+    {
+        AgeTime[] _ages = TimeTravelManager.instance.worlds;
+
+        for (int i = 0; i < _ages.Length; i++)
+        {
+            if (_ages[i].worldMusic != active && _ages[i].worldMusic.world != GameWorlds.ThrowbackToThePresent)
+            {
+                if (_ages[i].worldMusic.world != GameWorlds.ModernDay)
+                    _ages[i].worldTables.transform.localPosition += new Vector3(0f, TimeTravelManager.instance.worldTablesYOffset, 0f);
+                
+                else
+                    _ages[i].worldTables.transform.localPosition += new Vector3(0f, TimeTravelManager.instance.modernDayGardenTablesYOffset, 0f);
+            }
+        }
+    }
+
+    public IEnumerator SwapMusicAge(MusicAsset worldMusic)
+    {
+        if (playLoopCoroutine != null) StopCoroutine(playLoopCoroutine);
+        if (mainCoroutine != null) StopCoroutine(mainCoroutine);
+
+        source.Stop();
+        source.clip = null;
+        source.PlayOneShot(ageTransitionEffect);
+        currentWorld = worldMusic.world;
+        TimeTravelManager.instance.TriggerTransition(true);
+        playingContext = string.Empty;
+
+        Player.instance.SafetyNetsWhenHolding();
+        Player.instance.RightHandEnabler(false);
+
+        yield return new WaitForSeconds(.45f);
+
+        TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, true);
+
+        if (GetNextWorld(worldMusic) != null && !TimeTravelManager.instance.HasEnteredBefore(worldMusic.worldID))
+        {
+            GetWorldData(worldMusic).plantsButton.interactable = true;
+            GetNextWorld(worldMusic).unlockFirstPanel.SetActive(false);
+        }
+
+        yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
+
+        if (GameManager.instance.onTutorial)
+            RemoveTutorialStuff();
+
+        TimeTravelManager.instance.TriggerTransition(false);
+
+        Player.instance.RightHandEnabler(true);
+
+        ChangeMusic(worldMusic);
+
+        DataCollector.instance.SetLastVisitedWorld(currentWorld);
     }
 
     public void RemoveTutorialStuff()
@@ -419,7 +410,6 @@ public class MusicManager : MonoBehaviour
         tutorialGarden.SetActive(false);
         tutorialGardening.transform.localPosition = new Vector3(0f, -1.75f, 0f);
         fullGardening.transform.localPosition = new Vector3(0f, 0f, 0f);
-        SeedDatabase.instance.IgnorPosOfGardenItems(false, true);
     }
 }
 

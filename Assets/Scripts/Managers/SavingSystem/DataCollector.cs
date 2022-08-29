@@ -13,12 +13,13 @@ public class SerializableData
     public List<GameWorlds> unlockedWorlds = new List<GameWorlds>();
     public int playerWaters, playerComposts, playerFertilizer, playerPhonographs;
     public string gardenName, playerLastWorld;
+    public int playerCoins;
     public bool isOnTutorial;
     public float spentTime;
 
     public SerializableData (List<GardenTable> savedTables, List<SeedDataContainer> savedSeeds, List<FlowerPotDataContainer> flowerPotDatas,
         List<GameWorlds> unlockedWorlds, int playerWaters, int playerComposts, int playerFertilizer, int playerPhonographs, string gardenName, string playerLastWorld, bool isOnTutorial,
-        float spentTime)
+        float spentTime, int playerCoins)
     {
         this.savedTables = savedTables;
         this.savedSeeds = savedSeeds;
@@ -30,6 +31,7 @@ public class SerializableData
         this.playerLastWorld = playerLastWorld;
         this.isOnTutorial = isOnTutorial;
         this.spentTime = spentTime;
+        this.playerCoins = playerCoins;
     }
 }
 
@@ -72,7 +74,7 @@ public class DataCollector : MonoBehaviour
     public List<FlowerPotDataContainer> flowerPotsDatas = new List<FlowerPotDataContainer>();
     public List<WorldHolders> worldHolders = new List<WorldHolders>();
     public List<GameWorlds> unlockedWorlds = new List<GameWorlds>();
-    public float playerCoins;
+    public int playerCoins;
     public string gameFileLetter;
     public int playerWaters, playerComposts, playerFertilizer, playerPhonographs;
     public string gardenName, playerLastWorld;
@@ -97,7 +99,7 @@ public class DataCollector : MonoBehaviour
         SeedDatabase.instance.SendGardenDataToCollector();
         spentTime = GameManager.instance.GetSpentTime();
         SerializableData zenData = new SerializableData(worldTables, seeds, flowerPotsDatas, unlockedWorlds, playerWaters, playerComposts, playerFertilizer, playerPhonographs, 
-            gardenName, playerLastWorld, isOnTutorial, spentTime);
+            gardenName, playerLastWorld, isOnTutorial, spentTime, playerCoins);
 
         using (StreamWriter stream = new StreamWriter(Application.persistentDataPath + "/ZenGardenVR_" + gameFileLetter + ".json"))
         {
@@ -136,7 +138,7 @@ public class DataCollector : MonoBehaviour
             GameManager.instance.FirstTimeTutorial();
             SeedDatabase.instance.SendGardenDataToCollector();
             UIManager.instance.CheckAvailabilityForPinatas();
-            MusicManager.instance.ChangeWithoutTransition(Resources.Load<MusicAsset>("Music/Datas/Tutorial"));
+            //MusicManager.instance.ChangeWithoutTransition(Resources.Load<MusicAsset>("Music/Datas/Tutorial"));
 
             SetGardenName(mm.newSetGardenName);
             mm.newSetGardenName = string.Empty;
@@ -225,11 +227,17 @@ public class DataCollector : MonoBehaviour
                 SeedDatabase.instance.jurassicBlock.SetActive(false);
         }
 
+        Player.instance.SetMoneyAmount(sd.playerCoins);
         UIManager.instance.CheckAvailabilityForPinatas();
         playerLastWorld = sd.playerLastWorld;
         gardenName = sd.gardenName;
 
         StartCoroutine(AutoSave());
+    }
+
+    public void SetPlayerCoins(int playerMoney)
+    {
+        playerCoins = playerMoney;
     }
 
     public void SetTutorialState(bool onTutorial)
@@ -307,6 +315,16 @@ public class DataCollector : MonoBehaviour
         }
     }
 
+    public void UdpateFlowerPotHolder(GameWorlds world, FlowerPotHolder previousFp, FlowerPotHolder newFp)
+    {
+        if (GetTableFromWorld(world) != null)
+        {
+            GardenTable _gt = GetTableFromWorld(world);
+            FlowerPotSpot fps = _gt.GetFlowerPotSpot(previousFp.holderIdx);
+            fps.holderIdx = newFp.holderIdx;
+        }
+    }
+
     public void SetPlantGrowThreshold(GameWorlds world, FlowerPot flowerPot, int grow)
     {
         if (GetTableFromWorld(world) != null)
@@ -371,6 +389,19 @@ public class DataCollector : MonoBehaviour
             FlowerPotSpot fps = _gt.GetFlowerPotSpot(flowerPot.inPositionOfHolder.holderIdx);
 
             if (fps != null) fps.SetPlantGardeningState(gardening);
+        }
+    }
+
+    public void ReplacePlantInFlowerPot(GameWorlds world, Plant plant, FlowerPot oldFp, FlowerPot newFp)
+    {
+        if (GetTableFromWorld(world) != null)
+        {
+            GardenTable _gt = GetTableFromWorld(world);
+            FlowerPotSpot oldFps = _gt.GetFlowerPotSpot(oldFp.inPositionOfHolder.holderIdx);
+            FlowerPotSpot newFps = _gt.GetFlowerPotSpot(newFp.inPositionOfHolder.holderIdx);
+
+            oldFps.RemovePlant();
+            newFps.AddPlant(plant);
         }
     }
 

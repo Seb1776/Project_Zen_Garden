@@ -10,11 +10,6 @@ public class FlowerPotHolder : MonoBehaviour
 
     public OutlineEffect outline;
 
-    void Start()
-    {
-        
-    }
-
     public void StartStuff()
     {
         outline = transform.GetChild(0).GetComponent<OutlineEffect>();

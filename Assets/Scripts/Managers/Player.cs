@@ -79,8 +79,16 @@ public class Player : MonoBehaviour
     }
 
     public void SpendMoney(int amount)
+    {   
+        if (currentPlayerCoins > 0)
+            currentPlayerCoins -= amount;
+
+        DataCollector.instance.SetPlayerCoins(currentPlayerCoins);
+    }
+
+    public void SetMoneyAmount(int amount)
     {
-        currentPlayerCoins -= amount;
+        currentPlayerCoins = amount;
     }
 
     public bool CanSpendMoney(int amount)
@@ -89,8 +97,11 @@ public class Player : MonoBehaviour
     }
 
     public void AddMoney(int amount)
-    {
-        currentPlayerCoins += amount;
+    {   
+        if (currentPlayerCoins < 99999999)
+            currentPlayerCoins += amount;
+
+        DataCollector.instance.SetPlayerCoins(currentPlayerCoins);
     }
 
     public int GetPlayerMoney()
@@ -120,6 +131,8 @@ public class Player : MonoBehaviour
         {
             if (hoveringFlowerPot.GetIfPlantIsAccepted())
             {
+                DataCollector.instance.ReplacePlantInFlowerPot(GameManager.instance.GetGameWorldFromString(hoveringFlowerPot.createdIn),
+                    holdingPlantedPlant, holdingPlantedPlant.flowerPotIn, hoveringFlowerPot);
                 hoveringFlowerPot.RePlantPlant(holdingPlantedPlant);
                 holdingPlantedPlant = null;
                 hoveringFlowerPot = null;
