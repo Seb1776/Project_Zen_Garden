@@ -16,7 +16,7 @@ public class PinataHolder : MonoBehaviour
 
     void SetUI()
     {
-        pinataImage.sprite = pinataData.pinataImage;
+        /*pinataImage.sprite = pinataData.pinataImage;
 
         for (int i = 0; i < pinataSizes.Length; i++)
         {
@@ -28,7 +28,7 @@ public class PinataHolder : MonoBehaviour
             pinataSizes[i].plants.text = "Plants: " + pinataData.sizes[i].plantsToAppearRange.x + " - " + pinataData.sizes[i].plantsToAppearRange.y;
             pinataSizes[i].seeds.text = "Seeds: " + pinataData.sizes[i].seedsToGiveRange.x + " - " + pinataData.sizes[i].seedsToGiveRange.y;
             pinataSizes[i].price.text = "$ " + pinataData.sizes[i].pinataPrice.ToString("N0");
-        }
+        }*/
     }
 }
 

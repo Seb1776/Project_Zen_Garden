@@ -28,6 +28,12 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject pinataMenu;
     [SerializeField] private Image pinataImage;
     [SerializeField] private GameObject pinataContinueButton;
+    [SerializeField] [NonReorderable] private PinataRewardsPlaceholders[] pinataQualitiesChances;
+    [SerializeField] private PinataSizeCategory debugNewPinata;
+    [SerializeField] private List<string> commonP = new List<string>();
+    [SerializeField] private List<string> rareP = new List<string>();
+    [SerializeField] private List<string> epicP = new List<string>();
+    [SerializeField] private List<string> legendaryP = new List<string>();
     [SerializeField] [NonReorderable] private PinatasUI[] pinatasUI;
     public Text pinataRewardText;
     private Plant spawnedUIPlant;
@@ -36,6 +42,11 @@ public class UIManager : MonoBehaviour
     {
         if (instance != null && instance != this) Destroy(this);
         else instance = this;
+    }
+
+    void Start()
+    {
+        TestDrivePinata();
     }
 
     void Update()
@@ -219,7 +230,7 @@ public class UIManager : MonoBehaviour
 
     public void CheckAvailabilityForPinatas()
     {
-        for (int i = 0; i < pinatasUI.Length; i++)
+        /*for (int i = 0; i < pinatasUI.Length; i++)
         {
             for (int j = 0; j < pinatasUI[i].pinataAsset.sizes.Length; j++)
             {
@@ -238,6 +249,61 @@ public class UIManager : MonoBehaviour
                 
                 else
                     pinatasUI[i].SetAvailability(j, false);
+            }
+        }*/
+    }
+
+    public void TestDrivePinata()
+    {
+        for (int i = 0; i < pinataQualitiesChances.Length; i++)
+        {   
+            if (pinataQualitiesChances[i].sizeToApply == debugNewPinata)
+            {
+                Debug.Log("Opening Pinata Size: " + pinataQualitiesChances[i].sizeToApply.ToString());
+
+                for (int j = 0; j < pinataQualitiesChances[i].chances.Length; j++)
+                {
+                    Debug.Log("Checking chances for Quality: " + pinataQualitiesChances[i].chances[j].quality.ToString());
+
+                    if (GameHelper.GetBoolFromChance(pinataQualitiesChances[i].chances[j].appearChance))
+                    {
+                        Debug.Log("Pinata Will Show " + pinataQualitiesChances[i].chances[j].plantAmount + " " +
+                            pinataQualitiesChances[i].chances[j].quality.ToString() + " Quality Plants. Shuffling...");
+
+                        List<string> setPlants = new List<string>();
+                        List<string> rewardPlants = new List<string>();
+
+                        switch (pinataQualitiesChances[i].chances[j].quality)
+                        {
+                            case PlantQualityName.Common: setPlants = commonP; break;
+                            case PlantQualityName.Rare: setPlants = rareP; break;
+                            case PlantQualityName.Epic: setPlants = epicP; break;
+                            case PlantQualityName.Legendary: setPlants = legendaryP; break;
+                        }
+
+                        for (int k = 0; k < pinataQualitiesChances[i].chances[j].plantAmount; k++)
+                        {
+                            int selectedIdx = Random.Range(0, setPlants.Count);
+                            rewardPlants.Add(setPlants[selectedIdx]);
+                            setPlants.Remove(setPlants[selectedIdx]);
+                        }
+
+                        Debug.Log("Reward Plants Are: ");
+
+                        for (int k = 0; k < rewardPlants.Count; k++)
+                        {
+                            int randAmount = Random.Range(pinataQualitiesChances[i].chances[j].seedsRange.x,
+                                pinataQualitiesChances[i].chances[j].seedsRange.y);
+                            
+                            Debug.Log(rewardPlants[k] + " with " + randAmount + " seeds");
+                        }
+                    }
+
+                    else
+                        Debug.Log("Pinata WON'T Show " + pinataQualitiesChances[i].chances[j].quality.ToString());
+                }
+
+                break;
             }
         }
     }
@@ -441,6 +507,14 @@ public class PinatasUI
         else
             buttons[index].availabilityText.text = "Not Enough Plants!";
     }
+}
+
+[System.Serializable]
+public class PinataRewardsPlaceholders
+{
+    public PinataSizeCategory sizeToApply;
+    [NonReorderable]
+    public QualityChance[] chances;
 }
 
 [System.Serializable]

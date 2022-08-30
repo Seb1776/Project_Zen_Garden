@@ -89,6 +89,20 @@ public static class GameHelper
         return (perc / value) * 100f;
     }
 
+    public static bool GetBoolFromChance(float chance)
+    {
+        if (chance >= 100f)
+            return true;
+        
+        if (chance <= 0f)
+            return false;
+
+        float percVal = chance / 100f;
+        float randVal = Random.value;
+        Debug.Log(percVal + " and " + randVal + ". and is " + (percVal >= randVal));
+        return percVal >= randVal;
+    }
+
     public static bool GetRandomBool()
     {
         return Random.value >= .5f;

@@ -57,7 +57,7 @@ public class Pinata : MonoBehaviour
 
     void SetRewardPlants()
     {
-        int unlockedPlants = 0;
+        /*int unlockedPlants = 0;
 
         foreach (PlantAsset pa in pinataData.plantsThatCanAppear)
             if (SeedDatabase.instance.PlayerOwnsPlant(pa))
@@ -80,7 +80,7 @@ public class Pinata : MonoBehaviour
                 showPlants.Add(notSelectedPlants[randomPlant]);
                 notSelectedPlants.Remove(notSelectedPlants[randomPlant]);
             }
-        }
+        }*/
     }
 
     public void DeleteAllCreatedRewards()
