@@ -25,16 +25,21 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image plantBackGround;
     [SerializeField] private Transform plantSpawn;
     [Header("Pinatas UI")]
+    public Transform pinataRewardsSpawn;
     [SerializeField] private GameObject pinataMenu;
     [SerializeField] private Image pinataImage;
     [SerializeField] private GameObject pinataContinueButton;
-    [SerializeField] [NonReorderable] private PinataRewardsPlaceholders[] pinataQualitiesChances;
-    [SerializeField] private PinataSizeCategory debugNewPinata;
-    [SerializeField] private List<string> commonP = new List<string>();
-    [SerializeField] private List<string> rareP = new List<string>();
-    [SerializeField] private List<string> epicP = new List<string>();
-    [SerializeField] private List<string> legendaryP = new List<string>();
-    [SerializeField] [NonReorderable] private PinatasUI[] pinatasUI;
+    [SerializeField][NonReorderable] private PinataRewardsPlaceholders[] pinataQualitiesChances;
+    [SerializeField] private Button buyPinataButton;
+    [SerializeField] private GameObject buyPinataCoin;
+    [SerializeField] private PinataAsset[] allPinatas;
+    [SerializeField] private Image menuPinataImage;
+    [SerializeField] private Text pinataSizeT;
+    [SerializeField] private Text pinataNameT;
+    [SerializeField] private Text pinataPriceT;
+    [SerializeField][NonReorderable] private PinatasUIQuality[] pinatasUI;
+    [SerializeField] private List<RewardedPlants> rewComm, rewRar, rewEpc, rewLeg = new List<RewardedPlants>();
+    private int currentPinatasIndex, currentSizesIndex;
     public Text pinataRewardText;
     private Plant spawnedUIPlant;
 
@@ -46,7 +51,7 @@ public class UIManager : MonoBehaviour
 
     void Start()
     {
-        TestDrivePinata();
+        InitPinatasMenu();
     }
 
     void Update()
@@ -67,7 +72,7 @@ public class UIManager : MonoBehaviour
 
             if (player.GetHoldingFlowerPot() == null)
                 CreateFlowerPotOnPlayerHand(flowerPot.gameObject);
-            
+
             else
             {
                 if (player.GetHoldingFlowerPot().gameObject.name != flowerPot.gameObject.name)
@@ -103,19 +108,19 @@ public class UIManager : MonoBehaviour
         {
             case "water":
                 git = GardenItemType.Water;
-            break;
+                break;
 
             case "compost":
                 git = GardenItemType.Compost;
-            break;
+                break;
 
             case "fertilizer":
                 git = GardenItemType.Fertilizer;
-            break;
+                break;
 
             case "phonograph":
                 git = GardenItemType.Music;
-            break;
+                break;
         }
 
         switch (git)
@@ -135,7 +140,7 @@ public class UIManager : MonoBehaviour
 
                 else
                     SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
-            break;
+                break;
 
             case GardenItemType.Compost:
                 if (Player.instance.CanSpendMoney(SeedDatabase.instance.compostUI.gardenPrice) &&
@@ -152,7 +157,7 @@ public class UIManager : MonoBehaviour
 
                 else
                     SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
-            break;
+                break;
 
             case GardenItemType.Fertilizer:
                 if (Player.instance.CanSpendMoney(SeedDatabase.instance.fertilizerUI.gardenPrice) &&
@@ -169,7 +174,7 @@ public class UIManager : MonoBehaviour
 
                 else
                     SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
-            break;
+                break;
 
             case GardenItemType.Music:
                 if (Player.instance.CanSpendMoney(SeedDatabase.instance.phonographUI.gardenPrice) &&
@@ -186,7 +191,7 @@ public class UIManager : MonoBehaviour
 
                 else
                     SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
-            break;
+                break;
         }
     }
 
@@ -211,14 +216,14 @@ public class UIManager : MonoBehaviour
 
         if (ppa != null)
             plantExtraPercT.text = "% " + ppa.plantPercentageExtra;
-        
+
         if (pa.canBePlantedIn.Count > 1)
         {
             plantFlowerPotsT.text = GetStringedFlowerPot(pa.canBePlantedIn[0]) + ", ";
 
             for (int i = 1; i < pa.canBePlantedIn.Count - 1; i++)
                 plantFlowerPotsT.text += GetStringedFlowerPot(pa.canBePlantedIn[i]) + ", ";
-            
+
             plantFlowerPotsT.text += GetStringedFlowerPot(pa.canBePlantedIn[pa.canBePlantedIn.Count - 1]);
         }
 
@@ -228,84 +233,232 @@ public class UIManager : MonoBehaviour
         spawnedUIPlant.transform.localScale = new Vector3(-spawnedUIPlant.transform.localScale.x, spawnedUIPlant.transform.localScale.y);
     }
 
-    public void CheckAvailabilityForPinatas()
+    public void CheckAvailabilityForPinatas(PinataAsset pa)
     {
-        /*for (int i = 0; i < pinatasUI.Length; i++)
-        {
-            for (int j = 0; j < pinatasUI[i].pinataAsset.sizes.Length; j++)
-            {
-                int currentlyUnlocked = 0;
+        int currentlyUnlocked = 0;
 
-                for (int k = 0; k < pinatasUI[i].pinataAsset.plantsThatCanAppear.Length; k++)
-                {
-                    if (SeedDatabase.instance.PlayerOwnsPlant(pinatasUI[i].pinataAsset.plantsThatCanAppear[k]))
-                    {
-                        currentlyUnlocked++;
-                    }
+        for (int i = 0; i < pa.sizes.Length; i++)
+        {
+            if (pa.sizes[i].pinataSize == pinataQualitiesChances[currentSizesIndex].sizeToApply)
+            {
+                for (int j = 0; j < pa.plantsThatCanAppear.Length; j++)
+                {   
+                    for (int k = 0; k < pa.plantsThatCanAppear[j].plantsOfThatQuality.Length; k++)
+                        if (SeedDatabase.instance.PlayerOwnsPlant(pa.plantsThatCanAppear[j].plantsOfThatQuality[k]))
+                            currentlyUnlocked++;
                 }
 
-                if (currentlyUnlocked >= pinatasUI[i].pinataAsset.sizes[j].minUnlockedPlantsToUse)
-                    pinatasUI[i].SetAvailability(j, true);
-                
-                else
-                    pinatasUI[i].SetAvailability(j, false);
+                if (currentlyUnlocked < pinataQualitiesChances[currentSizesIndex].minUnlockedPlantsToUse)
+                    pinataPriceT.text = "NOT ENOUGH PLANTS!";
+
+                buyPinataCoin.SetActive(currentlyUnlocked >= pinataQualitiesChances[currentSizesIndex].minUnlockedPlantsToUse);
+                buyPinataButton.interactable = currentlyUnlocked >= pinataQualitiesChances[currentSizesIndex].minUnlockedPlantsToUse;
             }
-        }*/
+        }
     }
 
-    public void TestDrivePinata()
+    public void CalculatePinataRewards()
     {
+        //Iterate through all Pinata Size
         for (int i = 0; i < pinataQualitiesChances.Length; i++)
-        {   
-            if (pinataQualitiesChances[i].sizeToApply == debugNewPinata)
-            {
-                Debug.Log("Opening Pinata Size: " + pinataQualitiesChances[i].sizeToApply.ToString());
-
+        {   //Check to only run iteration untill the right Pinata Size
+            if (pinataQualitiesChances[i].sizeToApply == allPinatas[currentPinatasIndex].sizes[currentSizesIndex].pinataSize)
+            {   //Iterate through all Plant Qualities
                 for (int j = 0; j < pinataQualitiesChances[i].chances.Length; j++)
-                {
-                    Debug.Log("Checking chances for Quality: " + pinataQualitiesChances[i].chances[j].quality.ToString());
-
+                {   //Get a random bool from Quality's appear chance
                     if (GameHelper.GetBoolFromChance(pinataQualitiesChances[i].chances[j].appearChance))
-                    {
-                        Debug.Log("Pinata Will Show " + pinataQualitiesChances[i].chances[j].plantAmount + " " +
-                            pinataQualitiesChances[i].chances[j].quality.ToString() + " Quality Plants. Shuffling...");
-
-                        List<string> setPlants = new List<string>();
-                        List<string> rewardPlants = new List<string>();
-
-                        switch (pinataQualitiesChances[i].chances[j].quality)
+                    {   //If the random bool is true, the rewards will be chosen for that Quality
+                        List<PlantAsset> nonUsed = new List<PlantAsset>();
+                        List<PlantAsset> usedRews = new List<PlantAsset>();
+                        //Assign Plants to the 'nonUsed' list, only unlocked plants will be added to the list
+                        for (int k = 0; k < allPinatas[currentPinatasIndex].plantsThatCanAppear.Length; k++)
                         {
-                            case PlantQualityName.Common: setPlants = commonP; break;
-                            case PlantQualityName.Rare: setPlants = rareP; break;
-                            case PlantQualityName.Epic: setPlants = epicP; break;
-                            case PlantQualityName.Legendary: setPlants = legendaryP; break;
-                        }
+                            if (pinataQualitiesChances[i].chances[j].quality == allPinatas[currentPinatasIndex].plantsThatCanAppear[k].quality)
+                            {
+                                for (int l = 0; l < allPinatas[currentPinatasIndex].plantsThatCanAppear[k].plantsOfThatQuality.Length; )
+                                {
+                                    if (SeedDatabase.instance.PlayerOwnsPlant(allPinatas[currentPinatasIndex].plantsThatCanAppear[k].plantsOfThatQuality[l]))
+                                    {
+                                        nonUsed.Add(allPinatas[currentPinatasIndex].plantsThatCanAppear[k].plantsOfThatQuality[l]);
+                                        l++;
+                                    }
+                                }
 
+                                break;
+                            }
+                        }
+                        //Randomly add plants to the 'usedRews' based on how many Plants can appear
                         for (int k = 0; k < pinataQualitiesChances[i].chances[j].plantAmount; k++)
                         {
-                            int selectedIdx = Random.Range(0, setPlants.Count);
-                            rewardPlants.Add(setPlants[selectedIdx]);
-                            setPlants.Remove(setPlants[selectedIdx]);
+                            int plantIdx = Random.Range(0, nonUsed.Count);
+                            usedRews.Add(nonUsed[plantIdx]);
+                            nonUsed.RemoveAt(plantIdx);
                         }
-
-                        Debug.Log("Reward Plants Are: ");
-
-                        for (int k = 0; k < rewardPlants.Count; k++)
+                        //Assign the Plants on the 'usedRews' to it's respective Quality Reward list, to later be used by the Pinata
+                        for (int k = 0; k < usedRews.Count; k++)
                         {
-                            int randAmount = Random.Range(pinataQualitiesChances[i].chances[j].seedsRange.x,
+                            int randSeeds = Random.Range(pinataQualitiesChances[i].chances[j].seedsRange.x,
                                 pinataQualitiesChances[i].chances[j].seedsRange.y);
                             
-                            Debug.Log(rewardPlants[k] + " with " + randAmount + " seeds");
+                            switch (pinataQualitiesChances[i].chances[j].quality)
+                            {
+                                case PlantQualityName.Common:
+                                    rewComm.Add(new RewardedPlants(PlantQualityName.Common, usedRews[k], randSeeds));
+                                break;
+
+                                case PlantQualityName.Rare:
+                                    rewRar.Add(new RewardedPlants(PlantQualityName.Rare, usedRews[k], randSeeds));
+                                break;
+
+                                case PlantQualityName.Epic:
+                                    rewEpc.Add(new RewardedPlants(PlantQualityName.Epic, usedRews[k], randSeeds));
+                                break;
+
+                                case PlantQualityName.Legendary:
+                                    rewLeg.Add(new RewardedPlants(PlantQualityName.Legendary, usedRews[k], randSeeds));
+                                break;
+                            }
                         }
                     }
-
-                    else
-                        Debug.Log("Pinata WON'T Show " + pinataQualitiesChances[i].chances[j].quality.ToString());
                 }
 
                 break;
             }
         }
+    }
+
+    public List<List<RewardedPlants>> GetFullPinataRewards()
+    {
+        List<List<RewardedPlants>> retList = new List<List<RewardedPlants>>();
+
+        retList.Add(rewComm); retList.Add(rewRar); retList.Add(rewEpc); retList.Add(rewLeg);
+        return retList;
+    }
+
+    void InitPinatasMenu()
+    {
+        pinataPriceT.text = allPinatas[currentPinatasIndex].sizes[currentSizesIndex].pinataPrice.ToString("N0");
+
+        for (int i = 0; i < pinataQualitiesChances[currentSizesIndex].chances.Length; i++)
+        {
+            pinatasUI[i].appearChance.text = pinataQualitiesChances[currentSizesIndex].chances[i].quality.ToString() + " - " +
+                pinataQualitiesChances[currentSizesIndex].chances[i].appearChance + "%";
+
+            pinatasUI[i].plantAmounts.text = "Plants - " + pinataQualitiesChances[currentSizesIndex].chances[i].plantAmount;
+            pinatasUI[i].seedsAmounts.text = "Seeds - " + pinataQualitiesChances[currentSizesIndex].chances[i].seedsRange.x;
+        }
+
+        CheckAvailabilityForPinatas(allPinatas[currentPinatasIndex]);
+    }
+
+    public void LeftPinatasButton(bool type)
+    {
+        if (type)
+        {
+            currentSizesIndex--;
+
+            if (currentSizesIndex < 0)
+                currentSizesIndex = 3;
+
+            switch (currentSizesIndex)
+            {
+                case 0: pinataSizeT.text = "Small"; break;
+                case 1: pinataSizeT.text = "Medium"; break;
+                case 2: pinataSizeT.text = "Large"; break;
+                case 3: pinataSizeT.text = "Extra-Large"; break;
+            }
+
+            pinataPriceT.text = allPinatas[currentPinatasIndex].sizes[currentSizesIndex].pinataPrice.ToString("N0");
+
+            for (int i = 0; i < pinataQualitiesChances[currentSizesIndex].chances.Length; i++)
+            {
+                pinatasUI[i].appearChance.text = pinataQualitiesChances[currentSizesIndex].chances[i].quality.ToString() + " - " +
+                    pinataQualitiesChances[currentSizesIndex].chances[i].appearChance + "%";
+
+                pinatasUI[i].plantAmounts.text = "Plants - " + pinataQualitiesChances[currentSizesIndex].chances[i].plantAmount;
+                pinatasUI[i].seedsAmounts.text = "Seeds - " + pinataQualitiesChances[currentSizesIndex].chances[i].seedsRange.x;
+            }
+
+            CheckAvailabilityForPinatas(allPinatas[currentPinatasIndex]);
+        }
+
+        else
+        {
+            currentPinatasIndex--;
+
+            if (currentPinatasIndex < 0)
+                currentPinatasIndex = allPinatas.Length - 1;
+
+            menuPinataImage.sprite = allPinatas[currentPinatasIndex].pinataImage;
+            pinataNameT.text = allPinatas[currentPinatasIndex].pinataName;
+
+            SetPinataToSmall();
+        }
+    }
+
+    public void RightPinatasButton(bool type)
+    {
+        if (type)
+        {
+            currentSizesIndex++;
+
+            if (currentSizesIndex > 3)
+                currentSizesIndex = 0;
+
+            switch (currentSizesIndex)
+            {
+                case 0: pinataSizeT.text = "Small"; break;
+                case 1: pinataSizeT.text = "Medium"; break;
+                case 2: pinataSizeT.text = "Large"; break;
+                case 3: pinataSizeT.text = "Extra-Large"; break;
+            }
+
+            pinataPriceT.text = allPinatas[currentPinatasIndex].sizes[currentSizesIndex].pinataPrice.ToString("N0");
+
+            for (int i = 0; i < pinataQualitiesChances[currentSizesIndex].chances.Length; i++)
+            {
+                pinatasUI[i].appearChance.text = pinataQualitiesChances[currentSizesIndex].chances[i].quality.ToString() + " - " +
+                    pinataQualitiesChances[currentSizesIndex].chances[i].appearChance + "%";
+
+                pinatasUI[i].plantAmounts.text = "Plants - " + pinataQualitiesChances[currentSizesIndex].chances[i].plantAmount;
+                pinatasUI[i].seedsAmounts.text = "Seeds - " + pinataQualitiesChances[currentSizesIndex].chances[i].seedsRange.x;
+            }
+
+            CheckAvailabilityForPinatas(allPinatas[currentPinatasIndex]);
+        }
+
+        else
+        {
+            currentPinatasIndex++;
+
+            if (currentPinatasIndex > allPinatas.Length - 1)
+                currentPinatasIndex = 0;
+
+            menuPinataImage.sprite = allPinatas[currentPinatasIndex].pinataImage;
+            pinataNameT.text = allPinatas[currentPinatasIndex].pinataName;
+
+            SetPinataToSmall();
+        }
+    }
+
+    void SetPinataToSmall()
+    {
+        currentSizesIndex = 0;
+        pinataSizeT.text = "Small";
+        pinataPriceT.text = allPinatas[currentPinatasIndex].sizes[0].pinataPrice.ToString("N0");
+
+        pinataPriceT.text = allPinatas[currentPinatasIndex].sizes[currentSizesIndex].pinataPrice.ToString("N0");
+
+        for (int i = 0; i < pinataQualitiesChances[currentSizesIndex].chances.Length; i++)
+        {
+            pinatasUI[i].appearChance.text = pinataQualitiesChances[currentSizesIndex].chances[i].quality.ToString() + " - " +
+                pinataQualitiesChances[currentSizesIndex].chances[i].appearChance + "%";
+
+            pinatasUI[i].plantAmounts.text = "Plants - " + pinataQualitiesChances[currentSizesIndex].chances[i].plantAmount;
+            pinatasUI[i].seedsAmounts.text = "Seeds - " + pinataQualitiesChances[currentSizesIndex].chances[i].seedsRange.x;
+        }
+
+        CheckAvailabilityForPinatas(allPinatas[currentPinatasIndex]);
     }
 
     public void ActivatePinataContinueButton()
@@ -325,6 +478,7 @@ public class UIManager : MonoBehaviour
         pinataContinueButton.SetActive(false);
         pinataRewardText.text = "Grab and Squish the Pinata with the Button B and the Trigger!";
         creaPinata.DeleteAllCreatedRewards();
+        rewComm.Clear(); rewRar.Clear(); rewEpc.Clear(); rewLeg.Clear();
         Destroy(creaPinata.gameObject);
     }
 
@@ -383,7 +537,7 @@ public class UIManager : MonoBehaviour
         {
             if (player.GetHoldingPlant() == null)
                 CreatePlantOnPlayerHand(plant.gameObject);
-            
+
             else
             {
                 if (player.GetHoldingPlant().gameObject.name != plant.gameObject.name)
@@ -426,7 +580,7 @@ public class UIManager : MonoBehaviour
     }
 
     public void ChangePlantsFromWorld(string world)
-    {   
+    {
         if (world != activePlants)
         {
             foreach (GameObject g in plantSections)
@@ -453,24 +607,22 @@ public class UIManager : MonoBehaviour
             SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
     }
 
-    public void SelectSPinata(PinataAsset pa) => CreatePinata("s", pa.pinataGameObject);
-
-    public void SelectMPinata(PinataAsset pa) => CreatePinata("m", pa.pinataGameObject);
-
-    public void SelectLPinata(PinataAsset pa) => CreatePinata("l", pa.pinataGameObject);
-
-    public void SelectXLPinata(PinataAsset pa) => CreatePinata("xl", pa.pinataGameObject);
-
-    public void CreatePinata(string pinataSize, GameObject pinataG)
-    {
-        creaPinata = Instantiate(pinataG, pinataG.transform.position, Quaternion.identity).GetComponent<Pinata>();
-        creaPinata.SetPinataSize(pinataSize);
-        ActivatePinataMenu();
+    public void BuyPinata()
+    {   
+        if (Player.instance.GetPlayerMoney() >= allPinatas[currentPinatasIndex].sizes[currentSizesIndex].pinataPrice)
+        {
+            CalculatePinataRewards();
+            GameObject pinataG = allPinatas[currentPinatasIndex].pinataGameObject;
+            creaPinata = Instantiate(pinataG, pinataG.transform.position, Quaternion.identity).GetComponent<Pinata>();
+            creaPinata.SetPinataSize(pinataQualitiesChances[currentSizesIndex].sizeToApply.ToString().ToLower());
+            ActivatePinataMenu();
+            Player.instance.SpendMoney(allPinatas[currentPinatasIndex].sizes[currentSizesIndex].pinataPrice);
+        }
     }
 
     void CreatePlantOnPlayerHand(GameObject plant)
     {
-        GameObject selectPlant = Instantiate(plant, 
+        GameObject selectPlant = Instantiate(plant,
             player.leftHand.handInteractor.transform.position, Quaternion.identity
         );
 
@@ -483,7 +635,7 @@ public class UIManager : MonoBehaviour
     {
         GameObject selectFlower = Instantiate(flowerPot,
             player.leftHand.handInteractor.transform.position, Quaternion.identity);
-        
+
         selectFlower.gameObject.name = selectFlower.gameObject.name.Replace("(Clone)", string.Empty);
         selectFlower.GetComponent<FlowerPot>().SetHandPosition(player.leftHand.handInteractor.transform);
         player.CreatedAFlowerPot(selectFlower.GetComponent<FlowerPot>());
@@ -491,36 +643,33 @@ public class UIManager : MonoBehaviour
 }
 
 [System.Serializable]
-public class PinatasUI
+public class RewardedPlants
 {
-    public PinataAsset pinataAsset;
-    [NonReorderable]
-    public PinatasButtons[] buttons;
+    public PlantQualityName quality;
+    public PlantAsset plant;
+    public int givenSeeds;
 
-    public void SetAvailability(int index, bool set)
+    public RewardedPlants (PlantQualityName quality, PlantAsset plant, int givenSeeds)
     {
-        buttons[index].buyButton.interactable = set;
-        buttons[index].coin.SetActive(set);
-
-        if (set)
-            buttons[index].availabilityText.text = pinataAsset.sizes[index].pinataPrice.ToString("N0");
-        else
-            buttons[index].availabilityText.text = "Not Enough Plants!";
+        this.quality = quality;
+        this.plant = plant;
+        this.givenSeeds = givenSeeds;
     }
+}
+
+[System.Serializable]
+public class PinatasUIQuality
+{
+    public Text appearChance;
+    public Text plantAmounts;
+    public Text seedsAmounts;
 }
 
 [System.Serializable]
 public class PinataRewardsPlaceholders
 {
     public PinataSizeCategory sizeToApply;
+    public int minUnlockedPlantsToUse;
     [NonReorderable]
     public QualityChance[] chances;
-}
-
-[System.Serializable]
-public class PinatasButtons
-{
-    public Button buyButton;
-    public Text availabilityText;
-    public GameObject coin;
 }

@@ -215,7 +215,6 @@ public class SeedDatabase : MonoBehaviour
         if (!loading)
         {
             DataCollector.instance.AddNewSeedPacket(plant.name, plant.appearsIn.ToString(), 1);
-            UIManager.instance.CheckAvailabilityForPinatas();
         }
 
         if (GameManager.instance.onTutorial && GetTotalUnlockedPlants() >= 5)

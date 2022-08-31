@@ -5,7 +5,9 @@ public class PinataAsset : ScriptableObject
 {
     [NonReorderable] public PinataSize[] sizes;
     public Sprite pinataImage;
+    public string pinataName;
     public GameObject pinataGameObject;
+    [NonReorderable]
     public PlantsDividedQuality[] plantsThatCanAppear;
 }
 
@@ -13,11 +15,8 @@ public class PinataAsset : ScriptableObject
 public class PinataSize
 {
     public int pinataPrice;
-    public int minUnlockedPlantsToUse;
     public PinataSizeCategory pinataSize;
     public Vector2Int squishesRange;
-    /*[NonReorderable]
-    public QualityChance[] qualitiesToAppear;*/
 }
 
 [System.Serializable]

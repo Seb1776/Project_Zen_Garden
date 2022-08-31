@@ -88,8 +88,10 @@ public class DataCollector : MonoBehaviour
     }
 
     void Start()
-    {
-        gameFileLetter = GameObject.FindGameObjectWithTag("MainMenu").GetComponent<MainMenu>().loadedLetter;
+    {   
+        if (GameObject.FindGameObjectWithTag("MainMenu") != null)
+            gameFileLetter = GameObject.FindGameObjectWithTag("MainMenu").GetComponent<MainMenu>().loadedLetter;
+
         LoadData();
     }
 
@@ -110,7 +112,10 @@ public class DataCollector : MonoBehaviour
 
     public void LoadData()
     {
-        MainMenu mm = GameObject.FindGameObjectWithTag("MainMenu").GetComponent<MainMenu>();
+        MainMenu mm = null;
+
+        if (GameObject.FindGameObjectWithTag("MainMenu") != null)
+            mm = GameObject.FindGameObjectWithTag("MainMenu").GetComponent<MainMenu>();
 
         if (File.Exists(Application.persistentDataPath + "/ZenGardenVR_" + gameFileLetter + ".json"))
         {
@@ -137,18 +142,23 @@ public class DataCollector : MonoBehaviour
             playerLastWorld = "Tutorial";
             GameManager.instance.FirstTimeTutorial();
             SeedDatabase.instance.SendGardenDataToCollector();
-            UIManager.instance.CheckAvailabilityForPinatas();
             MusicManager.instance.ChangeWithoutTransition(Resources.Load<MusicAsset>("Music/Datas/Tutorial"));
 
-            SetGardenName(mm.newSetGardenName);
-            mm.newSetGardenName = string.Empty;
+            if (mm != null)
+            {
+                SetGardenName(mm.newSetGardenName);
+                mm.newSetGardenName = string.Empty;
+            }
 
             StartCoroutine(AutoSave());
         }
 
-        mm.transitionBall.SetTrigger("detransition");
-        GameManager.instance.startCounting = true;
-        StartCoroutine(WaitToDeleteMain(7f, mm.gameObject, mm.transitionBall.gameObject));
+        if (mm != null)
+        {
+            mm.transitionBall.SetTrigger("detransition");
+            GameManager.instance.startCounting = true;
+            StartCoroutine(WaitToDeleteMain(7f, mm.gameObject, mm.transitionBall.gameObject));
+        }
     }
 
     IEnumerator WaitToDeleteMain(float delay, GameObject _a, GameObject _b)
@@ -228,7 +238,6 @@ public class DataCollector : MonoBehaviour
         }
 
         Player.instance.SetMoneyAmount(sd.playerCoins);
-        UIManager.instance.CheckAvailabilityForPinatas();
         playerLastWorld = sd.playerLastWorld;
         gardenName = sd.gardenName;
 
