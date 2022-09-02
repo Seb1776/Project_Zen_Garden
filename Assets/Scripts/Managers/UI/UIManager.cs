@@ -618,6 +618,9 @@ public class UIManager : MonoBehaviour
             ActivatePinataMenu();
             Player.instance.SpendMoney(allPinatas[currentPinatasIndex].sizes[currentSizesIndex].pinataPrice);
         }
+
+        else
+            SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
     }
 
     void CreatePlantOnPlayerHand(GameObject plant)
