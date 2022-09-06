@@ -13,6 +13,27 @@ public class PlantAsset : ScriptableObject
     public List<FlowerPotType> canBePlantedIn = new List<FlowerPotType>();
     public int unlockPrice;
     public int buyPrice;
-    public int revenuePrice;
+    [NonReorderable]
+    public PlantLevel[] plantLevels;
     public Vector3 initialScale;
+
+    public PlantLevel GetPlantLevel(int idx)
+    {
+        for (int i = 0; i < plantLevels.Length; i++)
+            if (idx == i)
+                return plantLevels[i];
+
+        return null;
+    }
+}
+
+[System.Serializable]
+public class PlantLevel
+{
+    public int upgradePrice;
+    public int producedCoins;
+    public int producingTime;
+    public int plantLife;
+    public int energyLevel;
+    public int sellPrice;
 }

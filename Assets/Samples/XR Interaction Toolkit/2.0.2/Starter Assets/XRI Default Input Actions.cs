@@ -966,6 +966,15 @@ public partial class @XRIDefaultInputActions : IInputActionCollection2, IDisposa
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Button B"",
+                    ""type"": ""Button"",
+                    ""id"": ""5542a4c8-47aa-4dff-ba12-4b7d72d9487e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -1177,6 +1186,17 @@ public partial class @XRIDefaultInputActions : IInputActionCollection2, IDisposa
                     ""action"": ""Button A"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e72311bd-8f3f-4844-8087-7c2e0febd764"",
+                    ""path"": ""<XRController>{RightHand}/secondaryButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Button B"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -1385,6 +1405,7 @@ public partial class @XRIDefaultInputActions : IInputActionCollection2, IDisposa
         m_XRIRightHandInteraction_RotateAnchor = m_XRIRightHandInteraction.FindAction("Rotate Anchor", throwIfNotFound: true);
         m_XRIRightHandInteraction_TranslateAnchor = m_XRIRightHandInteraction.FindAction("Translate Anchor", throwIfNotFound: true);
         m_XRIRightHandInteraction_ButtonA = m_XRIRightHandInteraction.FindAction("Button A", throwIfNotFound: true);
+        m_XRIRightHandInteraction_ButtonB = m_XRIRightHandInteraction.FindAction("Button B", throwIfNotFound: true);
         // XRI RightHand Locomotion
         m_XRIRightHandLocomotion = asset.FindActionMap("XRI RightHand Locomotion", throwIfNotFound: true);
         m_XRIRightHandLocomotion_TeleportSelect = m_XRIRightHandLocomotion.FindAction("Teleport Select", throwIfNotFound: true);
@@ -1785,6 +1806,7 @@ public partial class @XRIDefaultInputActions : IInputActionCollection2, IDisposa
     private readonly InputAction m_XRIRightHandInteraction_RotateAnchor;
     private readonly InputAction m_XRIRightHandInteraction_TranslateAnchor;
     private readonly InputAction m_XRIRightHandInteraction_ButtonA;
+    private readonly InputAction m_XRIRightHandInteraction_ButtonB;
     public struct XRIRightHandInteractionActions
     {
         private @XRIDefaultInputActions m_Wrapper;
@@ -1798,6 +1820,7 @@ public partial class @XRIDefaultInputActions : IInputActionCollection2, IDisposa
         public InputAction @RotateAnchor => m_Wrapper.m_XRIRightHandInteraction_RotateAnchor;
         public InputAction @TranslateAnchor => m_Wrapper.m_XRIRightHandInteraction_TranslateAnchor;
         public InputAction @ButtonA => m_Wrapper.m_XRIRightHandInteraction_ButtonA;
+        public InputAction @ButtonB => m_Wrapper.m_XRIRightHandInteraction_ButtonB;
         public InputActionMap Get() { return m_Wrapper.m_XRIRightHandInteraction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1834,6 +1857,9 @@ public partial class @XRIDefaultInputActions : IInputActionCollection2, IDisposa
                 @ButtonA.started -= m_Wrapper.m_XRIRightHandInteractionActionsCallbackInterface.OnButtonA;
                 @ButtonA.performed -= m_Wrapper.m_XRIRightHandInteractionActionsCallbackInterface.OnButtonA;
                 @ButtonA.canceled -= m_Wrapper.m_XRIRightHandInteractionActionsCallbackInterface.OnButtonA;
+                @ButtonB.started -= m_Wrapper.m_XRIRightHandInteractionActionsCallbackInterface.OnButtonB;
+                @ButtonB.performed -= m_Wrapper.m_XRIRightHandInteractionActionsCallbackInterface.OnButtonB;
+                @ButtonB.canceled -= m_Wrapper.m_XRIRightHandInteractionActionsCallbackInterface.OnButtonB;
             }
             m_Wrapper.m_XRIRightHandInteractionActionsCallbackInterface = instance;
             if (instance != null)
@@ -1865,6 +1891,9 @@ public partial class @XRIDefaultInputActions : IInputActionCollection2, IDisposa
                 @ButtonA.started += instance.OnButtonA;
                 @ButtonA.performed += instance.OnButtonA;
                 @ButtonA.canceled += instance.OnButtonA;
+                @ButtonB.started += instance.OnButtonB;
+                @ButtonB.performed += instance.OnButtonB;
+                @ButtonB.canceled += instance.OnButtonB;
             }
         }
     }
@@ -2012,6 +2041,7 @@ public partial class @XRIDefaultInputActions : IInputActionCollection2, IDisposa
         void OnRotateAnchor(InputAction.CallbackContext context);
         void OnTranslateAnchor(InputAction.CallbackContext context);
         void OnButtonA(InputAction.CallbackContext context);
+        void OnButtonB(InputAction.CallbackContext context);
     }
     public interface IXRIRightHandLocomotionActions
     {

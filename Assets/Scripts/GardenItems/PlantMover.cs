@@ -20,7 +20,7 @@ public class PlantMover : GardenItem
 
     void ReturnPlantToOriginalLocation(XRBaseInteractor i)
     {
-        if (grabbedPlant != null)
+        if (grabbedPlant != null && grabbedPlant.replanting)
         {
             grabbedPlant.flowerPotIn.RePlantPlant(grabbedPlant);
             Player.instance.RecievePlantedPlant(null);
@@ -29,7 +29,7 @@ public class PlantMover : GardenItem
 
     void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Plant"))
+        if (other.CompareTag("Plant") && other.GetComponent<Plant>().growth)
         {
             grabbedPlant.flowerPotIn.outline.ChangeOutlineColor(Color.yellow, false);
             grabbedPlant = null;
@@ -39,8 +39,8 @@ public class PlantMover : GardenItem
 
     void OnTriggerStay(Collider other)
     {
-        if (other.CompareTag("Plant"))
-        {   
+        if (other.CompareTag("Plant") && other.GetComponent<Plant>().growth)
+        {
             if (grabbedPlant == null)
             {
                 grabbedPlant = other.transform.GetComponent<Plant>();

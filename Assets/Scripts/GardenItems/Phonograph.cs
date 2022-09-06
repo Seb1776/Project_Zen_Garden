@@ -42,13 +42,13 @@ public class Phonograph : GardenItem
             {
                 if (hoveringFlowerPot.GetPlantedPlant() != null)
                 {
-                    if (hoveringFlowerPot.GetPlantedPlant() != null && !hoveringFlowerPot.GetPlantedPlant().fullyGrown)
+                    if (hoveringFlowerPot.GetPlantedPlant() != null)
                     {
                         hoveringFlowerPot.outline.ChangeOutlineColor(Color.red, false);
                         hoveringFlowerPot = null;
                     }
 
-                    else if (hoveringFlowerPot.GetPlantedPlant() != null && hoveringFlowerPot.GetPlantedPlant().fullyGrown)
+                    else if (hoveringFlowerPot.GetPlantedPlant() != null)
                     {
                         hoveringFlowerPot.outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
                         hoveringFlowerPot = null;

@@ -59,13 +59,13 @@ public class WateringCan : GardenItem
         {   
             if (detectedPot != null && detectedPot.GetPlantedPlant() != null)
             {
-                if (!detectedPot.GetPlantedPlant().fullyGrown)
+                if (detectedPot.GetPlantedPlant() != null)
                 {
                     detectedPot.outline.ChangeOutlineColor(Color.white, false);
                     detectedPot = null;
                 }
 
-                else if (detectedPot.GetPlantedPlant() != null && detectedPot.GetPlantedPlant().fullyGrown)
+                else if (detectedPot.GetPlantedPlant() != null)
                 {
                     detectedPot.outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
                     detectedPot = null;

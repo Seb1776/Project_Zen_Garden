@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     private bool grabbedPlantedPlant, grabbedPlacedFlower;
     private GardenItem holdingGardenItem;
     private SeedDatabase seedDatabase;
+    public bool onSellingPlantPanel, onUpgradingPlantPanel;
     [Header ("Economy")]
     [SerializeField] private int currentPlayerCoins;
 
@@ -39,6 +40,7 @@ public class Player : MonoBehaviour
 
     void SetInteractions()
     {
+        //Left Hand
         leftHand.handInteractor.enabled = false;
         leftHand.move.Enable();
         leftHand.move = xrDirect.XRILeftHandInteraction.ButtonA;
@@ -55,6 +57,7 @@ public class Player : MonoBehaviour
         leftHand.removePlant.performed += GetRidOfSelectedPlant;
         leftHand.removePlant.performed += GetRidOfSelectedFlowerPot;
 
+        //Right Hand
         rightHand.grabbedItemEffect.Enable();
         rightHand.grabbedItemEffect = xrDirect.XRIRightHandInteraction.Activate;
         rightHand.grabbedItemEffect.performed += GrabPlantedPlant;
@@ -65,8 +68,12 @@ public class Player : MonoBehaviour
 
         rightHand.sellPlant.Enable();
         rightHand.sellPlant = xrDirect.XRIRightHandInteraction.ButtonA;
-        rightHand.sellPlant.performed += SellPlant;
+        rightHand.sellPlant.performed += TriggerSellActionMenu;
         rightHand.sellPlant.performed += SquishPinata;
+
+        rightHand.upgradePlant.Enable();
+        rightHand.upgradePlant = xrDirect.XRIRightHandInteraction.ButtonB;
+        rightHand.upgradePlant.performed += TriggerUpgradeActionMenu;
     }
 
     public void GrabPlantedPlant(InputAction.CallbackContext ctx)
@@ -265,15 +272,75 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void SellPlant(InputAction.CallbackContext ctx)
+    /*public void SellPlant(InputAction.CallbackContext ctx)
     {
         if (holdingFlowerPot != null)
         {
+            //Linea 1
             GameObject plant;
             plant = holdingFlowerPot.GetPlantedPlant().gameObject;
-            AddMoney(plant.GetComponent<Plant>().plantData.revenuePrice);
             plant.GetComponent<Plant>().TriggerSellPlant();
+
+
+            //Linea 2
+            holdingFlowerPot.GetPlantedPlant().TriggerReplant();
         }
+    }*/
+
+    public void TriggerSellActionMenu(InputAction.CallbackContext ctx)
+    {
+        if (holdingFlowerPot != null && !onUpgradingPlantPanel)
+        {
+            if (onSellingPlantPanel)
+            {
+                holdingFlowerPot.GetPlantedPlant().TriggerSellPlant();
+            }
+
+            else
+            {
+                holdingFlowerPot.sellPlantPanel.SetActive(true);
+                holdingFlowerPot.actionButtons.SetActive(false);
+                holdingFlowerPot.plantSellT.text = "$ " + holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex
+                ].sellPrice.ToString("N0");
+                holdingFlowerPot.ToggleFlowerPotUI(false);
+                onSellingPlantPanel = true;
+            }
+        }
+    }
+
+    public void TriggerUpgradeActionMenu(InputAction.CallbackContext ctx)
+    {
+        if (holdingFlowerPot.GetPlantedPlant().CanUpgradePlant())
+        {
+            if (holdingFlowerPot != null && !onSellingPlantPanel)
+            {   
+                if (onUpgradingPlantPanel)
+                {
+                    Debug.Log("Upgrade " + holdingFlowerPot.GetPlantedPlant().gameObject.name);
+                }
+
+                else
+                {
+                    holdingFlowerPot.upgradePlantPanel.SetActive(true);
+                    holdingFlowerPot.actionButtons.SetActive(false);
+                    holdingFlowerPot.ToggleFlowerPotUI(false);
+                    holdingFlowerPot.plantUpgradeT.text = "$ " + holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                        holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex + 1
+                    ].upgradePrice.ToString("N0");
+                    onUpgradingPlantPanel = true;
+                }
+            }
+        }
+    }
+
+    public void DeTriggerPanels()
+    {
+        holdingFlowerPot.upgradePlantPanel.SetActive(false);
+        holdingFlowerPot.sellPlantPanel.SetActive(false);
+        holdingFlowerPot.ToggleFlowerPotUI(true);
+        onUpgradingPlantPanel = false;
+        onSellingPlantPanel = false;
     }
 
     public void SetFlowerPot(InputAction.CallbackContext ctx)
@@ -379,4 +446,5 @@ public class VRHandsRight
     public XRDirectInteractor handInteractor;
     public InputAction grabbedItemEffect;
     public InputAction sellPlant;
+    public InputAction upgradePlant;
 }

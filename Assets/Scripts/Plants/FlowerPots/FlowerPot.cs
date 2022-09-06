@@ -19,11 +19,14 @@ public class FlowerPot : MonoBehaviour
     [SerializeField] private GameObject musicPlayer;
     public string createdIn;
     public OutlineEffect outline;
-    public GameObject sellPlantButton;
+    public GameObject actionButtons, sellPlantPanel, upgradePlantPanel;
+    private Animator coinShowAnimator;
 
     [Header ("UI")]
     [SerializeField] private GameObject needWaterIcon;
     [SerializeField] private GameObject needCompostIcon, needFertilizerIcon, needMusicIcon;
+    [SerializeField] private Slider revenueSlider, plantEnergySlider, lifeSlider;
+    public Text plantName, plantLevel, plantSellT, plantUpgradeT;
     public Text revenueText;
 
     [Header ("Effect")]
@@ -33,7 +36,7 @@ public class FlowerPot : MonoBehaviour
     private Collider coll;
     public Collider triggerColl;
     private PlantsManager plantsManager;
-    [SerializeField] private Plant plantInSpace;
+    private Plant plantInSpace;
     private SeedDatabase seedDatabase;
     private AudioSource source;
     private MusicManager musicManager;
@@ -61,6 +64,7 @@ public class FlowerPot : MonoBehaviour
         musicManager = GameObject.FindGameObjectWithTag("MusicManager").GetComponent<MusicManager>();
         plantsManager = GameObject.FindGameObjectWithTag("PlantsManager").GetComponent<PlantsManager>();
         seedDatabase = GameObject.FindGameObjectWithTag("SeedDatabase").GetComponent<SeedDatabase>();
+        coinShowAnimator = transform.GetChild(6).transform.GetChild(8).GetComponent<Animator>();
     }
 
     [System.Obsolete]
@@ -79,18 +83,15 @@ public class FlowerPot : MonoBehaviour
             Vector3.Distance(transform.localPosition, startPos) > 0.01f)
                 returnToPos = true;
         
-        if (GetPlantedPlant() != null && (GetPlantedPlant().fullyGrown && !GetPlantedPlant().replanting) && !selectedByShovel)
-            outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
-        
         if (returnToPos && MusicManager.instance.currentWorld.ToString() == createdIn)
             GetBackPos();
+        
+        potInteractable.enabled = !returning;
     }
 
     void GetBackPos()
     {
         transform.position = Vector3.Lerp(transform.position, startPos, 2.5f * Time.deltaTime);
-        coll.isTrigger = true;
-        triggerColl.enabled = false;
         returning = true;
 
         if (Vector3.Distance(transform.position, startPos) <= 0.001f)
@@ -98,8 +99,6 @@ public class FlowerPot : MonoBehaviour
             transform.position = startPos;
             returnToPos = false;
             returning = false;
-            coll.isTrigger = false;
-            triggerColl.enabled = true;
         }
     }
 
@@ -131,14 +130,15 @@ public class FlowerPot : MonoBehaviour
 
         if (plantInSpace != null)
         {
-            sellPlantButton.SetActive(true);
+            actionButtons.SetActive(true);
             revenueText.gameObject.SetActive(true);
         }
     }
 
-    public void UpdatePlantSellPrice(int newPrice)
+    public void TriggerCoinRevenue(int revenue)
     {
-        revenueText.text = "Sell For: $ " + newPrice.ToString("0,0");
+        coinShowAnimator.transform.GetChild(1).GetComponent<Text>().text = "+ " + revenue.ToString("N0");
+        coinShowAnimator.SetTrigger("showrev");
     }
 
     void UnSendFlowerPotToPlayer(XRBaseInteractor flower)
@@ -158,10 +158,11 @@ public class FlowerPot : MonoBehaviour
             reAssignable = false;
         }
 
+        Player.instance.DeTriggerPanels();
         triggerColl.enabled = plantInSpace == null;
         SeedDatabase.instance.TriggerHolders(false);
         player.SetHoldFlowerPot();
-        sellPlantButton.SetActive(false);
+        actionButtons.SetActive(false);
         revenueText.gameObject.SetActive(false);
     }
 
@@ -203,6 +204,7 @@ public class FlowerPot : MonoBehaviour
     public void ReCheckForWarnings(GardenItemType gip)
     {
         ActivateWarning(gip, true);
+        ToggleFlowerPotSliders(false);
     }
 
     public IEnumerator TriggerWaterEffect(float duration)
@@ -237,16 +239,20 @@ public class FlowerPot : MonoBehaviour
     public void RePlantPlant(Plant p)
     {
         StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantplant"));
+        p.flowerPotIn.triggerColl.enabled = true;
         p.flowerPotIn.plantInSpace = null;
         p.transform.position = plantPlantingPosition.position;
         p.transform.parent = transform;
-        p.SetPlanted();
         p.ApplyColorToPlant(new Color(1f, 1f, 1f, 1f));
         outline.ChangeOutlineColor(Color.white, false);
-        UpdatePlantSellPrice(p.GetActualRevenue());
         triggerColl.enabled = false;
         p.plantAnim.speed = 1f;
         p.flowerPotIn = this;
+        p.SetPlanted();
+        p.flowerPotIn.SetFlowerPotUI(p.plantData.plantName, p.currentPlantLevelIndex + 1, p.plantData.plantLevels[p.currentPlantLevelIndex].
+            energyLevel, p.plantData.plantLevels[p.currentPlantLevelIndex].producingTime, p.plantData.plantLevels[p.currentPlantLevelIndex].plantLife);
+        p.flowerPotIn.UpdateFlowerPotUI((true, p.currentPlantLevelIndex + 1), (true, p.currentEnergyTime), (true, p.currentProgressTime), (true, (int)p.currentLifeTime));
+        p.flowerPotIn.ToggleFlowerPotUI(true);
         p.replanting = false;
 
         if (p != plantInSpace)
@@ -266,19 +272,68 @@ public class FlowerPot : MonoBehaviour
         p.flowerPotIn = this;
         _s.transform.parent = transform;
         seedDatabase.UsePlant(p.plantData);
+        outline.StartStuff();
         outline.outlineRenderer.enabled = false;
         hoveringPlantIsAccepted = false;
         canUseOutline = false;
         plantInSpace = p;
-        UpdatePlantSellPrice(p.GetActualRevenue());
         triggerColl.enabled = false;
         p.ApplyColorToPlant(new Color(1f, 1f, 1f, 1f));
         p.SetPlanted(_s);
+        p.SetPlantProgress();
         p.expectedItem = GardenItemType.None;
         DataCollector.instance.AddPlant(MusicManager.instance.GetCurrentMusic().world, this, p);
         DataCollector.instance.UpdateSeedPacket(p.plantData.name, SeedDatabase.instance.GetPlantInList(p.plantData).amount);
         p.plantIsAbove = null;
         p.transform.localScale = Vector3.zero;
+    }
+
+    public void ToggleFlowerPotUI(bool toggle)
+    {   
+        if (!plantInSpace.ExpectingGardenItem())
+        {
+            plantEnergySlider.gameObject.SetActive(toggle);
+            revenueSlider.gameObject.SetActive(toggle);
+            lifeSlider.gameObject.SetActive(toggle);
+        }
+
+        else
+            ActivateWarning(plantInSpace.expectedItem, true);
+
+        plantName.gameObject.SetActive(toggle);
+        plantLevel.gameObject.SetActive(toggle);
+    }
+
+    public void ToggleFlowerPotSliders(bool toggle)
+    {
+        plantEnergySlider.gameObject.SetActive(toggle);
+        revenueSlider.gameObject.SetActive(toggle);
+        lifeSlider.gameObject.SetActive(toggle);
+    }
+
+    public void SetFlowerPotUI(string _plantName, int _plantLevel, float maxEnergySlide, float maxRevenueSlide, float maxLifeSlide)
+    {
+        plantName.text = _plantName;
+        plantLevel.text = "Level " + _plantLevel;
+        plantEnergySlider.maxValue = maxEnergySlide;
+        revenueSlider.maxValue = maxRevenueSlide;
+        lifeSlider.maxValue = maxLifeSlide;
+    }
+
+    public void UpdateFlowerPotUI((bool changeLevel, int newPlantLevel) _plantLevel, (bool changeEnergy, float newEnergy) currentEnergy, 
+        (bool changeRevenue, float newRevenue) currentRevenue, (bool changeLife, int newLife) currentLife)
+    {
+        if (_plantLevel.changeLevel)
+            plantLevel.text = "Level " + _plantLevel.newPlantLevel;
+
+        if (currentEnergy.changeEnergy)
+            plantEnergySlider.value = currentEnergy.newEnergy;
+
+        if (currentRevenue.changeRevenue)
+            revenueSlider.value = currentRevenue.newRevenue;
+        
+        if (currentLife.changeLife)
+            lifeSlider.value = currentLife.newLife;
     }
 
     public void PlantPlantFromLoad(GameObject plantPref, PlantSpot plantData)
@@ -298,7 +353,6 @@ public class FlowerPot : MonoBehaviour
         hoveringPlantIsAccepted = false;
         canUseOutline = false;
         plantInSpace = p;
-        UpdatePlantSellPrice(p.GetActualRevenue());
         triggerColl.enabled = false;
         p.ApplyColorToPlant(new Color(1f, 1f, 1f, 1f));
         p.SetPlanted(_s);
@@ -317,6 +371,7 @@ public class FlowerPot : MonoBehaviour
         if (other.CompareTag("Plant") && other.GetComponent<Plant>().plantIsAbove == null && canUseOutline)
         {
             other.GetComponent<Plant>().plantIsAbove = this;
+            Debug.Log(other.gameObject.name);
 
             if (other.GetComponent<Plant>().CanPlantInFlowerPot(flowerPotAsset.flowerPotType))
             {

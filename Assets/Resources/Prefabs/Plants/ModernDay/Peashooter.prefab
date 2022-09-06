@@ -1455,7 +1455,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: 56d75c13fbcd26c4db9000e027f1bc1e, type: 2}
+  plantAnim: {fileID: 0}
+  currentProgressTime: 0
+  maxTimeToProduce: 10
+  coinsToProduce: 2
+  currentEnegryTime: 0
+  startEnergyTime: 5
+  hasEnergy: 1
+  waterRange: {x: 0, y: 0}
+  compostRange: {x: 0, y: 0}
+  fertilizerRange: {x: 0, y: 0}
+  musicRange: {x: 0, y: 0}
+  replanting: 0
+  fullyGrown: 0
+  currentGrowThreshold: 0
   flowerPotIn: {fileID: 0}
+  plantIsAbove: {fileID: 0}
+  expectedItem: 4
+  revenueMultiplier: 0
 --- !u!65 &8244897900307313646
 BoxCollider:
   m_ObjectHideFlags: 0

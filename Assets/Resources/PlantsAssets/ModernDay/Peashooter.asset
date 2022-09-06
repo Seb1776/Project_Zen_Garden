@@ -21,7 +21,25 @@ MonoBehaviour:
   appearsIn: 10
   plantQuality: {fileID: 11400000, guid: 12d300539662e254a91a708910e8ab05, type: 2}
   canBePlantedIn: 0000000001000000050000000600000007000000
-  unlockPrice: 0
+  unlockPrice: 150
   buyPrice: 150
-  revenuePrice: 175
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 2
+    producingTime: 10
+    plantLife: 20
+    energyLevel: 5
+    sellPrice: 150
+  - upgradePrice: 350
+    producedCoins: 4
+    producingTime: 15
+    plantLife: 22
+    energyLevel: 8
+    sellPrice: 450
+  - upgradePrice: 550
+    producedCoins: 8
+    producingTime: 18
+    plantLife: 25
+    energyLevel: 20
+    sellPrice: 800
   initialScale: {x: -0.07990621, y: 0.07990621, z: 0.07990621}

@@ -10,32 +10,30 @@ public class Plant : MonoBehaviour
     private GameManager manager;
     private PlantsManager plantsManager;
     private bool planted;
-    private bool growth;
+    public bool growth;
     private GameObject _sprout;
     private Collider coll;
     private Transform handPosition;
     private Player player;
     public Animator plantAnim;
 
-    public Vector2Int waterRange, compostRange, fertilizerRange, musicRange;
-    private Vector2 timeRange;
+    //New Progress
+    public float currentProgressTime;
+    [SerializeField] private int maxTimeToProduce;
+    [SerializeField] private int coinsToProduce;
+    public float currentEnergyTime;
+    public float currentLifeTime;
+    [SerializeField] private bool hasEnergy = true;
+    public int currentPlantLevelIndex;
+
+    //Old Progress
     private Vector3 outsideScale;
-    private float setTimeRange, currentTimeRange;
-    private bool waitingForInteraction;
-    private bool progressSet;
     private bool gardenItemChosen, canReplant;
     public bool replanting;
-    public bool fullyGrown;
-    private int growThreshold;
     private bool selling;
-    public int currentGrowThreshold;
     public FlowerPot flowerPotIn, plantIsAbove;
     public GardenItemType expectedItem = GardenItemType.None;
     private GardenItem itemHolding;
-
-    private float revMulIncreaser;
-    public float revenueMultiplier;
-    private float percentageExtra;
 
     void Awake()
     {
@@ -45,8 +43,6 @@ public class Plant : MonoBehaviour
         manager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         plantsManager = GameObject.FindGameObjectWithTag("PlantsManager").GetComponent<PlantsManager>();
-
-        plantsManager.AssignQualityData(this);
 
         outsideScale = transform.localScale;
     }
@@ -58,9 +54,6 @@ public class Plant : MonoBehaviour
             ApplyColorToPlant(new Color(1f, 1f, 1f, .5f));
             plantAnim.speed = 0f;
         }
-
-        revenueMultiplier = 1f / GetAccumulativeRange();
-        revMulIncreaser = 1f / GetAccumulativeRange();
     }
 
     void Update()
@@ -68,9 +61,6 @@ public class Plant : MonoBehaviour
         LookInCameraDirection();
         PlantGrowBehaviour();
 
-        if (planted)
-            PlantProgress();
-        
         if (selling)
             SellPlant();
     }
@@ -79,46 +69,55 @@ public class Plant : MonoBehaviour
     {
         planted = false;
 
-        waterRange = new Vector2Int(data.waterCurrentUses, data.waterTotalUses);
-        compostRange = new Vector2Int(data.compostCurrentUses, data.compostTotalUses);
-        fertilizerRange = new Vector2Int(data.fertilizerCurrentUses, data.fertilizerTotalUses);
-        musicRange = new Vector2Int(data.phonographCurrentUses, data.phonographTotalUses);
-        currentGrowThreshold = data.plantGrowThreshold;
-        revenueMultiplier = data.plantMultRevenue;
-        currentTimeRange = 0f;
-
         if (data.plantIsGrown)
-            GrowPlant(false, data.plantIsFullyGrown);
-        
-        if (!data.plantIsFullyGrown)
+            GrowPlant(false);
+
+        switch (data.plantLastRequire)
         {
-            switch(data.plantLastRequire)
-            {
-                case "Water":
-                    expectedItem = GardenItemType.Water;
+            case "Water":
+                expectedItem = GardenItemType.Water;
                 break;
 
-                case "Compost":
-                    expectedItem = GardenItemType.Compost;
+            case "Compost":
+                expectedItem = GardenItemType.Compost;
                 break;
 
-                case "Fertilizer":
-                    expectedItem = GardenItemType.Fertilizer;
+            case "Fertilizer":
+                expectedItem = GardenItemType.Fertilizer;
                 break;
 
-                case "Music":
-                    expectedItem = GardenItemType.Music;
+            case "Music":
+                expectedItem = GardenItemType.Music;
                 break;
-            }
 
-            planted = true;
+            default:
+                expectedItem = GardenItemType.None;
+                break;
         }
 
-        flowerPotIn.UpdatePlantSellPrice(GetActualRevenue());
+        planted = true;
+        currentPlantLevelIndex = data.plantLevelIndex;
+        currentEnergyTime = data.plantLastEnergyTick;
+        currentProgressTime = data.plantLastProducingTick;
+        currentLifeTime = data.plasntLastLifeTick;
+
+        maxTimeToProduce = plantData.plantLevels[currentPlantLevelIndex].producingTime;
+
+        flowerPotIn.SetFlowerPotUI(plantData.plantName, currentPlantLevelIndex + 1, plantData.plantLevels[currentPlantLevelIndex].
+            energyLevel, plantData.plantLevels[currentPlantLevelIndex].producingTime, plantData.plantLevels[currentPlantLevelIndex].plantLife);
+        flowerPotIn.UpdateFlowerPotUI((true, currentPlantLevelIndex + 1), (true, currentEnergyTime), (true, currentProgressTime), (true, (int)currentLifeTime));
+        flowerPotIn.ToggleFlowerPotUI(true);
+
+        if (expectedItem != GardenItemType.None)
+        {
+            flowerPotIn.ToggleFlowerPotSliders(false);
+            hasEnergy = false;
+            ChooseGardenItem();
+        }
     }
 
     public void GrowPlant(bool playSound = true, bool triggerFullGrown = false)
-    {   
+    {
         if (!growth)
         {
             _sprout.GetComponent<Animator>().SetTrigger("hide");
@@ -127,7 +126,7 @@ public class Plant : MonoBehaviour
     }
 
     IEnumerator GrowPlantAfterSprout(bool playSound = true, bool triggerFullyGrown = false)
-    {   
+    {
         if (!growth)
         {
             yield return new WaitForSeconds(1.167f);
@@ -142,14 +141,12 @@ public class Plant : MonoBehaviour
                 flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                 SetPlanted();
                 ApplyColorToPlant(new Color(1f, 1f, 1f, 1f));
-                fullyGrown = true;
                 plantAnim.speed = 1f;
-                currentTimeRange = -50f;
             }
 
             else
             {
-                DataCollector.instance.SetPlantFullGrownData(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, growth, fullyGrown);
+                DataCollector.instance.SetPlantFullGrownData(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, growth);
             }
         }
     }
@@ -160,16 +157,19 @@ public class Plant : MonoBehaviour
     }
 
     public void TriggerReplant()
-    {   
+    {
         if (canReplant)
         {
             DeactivateWarnings();
             transform.parent = null;
             flowerPotIn.triggerColl.enabled = true;
             flowerPotIn.canUseOutline = true;
+            flowerPotIn.ToggleFlowerPotUI(false);
+            flowerPotIn.triggerColl.enabled = true;
             flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
             planted = false;
             replanting = true;
+            PlantsManager.OnTick -= PlantProgress;
             ApplyColorToPlant(new Color(1f, 1f, 1f, .5f));
             plantAnim.speed = 0f;
         }
@@ -180,6 +180,7 @@ public class Plant : MonoBehaviour
         SoundEffectsManager.instance.PlaySoundEffectNC("removeplant");
         DataCollector.instance.RemovePlant(MusicManager.instance.GetCurrentMusic().world, flowerPotIn);
         DeactivateWarnings();
+        flowerPotIn.ToggleFlowerPotUI(false);
         flowerPotIn.canUseOutline = true;
         flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
         flowerPotIn.triggerColl.enabled = true;
@@ -191,131 +192,137 @@ public class Plant : MonoBehaviour
         handPosition = _hand;
     }
 
-    public int GetActualRevenue()
+    public void SetPlantProgress()
     {
-        if (fullyGrown)
-            return (int)(revenueMultiplier * plantData.revenuePrice) + GetExtraRevenue();
+        PlantLevel pl = plantData.GetPlantLevel(0);
 
-        return (int)(revenueMultiplier * plantData.revenuePrice);
+        maxTimeToProduce = pl.producingTime;
+        currentEnergyTime = pl.energyLevel;
+        coinsToProduce = pl.producedCoins;
+        currentLifeTime = pl.plantLife;
+        currentPlantLevelIndex = 0;
     }
 
-    public int GetExtraRevenue()
+    public void PlantProgress(object sender, PlantsManager.OnTickEventArgs e)
     {
-        return (int)(GameHelper.GetPercentageFromValue(plantData.revenuePrice, percentageExtra));
-    }
-
-    public void SetPlantProgress(PlantProcessAsset ppa)
-    {
-        waterRange.y = Random.Range(ppa.waterRange.x, ppa.waterRange.y);
-        compostRange.y = Random.Range(ppa.compostRange.x, ppa.compostRange.y);
-        fertilizerRange.y = Random.Range(ppa.fertilizerRange.x, ppa.fertilizerRange.y);
-        musicRange.y = Random.Range(ppa.musicRange.x, ppa.musicRange.y);
-        timeRange = ppa.timeRange;
-        percentageExtra = ppa.plantPercentageExtra;
-        growThreshold = (int)((waterRange.y + compostRange.y + fertilizerRange.y + musicRange.y) / 2f);
-        GetNewTimeRange();
-        progressSet = true;
-    }
-
-    void PlantProgress()
-    {
-        if (progressSet && !fullyGrown)
+        if (planted && hasEnergy)
         {
-            if (currentTimeRange < setTimeRange && !waitingForInteraction)
-                currentTimeRange += Time.deltaTime;
-            
-            else if (currentTimeRange >= setTimeRange)
-            {
-                waitingForInteraction = true;
+            currentProgressTime += 1;
+            flowerPotIn.UpdateFlowerPotUI((false, currentPlantLevelIndex + 1), (false, currentEnergyTime), (true, currentProgressTime), (false, 0));
+            DataCollector.instance.SetPlantProduceTick(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, currentProgressTime);
 
-                if (!gardenItemChosen)
-                    ChooseGardenItem();
+            if (currentProgressTime >= maxTimeToProduce)
+            {
+                currentProgressTime = 0f;
+
+                currentEnergyTime -= 1;
+                flowerPotIn.TriggerCoinRevenue(plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
+
+                PlantsManager.instance.AddMoneyToWorldBank(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
+                DataCollector.instance.SetWorldBankMoney(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), PlantsManager.instance.GetCurrentWorldMoney(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn)));
+
+                flowerPotIn.UpdateFlowerPotUI((false, currentPlantLevelIndex + 1), (true, currentEnergyTime), (true, currentProgressTime), (false, 0));
+                DataCollector.instance.SetPlantEnergyTick(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, currentEnergyTime);
+
+                if (currentEnergyTime <= 0)
+                {
+                    hasEnergy = false;
+                    currentLifeTime -= 1;
+                    DataCollector.instance.SetPlantLifeTick(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, currentLifeTime);
+
+                    if (currentLifeTime > 0)
+                    {
+                        ChooseGardenItem();
+
+                        PlantsManager.instance.AddPlantWorldChange(
+                            GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.name, true, true
+                        );
+                    }
+                    
+                    else
+                    {
+                        PlantsManager.instance.AddPlantWorldChange(
+                            GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.name, true, false
+                        );
+
+                        PlantsManager.instance.AddPlantWorldChange(
+                            GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.name, false, true
+                        );
+
+                        WitherPlant();
+                    }
+                }
             }
         }
     }
 
-    void GetNewTimeRange()
-    {
-        setTimeRange = Random.Range(timeRange.x, timeRange.y);
-    }
-
     public bool ExpectingGardenItem()
     {
-        return currentTimeRange >= setTimeRange;
+        return gardenItemChosen;
     }
 
     void ChooseGardenItem()
     {
         List<GardenItemType> availableItems = new List<GardenItemType>();
 
-        if (expectedItem == GardenItemType.None && !fullyGrown)
+        if (expectedItem == GardenItemType.None)
         {
-            for (int i = 0; i < 4; i++)
-            {
-                if (i == 0 && !ItemIsComplete(waterRange))
-                    availableItems.Add(GardenItemType.Water);
-
-                else if (i == 1 && !ItemIsComplete(compostRange))
-                    availableItems.Add(GardenItemType.Compost);
-
-                else if (i == 2 && !ItemIsComplete(fertilizerRange))
-                    availableItems.Add(GardenItemType.Fertilizer);
-
-                else if (i == 3 && !ItemIsComplete(musicRange))
-                    availableItems.Add(GardenItemType.Music);
-            }
-            
-            int randItemIdx = Random.Range(0, availableItems.Count);
-
-            if (availableItems[randItemIdx] == GardenItemType.Water)
-            {
-                expectedItem = GardenItemType.Water;
-                flowerPotIn.ActivateWarning(GardenItemType.Water, true);
-            }
-            
-            if (availableItems[randItemIdx] == GardenItemType.Compost)
-            {
-                expectedItem = GardenItemType.Compost;
-                flowerPotIn.ActivateWarning(GardenItemType.Compost, true);
-            }
-            
-            if (availableItems[randItemIdx] == GardenItemType.Fertilizer)
-            {
-                expectedItem = GardenItemType.Fertilizer;
-                flowerPotIn.ActivateWarning(GardenItemType.Fertilizer, true);
-            }
-            
-            if (availableItems[randItemIdx] == GardenItemType.Music)
-            {
-                expectedItem = GardenItemType.Music;
-                flowerPotIn.ActivateWarning(GardenItemType.Music, true);
-            }
+            int randomItem = Random.Range(0, plantData.plantQuality.canAskFor.Length);
+            expectedItem = plantData.plantQuality.canAskFor[randomItem];
         }
 
-        else if (expectedItem != GardenItemType.None && !fullyGrown)
-        {
-            switch (expectedItem)
-            {
-                case GardenItemType.Water:
-                    flowerPotIn.ActivateWarning(GardenItemType.Water, true);
-                break;
-
-                case GardenItemType.Compost:
-                    flowerPotIn.ActivateWarning(GardenItemType.Compost, true);
-                break;
-
-                case GardenItemType.Fertilizer:
-                    flowerPotIn.ActivateWarning(GardenItemType.Fertilizer, true);
-                break;
-
-                case GardenItemType.Music:
-                    flowerPotIn.ActivateWarning(GardenItemType.Music, true);
-                break;
-            }
-        }
+        flowerPotIn.ToggleFlowerPotSliders(false);
+        flowerPotIn.ActivateWarning(expectedItem, true);
 
         DataCollector.instance.SetPlantGardenState(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), expectedItem.ToString(), flowerPotIn);
         gardenItemChosen = true;
+    }
+
+    public void UpgradePlant()
+    {   
+        if (CanUpgradePlant())
+        {   
+            if (Player.instance.CanSpendMoney(plantData.plantLevels[currentPlantLevelIndex + 1].upgradePrice))
+            {
+                currentPlantLevelIndex++;
+
+                if (currentPlantLevelIndex >= (plantData.plantLevels.Length - 1) / 2f)
+                    GrowPlant();
+
+                if (currentPlantLevelIndex == plantData.plantLevels.Length - 1)
+                {
+                    DataCollector.instance.SetPlantFullGrownData(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, growth);
+                    flowerPotIn.PlayFullGrown();
+                }
+
+                ResetPlantTimers();
+                flowerPotIn.SetFlowerPotUI(plantData.plantName, currentPlantLevelIndex + 1, plantData.GetPlantLevel(currentPlantLevelIndex).energyLevel, plantData.GetPlantLevel(currentPlantLevelIndex).producingTime, plantData.GetPlantLevel(currentPlantLevelIndex).plantLife);
+                flowerPotIn.UpdateFlowerPotUI((true, currentPlantLevelIndex + 1), (true, currentEnergyTime), (true, currentProgressTime), (true, (int)currentLifeTime));
+                DataCollector.instance.SetPlantLevel(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, currentPlantLevelIndex);
+                Player.instance.SpendMoney(plantData.plantLevels[currentPlantLevelIndex].upgradePrice);
+            }
+        }
+    }
+
+    public void WitherPlant()
+    {
+        TriggerSellPlant();
+    }
+
+    public void ResetPlantTimers()
+    {
+        currentProgressTime = 0f;
+
+        PlantLevel pl = plantData.GetPlantLevel(currentPlantLevelIndex);
+
+        maxTimeToProduce = pl.producingTime;
+        currentEnergyTime = pl.energyLevel;
+        coinsToProduce = pl.producedCoins;
+    }
+
+    public bool CanUpgradePlant()
+    {
+        return currentPlantLevelIndex < plantData.plantLevels.Length - 1;
     }
 
     public void DeactivateWarnings()
@@ -326,81 +333,23 @@ public class Plant : MonoBehaviour
         flowerPotIn.ActivateWarning(GardenItemType.Music, false);
     }
 
+    public void ReFillEnergy()
+    {
+        currentEnergyTime = plantData.GetPlantLevel(currentPlantLevelIndex).energyLevel;
+        hasEnergy = true;
+    }
+
     public void ApplyGardenItem(GardenItemType item)
-    {   
+    {
         if (item == expectedItem)
         {
-            switch (item)
-            {
-                case GardenItemType.Water:
-                    waterRange.x++;
-
-                    DataCollector.instance.SetPlantGardenData(
-                        GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, expectedItem.ToString(), waterRange.x
-                    );
-                break;
-
-                case GardenItemType.Compost:
-                    compostRange.x++;
-
-                    DataCollector.instance.SetPlantGardenData(
-                        GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, expectedItem.ToString(), compostRange.x
-                    );
-                break;
-
-                case GardenItemType.Fertilizer:
-                    fertilizerRange.x++;
-
-                    DataCollector.instance.SetPlantGardenData(
-                        GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, expectedItem.ToString(), fertilizerRange.x
-                    );
-                break;
-
-                case GardenItemType.Music:
-                    musicRange.x++;
-
-                    DataCollector.instance.SetPlantGardenData(
-                        GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, expectedItem.ToString(), musicRange.x
-                    );
-                break;
-            }
-
-            flowerPotIn.ActivateWarning(item, false);
-
-            if (currentGrowThreshold >= growThreshold && !growth)
-                GrowPlant();
-            
-            else
-            {
-                currentGrowThreshold++;
-                DataCollector.instance.SetPlantGrowThreshold(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, currentGrowThreshold);
-            }
-
-            if (!CheckForAllRangesCompleted())
-            {
-                currentTimeRange = 0f;
-                waitingForInteraction = false;
-                gardenItemChosen = false;
-                flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
-
-                revenueMultiplier += revMulIncreaser;
-                DataCollector.instance.SetPlantRevenueMult(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, revenueMultiplier);
-                flowerPotIn.UpdatePlantSellPrice(GetActualRevenue());
-
-                GetNewTimeRange();
-
-                expectedItem = GardenItemType.None;
-                DataCollector.instance.SetPlantGardenState(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), expectedItem.ToString(), flowerPotIn);
-            }
-
-            else
-            {
-                flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
-                fullyGrown = true;
-                DataCollector.instance.SetPlantFullGrownData(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, growth, fullyGrown);
-                currentTimeRange = 0f;
-                flowerPotIn.PlayFullGrown();
-            }
+            flowerPotIn.ActivateWarning(expectedItem, false);
+            expectedItem = GardenItemType.None;
+            DataCollector.instance.SetPlantGardenState(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), expectedItem.ToString(), flowerPotIn);
+            gardenItemChosen = false;
+            ReFillEnergy();
+            flowerPotIn.ToggleFlowerPotSliders(true);
+            flowerPotIn.UpdateFlowerPotUI((false, currentPlantLevelIndex + 1), (true, currentEnergyTime), (true, currentProgressTime), (true, (int)currentLifeTime));
         }
     }
 
@@ -417,14 +366,14 @@ public class Plant : MonoBehaviour
     void SellPlant()
     {
         if (selling)
-        {   
+        {
             if (growth)
             {
                 if (Vector2.Distance(transform.localScale, Vector3.zero) > 0.01f)
                 {
                     transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 2.5f * Time.deltaTime);
                     flowerPotIn.revenueText.gameObject.SetActive(false);
-                    flowerPotIn.sellPlantButton.SetActive(false);
+                    flowerPotIn.actionButtons.SetActive(false);
                 }
 
                 else
@@ -434,6 +383,7 @@ public class Plant : MonoBehaviour
                     flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                     flowerPotIn.triggerColl.enabled = true;
                     flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+                    flowerPotIn.ToggleFlowerPotUI(false);
                     Destroy(this.gameObject);
                 }
             }
@@ -442,44 +392,21 @@ public class Plant : MonoBehaviour
             {
                 _sprout.GetComponent<Animator>().SetTrigger("hide");
                 flowerPotIn.revenueText.gameObject.SetActive(false);
-                flowerPotIn.sellPlantButton.SetActive(false);
+                flowerPotIn.actionButtons.SetActive(false);
                 DataCollector.instance.RemovePlant(MusicManager.instance.GetCurrentMusic().world, flowerPotIn);
+                flowerPotIn.ToggleFlowerPotUI(false);
                 DeactivateWarnings();
                 StartCoroutine(SellSprout());
             }
         }
     }
 
-    bool CheckForAllRangesCompleted()
-    {
-        if (ItemIsComplete(waterRange) && ItemIsComplete(compostRange) && ItemIsComplete(fertilizerRange)
-            && ItemIsComplete(musicRange))
-            {
-                return true;
-            }
-        
-        return false;
-    }
-    
-    int GetAccumulativeRange()
-    {
-        return waterRange.y + compostRange.y + fertilizerRange.y + musicRange.y;
-    }
-
-    bool ItemIsComplete(Vector2Int range)
-    {
-        if (range.x >= range.y)
-            return true;
-        
-        return false;
-    }
-
     void PlantGrowBehaviour()
     {
         if (!planted && handPosition != null)
             transform.position = handPosition.position;
-        
-        if (!fullyGrown && growth && !replanting && transform.localScale != plantData.initialScale)
+
+        if (growth && !replanting && transform.localScale != plantData.initialScale)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, plantData.initialScale, 2 * Time.deltaTime);
 
@@ -517,6 +444,11 @@ public class Plant : MonoBehaviour
             _sprout = _sp;
 
         planted = true;
+
+        flowerPotIn.ToggleFlowerPotUI(true);
+        flowerPotIn.SetFlowerPotUI(plantData.plantName, currentPlantLevelIndex + 1, plantData.GetPlantLevel(currentPlantLevelIndex).energyLevel, plantData.GetPlantLevel(currentPlantLevelIndex).producingTime, plantData.GetPlantLevel(currentPlantLevelIndex).plantLife);
+        flowerPotIn.UpdateFlowerPotUI((true, currentPlantLevelIndex + 1), (true, currentEnergyTime), (true, currentProgressTime), (true, (int)currentLifeTime));
+        PlantsManager.OnTick += PlantProgress;
     }
 
     void LookInCameraDirection()
@@ -537,7 +469,9 @@ public class Plant : MonoBehaviour
     void OnTriggerExit(Collider c)
     {
         if (c.transform.CompareTag("FlowerPot"))
+        {
             if (c.GetComponent<FlowerPot>() != null && c.isTrigger)
                 player.HoveringAFlowerPot(null);
+        }
     }
 }
