@@ -37,8 +37,10 @@ public class PlantsManager : MonoBehaviour
     [SerializeField] private GameObject sprout;
     [SerializeField] private Plant debugPlant;
     [SerializeField] private FlowerPot debugFlowerPot;
+    public PlantAsset[] allPlantAssets;
     public WorldBanks[] worldBanks;
-    public WorldChanges[] worldChanges;
+    public QualityStandards common, rare, epic, legend, botanic;
+    public List<WorldChanges> worldChanges = new List<WorldChanges>();
 
     [Header ("Debug")]
     [SerializeField] private int holderIdx;
@@ -61,13 +63,124 @@ public class PlantsManager : MonoBehaviour
         else instance = this;
     }
 
-    IEnumerator Testing()
+    void Start()
     {
-        yield return new WaitForSeconds(3.5f);
+        TestAllPlants();
+    }
 
-        generatedPlant = Instantiate(plantToPut.gameObject, transform.position, Quaternion.identity).GetComponent<Plant>();
+    void TestAllPlants()
+    {
+        for (int i = 0; i < allPlantAssets.Length; i++)
+        {
+            PlantAsset pa = allPlantAssets[i];
+            QualityStandards qs = null;
 
-        generatedPot.PlantPlant(generatedPlant);
+            switch (pa.plantQuality.quality)
+            {
+                case PlantQualityName.Common:
+                    qs = common;
+                break;
+
+                case PlantQualityName.Rare:
+                    qs = rare;
+                break;
+
+                case PlantQualityName.Epic:
+                    qs = epic;
+                break;
+
+                case PlantQualityName.Legendary:
+                    qs = legend;
+                break;
+
+                case PlantQualityName.Botanic:
+                    qs = botanic;
+                break;
+            }
+
+            if (!pa.autoSettedPrice)
+            {
+                pa.plantLevels[0].producingTime = GetRounded(qs.plantProductionTime * GetWorldMultiplier(pa.appearsIn) * GetRandomMultiplier(GetWorldRange(pa.appearsIn)));
+                pa.plantLevels[0].producedCoins = GetRounded(qs.producedCoins * GetWorldMultiplier(pa.appearsIn) * GetRandomMultiplier(GetWorldRange(pa.appearsIn)));
+                pa.plantLevels[0].energyLevel = GetRounded(qs.plantEnergy * GetWorldMultiplier(pa.appearsIn) * GetRandomMultiplier(GetWorldRange(pa.appearsIn)));
+                pa.plantLevels[0].plantLife = GetRounded(qs.plantLife * GetWorldMultiplier(pa.appearsIn) * GetRandomMultiplier(GetWorldRange(pa.appearsIn)));
+
+                pa.plantLevels[1].producingTime = GetRounded(pa.plantLevels[0].producingTime * 1.5f);
+                pa.plantLevels[1].producedCoins = GetRounded(pa.plantLevels[0].producedCoins * 1.5f);
+                pa.plantLevels[1].energyLevel = GetRounded(pa.plantLevels[0].energyLevel * 1.5f);
+                pa.plantLevels[1].plantLife = GetRounded(pa.plantLevels[0].plantLife * 1.5f);
+
+                pa.plantLevels[2].producingTime = GetRounded(pa.plantLevels[0].producingTime * 2.2f);
+                pa.plantLevels[2].producedCoins = GetRounded(pa.plantLevels[0].producedCoins * 2.2f);
+                pa.plantLevels[2].energyLevel = GetRounded(pa.plantLevels[0].energyLevel * 2.2f);
+                pa.plantLevels[2].plantLife = GetRounded(pa.plantLevels[0].plantLife * 2.2f);
+
+                int expProductionZe = pa.plantLevels[0].producingTime * pa.plantLevels[0].producedCoins * pa.plantLevels[0].energyLevel * pa.plantLevels[0].plantLife;
+                pa.unlockPrice = pa.buyPrice = pa.plantLevels[0].sellPrice = GetRounded(expProductionZe * 0.02f);
+
+                int expProductionTw = pa.plantLevels[1].producingTime * pa.plantLevels[1].producedCoins * pa.plantLevels[1].energyLevel * pa.plantLevels[1].plantLife;
+                pa.plantLevels[1].upgradePrice = GetRounded(expProductionTw * 0.02f);
+                pa.plantLevels[1].sellPrice = GetRounded((expProductionTw * 0.02f) * 1.5f);
+
+                int expProductionTh = pa.plantLevels[2].producingTime * pa.plantLevels[2].producedCoins * pa.plantLevels[2].energyLevel * pa.plantLevels[2].plantLife;
+                pa.plantLevels[2].upgradePrice = GetRounded(expProductionTh * 0.02f);
+                pa.plantLevels[2].sellPrice = GetRounded((expProductionTh * 0.02f) * 1.5f);
+
+                pa.autoSettedPrice = true;
+            }
+        }
+    }
+
+    public int GetRounded(float val)
+    {
+        return (int)(Math.Round(val));
+    }
+
+    public float GetWorldMultiplier(GameWorlds world)
+    {
+        switch (world)
+        {
+            case GameWorlds.Tutorial: return 1f;
+            case GameWorlds.JurassicMarsh: return 1.05f;
+            case GameWorlds.NeonMixtapeTour: return 1.1f;
+            case GameWorlds.DarkAges: return 1.15f;
+            case GameWorlds.PirateSeas: return 1.2f;
+            case GameWorlds.FarFuture: return 1.25f;
+            case GameWorlds.LostCity: return 1.3f;
+            case GameWorlds.WildWest: return 1.35f;
+            case GameWorlds.BigWaveBeach: return 1.4f;
+            case GameWorlds.FrostbiteCaves: return 1.45f;
+            case GameWorlds.AncientEgypt: return 1.5f;
+            case GameWorlds.ModernDay: return 1.55f;
+        }
+        
+        return -1f;
+    }
+
+    public Vector2 GetWorldRange(GameWorlds world)
+    {
+        switch (world)
+        {
+            case GameWorlds.Tutorial: return new Vector2(1f, 1f);
+            case GameWorlds.JurassicMarsh: return new Vector2(1f, 1.05f);
+            case GameWorlds.NeonMixtapeTour: return new Vector2(1.06f, 1.1f);
+            case GameWorlds.DarkAges: return new Vector2(1.11f, 1.15f);
+            case GameWorlds.PirateSeas: return new Vector2(1.16f, 1.2f);
+            case GameWorlds.FarFuture: return new Vector2(1.21f, 1.25f);
+            case GameWorlds.LostCity: return new Vector2(1.26f, 1.3f);
+            case GameWorlds.WildWest: return new Vector2(1.31f, 1.35f);
+            case GameWorlds.BigWaveBeach: return new Vector2(1.36f, 1.4f);
+            case GameWorlds.FrostbiteCaves: return new Vector2(1.41f, 1.45f);
+            case GameWorlds.AncientEgypt: return new Vector2(1.46f, 1.5f);
+            case GameWorlds.ModernDay: return new Vector2(1.51f, 1.55f);
+        }
+
+        return Vector2.zero;
+    }
+
+    public float GetRandomMultiplier(Vector2 range)
+    {
+        return UnityEngine.Random.Range(range.x, range.y);
     }
 
     void Update()
@@ -122,7 +235,7 @@ public class PlantsManager : MonoBehaviour
     {   
         if (MusicManager.instance.GetCurrentMusic().world != world)
         {
-            for (int i = 0; i < worldChanges.Length; i++)
+            for (int i = 0; i < worldChanges.Count; i++)
             {
                 if (worldChanges[i].world == world)
                 {
@@ -184,15 +297,46 @@ public class PlantsManager : MonoBehaviour
                         }
                     }
 
+                    DataCollector.instance.SetWorldChanges(world, worldChanges[i]);
+
                     break;
                 }
             }
         }
     }
 
-    public void AddMoneyWorldChange(int amount)
+    public void ClearWorldChanges(GameWorlds world)
     {
+        for (int i = 0; i < worldChanges.Count; i++)
+        {
+            worldChanges[i].witheredPlants.Clear();
+            worldChanges[i].tiredPlants.Clear();
+            worldChanges[i].producedMoneyUntilPoint = 0;
+        }
+    }
 
+    public void AddMoneyWorldChange(GameWorlds worlds, int amount)
+    {
+        for (int i = 0; i < worldChanges.Count; i++)
+        {
+            if (worldChanges[i].world == worlds)
+            {
+                worldChanges[i].producedMoneyUntilPoint += amount;
+                DataCollector.instance.SetWorldChanges(worlds, worldChanges[i]);
+                break;
+            }
+        }
+    }
+
+    public bool ChangesInWorld(GameWorlds world)
+    {
+        for (int i = 0; i < worldChanges.Count; i++)
+        {
+            if (worldChanges[i].world == world)
+                return (worldChanges[i].tiredPlants.Count > 0 || worldChanges[i].witheredPlants.Count > 0 || worldChanges[i].producedMoneyUntilPoint > 0);
+        }
+
+        return false;
     }
 
     public GameObject GetSprout()
@@ -221,7 +365,7 @@ public class WorldChanges
     public GameWorlds world;
     public List<PlantChangeProfile> tiredPlants, witheredPlants = new List<PlantChangeProfile>();
     public int producedMoneyUntilPoint;
-    
+
     public int GetPlantOnChanges(string _plant, bool tired)
     {   
         if (tired)
@@ -257,4 +401,13 @@ public class PlantChangeProfile
         this.plantName = plantName;
         this.amount = amount;
     }
+}
+
+[System.Serializable]
+public class QualityStandards
+{
+    public float plantProductionTime;
+    public int producedCoins;
+    public float plantEnergy;
+    public float plantLife;
 }

@@ -191,6 +191,11 @@ public class Player : MonoBehaviour
         rightHand.handInteractor.enabled = en;
     }
 
+    public void LeftHandEnabler(bool en)
+    {
+        leftHand.handInteractor.enabled = en;
+    }
+
     public void GetRidOfSelectedPlant(InputAction.CallbackContext ctx)
     {
         if (holdingPlant != null)

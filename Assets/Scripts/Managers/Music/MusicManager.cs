@@ -337,9 +337,9 @@ public class MusicManager : MonoBehaviour
         
         currentWorld = worldMusic.world;
 
+        ChangeMusic(worldMusic);
         SetTablesInTimeTravel(worldMusic);
         TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
-        ChangeMusic(worldMusic);
     }
 
     public void SetTablesInTimeTravel(MusicAsset active)
@@ -373,6 +373,7 @@ public class MusicManager : MonoBehaviour
 
         Player.instance.SafetyNetsWhenHolding();
         Player.instance.RightHandEnabler(false);
+        Player.instance.LeftHandEnabler(false);
 
         yield return new WaitForSeconds(.45f);
 
@@ -392,8 +393,12 @@ public class MusicManager : MonoBehaviour
         TimeTravelManager.instance.TriggerTransition(false);
 
         Player.instance.RightHandEnabler(true);
+        Player.instance.LeftHandEnabler(true);
 
         ChangeMusic(worldMusic);
+
+        if (PlantsManager.instance.ChangesInWorld(currentWorld))
+            UIManager.instance.TriggerWhileYouWhereGone(currentWorld);
 
         DataCollector.instance.SetLastVisitedWorld(currentWorld);
     }

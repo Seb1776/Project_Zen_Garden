@@ -18,28 +18,29 @@ MonoBehaviour:
     deal. Hold my fir coat."'
   uiPlant: {fileID: 8244897900307313641, guid: 50d36550d9ce73b43a2886a8f01e23d4, type: 3}
   plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
-  appearsIn: 10
+  appearsIn: 12
   plantQuality: {fileID: 11400000, guid: 12d300539662e254a91a708910e8ab05, type: 2}
   canBePlantedIn: 0000000001000000050000000600000007000000
-  unlockPrice: 150
-  buyPrice: 150
+  unlockPrice: 0
+  buyPrice: 0
+  autoSettedPrice: 1
   plantLevels:
   - upgradePrice: 0
-    producedCoins: 2
+    producedCoins: 5
     producingTime: 10
     plantLife: 20
-    energyLevel: 5
-    sellPrice: 150
-  - upgradePrice: 350
-    producedCoins: 4
+    energyLevel: 10
+    sellPrice: 0
+  - upgradePrice: 1350
+    producedCoins: 10
     producingTime: 15
-    plantLife: 22
-    energyLevel: 8
-    sellPrice: 450
-  - upgradePrice: 550
-    producedCoins: 8
-    producingTime: 18
-    plantLife: 25
+    plantLife: 30
+    energyLevel: 15
+    sellPrice: 2025
+  - upgradePrice: 3600
+    producedCoins: 10
+    producingTime: 20
+    plantLife: 45
     energyLevel: 20
-    sellPrice: 800
+    sellPrice: 5400
   initialScale: {x: -0.07990621, y: 0.07990621, z: 0.07990621}

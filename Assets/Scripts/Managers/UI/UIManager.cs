@@ -17,6 +17,10 @@ public class UIManager : MonoBehaviour
     public GameObject pinataRewardPanel;
     [Header("UI")]
     [SerializeField] private Text coins;
+    [SerializeField] private GameObject wywPanel;
+    [SerializeField] private Text wywCoins;
+    [SerializeField] private GameObject tiredNone, witheredNone;
+    [SerializeField] private Transform tiredPanel, witheredPanel;
     private Pinata creaPinata;
     [SerializeField] private string activePlants;
     [Header("Almanac UI")]
@@ -195,6 +199,51 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void TriggerWhileYouWhereGone(GameWorlds world)
+    {
+        List<WorldChanges> _wc = PlantsManager.instance.worldChanges;
+        List<Animator> createds = new List<Animator>();
+
+        for (int i = 0; i < _wc.Count; i++)
+        {      
+            if (_wc[i].world == world)
+            {
+                tiredNone.SetActive(_wc[i].tiredPlants.Count == 0);
+                witheredNone.SetActive(_wc[i].witheredPlants.Count == 0);
+                wywCoins.text = "$ " + _wc[i].producedMoneyUntilPoint.ToString("N0");
+
+                for (int j = 0; j < _wc[i].tiredPlants.Count; j++)
+                {
+                    GameObject seedUI = Instantiate(
+                        Resources.Load<GameObject>("Prefabs/UI/" + _wc[i].tiredPlants[j].plantName), transform.position, Quaternion.identity, tiredPanel
+                    );
+
+                    seedUI.transform.GetChild(3).GetComponent<Text>().text = "x " + _wc[i].tiredPlants[j].amount;
+                    Destroy(seedUI.GetComponent<Animator>());
+                    seedUI.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                    seedUI.transform.localScale = new Vector3(0.8267679f, 0.8267679f, 0.8267679f);
+                }
+
+                for (int j = 0; j < _wc[i].witheredPlants.Count; j++)
+                {
+                    GameObject seedUI = Instantiate(
+                        Resources.Load<GameObject>("Prefabs/UI/" + _wc[i].witheredPlants[j].plantName), transform.position, Quaternion.identity, tiredPanel
+                    );
+                    
+                    seedUI.transform.GetChild(3).GetComponent<Text>().text = "x " + _wc[i].witheredPlants[j].amount;
+                    Destroy(seedUI.GetComponent<Animator>());
+                    seedUI.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
+                    seedUI.transform.localScale = new Vector3(0.8267679f, 0.8267679f, 0.8267679f);
+                }
+
+                break;
+            }
+        }
+
+        wywPanel.SetActive(true);
+        PlantsManager.instance.ClearWorldChanges(world);
+    }
+
     public void SetPlantInAlmanac(PlantAsset pa)
     {
         if (spawnedUIPlant != null)
@@ -207,7 +256,6 @@ public class UIManager : MonoBehaviour
 
         plantNameT.text = pa.plantName;
         plantBuyPriceT.text = "$ " + pa.buyPrice.ToString("N0");
-        //plantSellPriceT.text = "$ " + pa.revenuePrice.ToString("N0");
         plantBackGround.sprite = pa.plantBackg;
         plantDescT.text = pa.plantDescription;
         plantQualityT.text = GetStringedPlantQuality(pa.plantQuality.quality, true);

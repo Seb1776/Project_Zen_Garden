@@ -218,6 +218,8 @@ public class Plant : MonoBehaviour
                 currentEnergyTime -= 1;
                 flowerPotIn.TriggerCoinRevenue(plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
 
+                PlantsManager.instance.AddMoneyWorldChange(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
+
                 PlantsManager.instance.AddMoneyToWorldBank(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
                 DataCollector.instance.SetWorldBankMoney(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), PlantsManager.instance.GetCurrentWorldMoney(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn)));
 
@@ -346,6 +348,9 @@ public class Plant : MonoBehaviour
             flowerPotIn.ActivateWarning(expectedItem, false);
             expectedItem = GardenItemType.None;
             DataCollector.instance.SetPlantGardenState(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), expectedItem.ToString(), flowerPotIn);
+            PlantsManager.instance.AddPlantWorldChange(
+                GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.name, true, false
+            );
             gardenItemChosen = false;
             ReFillEnergy();
             flowerPotIn.ToggleFlowerPotSliders(true);

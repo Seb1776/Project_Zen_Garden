@@ -13,6 +13,7 @@ public class PlantAsset : ScriptableObject
     public List<FlowerPotType> canBePlantedIn = new List<FlowerPotType>();
     public int unlockPrice;
     public int buyPrice;
+    public bool autoSettedPrice;
     [NonReorderable]
     public PlantLevel[] plantLevels;
     public Vector3 initialScale;

@@ -12,6 +12,7 @@ public class SerializableData
     public List<FlowerPotDataContainer> flowerPotsDatas = new List<FlowerPotDataContainer>();
     public List<GameWorlds> unlockedWorlds = new List<GameWorlds>();
     public int[] playerBanks = new int[12];
+    public List<WorldChanges> worldChanges = new List<WorldChanges>();
     public int playerWaters, playerComposts, playerFertilizer, playerPhonographs;
     public string gardenName, playerLastWorld;
     public int playerCoins;
@@ -20,7 +21,7 @@ public class SerializableData
 
     public SerializableData (List<GardenTable> savedTables, List<SeedDataContainer> savedSeeds, List<FlowerPotDataContainer> flowerPotDatas,
         List<GameWorlds> unlockedWorlds, int playerWaters, int playerComposts, int playerFertilizer, int playerPhonographs, string gardenName, string playerLastWorld, bool isOnTutorial,
-        float spentTime, int playerCoins, int[] playerBanks)
+        float spentTime, int playerCoins, int[] playerBanks, List<WorldChanges> worldChanges)
     {
         this.savedTables = savedTables;
         this.savedSeeds = savedSeeds;
@@ -34,6 +35,7 @@ public class SerializableData
         this.spentTime = spentTime;
         this.playerCoins = playerCoins;
         this.playerBanks = playerBanks;
+        this.worldChanges = worldChanges;
     }
 }
 
@@ -77,6 +79,7 @@ public class DataCollector : MonoBehaviour
     public List<WorldHolders> worldHolders = new List<WorldHolders>();
     public List<GameWorlds> unlockedWorlds = new List<GameWorlds>();
     public int[] playerBanks = new int[12];
+    public List<WorldChanges> worldChanges = new List<WorldChanges>();
     public int playerCoins;
     public string gameFileLetter;
     public int playerWaters, playerComposts, playerFertilizer, playerPhonographs;
@@ -104,7 +107,7 @@ public class DataCollector : MonoBehaviour
         SeedDatabase.instance.SendGardenDataToCollector();
         spentTime = GameManager.instance.GetSpentTime();
         SerializableData zenData = new SerializableData(worldTables, seeds, flowerPotsDatas, unlockedWorlds, playerWaters, playerComposts, playerFertilizer, playerPhonographs, 
-            gardenName, playerLastWorld, isOnTutorial, spentTime, playerCoins, playerBanks);
+            gardenName, playerLastWorld, isOnTutorial, spentTime, playerCoins, playerBanks, worldChanges);
 
         using (StreamWriter stream = new StreamWriter(Application.persistentDataPath + "/ZenGardenVR_" + gameFileLetter + ".json"))
         {
@@ -132,10 +135,10 @@ public class DataCollector : MonoBehaviour
                 unlockedWorlds = loadedData.unlockedWorlds;
                 GameManager.instance.spentTime = loadedData.spentTime;
                 MusicAsset ma = Resources.Load<MusicAsset>("Music/Datas/" + loadedData.playerLastWorld);
-                MusicManager.instance.ChangeWithoutTransition(ma);
                 SetTutorialState(loadedData.isOnTutorial);
 
                 RecreateData(loadedData);
+                MusicManager.instance.ChangeWithoutTransition(ma);
             }
         }
 
@@ -229,6 +232,13 @@ public class DataCollector : MonoBehaviour
             PlantsManager.instance.worldBanks[i].moneyBank = playerBanks[i];
         }
 
+        worldChanges = sd.worldChanges;
+
+        for (int i = 0; i < worldChanges.Count; i++)
+        {
+            PlantsManager.instance.worldChanges[i] = worldChanges[i];
+        }
+
         SeedDatabase.instance.SetGardenDataFromCollector(sd.playerWaters, sd.playerComposts, sd.playerFertilizer, sd.playerPhonographs);
 
         foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
@@ -257,6 +267,18 @@ public class DataCollector : MonoBehaviour
         gardenName = sd.gardenName;
 
         StartCoroutine(AutoSave());
+    }
+
+    public void SetWorldChanges(GameWorlds world, WorldChanges change)
+    {
+        for (int i = 0; i < worldChanges.Count; i++)
+        {
+            if (worldChanges[i].world == world)
+            {
+                worldChanges[i] = change;
+                break;
+            }
+        }
     }
 
     public void SetPlayerCoins(int playerMoney)
