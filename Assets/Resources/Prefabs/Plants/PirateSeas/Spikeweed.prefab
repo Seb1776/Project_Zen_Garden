@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 4822391661000055587}
   m_Layer: 0
   m_Name: Spikeweed
-  m_TagString: Untagged
+  m_TagString: Plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -918,18 +918,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: 95410e044e9d28b4c9063de49cfdf84f, type: 2}
+  growth: 0
   plantAnim: {fileID: 0}
-  waterRange: {x: 0, y: 0}
-  compostRange: {x: 0, y: 0}
-  fertilizerRange: {x: 0, y: 0}
-  musicRange: {x: 0, y: 0}
+  currentProgressTime: 0
+  maxTimeToProduce: 0
+  coinsToProduce: 0
+  currentEnergyTime: 0
+  currentLifeTime: 0
+  hasEnergy: 1
+  currentPlantLevelIndex: 0
   replanting: 0
-  fullyGrown: 0
-  currentGrowThreshold: 0
   flowerPotIn: {fileID: 0}
   plantIsAbove: {fileID: 0}
   expectedItem: 4
-  revenueMultiplier: 0
 --- !u!65 &4822391661000055586
 BoxCollider:
   m_ObjectHideFlags: 0
