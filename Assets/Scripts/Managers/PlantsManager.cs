@@ -217,6 +217,18 @@ public class PlantsManager : MonoBehaviour
         return -1;
     }
 
+    public void SetWorldMoney(GameWorlds world, int value)
+    {
+        for (int i = 0; i < worldBanks.Length; i++)
+        {
+            if (worldBanks[i].world == world)
+            {
+                worldBanks[i].moneyBank = value;
+                break;
+            }
+        }
+    }
+
     public void AddMoneyToWorldBank(GameWorlds world, int amount)
     {
         for (int i = 0; i < worldBanks.Length; i++)
@@ -224,7 +236,10 @@ public class PlantsManager : MonoBehaviour
             if (worldBanks[i].world == world)
             {   
                 if (worldBanks[i].moneyBank < 99999999)
+                {
                     worldBanks[i].moneyBank += amount;
+                    UIManager.instance.SetBankMoneyText(GetCurrentWorldMoney(world));
+                }
     
                 break;
             }
@@ -309,6 +324,9 @@ public class PlantsManager : MonoBehaviour
     {
         for (int i = 0; i < worldChanges.Count; i++)
         {
+            worldBanks[i].moneyBank += worldChanges[i].producedMoneyUntilPoint;
+            DataCollector.instance.SetWorldBankMoney(world, worldBanks[i].moneyBank);
+
             worldChanges[i].witheredPlants.Clear();
             worldChanges[i].tiredPlants.Clear();
             worldChanges[i].producedMoneyUntilPoint = 0;

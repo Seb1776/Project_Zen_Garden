@@ -25,6 +25,7 @@ public class Plant : MonoBehaviour
     public float currentLifeTime;
     [SerializeField] private bool hasEnergy = true;
     public int currentPlantLevelIndex;
+    public bool isDeco;
 
     //Old Progress
     private Vector3 outsideScale;
@@ -96,24 +97,30 @@ public class Plant : MonoBehaviour
         }
 
         planted = true;
-        currentPlantLevelIndex = data.plantLevelIndex;
-        currentEnergyTime = data.plantLastEnergyTick;
-        currentProgressTime = data.plantLastProducingTick;
-        currentLifeTime = data.plasntLastLifeTick;
 
-        maxTimeToProduce = plantData.plantLevels[currentPlantLevelIndex].producingTime;
-
-        flowerPotIn.SetFlowerPotUI(plantData.plantName, currentPlantLevelIndex + 1, plantData.plantLevels[currentPlantLevelIndex].
-            energyLevel, plantData.plantLevels[currentPlantLevelIndex].producingTime, plantData.plantLevels[currentPlantLevelIndex].plantLife);
-        flowerPotIn.UpdateFlowerPotUI((true, currentPlantLevelIndex + 1), (true, currentEnergyTime), (true, currentProgressTime), (true, (int)currentLifeTime));
-        flowerPotIn.ToggleFlowerPotUI(true);
-
-        if (expectedItem != GardenItemType.None)
+        if (data.plantLevelIndex != 3)
         {
-            flowerPotIn.ToggleFlowerPotSliders(false);
-            hasEnergy = false;
-            ChooseGardenItem();
+            currentPlantLevelIndex = data.plantLevelIndex;
+            currentEnergyTime = data.plantLastEnergyTick;
+            currentProgressTime = data.plantLastProducingTick;
+            currentLifeTime = data.plasntLastLifeTick;
+
+            maxTimeToProduce = plantData.plantLevels[currentPlantLevelIndex].producingTime;
+
+            flowerPotIn.SetFlowerPotUI(plantData.plantName, currentPlantLevelIndex + 1, plantData.plantLevels[currentPlantLevelIndex].
+                energyLevel, plantData.plantLevels[currentPlantLevelIndex].producingTime, plantData.plantLevels[currentPlantLevelIndex].plantLife);
+            flowerPotIn.UpdateFlowerPotUI((true, currentPlantLevelIndex + 1), (true, currentEnergyTime), (true, currentProgressTime), (true, (int)currentLifeTime));
+            flowerPotIn.ToggleFlowerPotUI(true);
+
+            if (expectedItem != GardenItemType.None)
+            {
+                flowerPotIn.ToggleFlowerPotSliders(false);
+                hasEnergy = false;
+                ChooseGardenItem();
+            }
         }
+
+        else SetPlantAsDeco();
     }
 
     public void GrowPlant(bool playSound = true, bool triggerFullGrown = false)
@@ -218,10 +225,13 @@ public class Plant : MonoBehaviour
                 currentEnergyTime -= 1;
                 flowerPotIn.TriggerCoinRevenue(plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
 
-                PlantsManager.instance.AddMoneyWorldChange(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
+                if (GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn) == MusicManager.instance.GetCurrentMusic().world)
+                {
+                    PlantsManager.instance.AddMoneyToWorldBank(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
+                    DataCollector.instance.SetWorldBankMoney(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), PlantsManager.instance.GetCurrentWorldMoney(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn)));
+                }
 
-                PlantsManager.instance.AddMoneyToWorldBank(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
-                DataCollector.instance.SetWorldBankMoney(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), PlantsManager.instance.GetCurrentWorldMoney(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn)));
+                else PlantsManager.instance.AddMoneyWorldChange(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
 
                 flowerPotIn.UpdateFlowerPotUI((false, currentPlantLevelIndex + 1), (true, currentEnergyTime), (true, currentProgressTime), (false, 0));
                 DataCollector.instance.SetPlantEnergyTick(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, currentEnergyTime);
@@ -287,15 +297,13 @@ public class Plant : MonoBehaviour
             if (Player.instance.CanSpendMoney(plantData.plantLevels[currentPlantLevelIndex + 1].upgradePrice))
             {
                 currentPlantLevelIndex++;
+                flowerPotIn.PlayGrowSFX();
 
                 if (currentPlantLevelIndex >= (plantData.plantLevels.Length - 1) / 2f)
                     GrowPlant();
 
                 if (currentPlantLevelIndex == plantData.plantLevels.Length - 1)
-                {
                     DataCollector.instance.SetPlantFullGrownData(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, growth);
-                    flowerPotIn.PlayFullGrown();
-                }
 
                 ResetPlantTimers();
                 flowerPotIn.SetFlowerPotUI(plantData.plantName, currentPlantLevelIndex + 1, plantData.GetPlantLevel(currentPlantLevelIndex).energyLevel, plantData.GetPlantLevel(currentPlantLevelIndex).producingTime, plantData.GetPlantLevel(currentPlantLevelIndex).plantLife);
@@ -358,6 +366,16 @@ public class Plant : MonoBehaviour
         }
     }
 
+    public void SetPlantAsDeco()
+    {
+        flowerPotIn.PlayGrowSFX();
+        PlantsManager.OnTick -= PlantProgress;
+        isDeco = true;
+        DataCollector.instance.SetPlantLevel(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, 3);
+        expectedItem = GardenItemType.None;
+        flowerPotIn.outline.ChangeOutlineColor(new Color32(250, 114, 2, 255), true);
+    }
+
     public void TriggerSellPlant()
     {
         selling = true;
@@ -377,7 +395,6 @@ public class Plant : MonoBehaviour
                 if (Vector2.Distance(transform.localScale, Vector3.zero) > 0.01f)
                 {
                     transform.localScale = Vector3.Lerp(transform.localScale, Vector3.zero, 2.5f * Time.deltaTime);
-                    flowerPotIn.revenueText.gameObject.SetActive(false);
                     flowerPotIn.actionButtons.SetActive(false);
                 }
 
@@ -396,7 +413,6 @@ public class Plant : MonoBehaviour
             else
             {
                 _sprout.GetComponent<Animator>().SetTrigger("hide");
-                flowerPotIn.revenueText.gameObject.SetActive(false);
                 flowerPotIn.actionButtons.SetActive(false);
                 DataCollector.instance.RemovePlant(MusicManager.instance.GetCurrentMusic().world, flowerPotIn);
                 flowerPotIn.ToggleFlowerPotUI(false);

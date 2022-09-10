@@ -19,7 +19,8 @@ public class FlowerPot : MonoBehaviour
     [SerializeField] private GameObject musicPlayer;
     public string createdIn;
     public OutlineEffect outline;
-    public GameObject actionButtons, sellPlantPanel, upgradePlantPanel;
+    public GameObject actionButtons, sellPlantPanel, upgradePlantPanel, decoPlantPanel, normalUPlantPanel;
+    public Text upgradeProdTime, upgradeCoins, upgradeEnergy, upgradeLifeTime;
     private Animator coinShowAnimator;
 
     [Header ("UI")]
@@ -27,7 +28,6 @@ public class FlowerPot : MonoBehaviour
     [SerializeField] private GameObject needCompostIcon, needFertilizerIcon, needMusicIcon;
     [SerializeField] private Slider revenueSlider, plantEnergySlider, lifeSlider;
     public Text plantName, plantLevel, plantSellT, plantUpgradeT;
-    public Text revenueText;
 
     [Header ("Effect")]
     [SerializeField] private ParticleSystem grownEffect;
@@ -40,7 +40,7 @@ public class FlowerPot : MonoBehaviour
     private SeedDatabase seedDatabase;
     private AudioSource source;
     private MusicManager musicManager;
-    private XRGrabInteractable potInteractable;
+    public XRGrabInteractable potInteractable;
     private bool hoveringPlantIsAccepted, returnToPos, returning;
     public bool canUseOutline = true;
     public bool selectedByShovel;
@@ -131,7 +131,6 @@ public class FlowerPot : MonoBehaviour
         if (plantInSpace != null)
         {
             actionButtons.SetActive(true);
-            revenueText.gameObject.SetActive(true);
         }
     }
 
@@ -141,7 +140,7 @@ public class FlowerPot : MonoBehaviour
         coinShowAnimator.SetTrigger("showrev");
     }
 
-    void UnSendFlowerPotToPlayer(XRBaseInteractor flower)
+    public void UnSendFlowerPotToPlayer(XRBaseInteractor flower)
     {
         if (reAssignable)
         {
@@ -163,7 +162,6 @@ public class FlowerPot : MonoBehaviour
         SeedDatabase.instance.TriggerHolders(false);
         player.SetHoldFlowerPot();
         actionButtons.SetActive(false);
-        revenueText.gameObject.SetActive(false);
     }
 
     public FlowerPotHolder GetFPHolder()
@@ -221,9 +219,8 @@ public class FlowerPot : MonoBehaviour
         compostEffect.Stop();
     }
 
-    public void PlayFullGrown()
+    public void PlayGrowSFX()
     {
-        outline.ChangeOutlineColor(new Color(252f / 256f, 157f / 256f, 3f / 256f), true);
         Instantiate(grownEffect, transform.position, Quaternion.identity);
         source.PlayOneShot(musicManager.GetCurrentMusic().grownPlantClip);
     }

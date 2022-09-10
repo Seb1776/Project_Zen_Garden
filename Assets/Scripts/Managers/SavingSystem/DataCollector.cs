@@ -139,6 +139,11 @@ public class DataCollector : MonoBehaviour
 
                 RecreateData(loadedData);
                 MusicManager.instance.ChangeWithoutTransition(ma);
+
+                UIManager.instance.SetBankWorldPanel(MusicManager.instance.GetCurrentMusic().world);
+                UIManager.instance.SetBankWorldText(MusicManager.instance.GetFormatedWorldName(MusicManager.instance.GetCurrentMusic().world));
+                UIManager.instance.SetBankMoneyText(PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world));
+                Debug.Log(PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world));
             }
         }
 

@@ -18,14 +18,18 @@ public class UIManager : MonoBehaviour
     [Header("UI")]
     [SerializeField] private Text coins;
     [SerializeField] private GameObject wywPanel;
+    [SerializeField] private GameObject[] banksImagePanelsWorlds;
     [SerializeField] private Text wywCoins;
+    public Text currentBankMoney, worldBankText;
     [SerializeField] private GameObject tiredNone, witheredNone;
     [SerializeField] private Transform tiredPanel, witheredPanel;
     private Pinata creaPinata;
     [SerializeField] private string activePlants;
     [Header("Almanac UI")]
     [SerializeField] private Text plantNameT;
-    [SerializeField] private Text plantBuyPriceT, plantSellPriceT, plantExtraPercT, plantQualityT, plantFlowerPotsT, plantDescT;
+    [SerializeField] private Text plantProdTimeT, plantProdCoinsT, plantEnergyT, plantLifeTimeT, plantFlowerPotsT, plantDescT, plantQualityT,
+        plantLevelButtonT;
+    [SerializeField] private GameObject plantLevelButton;
     [SerializeField] private Image plantBackGround;
     [SerializeField] private Transform plantSpawn;
     [Header("Pinatas UI")]
@@ -46,6 +50,8 @@ public class UIManager : MonoBehaviour
     private int currentPinatasIndex, currentSizesIndex;
     public Text pinataRewardText;
     private Plant spawnedUIPlant;
+    private PlantAsset currentPa;
+    private int currentPlantLevelIndexAlc;
 
     void Awake()
     {
@@ -94,6 +100,22 @@ public class UIManager : MonoBehaviour
     {
         DataCollector.instance.SaveData();
         StartCoroutine(LoadScene(0));
+    }
+
+    public void SetBankMoneyText(int money)
+    {
+        currentBankMoney.text = "$ " + money.ToString("N0");
+    }
+
+    public void SetBankWorldText(string world)
+    {
+        worldBankText.text = world + " Bank";
+    }
+
+    public void SetBankWorldPanel(GameWorlds world)
+    {
+        foreach (GameObject g in banksImagePanelsWorlds) g.SetActive(false);
+        banksImagePanelsWorlds[(int)world].SetActive(true);
     }
 
     IEnumerator LoadScene(int index)
@@ -244,26 +266,59 @@ public class UIManager : MonoBehaviour
         PlantsManager.instance.ClearWorldChanges(world);
     }
 
+    public void GetBankedMoney()
+    {
+        if (PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world) > 0)
+        {
+            Player.instance.AddMoney(PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world));
+            PlantsManager.instance.SetWorldMoney(MusicManager.instance.GetCurrentMusic().world, 0);
+        }
+
+        else SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
+    }
+
+    public void TogglePlantLevel()
+    {
+        currentPlantLevelIndexAlc++;
+
+        if (currentPlantLevelIndexAlc > 2)
+            currentPlantLevelIndexAlc = 0;
+        
+        plantProdTimeT.text = currentPa.plantLevels[currentPlantLevelIndexAlc].producingTime + " (secs.)";
+        plantProdCoinsT.text = currentPa.plantLevels[currentPlantLevelIndexAlc].producedCoins.ToString();
+        plantEnergyT.text = currentPa.plantLevels[currentPlantLevelIndexAlc].energyLevel.ToString();
+        plantLifeTimeT.text = currentPa.plantLevels[currentPlantLevelIndexAlc].plantLife.ToString();
+
+        plantLevelButtonT.text = "Level " + (currentPlantLevelIndexAlc + 1).ToString();
+
+        SoundEffectsManager.instance.PlaySoundEffectNC("tap");
+    }
+
     public void SetPlantInAlmanac(PlantAsset pa)
     {
         if (spawnedUIPlant != null)
             Destroy(spawnedUIPlant.gameObject);
 
+        currentPlantLevelIndexAlc = 0;
         spawnedUIPlant = Instantiate(pa.uiPlant.gameObject, plantSpawn.position, Quaternion.Euler(new Vector3(0f, 0f, 0f))).GetComponent<Plant>();
         spawnedUIPlant.enabled = false;
         spawnedUIPlant.transform.parent = plantSpawn;
         spawnedUIPlant.transform.localRotation = Quaternion.Euler(new Vector3(0f, 0f, 0f));
 
+        SoundEffectsManager.instance.PlaySoundEffectNC("plantplant");
+        currentPa = pa;
+        plantLevelButton.SetActive(true);
+        plantLevelButtonT.text = "Level " + (currentPlantLevelIndexAlc + 1).ToString();
         plantNameT.text = pa.plantName;
-        plantBuyPriceT.text = "$ " + pa.buyPrice.ToString("N0");
+        plantProdTimeT.text = pa.plantLevels[0].producingTime + " (secs.)";
+        plantProdCoinsT.text = pa.plantLevels[0].producedCoins.ToString();
+        plantEnergyT.text = pa.plantLevels[0].energyLevel.ToString();
+        plantLifeTimeT.text = pa.plantLevels[0].plantLife.ToString();
         plantBackGround.sprite = pa.plantBackg;
         plantDescT.text = pa.plantDescription;
         plantQualityT.text = GetStringedPlantQuality(pa.plantQuality.quality, true);
 
         PlantProcessAsset ppa = Resources.Load<PlantProcessAsset>("PlantProcessAsset/" + GetStringedPlantQuality(pa.plantQuality.quality, false));
-
-        if (ppa != null)
-            plantExtraPercT.text = "% " + ppa.plantPercentageExtra;
 
         if (pa.canBePlantedIn.Count > 1)
         {

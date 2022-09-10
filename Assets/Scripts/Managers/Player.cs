@@ -18,8 +18,8 @@ public class Player : MonoBehaviour
     private bool grabbedPlantedPlant, grabbedPlacedFlower;
     private GardenItem holdingGardenItem;
     private SeedDatabase seedDatabase;
-    public bool onSellingPlantPanel, onUpgradingPlantPanel;
-    [Header ("Economy")]
+    public bool onSellingPlantPanel, onUpgradingPlantPanel, onDecoPlantPanel;
+    [Header("Economy")]
     [SerializeField] private int currentPlayerCoins;
 
     void Awake()
@@ -65,6 +65,8 @@ public class Player : MonoBehaviour
         rightHand.grabbedItemEffect.performed += DeleteFlowerPot;
         rightHand.grabbedItemEffect.performed += DeletePlant;
         rightHand.grabbedItemEffect.performed += SquishPinata;
+        rightHand.grabbedItemEffect.performed += SellActionMenu;
+        rightHand.grabbedItemEffect.performed += UpgradeActionMenu;
 
         rightHand.sellPlant.Enable();
         rightHand.sellPlant = xrDirect.XRIRightHandInteraction.ButtonA;
@@ -86,7 +88,7 @@ public class Player : MonoBehaviour
     }
 
     public void SpendMoney(int amount)
-    {   
+    {
         if (currentPlayerCoins > 0)
             currentPlayerCoins -= amount;
 
@@ -104,7 +106,7 @@ public class Player : MonoBehaviour
     }
 
     public void AddMoney(int amount)
-    {   
+    {
         if (currentPlayerCoins < 99999999)
             currentPlayerCoins += amount;
 
@@ -119,7 +121,7 @@ public class Player : MonoBehaviour
     public void PlantSelectedPlant(InputAction.CallbackContext ctx)
     {
         if ((holdingPlant != null && hoveringFlowerPot != null) && seedDatabase.CanPlant(holdingPlant.plantData))
-        {   
+        {
             if (hoveringFlowerPot.GetPlantedPlant() == null && hoveringFlowerPot.GetIfPlantIsAccepted())
             {
                 hoveringFlowerPot.PlantPlant(holdingPlant);
@@ -156,7 +158,7 @@ public class Player : MonoBehaviour
     }
 
     public void RecievePlantedPlant(Plant p)
-    {   
+    {
         if (!grabbedPlantedPlant && p != null)
         {
             holdingPlantedPlant = p;
@@ -260,7 +262,7 @@ public class Player : MonoBehaviour
     }
 
     public void SetGardenItem(GardenItem garden)
-    {   
+    {
         if (holdingGardenItem == null)
         {
             holdingGardenItem = garden;
@@ -269,7 +271,7 @@ public class Player : MonoBehaviour
     }
 
     public void DeSetGardenItem(GardenItem item)
-    {   
+    {
         if (holdingGardenItem != null && holdingGardenItem == item)
         {
             rightHand.grabbedItemEffect.performed -= holdingGardenItem.GardenItemAction;
@@ -277,75 +279,143 @@ public class Player : MonoBehaviour
         }
     }
 
-    /*public void SellPlant(InputAction.CallbackContext ctx)
+    public void SellActionMenu(InputAction.CallbackContext ctx)
     {
-        if (holdingFlowerPot != null)
+        if (onSellingPlantPanel)
         {
-            //Linea 1
-            GameObject plant;
-            plant = holdingFlowerPot.GetPlantedPlant().gameObject;
-            plant.GetComponent<Plant>().TriggerSellPlant();
-
-
-            //Linea 2
-            holdingFlowerPot.GetPlantedPlant().TriggerReplant();
+            Player.instance.AddMoney(holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex
+            ].sellPrice);
+            DeTriggerPanels();
+            StartCoroutine(DisableInteractorFor(.2f));
+            holdingFlowerPot.GetPlantedPlant().TriggerSellPlant();
+            SoundEffectsManager.instance.PlaySoundEffectNC("money");
         }
-    }*/
+    }
+
+    public void UpgradeActionMenu(InputAction.CallbackContext ctx)
+    {
+        if (onDecoPlantPanel)
+        {
+            holdingFlowerPot.GetPlantedPlant().SetPlantAsDeco();
+            SoundEffectsManager.instance.PlaySoundEffectNC("prize");
+            holdingFlowerPot.ToggleFlowerPotUI(false);
+            DeTriggerPanels();
+            holdingFlowerPot.potInteractable.enabled = false;
+            holdingFlowerPot.upgradePlantPanel.SetActive(false);
+        }
+
+        if (onUpgradingPlantPanel)
+        {
+            if (Player.instance.CanSpendMoney(
+                holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex + 1
+                ].upgradePrice))
+            {
+                SoundEffectsManager.instance.PlaySoundEffectNC("money");
+                Player.instance.SpendMoney(holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex + 1
+                ].upgradePrice);
+                holdingFlowerPot.GetPlantedPlant().UpgradePlant();
+                DeTriggerPanels();
+                holdingFlowerPot.potInteractable.enabled = false;
+                holdingFlowerPot.upgradePlantPanel.SetActive(false);
+            }
+
+            else SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
+        }
+    }
 
     public void TriggerSellActionMenu(InputAction.CallbackContext ctx)
     {
-        if (holdingFlowerPot != null && !onUpgradingPlantPanel)
+        if (holdingFlowerPot != null && !onUpgradingPlantPanel && !onSellingPlantPanel && !holdingFlowerPot.GetPlantedPlant().ExpectingGardenItem())
         {
-            if (onSellingPlantPanel)
-            {
-                holdingFlowerPot.GetPlantedPlant().TriggerSellPlant();
-            }
-
-            else
-            {
-                holdingFlowerPot.sellPlantPanel.SetActive(true);
-                holdingFlowerPot.actionButtons.SetActive(false);
-                holdingFlowerPot.plantSellT.text = "$ " + holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
-                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex
-                ].sellPrice.ToString("N0");
-                holdingFlowerPot.ToggleFlowerPotUI(false);
-                onSellingPlantPanel = true;
-            }
+            holdingFlowerPot.sellPlantPanel.SetActive(true);
+            holdingFlowerPot.actionButtons.SetActive(false);
+            holdingFlowerPot.plantSellT.text = "$ " + holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex
+            ].sellPrice.ToString("N0");
+            holdingFlowerPot.ToggleFlowerPotUI(false);
+            onSellingPlantPanel = true;
         }
+
+        else if (holdingFlowerPot != null && !onUpgradingPlantPanel && !onSellingPlantPanel && holdingFlowerPot.GetPlantedPlant().ExpectingGardenItem())
+            SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
     }
 
     public void TriggerUpgradeActionMenu(InputAction.CallbackContext ctx)
     {
-        if (holdingFlowerPot.GetPlantedPlant().CanUpgradePlant())
+        if (holdingFlowerPot != null && !onSellingPlantPanel && !onUpgradingPlantPanel && !holdingFlowerPot.GetPlantedPlant().ExpectingGardenItem())
         {
-            if (holdingFlowerPot != null && !onSellingPlantPanel)
-            {   
-                if (onUpgradingPlantPanel)
-                {
-                    Debug.Log("Upgrade " + holdingFlowerPot.GetPlantedPlant().gameObject.name);
-                }
+            holdingFlowerPot.actionButtons.SetActive(false);
+            holdingFlowerPot.ToggleFlowerPotUI(false);
+            holdingFlowerPot.upgradePlantPanel.SetActive(true);
 
-                else
-                {
-                    holdingFlowerPot.upgradePlantPanel.SetActive(true);
-                    holdingFlowerPot.actionButtons.SetActive(false);
-                    holdingFlowerPot.ToggleFlowerPotUI(false);
-                    holdingFlowerPot.plantUpgradeT.text = "$ " + holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
-                        holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex + 1
-                    ].upgradePrice.ToString("N0");
-                    onUpgradingPlantPanel = true;
-                }
+            if (holdingFlowerPot.GetPlantedPlant().CanUpgradePlant())
+            {
+                holdingFlowerPot.normalUPlantPanel.SetActive(true);
+
+                holdingFlowerPot.plantUpgradeT.text = "$ " + holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex + 1
+                ].upgradePrice.ToString("N0");
+
+                holdingFlowerPot.upgradeProdTime.text = holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex
+                ].producingTime + " <color=orange> >>> </color> <color=green>" + holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex + 1
+                ].producingTime + "</color>";
+
+                holdingFlowerPot.upgradeCoins.text = holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex
+                ].producedCoins + " <color=orange> >>> </color> <color=green>" + holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex + 1
+                ].producedCoins + "</color>";
+
+                holdingFlowerPot.upgradeEnergy.text = holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex
+                ].energyLevel + " <color=orange> >>> </color> <color=green>" + holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex + 1
+                ].energyLevel + "</color>";
+
+                holdingFlowerPot.upgradeLifeTime.text = holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex
+                ].plantLife + " <color=orange> >>> </color> <color=green>" + holdingFlowerPot.GetPlantedPlant().plantData.plantLevels[
+                    holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex + 1
+                ].plantLife + "</color>";
+
+                onUpgradingPlantPanel = true;
+            }
+
+            else
+            {
+                holdingFlowerPot.decoPlantPanel.SetActive(true);
+                onDecoPlantPanel = true;
             }
         }
+
+        else if (holdingFlowerPot != null && !onSellingPlantPanel && !onUpgradingPlantPanel && holdingFlowerPot.GetPlantedPlant().ExpectingGardenItem())
+            SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
+    }
+
+    IEnumerator DisableInteractorFor(float delay)
+    {
+        Player.instance.LeftHandEnabler(false);
+        Player.instance.RightHandEnabler(false);
+        yield return new WaitForSeconds(delay);
+        Player.instance.LeftHandEnabler(true);
+        Player.instance.RightHandEnabler(true);
     }
 
     public void DeTriggerPanels()
     {
         holdingFlowerPot.upgradePlantPanel.SetActive(false);
+        holdingFlowerPot.decoPlantPanel.SetActive(false);
+        holdingFlowerPot.normalUPlantPanel.SetActive(false);
         holdingFlowerPot.sellPlantPanel.SetActive(false);
-        holdingFlowerPot.ToggleFlowerPotUI(true);
+        holdingFlowerPot.ToggleFlowerPotUI(!holdingFlowerPot.GetPlantedPlant().isDeco);
         onUpgradingPlantPanel = false;
         onSellingPlantPanel = false;
+        onDecoPlantPanel = false;
     }
 
     public void SetFlowerPot(InputAction.CallbackContext ctx)
@@ -413,23 +483,23 @@ public class Player : MonoBehaviour
     }
 
     void TeleportEnabler(InputAction.CallbackContext ctx)
-    {   
+    {
         if (leftHand.canUse)
         {
             if (ctx.performed)
                 oneTeleporterEnabled = true;
-            
+
             leftHand.handInteractor.enabled = true;
         }
     }
 
     void TeleportDisabler(InputAction.CallbackContext ctx)
-    {   
+    {
         if (leftHand.canUse)
         {
             if (ctx.performed)
                 oneTeleporterEnabled = false;
-            
+
             leftHand.handInteractor.enabled = false;
         }
     }

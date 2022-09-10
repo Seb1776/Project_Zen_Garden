@@ -401,6 +401,33 @@ public class MusicManager : MonoBehaviour
             UIManager.instance.TriggerWhileYouWhereGone(currentWorld);
 
         DataCollector.instance.SetLastVisitedWorld(currentWorld);
+
+        UIManager.instance.SetBankMoneyText(PlantsManager.instance.GetCurrentWorldMoney(currentWorld));
+        Debug.Log(PlantsManager.instance.GetCurrentWorldMoney(currentWorld));
+        UIManager.instance.SetBankWorldPanel(currentWorld);
+        UIManager.instance.SetBankWorldText(GetFormatedWorldName(currentWorld));
+        Debug.Log(currentWorld);
+    }
+
+    public string GetFormatedWorldName(GameWorlds world)
+    {
+        switch (world)
+        {
+            case GameWorlds.ModernDay: return "Modern Day";
+            case GameWorlds.JurassicMarsh: return "Jurassic Marsh";
+            case GameWorlds.NeonMixtapeTour: return "Neon Mixtape Tour";
+            case GameWorlds.DarkAges: return "Dark Ages";
+            case GameWorlds.PirateSeas: return "Pirate Seas";
+            case GameWorlds.FarFuture: return "Far Future";
+            case GameWorlds.LostCity: return "Lost City";
+            case GameWorlds.WildWest: return "Wild West";
+            case GameWorlds.BigWaveBeach: return "Big Wave Beach";
+            case GameWorlds.FrostbiteCaves: return "Frostbite Caves";
+            case GameWorlds.AncientEgypt: return "Ancient Egypt";
+            case GameWorlds.Tutorial: return "Tutorial";
+        }
+
+        return string.Empty;
     }
 
     public void RemoveTutorialStuff()
