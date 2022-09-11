@@ -70,7 +70,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: -7231053441967933277, guid: 2702a5947cce33946b3df445e52f4e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -2117,11 +2117,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: 388a05edbefeb8c4892610226b50edf9, type: 2}
+  growth: 0
   plantAnim: {fileID: 0}
+  currentProgressTime: 0
+  maxTimeToProduce: 0
+  coinsToProduce: 0
+  currentEnergyTime: 0
+  currentLifeTime: 0
+  hasEnergy: 1
+  currentPlantLevelIndex: 0
+  isDeco: 0
   replanting: 0
-  fullyGrown: 0
   flowerPotIn: {fileID: 0}
   plantIsAbove: {fileID: 0}
+  expectedItem: 4
 --- !u!1 &6480666868616603049
 GameObject:
   m_ObjectHideFlags: 0
@@ -2280,7 +2289,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 6982132421125784167, guid: 2702a5947cce33946b3df445e52f4e56, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
