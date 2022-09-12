@@ -12,11 +12,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b53dbc10e280d4286729eb3d4d79ea, type: 3}
   m_Name: AncientEgypt
   m_EditorClassIdentifier: 
-  worldID: 
+  worldID: egypt
   world: 0
-  normalTracks: []
-  specialTracks: []
-  phonographClip: {fileID: 0}
-  grownPlantClip: {fileID: 0}
+  normalTracks:
+  - {fileID: 8300000, guid: efd98d0f2b4effc4993b03e7ca995a28, type: 3}
+  - {fileID: 8300000, guid: 54806ef412fc6fd4683ee1941424c327, type: 3}
+  - {fileID: 8300000, guid: c94502715939f5145be14fdfe1cb6dea, type: 3}
+  - {fileID: 8300000, guid: ce681335274189f42ae664bfcb53fe36, type: 3}
+  specialTracks:
+  - {fileID: 8300000, guid: 959c7bad876ab6948a01d527a55bfe3f, type: 3}
+  - {fileID: 8300000, guid: ce42bd2c1f6a1ff47ae24b1844afc304, type: 3}
+  - {fileID: 8300000, guid: da847ad118257d54b9eec6155a6b7f58, type: 3}
+  phonographClip: {fileID: 8300000, guid: 4a3f1b25938ce814396c3caa85e01f83, type: 3}
+  grownPlantClip: {fileID: 8300000, guid: 9bbe5cd62fdc6de46b14b2dfaf7baa19, type: 3}
   isPresent: 0
   unlockPrice: 1183675
