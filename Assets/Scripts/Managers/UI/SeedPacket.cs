@@ -24,6 +24,7 @@ public class SeedPacket : MonoBehaviour
 
     public void SeedPacketStart()
     {
+        Debug.Log("H");
         seedDatabase = GameObject.FindGameObjectWithTag("SeedDatabase").GetComponent<SeedDatabase>();
         SetPlantUIData();
         CheckPlantState();
