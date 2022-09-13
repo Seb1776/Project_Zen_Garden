@@ -365,7 +365,7 @@ public class FlowerPot : MonoBehaviour
 
     void OnTriggerStay(Collider other) 
     {
-        if (other.CompareTag("Plant") && other.GetComponent<Plant>().plantIsAbove == null && canUseOutline)
+        if (other.CompareTag("Plant") && other.GetComponent<Plant>().plantIsAbove == null && canUseOutline && createdIn == MusicManager.instance.GetCurrentMusic().world.ToString())
         {
             other.GetComponent<Plant>().plantIsAbove = this;
             Debug.Log(other.gameObject.name);

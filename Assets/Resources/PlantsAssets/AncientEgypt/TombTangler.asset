@@ -13,14 +13,34 @@ MonoBehaviour:
   m_Name: TombTangler
   m_EditorClassIdentifier: 
   plantName: Tomb Tangler
-  plantDescription: 
+  plantDescription: '"I don''t know what these tombstones are made out of, but they
+    sure make me belch out loud. Anyone dares disturb my siesta, I''ll pull them
+    down!"'
   uiPlant: {fileID: 6480666868586874440, guid: 5c862403a08e7fd4ea1d4144a66787f4, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
   plantQuality: {fileID: 11400000, guid: 7e4858d218dfb114d867c75772e237c3, type: 2}
   canBePlantedIn: 0600000000000000070000000a00000004000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 16262
+  buyPrice: 16262
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 22
+    producingTime: 15
+    plantLife: 56
+    energyLevel: 44
+    sellPrice: 16262
+  - upgradePrice: 80499
+    producedCoins: 33
+    producingTime: 22
+    plantLife: 84
+    energyLevel: 66
+    sellPrice: 120748
+  - upgradePrice: 377974
+    producedCoins: 48
+    producingTime: 33
+    plantLife: 123
+    energyLevel: 97
+    sellPrice: 566961
   initialScale: {x: -0.07953702, y: 0.07953702, z: 0.07953702}

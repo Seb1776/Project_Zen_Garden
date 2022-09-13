@@ -12,6 +12,7 @@ public class MusicManager : MonoBehaviour
 
     [SerializeField] private WorldMusic[] assets;
     public GameWorlds currentWorld;
+    [SerializeField] private GameObject[] modernDayFullRoster;
     [SerializeField] private AudioClip ageTransitionEffect;
     [SerializeField] private MusicAsset throwback;
     [Header ("Tutorial Things")]
@@ -44,6 +45,12 @@ public class MusicManager : MonoBehaviour
     void Start()
     {
         SetWorldsPrices();
+    }
+
+    void Update()
+    {
+        if (panning)
+            PanMusicLevel();
     }
 
     public void ChangeMusic(MusicAsset newAge)
@@ -263,7 +270,7 @@ public class MusicManager : MonoBehaviour
 
     public void CheckNextWorldPanelToOpen(MusicAsset worldToCheck)
     {
-        if (GetNextWorld(worldToCheck) != null && !TimeTravelManager.instance.HasEnteredBefore(worldToCheck.worldID))
+        if (GetNextWorld(worldToCheck) != null && !TimeTravelManager.instance.HasEnteredBefore(worldToCheck.worldID) && worldToCheck.world != GameWorlds.ModernDay)
         {   
             if (GetNextWorld(worldToCheck).unlockFirstPanel.activeSelf)
                 GetNextWorld(worldToCheck).unlockFirstPanel.SetActive(false);
@@ -342,6 +349,38 @@ public class MusicManager : MonoBehaviour
         TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, false);
     }
 
+    public void TriggerPanMusicLevel(float setTo, float duration)
+    {
+        _setTo = setTo;
+        _duration = duration;
+        panning = true;
+    }
+
+    bool panning;
+    float _setTo, _duration, _currDur;
+    public void PanMusicLevel()
+    {
+        if (_currDur >= _duration)
+        {
+            if (source.volume != 1f)
+                source.volume += Time.deltaTime;
+            
+            else
+            {
+                _currDur = 0f;
+                panning = false;
+            }
+        }
+
+        else
+        {
+            _currDur += Time.deltaTime;
+
+            if (source.volume != _setTo)
+                source.volume = Mathf.Lerp(source.volume, _setTo, 1f * Time.deltaTime);
+        }
+    }
+
     public void SetTablesInTimeTravel(MusicAsset active)
     {
         AgeTime[] _ages = TimeTravelManager.instance.worlds;
@@ -372,17 +411,25 @@ public class MusicManager : MonoBehaviour
         playingContext = string.Empty;
 
         Player.instance.SafetyNetsWhenHolding();
-        Player.instance.RightHandEnabler(false);
-        Player.instance.LeftHandEnabler(false);
+        Player.instance.TogglePlayerHands(false);
 
         yield return new WaitForSeconds(.45f);
 
         TimeTravelManager.instance.ChangeScenario(worldMusic.worldID, true);
 
         if (GetNextWorld(worldMusic) != null && !TimeTravelManager.instance.HasEnteredBefore(worldMusic.worldID))
-        {
-            GetWorldData(worldMusic).plantsButton.interactable = true;
-            GetNextWorld(worldMusic).unlockFirstPanel.SetActive(false);
+        {   
+            if (worldMusic.world != GameWorlds.ModernDay)
+            {
+                GetWorldData(worldMusic).plantsButton.interactable = true;
+                GetNextWorld(worldMusic).unlockFirstPanel.SetActive(false);
+            }
+
+            else
+            {
+                foreach (GameObject g in modernDayFullRoster)
+                    g.SetActive(true);
+            }
         }
 
         yield return new WaitForSeconds(ageTransitionEffect.length - 1f);
@@ -392,8 +439,7 @@ public class MusicManager : MonoBehaviour
 
         TimeTravelManager.instance.TriggerTransition(false);
 
-        Player.instance.RightHandEnabler(true);
-        Player.instance.LeftHandEnabler(true);
+        Player.instance.TogglePlayerHands(true);
 
         ChangeMusic(worldMusic);
 
@@ -436,12 +482,21 @@ public class MusicManager : MonoBehaviour
         DataCollector.instance.SetTutorialState(false);
 
         SeedDatabase.instance.TutorialPlantsSet(true);
-        modernDayUnlockPanel.SetActive(true);
+
+        if (!GameManager.instance.unlockedModernDay)
+            modernDayUnlockPanel.SetActive(true);
+
         fullModernDayPanel.SetActive(true);
         modernDayTutorialPanel.SetActive(false);
         tutorialGarden.SetActive(false);
         tutorialGardening.transform.localPosition = new Vector3(0f, -1.75f, 0f);
         fullGardening.transform.localPosition = new Vector3(0f, 0f, 0f);
+    }
+
+    public void UnlockFinalModernDay()
+    {
+        GameManager.instance.unlockedModernDay = true;
+        modernDayUnlockPanel.SetActive(false);
     }
 }
 

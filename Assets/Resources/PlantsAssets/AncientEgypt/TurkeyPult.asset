@@ -13,14 +13,35 @@ MonoBehaviour:
   m_Name: TurkeyPult
   m_EditorClassIdentifier: 
   plantName: Turkey-Pult
-  plantDescription: 
+  plantDescription: 'Turkey-pult''s turkeys are so delicious, you''d never know they
+    were actually made of tofu! Almost never. You might know. Okay, fine, cards on
+    the table: there is absolutely no way you could ever mistake these turkeys for
+    the real thing.'
   uiPlant: {fileID: 4688767622050606530, guid: 7ff9d9b19d0a5744a8af1b4b00d4b8df, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
   plantQuality: {fileID: 11400000, guid: 7e4858d218dfb114d867c75772e237c3, type: 2}
   canBePlantedIn: 06000000010000000000000009000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 17424
+  buyPrice: 17424
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 22
+    producingTime: 16
+    plantLife: 55
+    energyLevel: 45
+    sellPrice: 17424
+  - upgradePrice: 88324
+    producedCoins: 33
+    producingTime: 24
+    plantLife: 82
+    energyLevel: 68
+    sellPrice: 132486
+  - upgradePrice: 402494
+    producedCoins: 48
+    producingTime: 35
+    plantLife: 121
+    energyLevel: 99
+    sellPrice: 603742
   initialScale: {x: -0.05962319, y: 0.059623186, z: 0.059623186}

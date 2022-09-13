@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: MonarchMarigold
   m_EditorClassIdentifier: 
   plantName: Monarch Marigold
-  plantDescription: 
+  plantDescription: All hail the queen of the Marigolds! She's been the monarch for
+    over 200 years, giving birth to all kinds of Marigolds to help her reign.
   uiPlant: {fileID: 6259483992574685774, guid: a9ac2e5c4bf092144bdc384e845626cc, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
   plantQuality: {fileID: 11400000, guid: 336af25e7d4b0b84282aa7d3f0cf8af9, type: 2}
   canBePlantedIn: 0600000007000000080000000a0000000300000004000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 26653
+  buyPrice: 26653
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 34
+    producingTime: 13
+    plantLife: 67
+    energyLevel: 45
+    sellPrice: 26653
+  - upgradePrice: 138720
+    producedCoins: 51
+    producingTime: 20
+    plantLife: 100
+    energyLevel: 68
+    sellPrice: 208080
+  - upgradePrice: 633056
+    producedCoins: 75
+    producingTime: 29
+    plantLife: 147
+    energyLevel: 99
+    sellPrice: 949583
   initialScale: {x: -0.1423526, y: 0.14235264, z: 0.14235264}

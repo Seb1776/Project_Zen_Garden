@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private float skySpeed;
     [Header ("Tutorial Stuff")]
     public bool onTutorial;
+    public bool unlockedModernDay;
     [SerializeField] private GameObject jurassicMarshBlocker;
     [SerializeField] private GameObject tutorial;
 

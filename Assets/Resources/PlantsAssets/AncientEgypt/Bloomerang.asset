@@ -13,14 +13,34 @@ MonoBehaviour:
   m_Name: Bloomerang
   m_EditorClassIdentifier: 
   plantName: Bloomerang
-  plantDescription: 
+  plantDescription: As the first new member to your home defense team, Bloomerang
+    enjoys long walkabouts with his friend, Koala Bear, and listening to his Bob
+    Barley albums out back.
   uiPlant: {fileID: 3788827986313988852, guid: 16a3fb6768ef70041843123f2907d866, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
   plantQuality: {fileID: 11400000, guid: 12d300539662e254a91a708910e8ab05, type: 2}
   canBePlantedIn: 06000000000000000100000002000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 4792
+  buyPrice: 4792
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 11
+    producingTime: 22
+    plantLife: 45
+    energyLevel: 22
+    sellPrice: 4792
+  - upgradePrice: 23697
+    producedCoins: 16
+    producingTime: 33
+    plantLife: 68
+    energyLevel: 33
+    sellPrice: 35545
+  - upgradePrice: 109486
+    producedCoins: 24
+    producingTime: 48
+    plantLife: 99
+    energyLevel: 48
+    sellPrice: 164229
   initialScale: {x: -0.06357941, y: 0.06357941, z: 0.06357941}

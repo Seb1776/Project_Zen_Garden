@@ -14,32 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sizes:
   - pinataPrice: 500
-    minUnlockedPlantsToUse: 5
     pinataSize: 0
     squishesRange: {x: 3, y: 5}
-    plantsToAppearRange: {x: 2, y: 5}
-    seedsToGiveRange: {x: 5, y: 8}
   - pinataPrice: 1250
-    minUnlockedPlantsToUse: 9
     pinataSize: 1
     squishesRange: {x: 5, y: 8}
-    plantsToAppearRange: {x: 5, y: 9}
-    seedsToGiveRange: {x: 8, y: 10}
   - pinataPrice: 2000
-    minUnlockedPlantsToUse: 13
     pinataSize: 2
     squishesRange: {x: 8, y: 10}
-    plantsToAppearRange: {x: 9, y: 13}
-    seedsToGiveRange: {x: 12, y: 15}
   - pinataPrice: 2700
-    minUnlockedPlantsToUse: 15
     pinataSize: 3
     squishesRange: {x: 11, y: 13}
-    plantsToAppearRange: {x: 12, y: 15}
-    seedsToGiveRange: {x: 16, y: 20}
   pinataImage: {fileID: -3157079198908394129, guid: c06e8d560c8639b4ebea08043548e7bc, type: 3}
+  pinataName: Ancient Egypt Pinata
   pinataGameObject: {fileID: 7636636756824789020, guid: a5a9b79a226004b47a0f091cb09700c9, type: 3}
   plantsThatCanAppear:
-  - {fileID: 11400000, guid: 5b326a7a80f470240882da8cbdc30d0c, type: 2}
-  - {fileID: 11400000, guid: 79f20522a93e1384dab6f1e16d9fec97, type: 2}
-  - {fileID: 11400000, guid: 388a05edbefeb8c4892610226b50edf9, type: 2}
+  - quality: 0
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: a41aed3fb1b3ea74f8dc04554058da7f, type: 2}
+    - {fileID: 11400000, guid: f391a1d048a7df2489c1bf0e22a40b8d, type: 2}
+  - quality: 1
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 7fa2e01e584bf4344a121c0d2bf7e8f5, type: 2}
+    - {fileID: 11400000, guid: 14dd33bec8e2e6941baf1531e71b8d4d, type: 2}
+    - {fileID: 11400000, guid: 79f20522a93e1384dab6f1e16d9fec97, type: 2}
+    - {fileID: 11400000, guid: aa3614caf75f70e469e63714cb3bab1d, type: 2}
+  - quality: 2
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 80b1756e1dd62b142b292426fd4f8344, type: 2}
+    - {fileID: 11400000, guid: 417b2f50617572640a88efc0c9e0cb59, type: 2}
+    - {fileID: 11400000, guid: e5b7918aea4488448a00d80d6c5ef1d8, type: 2}
+  - quality: 3
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: be97688bd16500f4aa0e800399faa1d1, type: 2}
+    - {fileID: 11400000, guid: 5b326a7a80f470240882da8cbdc30d0c, type: 2}
+    - {fileID: 11400000, guid: 388a05edbefeb8c4892610226b50edf9, type: 2}

@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: BrambleBush
   m_EditorClassIdentifier: 
   plantName: Bramble Bush
-  plantDescription: 
+  plantDescription: Bramble Bush is a prickly sort. In fact, let's not beat around
+    the Bramble Bush here; he's covered in extraordinarily dangerous spikes.
   uiPlant: {fileID: 8314637441018750113, guid: 99c4c6f4c9ffe2b42aa438ce46337e61, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
   plantQuality: {fileID: 11400000, guid: 7e4858d218dfb114d867c75772e237c3, type: 2}
   canBePlantedIn: 06000000070000000300000009000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 17347
+  buyPrice: 17347
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 22
+    producingTime: 16
+    plantLife: 56
+    energyLevel: 44
+    sellPrice: 17347
+  - upgradePrice: 87817
+    producedCoins: 33
+    producingTime: 24
+    plantLife: 84
+    energyLevel: 66
+    sellPrice: 131725
+  - upgradePrice: 400882
+    producedCoins: 48
+    producingTime: 35
+    plantLife: 123
+    energyLevel: 97
+    sellPrice: 601322
   initialScale: {x: -0.06339475, y: 0.06339475, z: 0.06339475}

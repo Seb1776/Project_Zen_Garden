@@ -14,8 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldID: caves
   world: 6
-  normalTracks: []
-  specialTracks: []
+  normalTracks:
+  - {fileID: 8300000, guid: c507d6506fad4b64ca9d12b779cf4eac, type: 3}
+  - {fileID: 8300000, guid: 16949e74136c3e644875f5479f425b68, type: 3}
+  - {fileID: 8300000, guid: 988f1ab2cdea2004891d5f12df54b732, type: 3}
+  - {fileID: 8300000, guid: efefb575fab48054ca89e8df7ad35f7f, type: 3}
+  - {fileID: 8300000, guid: bf34cb77a53dcb5429e6fa2e23aef051, type: 3}
+  specialTracks:
+  - {fileID: 8300000, guid: 5b185aeae29f1ff4fb7964669833c269, type: 3}
+  - {fileID: 8300000, guid: cc8270333264abe46844e1d651486b63, type: 3}
+  - {fileID: 8300000, guid: 53514d2c36f1b8943827575be43eaa6a, type: 3}
   phonographClip: {fileID: 8300000, guid: 31fe368c9f757724e96520950669ce31, type: 3}
   grownPlantClip: {fileID: 8300000, guid: e292ccc2cd638c740bd92909619efef0, type: 3}
   isPresent: 0

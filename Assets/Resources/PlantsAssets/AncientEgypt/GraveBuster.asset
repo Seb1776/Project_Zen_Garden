@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: GraveBuster
   m_EditorClassIdentifier: 
   plantName: Grave Buster
-  plantDescription: 
-  uiPlant: {fileID: 0}
-  plantBackg: {fileID: 0}
+  plantDescription: He may appear spiky or ill-tempered, but Grave Buster just wants
+    to give you a big hug. Unless you're a puppy. He's terrified of those.
+  uiPlant: {fileID: 8160706007909220348, guid: d9ca0c8950d904f42859255c01ec7bc1, type: 3}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
   plantQuality: {fileID: 11400000, guid: 12d300539662e254a91a708910e8ab05, type: 2}
   canBePlantedIn: 06000000090000000800000003000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 4792
+  buyPrice: 4792
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 11
+    producingTime: 22
+    plantLife: 45
+    energyLevel: 22
+    sellPrice: 4792
+  - upgradePrice: 23697
+    producedCoins: 16
+    producingTime: 33
+    plantLife: 68
+    energyLevel: 33
+    sellPrice: 35545
+  - upgradePrice: 109486
+    producedCoins: 24
+    producingTime: 48
+    plantLife: 99
+    energyLevel: 48
+    sellPrice: 164229
   initialScale: {x: -0.05228366, y: 0.052283656, z: 0.052283656}

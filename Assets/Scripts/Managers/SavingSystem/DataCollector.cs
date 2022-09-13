@@ -208,8 +208,10 @@ public class DataCollector : MonoBehaviour
         }
 
         for (int i = 0; i < seeds.Count; i++)
+        {
             if (seeds[i].plantAssetName != "Peashooter")
                 SeedDatabase.instance.SetPlantAssetFromData(seeds[i]);
+        }
 
         for (int i = 0; i < flowerPotsDatas.Count; i++)
             SeedDatabase.instance.SetFlowerPotsFromLoad(flowerPotsDatas[i]);
@@ -220,6 +222,9 @@ public class DataCollector : MonoBehaviour
 
             if (ma.world == GameWorlds.JurassicMarsh)
                 SeedDatabase.instance.jurassicBlock.SetActive(false);
+            
+            else if (ma.world == GameWorlds.ModernDay)
+                MusicManager.instance.UnlockFinalModernDay();
 
             MusicManager.instance.DeactivateWorldLock(ma);
         }

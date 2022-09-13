@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: Snapdragon
   m_EditorClassIdentifier: 
   plantName: Snapdragon
-  plantDescription: 
+  plantDescription: Although the most powerful dragon in the plant kingdom, he still
+    dreams of wings and seeing the world beneath him.
   uiPlant: {fileID: 8757434696833344476, guid: 46ef4455f783c0c4b9016629db422e4e, type: 3}
   plantBackg: {fileID: 2624046264405249529, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 1
   plantQuality: {fileID: 11400000, guid: 6b1342737bbb6be4d959282895950709, type: 2}
   canBePlantedIn: 0700000006000000050000000a00000008000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 1121
+  buyPrice: 1121
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 7
+    producingTime: 13
+    plantLife: 28
+    energyLevel: 22
+    sellPrice: 1121
+  - upgradePrice: 5544
+    producedCoins: 10
+    producingTime: 20
+    plantLife: 42
+    energyLevel: 33
+    sellPrice: 8316
+  - upgradePrice: 25891
+    producedCoins: 15
+    producingTime: 29
+    plantLife: 62
+    energyLevel: 48
+    sellPrice: 38837
   initialScale: {x: -0.06849867, y: 0.06849867, z: 0.06849867}

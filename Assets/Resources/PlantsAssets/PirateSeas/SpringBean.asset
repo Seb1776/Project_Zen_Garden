@@ -13,14 +13,34 @@ MonoBehaviour:
   m_Name: SpringBean
   m_EditorClassIdentifier: 
   plantName: Spring Bean
-  plantDescription: 
+  plantDescription: 'He''s the strong, silent type and little is known about Spring
+    Bean. What is known though: his fan club is a million followers strong. And the
+    ladies love him.'
   uiPlant: {fileID: 1454329268668137510, guid: 82985d4d2b8297549b2647d668f6be92, type: 3}
   plantBackg: {fileID: 2624046264405249529, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 1
   plantQuality: {fileID: 11400000, guid: 12d300539662e254a91a708910e8ab05, type: 2}
   canBePlantedIn: 070000000000000001000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 796
+  buyPrice: 796
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 7
+    producingTime: 14
+    plantLife: 29
+    energyLevel: 14
+    sellPrice: 796
+  - upgradePrice: 3881
+    producedCoins: 10
+    producingTime: 21
+    plantLife: 44
+    energyLevel: 21
+    sellPrice: 5821
+  - upgradePrice: 18451
+    producedCoins: 15
+    producingTime: 31
+    plantLife: 64
+    energyLevel: 31
+    sellPrice: 27677
   initialScale: {x: -0.05860874, y: 0.05860874, z: 0.05860874}

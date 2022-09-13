@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: Repeater
   m_EditorClassIdentifier: 
   plantName: Repeater
-  plantDescription: 
+  plantDescription: '"Everyone always asks me if we''ve met before." says Repeater.
+    "Everyone always asks me if we''ve met before. Wait, did I just say that?"'
   uiPlant: {fileID: 7668978583873128728, guid: 7b24fc89fc0927f4abb709538979f58d, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
   plantQuality: {fileID: 11400000, guid: 6b1342737bbb6be4d959282895950709, type: 2}
   canBePlantedIn: 06000000000000000100000002000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 6389
+  buyPrice: 6389
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 11
+    producingTime: 20
+    plantLife: 44
+    energyLevel: 33
+    sellPrice: 6389
+  - upgradePrice: 31680
+    producedCoins: 16
+    producingTime: 30
+    plantLife: 66
+    energyLevel: 50
+    sellPrice: 47520
+  - upgradePrice: 149551
+    producedCoins: 24
+    producingTime: 44
+    plantLife: 97
+    energyLevel: 73
+    sellPrice: 224326
   initialScale: {x: -0.07990621, y: 0.07990621, z: 0.07990621}

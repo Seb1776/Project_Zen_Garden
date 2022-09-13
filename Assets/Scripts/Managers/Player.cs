@@ -287,7 +287,6 @@ public class Player : MonoBehaviour
                 holdingFlowerPot.GetPlantedPlant().currentPlantLevelIndex
             ].sellPrice);
             DeTriggerPanels();
-            StartCoroutine(DisableInteractorFor(.2f));
             holdingFlowerPot.GetPlantedPlant().TriggerSellPlant();
             SoundEffectsManager.instance.PlaySoundEffectNC("money");
         }
@@ -397,15 +396,6 @@ public class Player : MonoBehaviour
             SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
     }
 
-    IEnumerator DisableInteractorFor(float delay)
-    {
-        Player.instance.LeftHandEnabler(false);
-        Player.instance.RightHandEnabler(false);
-        yield return new WaitForSeconds(delay);
-        Player.instance.LeftHandEnabler(true);
-        Player.instance.RightHandEnabler(true);
-    }
-
     public void DeTriggerPanels()
     {
         holdingFlowerPot.upgradePlantPanel.SetActive(false);
@@ -480,6 +470,12 @@ public class Player : MonoBehaviour
     public FlowerPot GetHoveringFlowerPot()
     {
         return hoveringFlowerPot;
+    }
+
+    public void TogglePlayerHands(bool toggle)
+    {
+        leftHand.handInteractor.gameObject.SetActive(toggle);
+        rightHand.handInteractor.gameObject.SetActive(toggle);
     }
 
     void TeleportEnabler(InputAction.CallbackContext ctx)

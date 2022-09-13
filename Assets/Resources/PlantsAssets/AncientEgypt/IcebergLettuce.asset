@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: IcebergLettuce
   m_EditorClassIdentifier: 
   plantName: Iceberg Lettuce
-  plantDescription: 
+  plantDescription: Don't get lost staring into Iceberg's adorably cute eyes. If
+    you do, it will be your last step... but only if you're a zombie.
   uiPlant: {fileID: 3926295588658505487, guid: 86785dbf8ad2b324a86af7ba9d3eed57, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
-  plantQuality: {fileID: 0}
+  plantQuality: {fileID: 11400000, guid: 6b1342737bbb6be4d959282895950709, type: 2}
   canBePlantedIn: 0600000007000000090000000a00000003000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 6582
+  buyPrice: 6582
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 11
+    producingTime: 20
+    plantLife: 44
+    energyLevel: 34
+    sellPrice: 6582
+  - upgradePrice: 32314
+    producedCoins: 16
+    producingTime: 30
+    plantLife: 66
+    energyLevel: 51
+    sellPrice: 48470
+  - upgradePrice: 153648
+    producedCoins: 24
+    producingTime: 44
+    plantLife: 97
+    energyLevel: 75
+    sellPrice: 230472
   initialScale: {x: -0.04612797, y: 0.046127975, z: 0.046127975}

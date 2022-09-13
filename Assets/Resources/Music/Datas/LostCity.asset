@@ -14,8 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldID: jungle
   world: 7
-  normalTracks: []
-  specialTracks: []
+  normalTracks:
+  - {fileID: 8300000, guid: 233419c810ea7c64ab9b3ff7b60d38ee, type: 3}
+  - {fileID: 8300000, guid: 11919ce401a65514ca2651c82e7e63e5, type: 3}
+  - {fileID: 8300000, guid: 6d980a5f508a9d24aa3c79d1e214f923, type: 3}
+  - {fileID: 8300000, guid: 08bfa0934044a9842999fcb0f01b8457, type: 3}
+  - {fileID: 8300000, guid: 3a1a2b24f0535d34ca4fab2610e52a00, type: 3}
+  specialTracks:
+  - {fileID: 8300000, guid: 1285967cc0a8bb642b16bada7ec92bf6, type: 3}
+  - {fileID: 8300000, guid: 5fd4f14c47236634abf6f8afc8d5b204, type: 3}
+  - {fileID: 8300000, guid: 34c44bcdf0c05c345a155a6d55cb62e3, type: 3}
   phonographClip: {fileID: 8300000, guid: 4eb009e29d3483248809f8b4109f8c29, type: 3}
   grownPlantClip: {fileID: 8300000, guid: ffb9540fa4d0e9f4798b990f31ae918a, type: 3}
   isPresent: 0

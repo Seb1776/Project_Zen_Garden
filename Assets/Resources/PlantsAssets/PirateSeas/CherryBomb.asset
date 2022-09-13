@@ -13,14 +13,34 @@ MonoBehaviour:
   m_Name: CherryBomb
   m_EditorClassIdentifier: 
   plantName: Cherry Bomb
-  plantDescription: 
+  plantDescription: The Cherry Bomb Brothers attempted to start their own band. "We
+    tried to figure out what the sound would be, but we kept explodonating speakers,
+    stages, fans, and of course, zombies. Look for our LP next year."
   uiPlant: {fileID: 4455633743660526482, guid: e9b7c909ad44e9243b8ba6ff7ac94489, type: 3}
   plantBackg: {fileID: 2624046264405249529, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 1
   plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
   canBePlantedIn: 070000000a000000090000000800000003000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 2328
+  buyPrice: 2328
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 14
+    producingTime: 11
+    plantLife: 36
+    energyLevel: 21
+    sellPrice: 2328
+  - upgradePrice: 11612
+    producedCoins: 21
+    producingTime: 16
+    plantLife: 54
+    energyLevel: 32
+    sellPrice: 17418
+  - upgradePrice: 54074
+    producedCoins: 31
+    producingTime: 24
+    plantLife: 79
+    energyLevel: 46
+    sellPrice: 81111
   initialScale: {x: -0.07857613, y: 0.078576125, z: 0.078576125}

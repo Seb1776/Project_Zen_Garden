@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: Aloe
   m_EditorClassIdentifier: 
   plantName: Aloe
-  plantDescription: 
+  plantDescription: Aloe likes to soothe. He likes to alleviate, he likes to restore,
+    he likes to mend. But don't ask him to revive. He's touchy about revival.
   uiPlant: {fileID: 4336658194608476573, guid: a067743f113a96a4ba0138da6a7fd1e5, type: 3}
   plantBackg: {fileID: 2624046264405249529, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 1
   plantQuality: {fileID: 11400000, guid: 6b1342737bbb6be4d959282895950709, type: 2}
   canBePlantedIn: 070000000100000000000000060000000800000003000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 1070
+  buyPrice: 1070
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 7
+    producingTime: 13
+    plantLife: 28
+    energyLevel: 21
+    sellPrice: 1070
+  - upgradePrice: 5376
+    producedCoins: 10
+    producingTime: 20
+    plantLife: 42
+    energyLevel: 32
+    sellPrice: 8064
+  - upgradePrice: 24812
+    producedCoins: 15
+    producingTime: 29
+    plantLife: 62
+    energyLevel: 46
+    sellPrice: 37219
   initialScale: {x: -0.06085432, y: 0.06085432, z: 0.06085432}

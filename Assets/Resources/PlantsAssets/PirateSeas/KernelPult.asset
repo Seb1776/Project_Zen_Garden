@@ -13,14 +13,34 @@ MonoBehaviour:
   m_Name: KernelPult
   m_EditorClassIdentifier: 
   plantName: Kernel Pult
-  plantDescription: 
+  plantDescription: While working as an usher at the local movieplex, he saw "Fried
+    Green Tomatoes" and found his higher calling. He packed up his husks, his kernels,
+    his butter, and enlisted.
   uiPlant: {fileID: 993643428518122901, guid: aad422e9b8454d449bc0df909b144f49, type: 3}
   plantBackg: {fileID: 2624046264405249529, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 1
   plantQuality: {fileID: 11400000, guid: 12d300539662e254a91a708910e8ab05, type: 2}
   canBePlantedIn: 00000000010000000700000009000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 768
+  buyPrice: 768
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 7
+    producingTime: 14
+    plantLife: 28
+    energyLevel: 14
+    sellPrice: 768
+  - upgradePrice: 3704
+    producedCoins: 10
+    producingTime: 21
+    plantLife: 42
+    energyLevel: 21
+    sellPrice: 5557
+  - upgradePrice: 17875
+    producedCoins: 15
+    producingTime: 31
+    plantLife: 62
+    energyLevel: 31
+    sellPrice: 26812
   initialScale: {x: -0.05683854, y: 0.056838535, z: 0.056838535}

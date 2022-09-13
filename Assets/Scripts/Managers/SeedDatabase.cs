@@ -220,7 +220,28 @@ public class SeedDatabase : MonoBehaviour
         if (GameManager.instance.onTutorial && GetTotalUnlockedPlants() >= 5)
         {
             jurassicBlock.SetActive(false);
-            SoundEffectsManager.instance.PlaySoundEffectNC("prize");
+
+            if (!loading)
+            {
+                SoundEffectsManager.instance.PlaySoundEffectNC("prize");
+                UIManager.instance.TriggerUnlockPanel("Jurassic Marsh");
+            }
+        }
+
+        if (!GameManager.instance.unlockedModernDay && GetTotalUnlockedPlants() >= 177)
+        {   
+            if (!loading)
+            {
+                SoundEffectsManager.instance.PlaySoundEffectNC("endgame");
+
+                MusicManager.instance.TriggerPanMusicLevel(0.2f, 
+                    SoundEffectsManager.instance.GetSoundEffect("endgame").length);
+                
+                UIManager.instance.TriggerUnlockPanel("Modern Day");
+                DataCollector.instance.AddUnlockedWorld(GameWorlds.ModernDay);
+            }
+
+            MusicManager.instance.UnlockFinalModernDay();
         }
     }
 
@@ -260,7 +281,7 @@ public class SeedDatabase : MonoBehaviour
     public void SetPlantAssetFromData(SeedDataContainer sdc)
     {
         PlantAsset pa = Resources.Load<PlantAsset>("PlantsAssets/" + sdc.plantWorld + "/" + sdc.plantAssetName);
-        
+
         if (pa != null)
         {
             SeedPacket sp = GetPlantUISeedPacket(pa.name);

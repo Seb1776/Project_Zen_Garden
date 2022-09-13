@@ -13,14 +13,35 @@ MonoBehaviour:
   m_Name: Pokra
   m_EditorClassIdentifier: 
   plantName: Pokra
-  plantDescription: 
+  plantDescription: Pokra's scrappy, she's a fighter, she's not afraid to jab below
+    the belt to get the job done. She won't, because that would be cheating, but
+    she's not afraid to. "Just so we're clear," she says with a resolute glint in
+    her eye.
   uiPlant: {fileID: 6770416519637206217, guid: 40f768a8d4a82684f970b012d30208a6, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
   plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
   canBePlantedIn: 06000000010000000200000003000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 14636
+  buyPrice: 14636
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 22
+    producingTime: 18
+    plantLife: 56
+    energyLevel: 33
+    sellPrice: 14636
+  - upgradePrice: 74844
+    producedCoins: 33
+    producingTime: 27
+    plantLife: 84
+    energyLevel: 50
+    sellPrice: 112266
+  - upgradePrice: 344794
+    producedCoins: 48
+    producingTime: 40
+    plantLife: 123
+    energyLevel: 73
+    sellPrice: 517190
   initialScale: {x: -0.07181508, y: 0.07181508, z: 0.07181508}

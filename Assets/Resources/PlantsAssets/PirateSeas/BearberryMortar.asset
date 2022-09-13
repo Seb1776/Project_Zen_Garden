@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: BearberryMortar
   m_EditorClassIdentifier: 
   plantName: Bearberry Mortar
-  plantDescription: 
+  plantDescription: Bearberry Mortar has never been on the front line. In fact, during
+    a recent inspection his jammed cannon labeled him unqualified.
   uiPlant: {fileID: 2844973808517920128, guid: 27f674f0fda91d641bf46f1ece9078c1, type: 3}
   plantBackg: {fileID: 2624046264405249529, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 1
   plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
   canBePlantedIn: 07000000060000000500000004000000030000000a000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 2264
+  buyPrice: 2264
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 14
+    producingTime: 11
+    plantLife: 35
+    energyLevel: 21
+    sellPrice: 2264
+  - upgradePrice: 11182
+    producedCoins: 21
+    producingTime: 16
+    plantLife: 52
+    energyLevel: 32
+    sellPrice: 16773
+  - upgradePrice: 52705
+    producedCoins: 31
+    producingTime: 24
+    plantLife: 77
+    energyLevel: 46
+    sellPrice: 79057
   initialScale: {x: -0.1232004, y: 0.123200364, z: 0.123200364}

@@ -13,14 +13,34 @@ MonoBehaviour:
   m_Name: Parsnip
   m_EditorClassIdentifier: 
   plantName: Parsnip
-  plantDescription: 
+  plantDescription: '"Snip!" said Parsnip. "Snip snip snip! If it wasn''t for my
+    scrapbook, my coupons, and snipping zombies to death, I just don''t know what
+    I''d do with myself!"'
   uiPlant: {fileID: 5642155875408082975, guid: 0002e3f2204c5aa4ba1edb884169aab5, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
   plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
   canBePlantedIn: 06000000070000000400000003000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 14375
+  buyPrice: 14375
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 22
+    producingTime: 18
+    plantLife: 55
+    energyLevel: 33
+    sellPrice: 14375
+  - upgradePrice: 73062
+    producedCoins: 33
+    producingTime: 27
+    plantLife: 82
+    energyLevel: 50
+    sellPrice: 109593
+  - upgradePrice: 339187
+    producedCoins: 48
+    producingTime: 40
+    plantLife: 121
+    energyLevel: 73
+    sellPrice: 508781
   initialScale: {x: -0.05317983, y: 0.053179834, z: 0.053179834}

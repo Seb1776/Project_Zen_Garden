@@ -20,6 +20,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] private GameObject wywPanel;
     [SerializeField] private GameObject[] banksImagePanelsWorlds;
     [SerializeField] private Text wywCoins;
+    [SerializeField] private Animator unlockPanel;
+    [SerializeField] private Text unlockPanelText;
     public Text currentBankMoney, worldBankText;
     [SerializeField] private GameObject tiredNone, witheredNone;
     [SerializeField] private Transform tiredPanel, witheredPanel;
@@ -124,6 +126,12 @@ public class UIManager : MonoBehaviour
 
         while (!asyncOp.isDone)
             yield return null;
+    }
+
+    public void TriggerUnlockPanel(string text)
+    {
+        unlockPanelText.text = text;
+        unlockPanel.SetTrigger("show");
     }
 
     public void BuyGardenItem(string _git)

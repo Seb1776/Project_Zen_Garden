@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: GooPeashooter
   m_EditorClassIdentifier: 
   plantName: Goo Peashooter
-  plantDescription: 
+  plantDescription: Goo Peashooter is a goopy shooter. See? See how that works? It's
+    a play on words. Words are often playful, folks!
   uiPlant: {fileID: 1863230653684509136, guid: 4cebc4a97cc9dc9429a9796cd13b7f6d, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: 6351190313892116802, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 0
   plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
   canBePlantedIn: 06000000080000000a0000000400000002000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 15080
+  buyPrice: 15080
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 22
+    producingTime: 18
+    plantLife: 56
+    energyLevel: 34
+    sellPrice: 15080
+  - upgradePrice: 76341
+    producedCoins: 33
+    producingTime: 27
+    plantLife: 84
+    energyLevel: 51
+    sellPrice: 114511
+  - upgradePrice: 354240
+    producedCoins: 48
+    producingTime: 40
+    plantLife: 123
+    energyLevel: 75
+    sellPrice: 531360
   initialScale: {x: -0.07990623, y: 0.07990622, z: 0.07990623}

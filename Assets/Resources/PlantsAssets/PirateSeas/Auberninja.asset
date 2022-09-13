@@ -13,14 +13,35 @@ MonoBehaviour:
   m_Name: Auberninja
   m_EditorClassIdentifier: 
   plantName: Auberninja
-  plantDescription: 
+  plantDescription: He has received training in traditional ninjutsu since childhood,
+    is hailed as a genius who is only encountered once in a millennium in the ninja
+    community, proficient in all kinds of ninjutsu, and was also chosen by the ninja
+    king himself to be their successor.
   uiPlant: {fileID: 4184431566345222766, guid: 886cb62813bf4fb4883a2e8b2830ac35, type: 3}
   plantBackg: {fileID: 2624046264405249529, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 1
   plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
   canBePlantedIn: 0700000003000000040000000600000009000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 2264
+  buyPrice: 2264
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 14
+    producingTime: 11
+    plantLife: 35
+    energyLevel: 21
+    sellPrice: 2264
+  - upgradePrice: 11182
+    producedCoins: 21
+    producingTime: 16
+    plantLife: 52
+    energyLevel: 32
+    sellPrice: 16773
+  - upgradePrice: 52705
+    producedCoins: 31
+    producingTime: 24
+    plantLife: 77
+    energyLevel: 46
+    sellPrice: 79057
   initialScale: {x: -0.1136506, y: 0.1136506, z: 0.1136506}
