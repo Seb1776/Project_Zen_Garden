@@ -1,12 +1,57 @@
 fileFormatVersion: 2
 guid: 620c495a85709804eb2bf907bd37c4f6
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 2885081946625365949
+    second: PLANTGRIMROSE_1536_00_0
+  - first:
+      213: 607357906748703354
+    second: PLANTGRIMROSE_1536_00_1
+  - first:
+      213: -754482010064592129
+    second: PLANTGRIMROSE_1536_00_2
+  - first:
+      213: 5793592513858466258
+    second: PLANTGRIMROSE_1536_00_3
+  - first:
+      213: -5413349741007121870
+    second: PLANTGRIMROSE_1536_00_4
+  - first:
+      213: 7636142688524602760
+    second: PLANTGRIMROSE_1536_00_5
+  - first:
+      213: 689672594043826762
+    second: PLANTGRIMROSE_1536_00_6
+  - first:
+      213: -7513921802744456099
+    second: PLANTGRIMROSE_1536_00_7
+  - first:
+      213: 5992253965857490535
+    second: PLANTGRIMROSE_1536_00_8
+  - first:
+      213: -1989515791129393398
+    second: PLANTGRIMROSE_1536_00_9
+  - first:
+      213: -8061103912884203704
+    second: PLANTGRIMROSE_1536_00_10
+  - first:
+      213: -363542760694431421
+    second: PLANTGRIMROSE_1536_00_11
+  - first:
+      213: -1940271597735357882
+    second: PLANTGRIMROSE_1536_00_12
+  - first:
+      213: -6174557045261815938
+    second: PLANTGRIMROSE_1536_00_13
+  - first:
+      213: 4145876348555478571
+    second: PLANTGRIMROSE_1536_00_14
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,16 +77,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -50,9 +95,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -68,7 +113,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +146,326 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_0
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 889
+        width: 59
+        height: 132
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: db75f70aebed90820800000000000000
+      internalID: 2885081946625365949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_1
+      rect:
+        serializedVersion: 2
+        x: 454
+        y: 916
+        width: 42
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a72084b5cc4cd6800800000000000000
+      internalID: 607357906748703354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_2
+      rect:
+        serializedVersion: 2
+        x: 484
+        y: 717
+        width: 17
+        height: 26
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff26da8fb9a8785f0800000000000000
+      internalID: -754482010064592129
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_3
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 681
+        width: 176
+        height: 72
+      alignment: 9
+      pivot: {x: 0.4386449, y: 0.89637333}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d175e112b9f66050800000000000000
+      internalID: 5793592513858466258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_4
+      rect:
+        serializedVersion: 2
+        x: 183
+        y: 563
+        width: 109
+        height: 46
+      alignment: 9
+      pivot: {x: 0.5831468, y: 0.05565212}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 232515a771befd4b0800000000000000
+      internalID: -5413349741007121870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_5
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 615
+        width: 113
+        height: 60
+      alignment: 9
+      pivot: {x: 0.9761028, y: 0.8760183}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88d84b3315709f960800000000000000
+      internalID: 7636142688524602760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 555
+        width: 96
+        height: 45
+      alignment: 9
+      pivot: {x: 0.025959035, y: 0.32002497}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a42fd4bf195329900800000000000000
+      internalID: 689672594043826762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_7
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 674
+        width: 109
+        height: 69
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d5c9a5d4eef29b790800000000000000
+      internalID: -7513921802744456099
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_8
+      rect:
+        serializedVersion: 2
+        x: 441
+        y: 583
+        width: 59
+        height: 85
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7668cdecb33c82350800000000000000
+      internalID: 5992253965857490535
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_9
+      rect:
+        serializedVersion: 2
+        x: 248
+        y: 418
+        width: 73
+        height: 44
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a07c3bacde1d364e0800000000000000
+      internalID: -1989515791129393398
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_10
+      rect:
+        serializedVersion: 2
+        x: 406
+        y: 420
+        width: 79
+        height: 36
+      alignment: 9
+      pivot: {x: 0.7177541, y: 0.7779651}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 84f860763b4312090800000000000000
+      internalID: -8061103912884203704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_11
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 385
+        width: 77
+        height: 28
+      alignment: 9
+      pivot: {x: 0.03983178, y: 0.50602615}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 341c42809cf64faf0800000000000000
+      internalID: -363542760694431421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_12
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 469
+        width: 56
+        height: 62
+      alignment: 9
+      pivot: {x: 0.9400798, y: 0.04318188}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64254390345c215e0800000000000000
+      internalID: -1940271597735357882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_13
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 482
+        width: 53
+        height: 67
+      alignment: 9
+      pivot: {x: 0.7420019, y: 0.029618448}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e7fa8cfd4119f4aa0800000000000000
+      internalID: -6174557045261815938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTGRIMROSE_1536_00_14
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 837
+        width: 167
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b26c75eb29c198930800000000000000
+      internalID: 4145876348555478571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b8885525ee3a8b343aec8479acfc8a92
     internalID: 0
     vertices: []
     indices: 

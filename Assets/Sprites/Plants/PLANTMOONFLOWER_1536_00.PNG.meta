@@ -1,12 +1,57 @@
 fileFormatVersion: 2
 guid: c30a4cacc7f35184f93b389af34bf441
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: -5602967467999675480
+    second: PLANTMOONFLOWER_1536_00_0
+  - first:
+      213: -8691774912892768201
+    second: PLANTMOONFLOWER_1536_00_1
+  - first:
+      213: -6734074381841704892
+    second: PLANTMOONFLOWER_1536_00_2
+  - first:
+      213: -2857071824571128510
+    second: PLANTMOONFLOWER_1536_00_3
+  - first:
+      213: -4252502497640868311
+    second: PLANTMOONFLOWER_1536_00_4
+  - first:
+      213: 5248272841373416443
+    second: PLANTMOONFLOWER_1536_00_5
+  - first:
+      213: 2348372110475762554
+    second: PLANTMOONFLOWER_1536_00_6
+  - first:
+      213: -2576563672813456276
+    second: PLANTMOONFLOWER_1536_00_7
+  - first:
+      213: 257788339339794271
+    second: PLANTMOONFLOWER_1536_00_8
+  - first:
+      213: -7754854115235251030
+    second: PLANTMOONFLOWER_1536_00_9
+  - first:
+      213: -6456999162391811858
+    second: PLANTMOONFLOWER_1536_00_10
+  - first:
+      213: 1331584007896618631
+    second: PLANTMOONFLOWER_1536_00_11
+  - first:
+      213: 8287243733002510262
+    second: PLANTMOONFLOWER_1536_00_12
+  - first:
+      213: 1838203976696503202
+    second: PLANTMOONFLOWER_1536_00_13
+  - first:
+      213: 654008694152344234
+    second: PLANTMOONFLOWER_1536_00_14
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,16 +77,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -50,9 +95,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -68,7 +113,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +146,326 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_0
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 578
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8ab3fcd06c24e32b0800000000000000
+      internalID: -5602967467999675480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_1
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 587
+        width: 101
+        height: 40
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 730ff5984cc906780800000000000000
+      internalID: -8691774912892768201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_2
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 522
+        width: 77
+        height: 30
+      alignment: 9
+      pivot: {x: 0.9603014, y: 0.27232462}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 44854434703cb82a0800000000000000
+      internalID: -6734074381841704892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_3
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 483
+        width: 53
+        height: 33
+      alignment: 9
+      pivot: {x: 0.033274524, y: 0.07765521}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 24529ae1054a958d0800000000000000
+      internalID: -2857071824571128510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_4
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 537
+        width: 74
+        height: 34
+      alignment: 9
+      pivot: {x: 0.9620984, y: 0.13304049}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92697a552831cf4c0800000000000000
+      internalID: -4252502497640868311
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_5
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 500
+        width: 57
+        height: 35
+      alignment: 9
+      pivot: {x: 0.09271635, y: 0.06292027}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bfb746ab75c95d840800000000000000
+      internalID: 5248272841373416443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_6
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 885
+        width: 79
+        height: 136
+      alignment: 9
+      pivot: {x: 0.52061117, y: 0.013910182}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a7b97550ef7179020800000000000000
+      internalID: 2348372110475762554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_7
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 893
+        width: 77
+        height: 128
+      alignment: 9
+      pivot: {x: 0.7368412, y: 0.021692753}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6437c4adf43e3cd0800000000000000
+      internalID: -2576563672813456276
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_8
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 908
+        width: 77
+        height: 113
+      alignment: 9
+      pivot: {x: 0.5000004, y: 0.02891608}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f571699f029d39300800000000000000
+      internalID: 257788339339794271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_9
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 764
+        width: 71
+        height: 122
+      alignment: 9
+      pivot: {x: 0.32144314, y: 0.0223944}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aac3d68e449316490800000000000000
+      internalID: -7754854115235251030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_10
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 634
+        width: 64
+        height: 117
+      alignment: 9
+      pivot: {x: 0.43916246, y: 0.022213668}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ee824a2f8712466a0800000000000000
+      internalID: -6456999162391811858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_11
+      rect:
+        serializedVersion: 2
+        x: 329
+        y: 667
+        width: 73
+        height: 116
+      alignment: 9
+      pivot: {x: 0.7018512, y: 0.020761425}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 786d443a99cba7210800000000000000
+      internalID: 1331584007896618631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_12
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 765
+        width: 17
+        height: 18
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6bf52b87444320370800000000000000
+      internalID: 8287243733002510262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_13
+      rect:
+        serializedVersion: 2
+        x: 487
+        y: 690
+        width: 12
+        height: 14
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ab94bf07cc928910800000000000000
+      internalID: 1838203976696503202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTMOONFLOWER_1536_00_14
+      rect:
+        serializedVersion: 2
+        x: 110
+        y: 605
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa2b7f63171831900800000000000000
+      internalID: 654008694152344234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: a3e3a262efd5ccd4d9bab07834171723
     internalID: 0
     vertices: []
     indices: 

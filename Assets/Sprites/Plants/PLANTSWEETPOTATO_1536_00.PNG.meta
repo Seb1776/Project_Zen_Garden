@@ -1,12 +1,48 @@
 fileFormatVersion: 2
 guid: 146a0906f340c7a4a98c8f1f23662d76
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 156910658931117572
+    second: PLANTSWEETPOTATO_1536_00_0
+  - first:
+      213: 3906862089745122192
+    second: PLANTSWEETPOTATO_1536_00_1
+  - first:
+      213: 6946666051067926517
+    second: PLANTSWEETPOTATO_1536_00_2
+  - first:
+      213: -7184706821637955688
+    second: PLANTSWEETPOTATO_1536_00_3
+  - first:
+      213: -6585089482088581577
+    second: PLANTSWEETPOTATO_1536_00_4
+  - first:
+      213: 4474339747140571305
+    second: PLANTSWEETPOTATO_1536_00_5
+  - first:
+      213: 3761456196816322240
+    second: PLANTSWEETPOTATO_1536_00_6
+  - first:
+      213: 3076927724841347779
+    second: PLANTSWEETPOTATO_1536_00_7
+  - first:
+      213: -3037334232296640919
+    second: PLANTSWEETPOTATO_1536_00_8
+  - first:
+      213: 8425297406985665013
+    second: PLANTSWEETPOTATO_1536_00_9
+  - first:
+      213: -2527666427372972567
+    second: PLANTSWEETPOTATO_1536_00_10
+  - first:
+      213: -3397595516953879853
+    second: PLANTSWEETPOTATO_1536_00_11
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -32,16 +68,16 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -50,9 +86,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -68,7 +104,31 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -77,11 +137,263 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_0
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 385
+        width: 126
+        height: 124
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40ecf07b9657d2200800000000000000
+      internalID: 156910658931117572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_1
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 435
+        width: 84
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 093c2b50f56f73630800000000000000
+      internalID: 3906862089745122192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_2
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 321
+        width: 46
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f75b2be7f3876060800000000000000
+      internalID: 6946666051067926517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_3
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 362
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89f91f0463bca4c90800000000000000
+      internalID: -7184706821637955688
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_4
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 338
+        width: 13
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 736f2fd51001d94a0800000000000000
+      internalID: -6585089482088581577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_5
+      rect:
+        serializedVersion: 2
+        x: 226
+        y: 281
+        width: 27
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a099b04b4c081e30800000000000000
+      internalID: 4474339747140571305
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_6
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 267
+        width: 85
+        height: 26
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cebd616b70633430800000000000000
+      internalID: 3761456196816322240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_7
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 300
+        width: 45
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ca28b6a67173ba20800000000000000
+      internalID: 3076927724841347779
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_8
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 224
+        width: 35
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96e23d3bb9839d5d0800000000000000
+      internalID: -3037334232296640919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_9
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 181
+        width: 26
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5f9766e3a5bace470800000000000000
+      internalID: 8425297406985665013
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_10
+      rect:
+        serializedVersion: 2
+        x: 211
+        y: 163
+        width: 17
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e5d0c5c6ccebecd0800000000000000
+      internalID: -2527666427372972567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: PLANTSWEETPOTATO_1536_00_11
+      rect:
+        serializedVersion: 2
+        x: 186
+        y: 302
+        width: 23
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3da1189e0e059d0d0800000000000000
+      internalID: -3397595516953879853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 43eff2dcbad83554084aa45d1f574a89
     internalID: 0
     vertices: []
     indices: 
