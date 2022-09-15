@@ -53,6 +53,7 @@ public class UIManager : MonoBehaviour
     public Text pinataRewardText;
     private Plant spawnedUIPlant;
     private PlantAsset currentPa;
+    private List<GameObject> wywGeneratedSeeds = new List<GameObject>();
     private int currentPlantLevelIndexAlc;
 
     void Awake()
@@ -229,6 +230,14 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void DestroyGeneratedWYWPlants()
+    {
+        foreach (GameObject g in wywGeneratedSeeds)
+            Destroy(g);
+        
+        wywGeneratedSeeds.Clear();
+    }
+
     public void TriggerWhileYouWhereGone(GameWorlds world)
     {
         List<WorldChanges> _wc = PlantsManager.instance.worldChanges;
@@ -252,6 +261,7 @@ public class UIManager : MonoBehaviour
                     Destroy(seedUI.GetComponent<Animator>());
                     seedUI.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
                     seedUI.transform.localScale = new Vector3(0.8267679f, 0.8267679f, 0.8267679f);
+                    wywGeneratedSeeds.Add(seedUI);
                 }
 
                 for (int j = 0; j < _wc[i].witheredPlants.Count; j++)
@@ -264,6 +274,7 @@ public class UIManager : MonoBehaviour
                     Destroy(seedUI.GetComponent<Animator>());
                     seedUI.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
                     seedUI.transform.localScale = new Vector3(0.8267679f, 0.8267679f, 0.8267679f);
+                    wywGeneratedSeeds.Add(seedUI);
                 }
 
                 break;
@@ -280,6 +291,8 @@ public class UIManager : MonoBehaviour
         {
             Player.instance.AddMoney(PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world));
             PlantsManager.instance.SetWorldMoney(MusicManager.instance.GetCurrentMusic().world, 0);
+            SetBankMoneyText(PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world));
+            SoundEffectsManager.instance.PlaySoundEffectNC("money");
         }
 
         else SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");

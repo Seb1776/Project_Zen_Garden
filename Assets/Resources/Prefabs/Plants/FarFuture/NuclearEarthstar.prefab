@@ -229,7 +229,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1852906, y: 1.1667624, z: 0.06715049}
+  m_Size: {x: 1.1852906, y: 1.1667624, z: 0.01}
   m_Center: {x: -0.0037057698, y: 0.6874283, z: 0.0028185467}
 --- !u!114 &8205758202724677679
 MonoBehaviour:
@@ -244,11 +244,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: 878cec181ebd4e149a29492eac3586d8, type: 2}
+  growth: 0
   plantAnim: {fileID: 0}
+  currentProgressTime: 0
+  maxTimeToProduce: 0
+  coinsToProduce: 0
+  currentEnergyTime: 0
+  currentLifeTime: 0
+  hasEnergy: 1
+  currentPlantLevelIndex: 0
+  isDeco: 0
   replanting: 0
-  fullyGrown: 0
   flowerPotIn: {fileID: 0}
   plantIsAbove: {fileID: 0}
+  expectedItem: 4
 --- !u!210 &8205758202724677648
 SortingGroup:
   m_ObjectHideFlags: 0

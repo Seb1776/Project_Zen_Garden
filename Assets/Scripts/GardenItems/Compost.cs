@@ -110,6 +110,7 @@ public class Compost : GardenItem
                     GardenItemSFX();
                     fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Compost);
                     SeedDatabase.instance.GardenUse(GardenItemType.Compost, false);
+                    fp.outline.ChangeOutlineColor(Color.white, false);
                     
                     foreach (GardenItem gi in SeedDatabase.instance.compostUI.items)
                     {

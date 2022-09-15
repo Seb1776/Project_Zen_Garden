@@ -32,6 +32,13 @@ public class PlantMover : GardenItem
         if (other.CompareTag("Plant") && other.GetComponent<Plant>().growth)
         {
             grabbedPlant.flowerPotIn.outline.ChangeOutlineColor(Color.yellow, false);
+
+            if (!grabbedPlant.isDeco)
+                grabbedPlant.flowerPotIn.outline.ChangeOutlineColor(Color.gray, false);
+            
+            else
+                grabbedPlant.flowerPotIn.outline.ChangeOutlineColor(new Color32(250, 114, 2, 255), true);
+
             grabbedPlant = null;
             Player.instance.RecievePlantedPlant(grabbedPlant);
         }

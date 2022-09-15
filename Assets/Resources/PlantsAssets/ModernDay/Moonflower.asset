@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: Moonflower
   m_EditorClassIdentifier: 
   plantName: Moonflower
-  plantDescription: 
-  uiPlant: {fileID: 0}
-  plantBackg: {fileID: 0}
+  plantDescription: Moonflower is a fierce collaborator. She'll collaborate with
+    anything. She'd collaborate with a table if she could.
+  uiPlant: {fileID: 4308385392877667775, guid: af5240e9d254f0546bf5f77f90bfb4a5, type: 3}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 10
   plantQuality: {fileID: 11400000, guid: 6b1342737bbb6be4d959282895950709, type: 2}
   canBePlantedIn: 08000000040000000300000001000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 8934
+  buyPrice: 8934
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 12
+    producingTime: 22
+    plantLife: 47
+    energyLevel: 36
+    sellPrice: 8934
+  - upgradePrice: 44906
+    producedCoins: 18
+    producingTime: 33
+    plantLife: 70
+    energyLevel: 54
+    sellPrice: 67360
+  - upgradePrice: 203100
+    producedCoins: 26
+    producingTime: 48
+    plantLife: 103
+    energyLevel: 79
+    sellPrice: 304649
   initialScale: {x: -0.05181972, y: 0.051819716, z: 0.051819716}

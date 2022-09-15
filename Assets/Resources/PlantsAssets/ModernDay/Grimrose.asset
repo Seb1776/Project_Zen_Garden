@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: Grimrose
   m_EditorClassIdentifier: 
   plantName: Grimrose
-  plantDescription: 
+  plantDescription: '"When you think about it, the proper place for a zombie is in
+    the ground," says Grimrose. "So, really, I''m just expediting the process."'
   uiPlant: {fileID: 4508358231783918339, guid: 1500389887707004eb843b0319d307cb, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 10
   plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
   canBePlantedIn: 08000000030000000400000002000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 19371
+  buyPrice: 19371
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 24
+    producingTime: 19
+    plantLife: 59
+    energyLevel: 36
+    sellPrice: 19371
+  - upgradePrice: 95800
+    producedCoins: 36
+    producingTime: 28
+    plantLife: 88
+    energyLevel: 54
+    sellPrice: 143700
+  - upgradePrice: 457220
+    producedCoins: 53
+    producingTime: 42
+    plantLife: 130
+    energyLevel: 79
+    sellPrice: 685831
   initialScale: {x: -0.07935916, y: 0.07935916, z: 0.07935916}

@@ -749,9 +749,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: 3ef91317c661ebf448f5a1f38e40a4eb, type: 2}
-  fullyGrown: 0
+  growth: 0
+  plantAnim: {fileID: 0}
+  currentProgressTime: 0
+  maxTimeToProduce: 0
+  coinsToProduce: 0
+  currentEnergyTime: 0
+  currentLifeTime: 0
+  hasEnergy: 1
+  currentPlantLevelIndex: 0
+  isDeco: 0
+  replanting: 0
   flowerPotIn: {fileID: 0}
   plantIsAbove: {fileID: 0}
+  expectedItem: 4
 --- !u!65 &7040172051156841841
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -763,7 +774,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.1265752, y: 1.3115723, z: 0.21620809}
+  m_Size: {x: 1.1265752, y: 1.3115723, z: 0.01}
   m_Center: {x: 0.063287504, y: 0.7983979, z: 0.0073022405}
 --- !u!1 &7040172051364998158
 GameObject:

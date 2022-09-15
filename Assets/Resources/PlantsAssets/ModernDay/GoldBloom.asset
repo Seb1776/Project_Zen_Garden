@@ -13,14 +13,34 @@ MonoBehaviour:
   m_Name: GoldBloom
   m_EditorClassIdentifier: 
   plantName: Gold Bloom
-  plantDescription: 
+  plantDescription: '"Your botanists were so preoccupied with whether they could,"
+    says Gold Bloom, about nothing and to nobody in particular, "they didn''t stop
+    to think if they should."'
   uiPlant: {fileID: 809165368698722040, guid: 0373d542acb69ed4e9a402da9e05a68e, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 10
-  plantQuality: {fileID: 0}
+  plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
   canBePlantedIn: 07000000060000000300000008000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 19699
+  buyPrice: 19699
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 24
+    producingTime: 19
+    plantLife: 60
+    energyLevel: 36
+    sellPrice: 19699
+  - upgradePrice: 97978
+    producedCoins: 36
+    producingTime: 28
+    plantLife: 90
+    energyLevel: 54
+    sellPrice: 146966
+  - upgradePrice: 464255
+    producedCoins: 53
+    producingTime: 42
+    plantLife: 132
+    energyLevel: 79
+    sellPrice: 696382
   initialScale: {x: -0.0611993, y: 0.061199304, z: 0.061199304}

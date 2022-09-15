@@ -128,7 +128,7 @@ public class FlowerPot : MonoBehaviour
         triggerColl.enabled = false;
         SeedDatabase.instance.TriggerHolders(true);
 
-        if (plantInSpace != null)
+        if (plantInSpace != null && !plantInSpace.isDeco)
         {
             actionButtons.SetActive(true);
         }
@@ -269,8 +269,6 @@ public class FlowerPot : MonoBehaviour
         p.flowerPotIn = this;
         _s.transform.parent = transform;
         seedDatabase.UsePlant(p.plantData);
-        outline.StartStuff();
-        outline.outlineRenderer.enabled = false;
         hoveringPlantIsAccepted = false;
         canUseOutline = false;
         plantInSpace = p;
@@ -278,11 +276,20 @@ public class FlowerPot : MonoBehaviour
         p.ApplyColorToPlant(new Color(1f, 1f, 1f, 1f));
         p.SetPlanted(_s);
         p.SetPlantProgress();
+
+        SetFlowerPotUI(p.plantData.plantName, p.currentPlantLevelIndex + 1, p.plantData.plantLevels[p.currentPlantLevelIndex].
+            energyLevel, p.plantData.plantLevels[p.currentPlantLevelIndex].producingTime, p.plantData.plantLevels[p.currentPlantLevelIndex].plantLife);
+        UpdateFlowerPotUI((true, p.currentPlantLevelIndex + 1), (true, p.currentEnergyTime), (true, p.currentProgressTime), (true, (int)p.currentLifeTime));
+        ToggleFlowerPotUI(true);
+
         p.expectedItem = GardenItemType.None;
         DataCollector.instance.AddPlant(MusicManager.instance.GetCurrentMusic().world, this, p);
         DataCollector.instance.UpdateSeedPacket(p.plantData.name, SeedDatabase.instance.GetPlantInList(p.plantData).amount);
+        p.plantIsAbove.outline.ChangeOutlineColor(Color.white, false);
         p.plantIsAbove = null;
         p.transform.localScale = Vector3.zero;
+        p.flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
+        outline.ChangeOutlineColor(Color.white, false);
     }
 
     public void ToggleFlowerPotUI(bool toggle)
@@ -365,10 +372,9 @@ public class FlowerPot : MonoBehaviour
 
     void OnTriggerStay(Collider other) 
     {
-        if (other.CompareTag("Plant") && other.GetComponent<Plant>().plantIsAbove == null && canUseOutline && createdIn == MusicManager.instance.GetCurrentMusic().world.ToString())
+        if (other.CompareTag("Plant") && GetPlantedPlant() == null && other.GetComponent<Plant>().plantIsAbove == null && canUseOutline && createdIn == MusicManager.instance.GetCurrentMusic().world.ToString())
         {
             other.GetComponent<Plant>().plantIsAbove = this;
-            Debug.Log(other.gameObject.name);
 
             if (other.GetComponent<Plant>().CanPlantInFlowerPot(flowerPotAsset.flowerPotType))
             {

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777dbf86e677ed54d8dac8d28fb7bcd4, type: 3}
+  m_Name: CobCannon
+  m_EditorClassIdentifier: 
+  plantName: Cob Cannon
+  plantDescription: What's the deal with Cob Cannon, anyway? He went to Harvard.
+    He practices law in a prestigious New York firm. He can explode whole areas of
+    zombies with a single corn launch. All this is common knowledge. But deep inside,
+    what really makes him tick?
+  uiPlant: {fileID: 8395882492041954986, guid: 657a63413d4e13c40882a7dfa1839a5b, type: 3}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
+  appearsIn: 10
+  plantQuality: {fileID: 11400000, guid: 336af25e7d4b0b84282aa7d3f0cf8af9, type: 2}
+  canBePlantedIn: 040000000300000008000000070000000a000000
+  unlockPrice: 33163
+  buyPrice: 33163
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 35
+    producingTime: 14
+    plantLife: 72
+    energyLevel: 47
+    sellPrice: 33163
+  - upgradePrice: 165110
+    producedCoins: 52
+    producingTime: 21
+    plantLife: 108
+    energyLevel: 70
+    sellPrice: 247666
+  - upgradePrice: 776921
+    producedCoins: 77
+    producingTime: 31
+    plantLife: 158
+    energyLevel: 103
+    sellPrice: 1165381
+  initialScale: {x: -0.1190324, y: 0.1190324, z: 0.1190324}

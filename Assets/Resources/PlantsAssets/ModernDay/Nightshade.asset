@@ -13,14 +13,34 @@ MonoBehaviour:
   m_Name: Nightshade
   m_EditorClassIdentifier: 
   plantName: Nightshade
-  plantDescription: 
-  uiPlant: {fileID: 0}
-  plantBackg: {fileID: 0}
+  plantDescription: For Nightshade, smacking is a duty and a privilege. He comes
+    from a long line of ardent smackers, and his family counts three kings, four
+    ambassadors and a president as among those proudly slapped around.
+  uiPlant: {fileID: 455123933409357955, guid: 6896c3620ac66bf49a3d1fa46979034e, type: 3}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 10
   plantQuality: {fileID: 11400000, guid: 6b1342737bbb6be4d959282895950709, type: 2}
   canBePlantedIn: 08000000030000000400000009000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 8467
+  buyPrice: 8467
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 12
+    producingTime: 21
+    plantLife: 48
+    energyLevel: 35
+    sellPrice: 8467
+  - upgradePrice: 43131
+    producedCoins: 18
+    producingTime: 32
+    plantLife: 72
+    energyLevel: 52
+    sellPrice: 64696
+  - upgradePrice: 195235
+    producedCoins: 26
+    producingTime: 46
+    plantLife: 106
+    energyLevel: 77
+    sellPrice: 292853
   initialScale: {x: -0.07143697, y: 0.07143697, z: 0.07143697}

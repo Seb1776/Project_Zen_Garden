@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777dbf86e677ed54d8dac8d28fb7bcd4, type: 3}
+  m_Name: GoldMagnetShroom
+  m_EditorClassIdentifier: 
+  plantName: Gold Magnet-Shroom
+  plantDescription: '"How did I end up here?" asks Gold Magnet. "I was on the fast
+    track - corner office, full benefits, stock options. I was gonna be Vice President
+    of Midwestern Operations. Now I''m here, on this lawn, in serious danger of being
+    eaten to death. Ooh! A coin!"'
+  uiPlant: {fileID: 8000150575357998368, guid: 080c21578352b634c96f962e05f4b691, type: 3}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
+  appearsIn: 10
+  plantQuality: {fileID: 11400000, guid: 336af25e7d4b0b84282aa7d3f0cf8af9, type: 2}
+  canBePlantedIn: 07000000040000000300000009000000
+  unlockPrice: 32242
+  buyPrice: 32242
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 35
+    producingTime: 14
+    plantLife: 70
+    energyLevel: 47
+    sellPrice: 32242
+  - upgradePrice: 160524
+    producedCoins: 52
+    producingTime: 21
+    plantLife: 105
+    energyLevel: 70
+    sellPrice: 240786
+  - upgradePrice: 757252
+    producedCoins: 77
+    producingTime: 31
+    plantLife: 154
+    energyLevel: 103
+    sellPrice: 1135878
+  initialScale: {x: -0.1181466, y: 0.11814656, z: 0.11814656}

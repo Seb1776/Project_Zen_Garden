@@ -11,6 +11,7 @@ public class SeedPacket : MonoBehaviour
     private GameObject buyButton;
     private SeedDatabase seedDatabase;
     private Image plantImage;
+    private List<Image> altPlantImage = new List<Image>();
     private Image plantQualityImage;
     private Text plantName;
     private Text plantAmount;
@@ -44,7 +45,20 @@ public class SeedPacket : MonoBehaviour
     void SetPlantUIData()
     {
         plantButton = GetComponent<Button>();
-        plantImage = transform.GetChild(1).GetComponent<Image>();
+
+        if (transform.GetChild(1).childCount <= 0)
+            plantImage = transform.GetChild(1).GetComponent<Image>();
+        
+        else
+        {
+            if (transform.GetChild(1).transform.GetChild(0).childCount == 1)
+                plantImage = transform.GetChild(1).transform.GetChild(0).GetComponent<Image>();
+            
+            else
+                foreach (Image im in transform.GetChild(1).transform.GetChild(0).GetComponentsInChildren<Image>())
+                    altPlantImage.Add(im);
+        }
+
         plantName = transform.GetChild(2).GetComponent<Text>();
         plantQualityImage = transform.GetChild(3).GetComponent<Image>();
         plantAmount = transform.GetChild(4).GetComponent<Text>();
@@ -88,10 +102,16 @@ public class SeedPacket : MonoBehaviour
         if (seedDatabase.PlayerOwnsPlant(plantData))
         {
             if (seedDatabase.GetPlantInList(plantData).amount > 0)
-                plantImage.color = Color.white;
+            {
+                if (altPlantImage.Count <= 0) plantImage.color = Color.white;
+                else foreach (Image i in altPlantImage) i.color = Color.white;
+            }
             
             else
-                plantImage.color = new Color(.5f, .5f, .5f, 1f);
+            {
+                if (altPlantImage.Count <= 0) plantImage.color = new Color(.5f, .5f, .5f, 1f);
+                else foreach (Image i in altPlantImage) i.color = new Color(.5f, .5f, .5f, 1f);
+            }
 
             plantName.text = plantData.plantName;
             plantAmount.gameObject.SetActive(true);
@@ -104,7 +124,9 @@ public class SeedPacket : MonoBehaviour
 
         else
         {
-            plantImage.color = Color.black;
+            if (altPlantImage.Count <= 0) plantImage.color = Color.black;
+            else foreach (Image i in altPlantImage) i.color = Color.black;
+
             plantName.text = "???";
             plantButton.enabled = false;
             plantAmount.gameObject.SetActive(false);
@@ -118,9 +140,11 @@ public class SeedPacket : MonoBehaviour
         plantAmount.text = (seedDatabase.GetPlantInList(plantData).amount).ToString();
         
         if (seedDatabase.GetPlantInList(plantData).amount > 0)
-            plantImage.color = Color.white;
+            if (altPlantImage.Count == 0) plantImage.color = Color.white;
+            else foreach (Image i in altPlantImage) i.color = Color.white;
             
         else
-            plantImage.color = new Color(.5f, .5f, .5f, 1f);
+            if (altPlantImage.Count == 0) plantImage.color = new Color(.5f, .5f, .5f, 1f);
+            else foreach (Image i in altPlantImage) i.color = new Color(.5f, .5f, .5f, 1f);
     }
 }

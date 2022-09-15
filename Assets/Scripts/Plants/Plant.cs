@@ -120,7 +120,7 @@ public class Plant : MonoBehaviour
             }
         }
 
-        else SetPlantAsDeco();
+        else SetPlantAsDecoLoad();
     }
 
     public void GrowPlant(bool playSound = true, bool triggerFullGrown = false)
@@ -231,7 +231,10 @@ public class Plant : MonoBehaviour
                     DataCollector.instance.SetWorldBankMoney(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), PlantsManager.instance.GetCurrentWorldMoney(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn)));
                 }
 
-                else PlantsManager.instance.AddMoneyWorldChange(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
+                else 
+                {   
+                    PlantsManager.instance.AddMoneyWorldChange(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), plantData.GetPlantLevel(currentPlantLevelIndex).producedCoins);
+                }
 
                 flowerPotIn.UpdateFlowerPotUI((false, currentPlantLevelIndex + 1), (true, currentEnergyTime), (true, currentProgressTime), (false, 0));
                 DataCollector.instance.SetPlantEnergyTick(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, currentEnergyTime);
@@ -374,6 +377,15 @@ public class Plant : MonoBehaviour
         DataCollector.instance.SetPlantLevel(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn, 3);
         expectedItem = GardenItemType.None;
         flowerPotIn.outline.ChangeOutlineColor(new Color32(250, 114, 2, 255), true);
+    }
+
+    public void SetPlantAsDecoLoad()
+    {
+        PlantsManager.OnTick -= PlantProgress;
+        isDeco = true;
+        expectedItem = GardenItemType.None;
+        flowerPotIn.outline.ChangeOutlineColor(new Color32(250, 114, 2, 255), true);
+        flowerPotIn.ToggleFlowerPotUI(false);
     }
 
     public void TriggerSellPlant()

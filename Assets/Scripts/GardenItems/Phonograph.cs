@@ -21,6 +21,7 @@ public class Phonograph : GardenItem
                     StartCoroutine(hoveringFlowerPot.TriggerMusicEffect());
                     hoveringFlowerPot.GetPlantedPlant().ApplyGardenItem(GardenItemType.Music);
                     SeedDatabase.instance.GardenUse(GardenItemType.Music, false);
+                    hoveringFlowerPot.outline.ChangeOutlineColor(Color.white, false);
                     
                     foreach (GardenItem gi in SeedDatabase.instance.phonographUI.items)
                     {

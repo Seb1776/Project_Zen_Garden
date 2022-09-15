@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: ShrinkingViolet
   m_EditorClassIdentifier: 
   plantName: Shrinking Violet
-  plantDescription: 
+  plantDescription: Shrinking Violet started out shy, but it's remarkable how discovering
+    a magical talent for zombie-reduction can change your whole outlook.
   uiPlant: {fileID: 90938388880052860, guid: 1cc0df0ea3620ab46a0cc94babb8409f, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 10
   plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
   canBePlantedIn: 08000000090000000300000007000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 19699
+  buyPrice: 19699
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 24
+    producingTime: 19
+    plantLife: 60
+    energyLevel: 36
+    sellPrice: 19699
+  - upgradePrice: 97978
+    producedCoins: 36
+    producingTime: 28
+    plantLife: 90
+    energyLevel: 54
+    sellPrice: 146966
+  - upgradePrice: 464255
+    producedCoins: 53
+    producingTime: 42
+    plantLife: 132
+    energyLevel: 79
+    sellPrice: 696382
   initialScale: {x: -0.07823368, y: 0.07823368, z: 0.07823368}

@@ -10,7 +10,7 @@ public class SeedDatabase : MonoBehaviour
     [NonReorderable] public FlowerPots[] flowerPots;
     [SerializeField] private FlowerPotHolder[] holders;
     [SerializeField] private List<UnlockedSeeds> unlockedSeeds = new List<UnlockedSeeds>();
-    [SerializeField] private SeedPacket[] allSeeds;
+    public SeedPacket[] allSeeds;
     [SerializeField] private GardenItem[] modernDayGardenItems;
     public GardenAmount waterUI, compostUI, fertilizerUI, phonographUI;
     public GameObject jurassicBlock;
@@ -242,6 +242,7 @@ public class SeedDatabase : MonoBehaviour
             }
 
             MusicManager.instance.UnlockFinalModernDay();
+            MusicManager.instance.EnableFinalModernDayRoster();
         }
     }
 

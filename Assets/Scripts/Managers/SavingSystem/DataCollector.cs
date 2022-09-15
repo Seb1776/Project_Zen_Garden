@@ -174,7 +174,7 @@ public class DataCollector : MonoBehaviour
 
     public void SetWorldBankMoney(GameWorlds world, int amount)
     {
-        playerBanks[(int)world] += amount;
+        playerBanks[(int)world] = amount;
     }
 
     IEnumerator WaitToDeleteMain(float delay, GameObject _a, GameObject _b)
@@ -224,7 +224,10 @@ public class DataCollector : MonoBehaviour
                 SeedDatabase.instance.jurassicBlock.SetActive(false);
             
             else if (ma.world == GameWorlds.ModernDay)
+            {
                 MusicManager.instance.UnlockFinalModernDay();
+                MusicManager.instance.EnableFinalModernDayRoster();
+            }
 
             MusicManager.instance.DeactivateWorldLock(ma);
         }

@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: ShadowShroom
   m_EditorClassIdentifier: 
   plantName: Shadow-Shroom
-  plantDescription: 
-  uiPlant: {fileID: 853795394103759571, guid: 7779d407e8f892b42abd197db8742ebc, type: 3}
-  plantBackg: {fileID: 0}
+  plantDescription: Despite being such a poisonous and profoundly inedible fungus,
+    Shadow-shroom is nonetheless a total cutie-pie.
+  uiPlant: {fileID: 2004172177860446878, guid: 156ebcafc1ba276428b7d24777dbb735, type: 3}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 10
   plantQuality: {fileID: 11400000, guid: 6b1342737bbb6be4d959282895950709, type: 2}
   canBePlantedIn: 08000000070000000200000003000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 8291
+  buyPrice: 8291
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 12
+    producingTime: 21
+    plantLife: 47
+    energyLevel: 35
+    sellPrice: 8291
+  - upgradePrice: 41933
+    producedCoins: 18
+    producingTime: 32
+    plantLife: 70
+    energyLevel: 52
+    sellPrice: 62899
+  - upgradePrice: 189710
+    producedCoins: 26
+    producingTime: 46
+    plantLife: 103
+    energyLevel: 77
+    sellPrice: 284564
   initialScale: {x: -0.04433525, y: 0.04433525, z: 0.04433525}

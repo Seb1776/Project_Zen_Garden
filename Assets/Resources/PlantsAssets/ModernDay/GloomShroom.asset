@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777dbf86e677ed54d8dac8d28fb7bcd4, type: 3}
+  m_Name: GloomShroom
+  m_EditorClassIdentifier: 
+  plantName: Gloom-Shroom
+  plantDescription: '"I''ve always enjoyed releasing heavy fumes," says Gloom Shroom.
+    "I know a lot of people aren''t cool with that. They say it''s rude or that it
+    smells bad. All I can say is, would you rather have your brain eaten by zombies?"'
+  uiPlant: {fileID: 3363861461240359919, guid: dd24bb6e555f0904d950fd94b0bae95c, type: 3}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
+  appearsIn: 10
+  plantQuality: {fileID: 11400000, guid: 336af25e7d4b0b84282aa7d3f0cf8af9, type: 2}
+  canBePlantedIn: 08000000060000000a00000001000000
+  unlockPrice: 34836
+  buyPrice: 34836
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 36
+    producingTime: 14
+    plantLife: 72
+    energyLevel: 48
+    sellPrice: 34836
+  - upgradePrice: 176360
+    producedCoins: 54
+    producingTime: 21
+    plantLife: 108
+    energyLevel: 72
+    sellPrice: 264540
+  - upgradePrice: 820317
+    producedCoins: 79
+    producingTime: 31
+    plantLife: 158
+    energyLevel: 106
+    sellPrice: 1230476
+  initialScale: {x: -0.09325217, y: 0.093252175, z: 0.093252175}

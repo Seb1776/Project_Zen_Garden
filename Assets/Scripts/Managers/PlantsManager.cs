@@ -65,10 +65,15 @@ public class PlantsManager : MonoBehaviour
 
     void Start()
     {
-        TestAllPlants();
+        AutoSetPrices();
     }
 
-    void TestAllPlants()
+    void OnApplicationQuit()
+    {
+        RemoveStats();
+    }
+
+    void AutoSetPrices()
     {
         for (int i = 0; i < allPlantAssets.Length; i++)
         {
@@ -125,6 +130,64 @@ public class PlantsManager : MonoBehaviour
                 int expProductionTh = pa.plantLevels[2].producingTime * pa.plantLevels[2].producedCoins * pa.plantLevels[2].energyLevel * pa.plantLevels[2].plantLife;
                 pa.plantLevels[2].upgradePrice = GetRounded(expProductionTh * 0.02f);
                 pa.plantLevels[2].sellPrice = GetRounded((expProductionTh * 0.02f) * 1.5f);
+            }
+        }
+    }
+
+    void RemoveStats()
+    {
+        for (int i = 0; i < allPlantAssets.Length; i++)
+        {
+            PlantAsset pa = allPlantAssets[i];
+            QualityStandards qs = null;
+
+            switch (pa.plantQuality.quality)
+            {
+                case PlantQualityName.Common:
+                    qs = common;
+                break;
+
+                case PlantQualityName.Rare:
+                    qs = rare;
+                break;
+
+                case PlantQualityName.Epic:
+                    qs = epic;
+                break;
+
+                case PlantQualityName.Legendary:
+                    qs = legend;
+                break;
+
+                case PlantQualityName.Botanic:
+                    qs = botanic;
+                break;
+            }
+
+            if (!pa.autoSettedPrice)
+            {
+                pa.plantLevels[0].producingTime = 0;
+                pa.plantLevels[0].producedCoins = 0;
+                pa.plantLevels[0].energyLevel = 0;
+                pa.plantLevels[0].plantLife = 0;
+
+                pa.plantLevels[1].producingTime = 0;
+                pa.plantLevels[1].producedCoins = 0;
+                pa.plantLevels[1].energyLevel = 0;
+                pa.plantLevels[1].plantLife = 0;
+
+                pa.plantLevels[2].producingTime = 0;
+                pa.plantLevels[2].producedCoins = 0;
+                pa.plantLevels[2].energyLevel = 0;
+                pa.plantLevels[2].plantLife = 0;
+
+                pa.unlockPrice = 0;
+
+                pa.plantLevels[1].upgradePrice = 0;
+                pa.plantLevels[1].sellPrice = 0;
+
+                pa.plantLevels[2].upgradePrice = 0;
+                pa.plantLevels[2].sellPrice = 0;
 
                 pa.autoSettedPrice = true;
             }

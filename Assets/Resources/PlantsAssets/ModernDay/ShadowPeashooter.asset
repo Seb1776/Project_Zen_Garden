@@ -13,14 +13,35 @@ MonoBehaviour:
   m_Name: ShadowPeashooter
   m_EditorClassIdentifier: 
   plantName: Shadow Peashooter
-  plantDescription: 
-  uiPlant: {fileID: 0}
-  plantBackg: {fileID: 0}
+  plantDescription: '"Phoot," Shadow Peashooter says, emitting a shadowy, ah, hmmm,
+    I guess you could call it a pea, at a distant zombie. "Uph!" gasps the zombie
+    in the evident surprise. There''s a lot going on under the surface between these
+    two.'
+  uiPlant: {fileID: 853795394103759571, guid: 7779d407e8f892b42abd197db8742ebc, type: 3}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 10
   plantQuality: {fileID: 11400000, guid: 7e4858d218dfb114d867c75772e237c3, type: 2}
   canBePlantedIn: 08000000030000000400000007000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 23109
+  buyPrice: 23109
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 24
+    producingTime: 17
+    plantLife: 59
+    energyLevel: 48
+    sellPrice: 23109
+  - upgradePrice: 118610
+    producedCoins: 36
+    producingTime: 26
+    plantLife: 88
+    energyLevel: 72
+    sellPrice: 177915
+  - upgradePrice: 540452
+    producedCoins: 53
+    producingTime: 37
+    plantLife: 130
+    energyLevel: 106
+    sellPrice: 810677
   initialScale: {x: -0.06943668, y: 0.069436684, z: 0.069436684}

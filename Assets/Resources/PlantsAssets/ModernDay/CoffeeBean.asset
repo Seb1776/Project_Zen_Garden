@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777dbf86e677ed54d8dac8d28fb7bcd4, type: 3}
+  m_Name: CoffeeBean
+  m_EditorClassIdentifier: 
+  plantName: Coffee Bean
+  plantDescription: '"Hey, guys, hey!" says Coffee Bean. "Hey! What''s up? Who''s
+    that? Hey! Didja see that thing? What thing? Whoa! Lions!" Yep, Coffee Bean sure
+    does get excited.'
+  uiPlant: {fileID: 2196910446359572800, guid: 4b5c653fbc8171a4eafd818bacb21928, type: 3}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
+  appearsIn: 10
+  plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
+  canBePlantedIn: 09000000080000000600000003000000
+  unlockPrice: 19371
+  buyPrice: 19371
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 24
+    producingTime: 19
+    plantLife: 59
+    energyLevel: 36
+    sellPrice: 19371
+  - upgradePrice: 95800
+    producedCoins: 36
+    producingTime: 28
+    plantLife: 88
+    energyLevel: 54
+    sellPrice: 143700
+  - upgradePrice: 457220
+    producedCoins: 53
+    producingTime: 42
+    plantLife: 130
+    energyLevel: 79
+    sellPrice: 685831
+  initialScale: {x: -0.08228958, y: 0.08228958, z: 0.08228958}

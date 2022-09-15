@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777dbf86e677ed54d8dac8d28fb7bcd4, type: 3}
+  m_Name: ScaredyShroom
+  m_EditorClassIdentifier: 
+  plantName: Scaredy-Shroom
+  plantDescription: '"Who''s there?" whispers Scaredy-shroom, voice barely audible.
+    "Go away. I don''t want to see anybody. Unless it''s the man from the circus."'
+  uiPlant: {fileID: 5232319830803265408, guid: c20b5503b37a8524cb855d71f654a583, type: 3}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
+  appearsIn: 10
+  plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
+  canBePlantedIn: 08000000050000000600000003000000
+  unlockPrice: 18878
+  buyPrice: 18878
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 23
+    producingTime: 19
+    plantLife: 60
+    energyLevel: 36
+    sellPrice: 18878
+  - upgradePrice: 92534
+    producedCoins: 34
+    producingTime: 28
+    plantLife: 90
+    energyLevel: 54
+    sellPrice: 138802
+  - upgradePrice: 446736
+    producedCoins: 51
+    producingTime: 42
+    plantLife: 132
+    energyLevel: 79
+    sellPrice: 670103
+  initialScale: {x: -0.1093995, y: 0.10939945, z: 0.10939945}

@@ -115,7 +115,13 @@ public class PlantRemover : GardenItem
         if (detectedPlant != null && other.CompareTag("Plant"))
         {
             detectedPlant.flowerPotIn.selectedByShovel = false;
-            detectedPlant.flowerPotIn.outline.ChangeOutlineColor(Color.gray, false);
+            
+            if (!detectedFlowerPot.GetPlantedPlant().isDeco)
+                detectedFlowerPot.outline.ChangeOutlineColor(Color.gray, false);
+            
+            else
+                detectedFlowerPot.outline.ChangeOutlineColor(new Color32(250, 114, 2, 255), true);
+
             detectedPlant = null;
             Player.instance.RecieveToDeletePlant(null);
         }
@@ -123,7 +129,13 @@ public class PlantRemover : GardenItem
         else if (detectedFlowerPot != null && other.CompareTag("FlowerPot"))
         {
             detectedFlowerPot.selectedByShovel = false;
-            detectedFlowerPot.outline.ChangeOutlineColor(Color.gray, false);
+
+            if (!detectedFlowerPot.GetPlantedPlant().isDeco)
+                detectedFlowerPot.outline.ChangeOutlineColor(Color.gray, false);
+            
+            else
+                detectedFlowerPot.outline.ChangeOutlineColor(new Color32(250, 114, 2, 255), true);
+
             detectedFlowerPot = null;
             Player.instance.RecieveToDeleteFlowerPot(null);
         }

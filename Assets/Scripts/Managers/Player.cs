@@ -125,6 +125,7 @@ public class Player : MonoBehaviour
             if (hoveringFlowerPot.GetPlantedPlant() == null && hoveringFlowerPot.GetIfPlantIsAccepted())
             {
                 hoveringFlowerPot.PlantPlant(holdingPlant);
+                hoveringFlowerPot.outline.ChangeOutlineColor(Color.white, false);
                 holdingPlant = null;
                 hoveringFlowerPot = null;
             }
@@ -327,7 +328,7 @@ public class Player : MonoBehaviour
 
     public void TriggerSellActionMenu(InputAction.CallbackContext ctx)
     {
-        if (holdingFlowerPot != null && !onUpgradingPlantPanel && !onSellingPlantPanel && !holdingFlowerPot.GetPlantedPlant().ExpectingGardenItem())
+        if (holdingFlowerPot != null && !holdingFlowerPot.GetPlantedPlant().isDeco && !onUpgradingPlantPanel && !onSellingPlantPanel && !holdingFlowerPot.GetPlantedPlant().ExpectingGardenItem())
         {
             holdingFlowerPot.sellPlantPanel.SetActive(true);
             holdingFlowerPot.actionButtons.SetActive(false);
@@ -344,7 +345,7 @@ public class Player : MonoBehaviour
 
     public void TriggerUpgradeActionMenu(InputAction.CallbackContext ctx)
     {
-        if (holdingFlowerPot != null && !onSellingPlantPanel && !onUpgradingPlantPanel && !holdingFlowerPot.GetPlantedPlant().ExpectingGardenItem())
+        if (holdingFlowerPot != null && !holdingFlowerPot.GetPlantedPlant().isDeco && !onSellingPlantPanel && !onUpgradingPlantPanel && !holdingFlowerPot.GetPlantedPlant().ExpectingGardenItem())
         {
             holdingFlowerPot.actionButtons.SetActive(false);
             holdingFlowerPot.ToggleFlowerPotUI(false);
@@ -392,7 +393,7 @@ public class Player : MonoBehaviour
             }
         }
 
-        else if (holdingFlowerPot != null && !onSellingPlantPanel && !onUpgradingPlantPanel && holdingFlowerPot.GetPlantedPlant().ExpectingGardenItem())
+        else if (holdingFlowerPot != null && !holdingFlowerPot.GetPlantedPlant().isDeco && !onSellingPlantPanel && !onUpgradingPlantPanel && holdingFlowerPot.GetPlantedPlant().ExpectingGardenItem())
             SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
     }
 

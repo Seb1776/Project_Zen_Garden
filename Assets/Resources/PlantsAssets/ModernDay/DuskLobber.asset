@@ -13,14 +13,33 @@ MonoBehaviour:
   m_Name: DuskLobber
   m_EditorClassIdentifier: 
   plantName: Dusk Lobber
-  plantDescription: 
+  plantDescription: Lobbing comes easily for Dusk Lobber, but that's only because
+    she's had extensive training and really enjoys parabolas.
   uiPlant: {fileID: 8467818673511164204, guid: c90133ec0e347e544be8f5c2a34deb3d, type: 3}
-  plantBackg: {fileID: 0}
+  plantBackg: {fileID: -2083292860765645478, guid: 4635d844ed9e596468570cb2e98e5b5d, type: 3}
   appearsIn: 10
   plantQuality: {fileID: 11400000, guid: d6c29c05ac532b64e8a07570e6dfe7b5, type: 2}
   canBePlantedIn: 080000000a0000000900000003000000
-  unlockPrice: 0
-  buyPrice: 0
-  autoSettedPrice: 0
-  plantLevels: []
+  unlockPrice: 19152
+  buyPrice: 19152
+  autoSettedPrice: 1
+  plantLevels:
+  - upgradePrice: 0
+    producedCoins: 24
+    producingTime: 19
+    plantLife: 60
+    energyLevel: 35
+    sellPrice: 19152
+  - upgradePrice: 94349
+    producedCoins: 36
+    producingTime: 28
+    plantLife: 90
+    energyLevel: 52
+    sellPrice: 141523
+  - upgradePrice: 452501
+    producedCoins: 53
+    producingTime: 42
+    plantLife: 132
+    energyLevel: 77
+    sellPrice: 678752
   initialScale: {x: -0.06446908, y: 0.064469084, z: 0.064469084}

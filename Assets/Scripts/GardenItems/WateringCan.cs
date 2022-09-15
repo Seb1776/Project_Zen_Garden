@@ -110,6 +110,7 @@ public class WateringCan : GardenItem
                     GardenItemSFX();
                     fp.GetPlantedPlant().ApplyGardenItem(GardenItemType.Water);
                     SeedDatabase.instance.GardenUse(GardenItemType.Water, false);
+                    fp.outline.ChangeOutlineColor(Color.white, false);
                     
                     foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
                     {

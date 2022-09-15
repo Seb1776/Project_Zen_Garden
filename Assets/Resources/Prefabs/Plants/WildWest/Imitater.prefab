@@ -299,7 +299,7 @@ GameObject:
   - component: {fileID: 5038952345458786492}
   m_Layer: 0
   m_Name: Imitater
-  m_TagString: Untagged
+  m_TagString: Plant
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -351,11 +351,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   plantData: {fileID: 11400000, guid: 677b68a5786f86b45a53813a8d695980, type: 2}
+  growth: 0
   plantAnim: {fileID: 0}
+  currentProgressTime: 0
+  maxTimeToProduce: 0
+  coinsToProduce: 0
+  currentEnergyTime: 0
+  currentLifeTime: 0
+  hasEnergy: 1
+  currentPlantLevelIndex: 0
+  isDeco: 0
   replanting: 0
-  fullyGrown: 0
   flowerPotIn: {fileID: 0}
   plantIsAbove: {fileID: 0}
+  expectedItem: 4
 --- !u!65 &4574906457286922390
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -367,7 +376,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.4479606, z: 0.035118848}
+  m_Size: {x: 1, y: 1.4479606, z: 0.01}
   m_Center: {x: 1.2003085e-14, y: 0.78807837, z: 0.0013182288}
 --- !u!210 &5038952345458786492
 SortingGroup:

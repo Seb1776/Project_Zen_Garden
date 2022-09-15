@@ -270,10 +270,16 @@ public class MusicManager : MonoBehaviour
 
     public void CheckNextWorldPanelToOpen(MusicAsset worldToCheck)
     {
-        if (GetNextWorld(worldToCheck) != null && !TimeTravelManager.instance.HasEnteredBefore(worldToCheck.worldID) && worldToCheck.world != GameWorlds.ModernDay)
+        if (GetNextWorld(worldToCheck) != null && !TimeTravelManager.instance.HasEnteredBefore(worldToCheck.worldID))
         {   
-            if (GetNextWorld(worldToCheck).unlockFirstPanel.activeSelf)
-                GetNextWorld(worldToCheck).unlockFirstPanel.SetActive(false);
+            if (worldToCheck.world != GameWorlds.ModernDay)
+            {
+                if (GetNextWorld(worldToCheck).unlockFirstPanel.activeSelf)
+                    GetNextWorld(worldToCheck).unlockFirstPanel.SetActive(false);
+            }
+
+            else
+                EnableFinalModernDayRoster();
         }
     }
 
@@ -491,6 +497,18 @@ public class MusicManager : MonoBehaviour
         tutorialGarden.SetActive(false);
         tutorialGardening.transform.localPosition = new Vector3(0f, -1.75f, 0f);
         fullGardening.transform.localPosition = new Vector3(0f, 0f, 0f);
+    }
+
+    public void EnableFinalModernDayRoster()
+    {
+        foreach (GameObject g in modernDayFullRoster)
+            g.SetActive(true);
+        
+        foreach (Image i in assets[0].plantImages)
+            i.color = Color.white;
+        
+        foreach (Image i in assets[0].plantImages)
+            Debug.Log(i.color);
     }
 
     public void UnlockFinalModernDay()
