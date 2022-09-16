@@ -161,6 +161,22 @@ public class DataCollector : MonoBehaviour
                 mm.newSetGardenName = string.Empty;
             }
 
+            UIManager.instance.SetBankWorldPanel(MusicManager.instance.GetCurrentMusic().world);
+            UIManager.instance.SetBankWorldText(MusicManager.instance.GetFormatedWorldName(MusicManager.instance.GetCurrentMusic().world));
+            UIManager.instance.SetBankMoneyText(PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world));
+
+            foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
+                gi.CheckForUsability();
+
+            foreach (GardenItem gi in SeedDatabase.instance.compostUI.items)
+                gi.CheckForUsability();
+            
+            foreach (GardenItem gi in SeedDatabase.instance.fertilizerUI.items)
+                gi.CheckForUsability();
+            
+            foreach (GardenItem gi in SeedDatabase.instance.phonographUI.items)
+                gi.CheckForUsability();
+
             StartCoroutine(AutoSave());
         }
 
