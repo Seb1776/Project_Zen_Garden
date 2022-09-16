@@ -412,12 +412,13 @@ public class Plant : MonoBehaviour
 
                 else
                 {
-                    DataCollector.instance.RemovePlant(MusicManager.instance.GetCurrentMusic().world, flowerPotIn);
+                    DataCollector.instance.RemovePlant(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn);
                     flowerPotIn.canUseOutline = true;
                     flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                     flowerPotIn.triggerColl.enabled = true;
                     flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
                     flowerPotIn.ToggleFlowerPotUI(false);
+                    PlantsManager.OnTick -= PlantProgress;
                     Destroy(this.gameObject);
                 }
             }
@@ -426,9 +427,10 @@ public class Plant : MonoBehaviour
             {
                 _sprout.GetComponent<Animator>().SetTrigger("hide");
                 flowerPotIn.actionButtons.SetActive(false);
-                DataCollector.instance.RemovePlant(MusicManager.instance.GetCurrentMusic().world, flowerPotIn);
+                DataCollector.instance.RemovePlant(GameManager.instance.GetGameWorldFromString(flowerPotIn.createdIn), flowerPotIn);
                 flowerPotIn.ToggleFlowerPotUI(false);
                 DeactivateWarnings();
+                PlantsManager.OnTick -= PlantProgress;
                 StartCoroutine(SellSprout());
             }
         }
@@ -439,7 +441,7 @@ public class Plant : MonoBehaviour
         if (!planted && handPosition != null)
             transform.position = handPosition.position;
 
-        if (growth && !replanting && transform.localScale != plantData.initialScale)
+        if (growth && !replanting && !selling && transform.localScale != plantData.initialScale)
         {
             transform.localScale = Vector3.Lerp(transform.localScale, plantData.initialScale, 2 * Time.deltaTime);
 

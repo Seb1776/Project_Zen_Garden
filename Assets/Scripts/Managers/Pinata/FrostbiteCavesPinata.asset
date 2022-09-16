@@ -13,45 +13,43 @@ MonoBehaviour:
   m_Name: FrostbiteCavesPinata
   m_EditorClassIdentifier: 
   sizes:
-  - pinataPrice: 500
-    minUnlockedPlantsToUse: 5
+  - pinataPrice: 4101
     pinataSize: 0
     squishesRange: {x: 3, y: 5}
-    plantsToAppearRange: {x: 2, y: 5}
-    seedsToGiveRange: {x: 5, y: 8}
-  - pinataPrice: 1250
-    minUnlockedPlantsToUse: 9
+  - pinataPrice: 6514
     pinataSize: 1
     squishesRange: {x: 5, y: 8}
-    plantsToAppearRange: {x: 5, y: 9}
-    seedsToGiveRange: {x: 8, y: 10}
-  - pinataPrice: 2000
-    minUnlockedPlantsToUse: 13
+  - pinataPrice: 9384
     pinataSize: 2
     squishesRange: {x: 8, y: 10}
-    plantsToAppearRange: {x: 9, y: 13}
-    seedsToGiveRange: {x: 12, y: 15}
-  - pinataPrice: 2700
-    minUnlockedPlantsToUse: 15
+  - pinataPrice: 14076
     pinataSize: 3
     squishesRange: {x: 11, y: 13}
-    plantsToAppearRange: {x: 12, y: 15}
-    seedsToGiveRange: {x: 16, y: 20}
   pinataImage: {fileID: -3157079198908394129, guid: c06e8d560c8639b4ebea08043548e7bc, type: 3}
+  pinataName: Frostbite Caves Pinata
+  allPlantsFromPinata: []
+  setted: 0
   pinataGameObject: {fileID: 7636636756824789020, guid: 82522d000e204ba4697ca04ae46be690, type: 3}
   plantsThatCanAppear:
-  - {fileID: 11400000, guid: 6757f80e4912f5b4499b136c53cb9858, type: 2}
-  - {fileID: 11400000, guid: 026d60d25566b2c46b4370fe431e6d7c, type: 2}
-  - {fileID: 11400000, guid: b595827349c2b2043809f548eb195aa7, type: 2}
-  - {fileID: 11400000, guid: e70a4288b99cffd47ae7c5e706bc2247, type: 2}
-  - {fileID: 11400000, guid: 62e46e8a0c3e9eb49b8a9317ba655572, type: 2}
-  - {fileID: 11400000, guid: 8e1460d08d00fd6418f96999b3515b64, type: 2}
-  - {fileID: 11400000, guid: e8db9f1c653c6f24c8a40382905368ea, type: 2}
-  - {fileID: 11400000, guid: 9b802e522f2c8574c81868fefb1cbe6c, type: 2}
-  - {fileID: 11400000, guid: 1c12f4df53ea8bf4795e10c02b09779f, type: 2}
-  - {fileID: 11400000, guid: 36469570947a2014ea677a99d29e2d81, type: 2}
-  - {fileID: 11400000, guid: 3ef91317c661ebf448f5a1f38e40a4eb, type: 2}
-  - {fileID: 11400000, guid: c4d4b34c105f5d1438a70c50afe1bd7e, type: 2}
-  - {fileID: 11400000, guid: 9be2018325d84b049a651a172b8c7f86, type: 2}
-  - {fileID: 11400000, guid: cb0237b14f4f35742aa0143951c7e8b2, type: 2}
-  - {fileID: 11400000, guid: a0d003a706c3d0c4fa06a7d4f01b4fd4, type: 2}
+  - quality: 0
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 026d60d25566b2c46b4370fe431e6d7c, type: 2}
+    - {fileID: 11400000, guid: 8e1460d08d00fd6418f96999b3515b64, type: 2}
+    - {fileID: 11400000, guid: 9b802e522f2c8574c81868fefb1cbe6c, type: 2}
+    - {fileID: 11400000, guid: a0d003a706c3d0c4fa06a7d4f01b4fd4, type: 2}
+    - {fileID: 11400000, guid: c4d4b34c105f5d1438a70c50afe1bd7e, type: 2}
+  - quality: 1
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 6757f80e4912f5b4499b136c53cb9858, type: 2}
+    - {fileID: 11400000, guid: e8db9f1c653c6f24c8a40382905368ea, type: 2}
+    - {fileID: 11400000, guid: 3ef91317c661ebf448f5a1f38e40a4eb, type: 2}
+  - quality: 2
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 62e46e8a0c3e9eb49b8a9317ba655572, type: 2}
+    - {fileID: 11400000, guid: 1c12f4df53ea8bf4795e10c02b09779f, type: 2}
+    - {fileID: 11400000, guid: 9be2018325d84b049a651a172b8c7f86, type: 2}
+    - {fileID: 11400000, guid: cb0237b14f4f35742aa0143951c7e8b2, type: 2}
+  - quality: 3
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: b595827349c2b2043809f548eb195aa7, type: 2}
+    - {fileID: 11400000, guid: e70a4288b99cffd47ae7c5e706bc2247, type: 2}

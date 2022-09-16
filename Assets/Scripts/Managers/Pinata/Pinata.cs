@@ -57,10 +57,6 @@ public class Pinata : MonoBehaviour
     {
         List<List<RewardedPlants>> pinataRewards = UIManager.instance.GetFullPinataRewards();
 
-        for (int i = 0; i < pinataRewards.Count; i++)
-            for (int j = 0; j < pinataRewards[i].Count; j++)
-                Debug.Log(pinataRewards[i][j].plant.name);
-
         List<Animator> seedPacketsAnimator = new List<Animator>();
 
         for (int i = 0; i < pinataRewards.Count; i++)

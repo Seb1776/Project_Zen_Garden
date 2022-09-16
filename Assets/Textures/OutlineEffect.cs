@@ -28,7 +28,6 @@ public class OutlineEffect : MonoBehaviour
             previouslyCreatedOutline.GetComponent<Renderer>().material.SetColor("_OutlineColor", _outlineColor);
 
         outlineRenderer.enabled = activate;
-        Debug.Log(activate);
     }
 
     Renderer CreateOutline(Material outlineMat, float scaleFactor, Color color)

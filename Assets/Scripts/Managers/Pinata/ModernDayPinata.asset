@@ -13,36 +13,51 @@ MonoBehaviour:
   m_Name: ModernDayPinata
   m_EditorClassIdentifier: 
   sizes:
-  - pinataPrice: 500
-    minUnlockedPlantsToUse: 5
+  - pinataPrice: 3337
     pinataSize: 0
     squishesRange: {x: 3, y: 5}
-    plantsToAppearRange: {x: 2, y: 5}
-    seedsToGiveRange: {x: 5, y: 8}
-  - pinataPrice: 1250
-    minUnlockedPlantsToUse: 9
+  - pinataPrice: 11778
     pinataSize: 1
     squishesRange: {x: 5, y: 8}
-    plantsToAppearRange: {x: 5, y: 9}
-    seedsToGiveRange: {x: 8, y: 10}
-  - pinataPrice: 2000
-    minUnlockedPlantsToUse: 13
+  - pinataPrice: 21457
     pinataSize: 2
     squishesRange: {x: 8, y: 10}
-    plantsToAppearRange: {x: 9, y: 13}
-    seedsToGiveRange: {x: 12, y: 15}
-  - pinataPrice: 2700
-    minUnlockedPlantsToUse: 15
+  - pinataPrice: 37550
     pinataSize: 3
     squishesRange: {x: 11, y: 13}
-    plantsToAppearRange: {x: 12, y: 15}
-    seedsToGiveRange: {x: 16, y: 20}
   pinataImage: {fileID: -3157079198908394129, guid: c06e8d560c8639b4ebea08043548e7bc, type: 3}
+  pinataName: Modern Day Pinata
+  allPlantsFromPinata: []
+  setted: 0
   pinataGameObject: {fileID: 7636636756824789020, guid: 3f64429bfe78807429c22f1827263f0f, type: 3}
   plantsThatCanAppear:
-  - {fileID: 11400000, guid: 88f70796fcf43e04fa50216871f21ad8, type: 2}
-  - {fileID: 11400000, guid: 8e6049de36d1e3c45a22b9bcaa4f5d31, type: 2}
-  - {fileID: 11400000, guid: 56d75c13fbcd26c4db9000e027f1bc1e, type: 2}
-  - {fileID: 11400000, guid: 0e7b29c7c5cd7b24fb114934d32ffedb, type: 2}
-  - {fileID: 11400000, guid: 676cef9aa7d96b74b8622b0ac7711351, type: 2}
-  - {fileID: 11400000, guid: fa1cd3872dbdce648beb0a1532f2a8d7, type: 2}
+  - quality: 0
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 88f70796fcf43e04fa50216871f21ad8, type: 2}
+    - {fileID: 11400000, guid: 56d75c13fbcd26c4db9000e027f1bc1e, type: 2}
+    - {fileID: 11400000, guid: 0e7b29c7c5cd7b24fb114934d32ffedb, type: 2}
+    - {fileID: 11400000, guid: 676cef9aa7d96b74b8622b0ac7711351, type: 2}
+    - {fileID: 11400000, guid: fa1cd3872dbdce648beb0a1532f2a8d7, type: 2}
+  - quality: 1
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 5450f94546341fb429446b5054739003, type: 2}
+    - {fileID: 11400000, guid: 20a7e56318b68564abe5baf43b97e3b5, type: 2}
+    - {fileID: 11400000, guid: 2cc39c512cf3e1a4390a2f4311193890, type: 2}
+  - quality: 2
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 21ac2a9ed4097e04bb1b83b66951f221, type: 2}
+    - {fileID: 11400000, guid: 1d53e30519e89194a96f7685e6db3382, type: 2}
+    - {fileID: 11400000, guid: 8e6049de36d1e3c45a22b9bcaa4f5d31, type: 2}
+    - {fileID: 11400000, guid: 93f00a8a131a577448ffeca9ba23cf0a, type: 2}
+    - {fileID: 11400000, guid: e63a9b4bd06248e4c92b50c99e335868, type: 2}
+    - {fileID: 11400000, guid: fafd48b796f3a0544bc7fd6a5d692bcc, type: 2}
+    - {fileID: 11400000, guid: 75ce6b7ab7f38fb4a97c8405794e359a, type: 2}
+    - {fileID: 11400000, guid: b4187e7b73324164a88b26b20fa60ce9, type: 2}
+    - {fileID: 11400000, guid: d112bfa4435aa1147800fd1ea94b31b0, type: 2}
+  - quality: 3
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: a92cca5d0b1db0240838b998bb4bc149, type: 2}
+    - {fileID: 11400000, guid: 8b0b205b8861efa43b2fb07a648dfede, type: 2}
+    - {fileID: 11400000, guid: d79e1ba102e2fd04691b75a263e5ad2f, type: 2}
+    - {fileID: 11400000, guid: b29b2cbcc70394e4ebfce88fefe8751c, type: 2}
+    - {fileID: 11400000, guid: 9f2c66b8a1573f946bd543914664cbae, type: 2}

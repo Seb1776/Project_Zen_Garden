@@ -455,10 +455,8 @@ public class MusicManager : MonoBehaviour
         DataCollector.instance.SetLastVisitedWorld(currentWorld);
 
         UIManager.instance.SetBankMoneyText(PlantsManager.instance.GetCurrentWorldMoney(currentWorld));
-        Debug.Log(PlantsManager.instance.GetCurrentWorldMoney(currentWorld));
         UIManager.instance.SetBankWorldPanel(currentWorld);
         UIManager.instance.SetBankWorldText(GetFormatedWorldName(currentWorld));
-        Debug.Log(currentWorld);
     }
 
     public string GetFormatedWorldName(GameWorlds world)
@@ -506,9 +504,6 @@ public class MusicManager : MonoBehaviour
         
         foreach (Image i in assets[0].plantImages)
             i.color = Color.white;
-        
-        foreach (Image i in assets[0].plantImages)
-            Debug.Log(i.color);
     }
 
     public void UnlockFinalModernDay()

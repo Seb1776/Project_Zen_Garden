@@ -104,7 +104,6 @@ public class Phonograph : GardenItem
         {   
             if (hoveringFlowerPot == null)
             {
-                Debug.Log(c.transform.GetComponent<FlowerPot>());
                 hoveringFlowerPot = c.transform.GetComponent<FlowerPot>();
 
                 if (hoveringFlowerPot.canApplyItem)

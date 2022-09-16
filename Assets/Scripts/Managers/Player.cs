@@ -289,6 +289,8 @@ public class Player : MonoBehaviour
             ].sellPrice);
             DeTriggerPanels();
             holdingFlowerPot.GetPlantedPlant().TriggerSellPlant();
+            holdingFlowerPot.ToggleFlowerPotUI(false);
+            holdingFlowerPot.potInteractable.enabled = false;
             SoundEffectsManager.instance.PlaySoundEffectNC("money");
         }
     }
@@ -403,7 +405,10 @@ public class Player : MonoBehaviour
         holdingFlowerPot.decoPlantPanel.SetActive(false);
         holdingFlowerPot.normalUPlantPanel.SetActive(false);
         holdingFlowerPot.sellPlantPanel.SetActive(false);
-        holdingFlowerPot.ToggleFlowerPotUI(!holdingFlowerPot.GetPlantedPlant().isDeco);
+
+        if (holdingFlowerPot.GetPlantedPlant() != null)
+            holdingFlowerPot.ToggleFlowerPotUI(!holdingFlowerPot.GetPlantedPlant().isDeco);
+
         onUpgradingPlantPanel = false;
         onSellingPlantPanel = false;
         onDecoPlantPanel = false;

@@ -101,6 +101,7 @@ public class UIManager : MonoBehaviour
 
     public void BackToStartMenu()
     {
+        Player.instance.TogglePlayerHands(false);
         DataCollector.instance.SaveData();
         StartCoroutine(LoadScene(0));
     }

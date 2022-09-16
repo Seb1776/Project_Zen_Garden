@@ -13,47 +13,46 @@ MonoBehaviour:
   m_Name: DarkAgesPinata
   m_EditorClassIdentifier: 
   sizes:
-  - pinataPrice: 500
-    minUnlockedPlantsToUse: 5
+  - pinataPrice: 661
     pinataSize: 0
     squishesRange: {x: 3, y: 5}
-    plantsToAppearRange: {x: 2, y: 5}
-    seedsToGiveRange: {x: 5, y: 8}
-  - pinataPrice: 1250
-    minUnlockedPlantsToUse: 9
+  - pinataPrice: 1165
     pinataSize: 1
     squishesRange: {x: 5, y: 8}
-    plantsToAppearRange: {x: 5, y: 9}
-    seedsToGiveRange: {x: 8, y: 10}
-  - pinataPrice: 2000
-    minUnlockedPlantsToUse: 13
+  - pinataPrice: 2109
     pinataSize: 2
     squishesRange: {x: 8, y: 10}
-    plantsToAppearRange: {x: 9, y: 13}
-    seedsToGiveRange: {x: 12, y: 15}
-  - pinataPrice: 2700
-    minUnlockedPlantsToUse: 15
+  - pinataPrice: 3164
     pinataSize: 3
     squishesRange: {x: 11, y: 13}
-    plantsToAppearRange: {x: 12, y: 15}
-    seedsToGiveRange: {x: 16, y: 20}
   pinataImage: {fileID: -3157079198908394129, guid: c06e8d560c8639b4ebea08043548e7bc, type: 3}
+  pinataName: Dark Ages Pinata
+  allPlantsFromPinata: []
+  setted: 0
   pinataGameObject: {fileID: 7636636756824789020, guid: ccb189f60a548b548845e5e7f7f62ffb, type: 3}
   plantsThatCanAppear:
-  - {fileID: 11400000, guid: 60ebc9a6ad3a4ae48b5b097bf7c185b3, type: 2}
-  - {fileID: 11400000, guid: 3737de03ccbaa6440900e863dc43114e, type: 2}
-  - {fileID: 11400000, guid: 83cca3e5c3bbc314293a2ce8f35ae480, type: 2}
-  - {fileID: 11400000, guid: 6c51abde2679665489584df6678c00b0, type: 2}
-  - {fileID: 11400000, guid: f312ea913c28d7d4a8fb5f58568c79d9, type: 2}
-  - {fileID: 11400000, guid: b78134413b05c4e4e94e89148929d3ae, type: 2}
-  - {fileID: 11400000, guid: a4da8e7663d3623409d4d7081c81c5c6, type: 2}
-  - {fileID: 11400000, guid: 35f303db636552c42bd01507a294fe9e, type: 2}
-  - {fileID: 11400000, guid: ab74944f893f8124886a445716466881, type: 2}
-  - {fileID: 11400000, guid: a72055de8eee3a04a93358aee33ab341, type: 2}
-  - {fileID: 11400000, guid: ccb25065e4f708c4f914f0f81e20753c, type: 2}
-  - {fileID: 11400000, guid: 026b0afa83a41d649a96981f3e3bcb8d, type: 2}
-  - {fileID: 11400000, guid: e94c28885fc819742ab69cb1a4cc4649, type: 2}
-  - {fileID: 11400000, guid: 2d1c414a7ba1efb4fbc2bb67a5f920d2, type: 2}
-  - {fileID: 11400000, guid: a8ed6b35308e58a47ba8292729686c84, type: 2}
-  - {fileID: 11400000, guid: 3390a95ed42824f448718ee959f87e9f, type: 2}
-  - {fileID: 11400000, guid: 2f2b16995891f06449c5c83a07dbd473, type: 2}
+  - quality: 0
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 3737de03ccbaa6440900e863dc43114e, type: 2}
+    - {fileID: 11400000, guid: 026b0afa83a41d649a96981f3e3bcb8d, type: 2}
+    - {fileID: 11400000, guid: a8ed6b35308e58a47ba8292729686c84, type: 2}
+  - quality: 1
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: f312ea913c28d7d4a8fb5f58568c79d9, type: 2}
+    - {fileID: 11400000, guid: ccb25065e4f708c4f914f0f81e20753c, type: 2}
+    - {fileID: 11400000, guid: 3390a95ed42824f448718ee959f87e9f, type: 2}
+  - quality: 2
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 83cca3e5c3bbc314293a2ce8f35ae480, type: 2}
+    - {fileID: 11400000, guid: 6c51abde2679665489584df6678c00b0, type: 2}
+    - {fileID: 11400000, guid: b78134413b05c4e4e94e89148929d3ae, type: 2}
+    - {fileID: 11400000, guid: 35f303db636552c42bd01507a294fe9e, type: 2}
+    - {fileID: 11400000, guid: 2d1c414a7ba1efb4fbc2bb67a5f920d2, type: 2}
+    - {fileID: 11400000, guid: 2f2b16995891f06449c5c83a07dbd473, type: 2}
+  - quality: 3
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 60ebc9a6ad3a4ae48b5b097bf7c185b3, type: 2}
+    - {fileID: 11400000, guid: a4da8e7663d3623409d4d7081c81c5c6, type: 2}
+    - {fileID: 11400000, guid: a72055de8eee3a04a93358aee33ab341, type: 2}
+    - {fileID: 11400000, guid: e94c28885fc819742ab69cb1a4cc4649, type: 2}
+    - {fileID: 11400000, guid: 95697a7ce10c6144ba61f9b6f2d69ce4, type: 2}

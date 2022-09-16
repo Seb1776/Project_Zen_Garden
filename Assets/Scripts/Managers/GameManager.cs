@@ -100,7 +100,6 @@ public static class GameHelper
 
         float percVal = chance / 100f;
         float randVal = Random.value;
-        Debug.Log(percVal + " and " + randVal + ". and is " + (percVal >= randVal));
         return percVal >= randVal;
     }
 

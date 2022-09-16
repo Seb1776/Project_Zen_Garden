@@ -288,8 +288,6 @@ public class FlowerPot : MonoBehaviour
         p.plantIsAbove.outline.ChangeOutlineColor(Color.white, false);
         p.plantIsAbove = null;
         p.transform.localScale = Vector3.zero;
-        p.flowerPotIn.outline.ChangeOutlineColor(Color.white, false);
-        outline.ChangeOutlineColor(Color.white, false);
     }
 
     public void ToggleFlowerPotUI(bool toggle)

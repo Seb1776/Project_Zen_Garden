@@ -18,6 +18,7 @@ public class MainMenu : MonoBehaviour
     public string newSetGardenName;
     public string loadedLetter;
     public FileUI fileAUI, fileBUI, fileCUI;
+    public GameObject[] hands;
 
     private TouchScreenKeyboard keyboard;
 
@@ -123,6 +124,7 @@ public class MainMenu : MonoBehaviour
 
     IEnumerator PreLoadGame()
     {
+        foreach (GameObject g in hands) g.SetActive(false);
         transitionBall.SetTrigger("transition");
         music.Stop();
         music.PlayOneShot(introLaugh);

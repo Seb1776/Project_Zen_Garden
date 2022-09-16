@@ -73,6 +73,196 @@ public class PlantsManager : MonoBehaviour
         RemoveStats();
     }
 
+    public float GetRandomMultiplier(Vector2 range)
+    {
+        return UnityEngine.Random.Range(range.x, range.y);
+    }
+
+    void Update()
+    {
+        TickSystemBehaviour();
+    }
+
+    void TickSystemBehaviour()
+    {
+        tickTimer += Time.deltaTime;
+
+        if (tickTimer >= TICK_TIMER_MAX)
+        {
+            tickTimer -= TICK_TIMER_MAX;
+            tick++;
+
+            if (OnTick != null) OnTick(this, new OnTickEventArgs{ tick = tick });
+
+            if (tick > maxTickThreshold)
+                tick = 0;
+        }
+    }
+
+    public int GetCurrentWorldMoney(GameWorlds world)
+    {
+        for (int i = 0; i < worldBanks.Length; i++)
+        {
+            if (worldBanks[i].world == world)
+            {
+                return worldBanks[i].moneyBank;
+            }
+        }
+
+        return -1;
+    }
+
+    public void SetWorldMoney(GameWorlds world, int value)
+    {
+        for (int i = 0; i < worldBanks.Length; i++)
+        {
+            if (worldBanks[i].world == world)
+            {
+                worldBanks[i].moneyBank = value;
+                break;
+            }
+        }
+    }
+
+    public void AddMoneyToWorldBank(GameWorlds world, int amount)
+    {
+        for (int i = 0; i < worldBanks.Length; i++)
+        {
+            if (worldBanks[i].world == world)
+            {   
+                if (worldBanks[i].moneyBank < 50000)
+                {
+                    worldBanks[i].moneyBank += amount;
+
+                    if (worldBanks[i].moneyBank > 50000) worldBanks[i].moneyBank = 50000;
+
+                    UIManager.instance.SetBankMoneyText(GetCurrentWorldMoney(world));
+                }
+    
+                break;
+            }
+        }
+    }
+
+    public void AddPlantWorldChange(GameWorlds world, string plant, bool state, bool add)
+    {   
+        if (MusicManager.instance.GetCurrentMusic().world != world)
+        {
+            for (int i = 0; i < worldChanges.Count; i++)
+            {
+                if (worldChanges[i].world == world)
+                {
+                    if (state)
+                    {   
+                        if (add)
+                        {
+                            if (worldChanges[i].GetPlantOnChanges(plant, state) == -1)
+                                worldChanges[i].tiredPlants.Add(new PlantChangeProfile(plant, 1));
+
+                            else
+                            {
+                                int plantIndex = worldChanges[i].GetPlantOnChanges(plant, state);
+                                worldChanges[i].tiredPlants[plantIndex].amount++;
+                            }
+                        }
+
+                        else
+                        {
+                            if (worldChanges[i].GetPlantOnChanges(plant, state) != -1)
+                            {
+                                int plantIndex = worldChanges[i].GetPlantOnChanges(plant, state);
+
+                                if (worldChanges[i].tiredPlants[plantIndex].amount >= 1)
+                                    worldChanges[i].tiredPlants[plantIndex].amount--;
+                                
+                                else
+                                    worldChanges[i].tiredPlants.RemoveAt(plantIndex);
+                            }
+                        }
+                    }
+
+                    else
+                    {
+                        if (add)
+                        {
+                            if (worldChanges[i].GetPlantOnChanges(plant, state) == -1)
+                                worldChanges[i].witheredPlants.Add(new PlantChangeProfile(plant, 1));
+
+                            else
+                            {
+                                int plantIndex = worldChanges[i].GetPlantOnChanges(plant, state);
+                                worldChanges[i].witheredPlants[plantIndex].amount++;
+                            }
+                        }
+
+                        else
+                        {
+                            if (worldChanges[i].GetPlantOnChanges(plant, state) != -1)
+                            {
+                                int plantIndex = worldChanges[i].GetPlantOnChanges(plant, state);
+
+                                if (worldChanges[i].witheredPlants[plantIndex].amount >= 1)
+                                    worldChanges[i].witheredPlants[plantIndex].amount--;
+                                
+                                else
+                                    worldChanges[i].witheredPlants.RemoveAt(plantIndex);
+                            }
+                        }
+                    }
+
+                    DataCollector.instance.SetWorldChanges(world, worldChanges[i]);
+
+                    break;
+                }
+            }
+        }
+    }
+
+    public void ClearWorldChanges(GameWorlds world)
+    {
+        for (int i = 0; i < worldChanges.Count; i++)
+        {
+            worldBanks[i].moneyBank += worldChanges[i].producedMoneyUntilPoint;
+            DataCollector.instance.SetWorldBankMoney(world, worldBanks[i].moneyBank);
+
+            worldChanges[i].witheredPlants.Clear();
+            worldChanges[i].tiredPlants.Clear();
+            worldChanges[i].producedMoneyUntilPoint = 0;
+        }
+    }
+
+    public void AddMoneyWorldChange(GameWorlds worlds, int amount)
+    {
+        for (int i = 0; i < worldChanges.Count; i++)
+        {
+            if (worldChanges[i].world == worlds && worldChanges[i].producedMoneyUntilPoint < 50000)
+            {
+                worldChanges[i].producedMoneyUntilPoint += amount;
+
+                if (worldChanges[i].producedMoneyUntilPoint > 50000) worldChanges[i].producedMoneyUntilPoint = 50000;
+
+                DataCollector.instance.SetWorldChanges(worlds, worldChanges[i]);
+                break;
+            }
+        }
+    }
+
+    public bool ChangesInWorld(GameWorlds world)
+    {
+        for (int i = 0; i < worldChanges.Count; i++)
+        {
+            if (worldChanges[i].world == world)
+                return (worldChanges[i].tiredPlants.Count > 0 || worldChanges[i].witheredPlants.Count > 0 || worldChanges[i].producedMoneyUntilPoint > 0);
+        }
+
+        return false;
+    }
+
+    public GameObject GetSprout()
+    {
+        return sprout;
+    }
+
     void AutoSetPrices()
     {
         for (int i = 0; i < allPlantAssets.Length; i++)
@@ -239,190 +429,6 @@ public class PlantsManager : MonoBehaviour
         }
 
         return Vector2.zero;
-    }
-
-    public float GetRandomMultiplier(Vector2 range)
-    {
-        return UnityEngine.Random.Range(range.x, range.y);
-    }
-
-    void Update()
-    {
-        TickSystemBehaviour();
-    }
-
-    void TickSystemBehaviour()
-    {
-        tickTimer += Time.deltaTime;
-
-        if (tickTimer >= TICK_TIMER_MAX)
-        {
-            tickTimer -= TICK_TIMER_MAX;
-            tick++;
-
-            if (OnTick != null) OnTick(this, new OnTickEventArgs{ tick = tick });
-
-            if (tick > maxTickThreshold)
-                tick = 0;
-        }
-    }
-
-    public int GetCurrentWorldMoney(GameWorlds world)
-    {
-        for (int i = 0; i < worldBanks.Length; i++)
-        {
-            if (worldBanks[i].world == world)
-            {
-                return worldBanks[i].moneyBank;
-            }
-        }
-
-        return -1;
-    }
-
-    public void SetWorldMoney(GameWorlds world, int value)
-    {
-        for (int i = 0; i < worldBanks.Length; i++)
-        {
-            if (worldBanks[i].world == world)
-            {
-                worldBanks[i].moneyBank = value;
-                break;
-            }
-        }
-    }
-
-    public void AddMoneyToWorldBank(GameWorlds world, int amount)
-    {
-        for (int i = 0; i < worldBanks.Length; i++)
-        {
-            if (worldBanks[i].world == world)
-            {   
-                if (worldBanks[i].moneyBank < 99999999)
-                {
-                    worldBanks[i].moneyBank += amount;
-                    UIManager.instance.SetBankMoneyText(GetCurrentWorldMoney(world));
-                }
-    
-                break;
-            }
-        }
-    }
-
-    public void AddPlantWorldChange(GameWorlds world, string plant, bool state, bool add)
-    {   
-        if (MusicManager.instance.GetCurrentMusic().world != world)
-        {
-            for (int i = 0; i < worldChanges.Count; i++)
-            {
-                if (worldChanges[i].world == world)
-                {
-                    if (state)
-                    {   
-                        if (add)
-                        {
-                            if (worldChanges[i].GetPlantOnChanges(plant, state) == -1)
-                                worldChanges[i].tiredPlants.Add(new PlantChangeProfile(plant, 1));
-
-                            else
-                            {
-                                int plantIndex = worldChanges[i].GetPlantOnChanges(plant, state);
-                                worldChanges[i].tiredPlants[plantIndex].amount++;
-                            }
-                        }
-
-                        else
-                        {
-                            if (worldChanges[i].GetPlantOnChanges(plant, state) != -1)
-                            {
-                                int plantIndex = worldChanges[i].GetPlantOnChanges(plant, state);
-
-                                if (worldChanges[i].tiredPlants[plantIndex].amount >= 1)
-                                    worldChanges[i].tiredPlants[plantIndex].amount--;
-                                
-                                else
-                                    worldChanges[i].tiredPlants.RemoveAt(plantIndex);
-                            }
-                        }
-                    }
-
-                    else
-                    {
-                        if (add)
-                        {
-                            if (worldChanges[i].GetPlantOnChanges(plant, state) == -1)
-                                worldChanges[i].witheredPlants.Add(new PlantChangeProfile(plant, 1));
-
-                            else
-                            {
-                                int plantIndex = worldChanges[i].GetPlantOnChanges(plant, state);
-                                worldChanges[i].witheredPlants[plantIndex].amount++;
-                            }
-                        }
-
-                        else
-                        {
-                            if (worldChanges[i].GetPlantOnChanges(plant, state) != -1)
-                            {
-                                int plantIndex = worldChanges[i].GetPlantOnChanges(plant, state);
-
-                                if (worldChanges[i].witheredPlants[plantIndex].amount >= 1)
-                                    worldChanges[i].witheredPlants[plantIndex].amount--;
-                                
-                                else
-                                    worldChanges[i].witheredPlants.RemoveAt(plantIndex);
-                            }
-                        }
-                    }
-
-                    DataCollector.instance.SetWorldChanges(world, worldChanges[i]);
-
-                    break;
-                }
-            }
-        }
-    }
-
-    public void ClearWorldChanges(GameWorlds world)
-    {
-        for (int i = 0; i < worldChanges.Count; i++)
-        {
-            worldBanks[i].moneyBank += worldChanges[i].producedMoneyUntilPoint;
-            DataCollector.instance.SetWorldBankMoney(world, worldBanks[i].moneyBank);
-
-            worldChanges[i].witheredPlants.Clear();
-            worldChanges[i].tiredPlants.Clear();
-            worldChanges[i].producedMoneyUntilPoint = 0;
-        }
-    }
-
-    public void AddMoneyWorldChange(GameWorlds worlds, int amount)
-    {
-        for (int i = 0; i < worldChanges.Count; i++)
-        {
-            if (worldChanges[i].world == worlds)
-            {
-                worldChanges[i].producedMoneyUntilPoint += amount;
-                DataCollector.instance.SetWorldChanges(worlds, worldChanges[i]);
-                break;
-            }
-        }
-    }
-
-    public bool ChangesInWorld(GameWorlds world)
-    {
-        for (int i = 0; i < worldChanges.Count; i++)
-        {
-            if (worldChanges[i].world == world)
-                return (worldChanges[i].tiredPlants.Count > 0 || worldChanges[i].witheredPlants.Count > 0 || worldChanges[i].producedMoneyUntilPoint > 0);
-        }
-
-        return false;
-    }
-
-    public GameObject GetSprout()
-    {
-        return sprout;
     }
 }
 

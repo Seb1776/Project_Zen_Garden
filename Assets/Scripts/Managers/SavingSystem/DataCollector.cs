@@ -143,7 +143,6 @@ public class DataCollector : MonoBehaviour
                 UIManager.instance.SetBankWorldPanel(MusicManager.instance.GetCurrentMusic().world);
                 UIManager.instance.SetBankWorldText(MusicManager.instance.GetFormatedWorldName(MusicManager.instance.GetCurrentMusic().world));
                 UIManager.instance.SetBankMoneyText(PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world));
-                Debug.Log(PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world));
             }
         }
 
@@ -154,6 +153,7 @@ public class DataCollector : MonoBehaviour
             GameManager.instance.FirstTimeTutorial();
             SeedDatabase.instance.SendGardenDataToCollector();
             MusicManager.instance.ChangeWithoutTransition(Resources.Load<MusicAsset>("Music/Datas/Tutorial"));
+            AddNewSeedPacket("Peashooter", "ModernDay", 1);
 
             if (mm != null)
             {
@@ -324,8 +324,7 @@ public class DataCollector : MonoBehaviour
 
     public void AddNewSeedPacket(string plant, string world, int amount)
     {   
-        if (plant != "Peashooter")
-            seeds.Add(new SeedDataContainer(plant, world, amount));
+        seeds.Add(new SeedDataContainer(plant, world, amount));
     }
 
     public void UpdateSeedPacket(string plant, int amount)

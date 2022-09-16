@@ -6,6 +6,8 @@ public class PinataAsset : ScriptableObject
     [NonReorderable] public PinataSize[] sizes;
     public Sprite pinataImage;
     public string pinataName;
+    public PlantAsset[] allPlantsFromPinata;
+    public bool setted;
     public GameObject pinataGameObject;
     [NonReorderable]
     public PlantsDividedQuality[] plantsThatCanAppear;
