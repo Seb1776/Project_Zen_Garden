@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -22,6 +23,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Text wywCoins;
     [SerializeField] private Animator unlockPanel;
     [SerializeField] private Text unlockPanelText;
+    public Slider musicSlider, sfxSlider;
+    public GameObject uiSections;
+    [SerializeField] private AudioMixer masterMxr;
     public Text currentBankMoney, worldBankText;
     [SerializeField] private GameObject tiredNone, witheredNone;
     [SerializeField] private Transform tiredPanel, witheredPanel;
@@ -519,6 +523,18 @@ public class UIManager : MonoBehaviour
 
             SetPinataToSmall();
         }
+    }
+
+    public void SetMusic(float volume)
+    {
+        masterMxr.SetFloat("MusVolume", volume / 2f);
+        DataCollector.instance.SetMusic(volume);
+    }
+
+    public void SetSFX(float volume)
+    {
+        masterMxr.SetFloat("SFXVolume", volume / 2f);
+        DataCollector.instance.SetSFX(volume);
     }
 
     public void RightPinatasButton(bool type)

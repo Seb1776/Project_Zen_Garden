@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 using UnityEngine.Serialization;
 
 public class MainMenu : MonoBehaviour
@@ -12,11 +13,14 @@ public class MainMenu : MonoBehaviour
     public Animator menuAnim;
     public Animator transitionBall;
     public AudioSource music;
+    public AudioMixer masterMxr;
     public AudioClip introLaugh;
     public SerializableData fileA = null, fileB = null, fileC = null;
     public InputField gardenNameInput;
     public string newSetGardenName;
     public string loadedLetter;
+    public Slider musSlider, sfxSlider;
+    public float musVolume, sfxVolume;
     public FileUI fileAUI, fileBUI, fileCUI;
     public GameObject[] hands;
 
@@ -27,6 +31,7 @@ public class MainMenu : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
         DontDestroyOnLoad(transitionBall.gameObject);
         LoadFiles();
+        LoadSettings();
     }
 
     void LoadFiles()
@@ -73,6 +78,55 @@ public class MainMenu : MonoBehaviour
     {
         loadedLetter = gameFile;
         StartCoroutine(PreLoadGame());
+    }
+
+    public void SetMusic(float volume)
+    {
+        masterMxr.SetFloat("MusVolume", volume / 2f);
+        musVolume = volume / 2f;
+    }
+
+    public void SetSFX(float volume)
+    {
+        masterMxr.SetFloat("SFXVolume", volume / 2f);
+        sfxVolume = volume / 2f;
+    }
+
+    IEnumerator AutoSaveSettings()
+    {
+        yield return new WaitForSeconds(.15f);
+        SaveSettings();
+    }
+
+    public void SaveSettings()
+    {
+        GameSettings settingsData = new GameSettings(musVolume, sfxVolume);
+
+        using (StreamWriter stream = new StreamWriter(Application.persistentDataPath +  "/ZGSettings.json"))
+        {
+            string json = JsonUtility.ToJson(settingsData);
+            stream.Write(json);
+        }
+    }
+
+    public void LoadSettings()
+    {
+        if (File.Exists(Application.persistentDataPath + "/ZGSettings.json"))
+        {
+            using (StreamReader reader = new StreamReader(Application.persistentDataPath + "/ZGSettings.json"))
+            {
+                string json = reader.ReadToEnd();
+                GameSettings settings = JsonUtility.FromJson<GameSettings>(json);
+
+                SetMusic(settings.musVolume); musVolume = 
+                   musSlider.value = settings.musVolume;
+
+                SetSFX(settings.sfxVolume); sfxVolume = 
+                    sfxSlider.value = settings.sfxVolume;
+            }
+        }
+
+        StartCoroutine(AutoSaveSettings());
     }
 
     public void SetNewLoadedLetter(string letter)

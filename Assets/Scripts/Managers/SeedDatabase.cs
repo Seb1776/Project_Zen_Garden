@@ -285,7 +285,7 @@ public class SeedDatabase : MonoBehaviour
 
         if (pa != null)
         {
-            SeedPacket sp = GetPlantUISeedPacket(pa.name);
+            SeedPacket sp = GetPlantUISeedPacket(pa.name.ToLower());
             
             if (sp != null)
             {
@@ -303,7 +303,7 @@ public class SeedDatabase : MonoBehaviour
     SeedPacket GetPlantUISeedPacket(string plantName)
     {
         for (int i = 0; i < allSeeds.Length; i++)
-            if (allSeeds[i].gameObject.name == plantName)
+            if (allSeeds[i].gameObject.name.ToLower() == plantName.ToLower())
                 return allSeeds[i];
 
         return null;

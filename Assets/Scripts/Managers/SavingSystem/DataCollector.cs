@@ -5,6 +5,17 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
+public class GameSettings
+{
+    public float musVolume, sfxVolume;
+
+    public GameSettings(float musVolume, float sfxVolume)
+    {
+        this.musVolume = musVolume;
+        this.sfxVolume = sfxVolume;
+    }
+}
+
 public class SerializableData
 {
     public List<GardenTable> savedTables = new List<GardenTable>();
@@ -85,7 +96,7 @@ public class DataCollector : MonoBehaviour
     public int playerWaters, playerComposts, playerFertilizer, playerPhonographs;
     public string gardenName, playerLastWorld;
     public bool isOnTutorial;
-    public float spentTime;
+    public float spentTime, musVolume, sfxVolume;
 
     void Awake()
     {
@@ -114,6 +125,14 @@ public class DataCollector : MonoBehaviour
             string json = JsonUtility.ToJson(zenData);
             stream.Write(json);
         }
+
+        GameSettings settingsData = new GameSettings(musVolume, sfxVolume);
+
+        using (StreamWriter stream = new StreamWriter(Application.persistentDataPath +  "/ZGSettings.json"))
+        {
+            string json = JsonUtility.ToJson(settingsData);
+            stream.Write(json);
+        }
     }
 
     public void LoadData()
@@ -122,6 +141,21 @@ public class DataCollector : MonoBehaviour
 
         if (GameObject.FindGameObjectWithTag("MainMenu") != null)
             mm = GameObject.FindGameObjectWithTag("MainMenu").GetComponent<MainMenu>();
+
+        if (File.Exists(Application.persistentDataPath + "/ZGSettings.json"))
+        {
+            using (StreamReader reader = new StreamReader(Application.persistentDataPath + "/ZGSettings.json"))
+            {
+                string json = reader.ReadToEnd();
+                GameSettings settings = JsonUtility.FromJson<GameSettings>(json);
+
+                UIManager.instance.SetMusic(settings.musVolume); musVolume = 
+                   UIManager.instance.musicSlider.value = settings.musVolume;
+
+                UIManager.instance.SetSFX(settings.sfxVolume); sfxVolume = 
+                    UIManager.instance.sfxSlider.value = settings.sfxVolume;
+            }
+        }
 
         if (File.Exists(Application.persistentDataPath + "/ZenGardenVR_" + gameFileLetter + ".json"))
         {
@@ -136,6 +170,7 @@ public class DataCollector : MonoBehaviour
                 GameManager.instance.spentTime = loadedData.spentTime;
                 MusicAsset ma = Resources.Load<MusicAsset>("Music/Datas/" + loadedData.playerLastWorld);
                 SetTutorialState(loadedData.isOnTutorial);
+                UIManager.instance.uiSections.SetActive(loadedData.isOnTutorial);
 
                 RecreateData(loadedData);
                 MusicManager.instance.ChangeWithoutTransition(ma);
@@ -203,6 +238,16 @@ public class DataCollector : MonoBehaviour
     public void AddUnlockedWorld(GameWorlds worlds)
     {
         unlockedWorlds.Add(worlds);
+    }
+
+    public void SetMusic(float mus)
+    {
+        musVolume = mus / 2f;
+    }
+
+    public void SetSFX(float sfx)
+    {
+        sfxVolume = sfx / 2f;
     }
 
     void RecreateData(SerializableData sd)

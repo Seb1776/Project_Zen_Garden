@@ -480,8 +480,8 @@ public class Player : MonoBehaviour
 
     public void TogglePlayerHands(bool toggle)
     {
-        leftHand.handInteractor.gameObject.SetActive(toggle);
-        rightHand.handInteractor.gameObject.SetActive(toggle);
+        leftHand.handInteractor.gameObject.SetActive(false);
+        rightHand.handInteractor.gameObject.GetComponent<Collider>().enabled = toggle;
     }
 
     void TeleportEnabler(InputAction.CallbackContext ctx)
