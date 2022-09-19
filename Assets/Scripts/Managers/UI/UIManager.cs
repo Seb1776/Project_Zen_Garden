@@ -32,12 +32,13 @@ public class UIManager : MonoBehaviour
     private Pinata creaPinata;
     [SerializeField] private string activePlants;
     [Header("Almanac UI")]
-    [SerializeField] private Text plantNameT;
+    [SerializeField] private Text plantNameT, pendantPlants;
     [SerializeField] private Text plantProdTimeT, plantProdCoinsT, plantEnergyT, plantLifeTimeT, plantFlowerPotsT, plantDescT, plantQualityT,
         plantLevelButtonT;
     [SerializeField] private GameObject plantLevelButton;
     [SerializeField] private Image plantBackGround;
     [SerializeField] private Transform plantSpawn;
+    [SerializeField] private GameObject newPlantWarning;
     [Header("Pinatas UI")]
     public Transform pinataRewardsSpawn;
     [SerializeField] private GameObject pinataMenu;
@@ -54,8 +55,10 @@ public class UIManager : MonoBehaviour
     [SerializeField][NonReorderable] private PinatasUIQuality[] pinatasUI;
     [SerializeField] private List<RewardedPlants> rewComm, rewRar, rewEpc, rewLeg = new List<RewardedPlants>();
     private int currentPinatasIndex, currentSizesIndex;
+    private bool newPlantDiscovered;
     public Text pinataRewardText;
     private Plant spawnedUIPlant;
+    private int pendantUnlockedPlants;
     private PlantAsset currentPa;
     private List<GameObject> wywGeneratedSeeds = new List<GameObject>();
     private int currentPlantLevelIndexAlc;
@@ -233,6 +236,19 @@ public class UIManager : MonoBehaviour
                     SoundEffectsManager.instance.PlaySoundEffectNC("cantselect");
                 break;
         }
+    }
+
+    public void ToggleAlmanacWarning(bool toggle)
+    {
+        pendantPlants.text = pendantUnlockedPlants.ToString();
+        newPlantWarning.SetActive(toggle);
+
+        if (!toggle) pendantUnlockedPlants = 0;
+    }
+
+    public void AddUnlockedPendant()
+    {
+        pendantUnlockedPlants++;
     }
 
     public void DestroyGeneratedWYWPlants()
@@ -477,7 +493,14 @@ public class UIManager : MonoBehaviour
             pinatasUI[i].seedsAmounts.text = "Seeds - " + pinataQualitiesChances[currentSizesIndex].chances[i].seedsRange.x;
         }
 
-        CheckAvailabilityForPinatas(allPinatas[currentPinatasIndex]);
+        
+    }
+
+    public void PinatasAvlCheck()
+    {
+        for (int i = 0; i < allPinatas.Length; i++)
+            CheckAvailabilityForPinatas(allPinatas[i]);
+        
     }
 
     public void LeftPinatasButton(bool type)

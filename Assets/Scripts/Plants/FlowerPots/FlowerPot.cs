@@ -261,6 +261,7 @@ public class FlowerPot : MonoBehaviour
 
     public void PlantPlant(Plant p)
     {
+        Debug.Log(p);
         StartCoroutine(SoundEffectsManager.instance.PlaySoundEffect("plantplant"));
         GameObject _s = Instantiate(plantsManager.GetSprout(), plantPlantingPosition.position, Quaternion.identity);
         _s.transform.position = plantPlantingPosition.position;

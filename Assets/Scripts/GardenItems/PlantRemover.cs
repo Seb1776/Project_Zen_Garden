@@ -130,11 +130,17 @@ public class PlantRemover : GardenItem
         {
             detectedFlowerPot.selectedByShovel = false;
 
-            if (!detectedFlowerPot.GetPlantedPlant().isDeco)
-                detectedFlowerPot.outline.ChangeOutlineColor(Color.gray, false);
-            
+            if (detectedFlowerPot.GetPlantedPlant() != null)
+            {
+                if (!detectedFlowerPot.GetPlantedPlant().isDeco)
+                    detectedFlowerPot.outline.ChangeOutlineColor(Color.gray, false);
+                
+                else
+                    detectedFlowerPot.outline.ChangeOutlineColor(new Color32(250, 114, 2, 255), true);
+            }
+
             else
-                detectedFlowerPot.outline.ChangeOutlineColor(new Color32(250, 114, 2, 255), true);
+                detectedFlowerPot.outline.ChangeOutlineColor(Color.gray, false);
 
             detectedFlowerPot = null;
             Player.instance.RecieveToDeleteFlowerPot(null);

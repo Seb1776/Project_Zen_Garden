@@ -215,6 +215,9 @@ public class SeedDatabase : MonoBehaviour
         if (!loading)
         {
             DataCollector.instance.AddNewSeedPacket(plant.name, plant.appearsIn.ToString(), 1);
+            UIManager.instance.AddUnlockedPendant();
+            UIManager.instance.ToggleAlmanacWarning(true);
+            UIManager.instance.PinatasAvlCheck();
         }
 
         if (GameManager.instance.onTutorial && GetTotalUnlockedPlants() >= 5)
@@ -228,7 +231,7 @@ public class SeedDatabase : MonoBehaviour
             }
         }
 
-        if (!GameManager.instance.unlockedModernDay && GetTotalUnlockedPlants() >= 177)
+        if (!GameManager.instance.unlockedModernDay && GetTotalUnlockedPlants() >= 178)
         {   
             if (!loading)
             {
@@ -272,7 +275,7 @@ public class SeedDatabase : MonoBehaviour
     public void UsePlant(PlantAsset plant)
     {
         if (PlayerOwnsPlant(plant))
-        {   
+        {
             UnlockedSeeds plantTo = GetPlantInList(plant);
             plantTo.amount--;
             plantTo.uiPacket.UpdatePlantAmount();
@@ -289,7 +292,7 @@ public class SeedDatabase : MonoBehaviour
             
             if (sp != null)
             {
-                UnlockPlant(pa, sp, true);
+                if (pa.plantName != "Peashooter") UnlockPlant(pa, sp, true);
                 UnlockedSeeds us = GetPlantInList(pa);
                 us.uiPacket.alamancEquivalent.SetActive(true);
                 us.amount = sdc.plantAmount;

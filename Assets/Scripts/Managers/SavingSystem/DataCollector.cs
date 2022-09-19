@@ -170,11 +170,11 @@ public class DataCollector : MonoBehaviour
                 GameManager.instance.spentTime = loadedData.spentTime;
                 MusicAsset ma = Resources.Load<MusicAsset>("Music/Datas/" + loadedData.playerLastWorld);
                 SetTutorialState(loadedData.isOnTutorial);
-                UIManager.instance.uiSections.SetActive(loadedData.isOnTutorial);
 
                 RecreateData(loadedData);
                 MusicManager.instance.ChangeWithoutTransition(ma);
 
+                UIManager.instance.uiSections.SetActive(true);
                 UIManager.instance.SetBankWorldPanel(MusicManager.instance.GetCurrentMusic().world);
                 UIManager.instance.SetBankWorldText(MusicManager.instance.GetFormatedWorldName(MusicManager.instance.GetCurrentMusic().world));
                 UIManager.instance.SetBankMoneyText(PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world));
@@ -188,7 +188,6 @@ public class DataCollector : MonoBehaviour
             GameManager.instance.FirstTimeTutorial();
             SeedDatabase.instance.SendGardenDataToCollector();
             MusicManager.instance.ChangeWithoutTransition(Resources.Load<MusicAsset>("Music/Datas/Tutorial"));
-            AddNewSeedPacket("Peashooter", "ModernDay", 1);
 
             if (mm != null)
             {
@@ -199,6 +198,7 @@ public class DataCollector : MonoBehaviour
             UIManager.instance.SetBankWorldPanel(MusicManager.instance.GetCurrentMusic().world);
             UIManager.instance.SetBankWorldText(MusicManager.instance.GetFormatedWorldName(MusicManager.instance.GetCurrentMusic().world));
             UIManager.instance.SetBankMoneyText(PlantsManager.instance.GetCurrentWorldMoney(MusicManager.instance.GetCurrentMusic().world));
+            UIManager.instance.uiSections.SetActive(false);
 
             foreach (GardenItem gi in SeedDatabase.instance.waterUI.items)
                 gi.CheckForUsability();
@@ -218,9 +218,10 @@ public class DataCollector : MonoBehaviour
         if (mm != null)
         {
             mm.transitionBall.SetTrigger("detransition");
-            GameManager.instance.startCounting = true;
             StartCoroutine(WaitToDeleteMain(7f, mm.gameObject, mm.transitionBall.gameObject));
         }
+
+        GameManager.instance.startCounting = true;
     }
 
     public void SetWorldBankMoney(GameWorlds world, int amount)
@@ -270,8 +271,7 @@ public class DataCollector : MonoBehaviour
 
         for (int i = 0; i < seeds.Count; i++)
         {
-            if (seeds[i].plantAssetName != "Peashooter")
-                SeedDatabase.instance.SetPlantAssetFromData(seeds[i]);
+            SeedDatabase.instance.SetPlantAssetFromData(seeds[i]);
         }
 
         for (int i = 0; i < flowerPotsDatas.Count; i++)
@@ -339,6 +339,7 @@ public class DataCollector : MonoBehaviour
         Player.instance.SetMoneyAmount(sd.playerCoins);
         playerLastWorld = sd.playerLastWorld;
         gardenName = sd.gardenName;
+        UIManager.instance.PinatasAvlCheck();
 
         StartCoroutine(AutoSave());
     }

@@ -494,16 +494,18 @@ public class Plant : MonoBehaviour
 
     void OnTriggerStay(Collider c)
     {
-        if (c.transform.CompareTag("FlowerPot"))
+        if (c.transform.CompareTag("FlowerPot") && Player.instance.holdingPlant == this)
         {
             if (c.GetComponent<FlowerPot>() != null && c.isTrigger)
+            {
                 player.HoveringAFlowerPot(c.GetComponent<FlowerPot>());
+            }
         }
     }
 
     void OnTriggerExit(Collider c)
     {
-        if (c.transform.CompareTag("FlowerPot"))
+        if (c.transform.CompareTag("FlowerPot") && Player.instance.holdingPlant == this)
         {
             if (c.GetComponent<FlowerPot>() != null && c.isTrigger)
                 player.HoveringAFlowerPot(null);

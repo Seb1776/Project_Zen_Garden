@@ -46,16 +46,25 @@ public class Player : MonoBehaviour
         leftHand.move = xrDirect.XRILeftHandInteraction.ButtonA;
         leftHand.move.performed += TeleportEnabler;
         leftHand.move.canceled += TeleportDisabler;
+        leftHand.move.performed += SetLHandAnimIndex;
+        leftHand.move.canceled += DeSetLHandAnimIndex;
 
         leftHand.plantAction.Enable();
         leftHand.plantAction = xrDirect.XRILeftHandInteraction.Activate;
         leftHand.plantAction.performed += PlantSelectedPlant;
         leftHand.plantAction.performed += SetFlowerPot;
+        leftHand.plantAction.performed += SetLHandAnimThumb;
+        leftHand.plantAction.canceled += DeSetLHandAnimThumb;
 
         leftHand.removePlant.Enable();
         leftHand.removePlant = xrDirect.XRILeftHandInteraction.ButtonB;
         leftHand.removePlant.performed += GetRidOfSelectedPlant;
         leftHand.removePlant.performed += GetRidOfSelectedFlowerPot;
+
+        leftHand.grip.Enable();
+        leftHand.grip = xrDirect.XRILeftHandInteraction.Select;
+        leftHand.grip.performed += SetLHandAnimIndex;
+        leftHand.grip.canceled += DeSetLHandAnimIndex;
 
         //Right Hand
         rightHand.grabbedItemEffect.Enable();
@@ -76,6 +85,51 @@ public class Player : MonoBehaviour
         rightHand.upgradePlant.Enable();
         rightHand.upgradePlant = xrDirect.XRIRightHandInteraction.ButtonB;
         rightHand.upgradePlant.performed += TriggerUpgradeActionMenu;
+
+        rightHand.grip.Enable();
+        rightHand.grip = xrDirect.XRILeftHandInteraction.Select;
+        rightHand.grip.performed += SetRHandAnimIndex;
+        rightHand.grip.canceled += DeSetRHandAnimIndex;
+    }
+
+    void SetLHandAnimIndex(InputAction.CallbackContext ctx)
+    {
+        leftHand.handAnimator.SetFloat("Finger", 1f);
+    }
+
+    void DeSetLHandAnimIndex(InputAction.CallbackContext ctx)
+    {
+        leftHand.handAnimator.SetFloat("Finger", 0f);
+    }
+
+    void SetLHandAnimThumb(InputAction.CallbackContext ctx)
+    {
+        leftHand.handAnimator.SetFloat("Fist", 1f);
+    }
+
+    void DeSetLHandAnimThumb(InputAction.CallbackContext ctx)
+    {
+        leftHand.handAnimator.SetFloat("Fist", 0f);
+    }
+
+    void SetRHandAnimIndex(InputAction.CallbackContext ctx)
+    {
+        rightHand.handAnimator.SetFloat("Finger", 1f);
+    }
+
+    void DeSetRHandAnimIndex(InputAction.CallbackContext ctx)
+    {
+        rightHand.handAnimator.SetFloat("Finger", 0f);
+    }
+
+    void SetRHandAnimThumb(InputAction.CallbackContext ctx)
+    {
+        rightHand.handAnimator.SetFloat("Fist", 1f);
+    }
+
+    void DeSetRHandAnimThumb(InputAction.CallbackContext ctx)
+    {
+        rightHand.handAnimator.SetFloat("Fist", 0f);
     }
 
     public void GrabPlantedPlant(InputAction.CallbackContext ctx)
@@ -480,7 +534,7 @@ public class Player : MonoBehaviour
 
     public void TogglePlayerHands(bool toggle)
     {
-        leftHand.handInteractor.gameObject.SetActive(false);
+        leftHand.handInteractor.gameObject.SetActive(toggle);
         rightHand.handInteractor.gameObject.GetComponent<Collider>().enabled = toggle;
     }
 
@@ -511,9 +565,11 @@ public class Player : MonoBehaviour
 public class VRHandsLeft
 {
     public XRRayInteractor handInteractor;
+    public Animator handAnimator;
     public InputAction move;
     public InputAction plantAction;
     public InputAction removePlant;
+    public InputAction grip;
     public bool canUse = true;
 }
 
@@ -521,7 +577,9 @@ public class VRHandsLeft
 public class VRHandsRight
 {
     public XRDirectInteractor handInteractor;
+    public Animator handAnimator;
     public InputAction grabbedItemEffect;
     public InputAction sellPlant;
     public InputAction upgradePlant;
+    public InputAction grip;
 }

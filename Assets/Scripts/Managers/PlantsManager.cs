@@ -42,17 +42,9 @@ public class PlantsManager : MonoBehaviour
     public QualityStandards common, rare, epic, legend, botanic;
     public List<WorldChanges> worldChanges = new List<WorldChanges>();
 
-    [Header ("Debug")]
-    [SerializeField] private int holderIdx;
-    [SerializeField] private Plant plantToPut;
-    [SerializeField] private Plant generatedPlant;
-    [SerializeField] private FlowerPot flowerPotToPut;
-    [SerializeField] private FlowerPot secondFp; 
-    [SerializeField] private FlowerPot generatedPot;
-    [SerializeField] private GameWorlds debugWorld;
     private const float TICK_TIMER_MAX = 1f;
     [SerializeField] private int maxTickThreshold;
-    [SerializeField] private int tick;
+    private int tick;
     private float tickTimer;
 
     void Awake()
