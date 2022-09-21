@@ -63,6 +63,7 @@ public class Pinata : MonoBehaviour
         {
             for (int j = 0; j < pinataRewards[i].Count; j++)
             {
+                Debug.Log(pinataRewards[i][j].plant.name);
                 GameObject seedP = Instantiate(Resources.Load<GameObject>("Prefabs/UI/" + pinataRewards[i][j].plant.name), transform.position, Quaternion.identity, UIManager.instance.pinataGridPanel.transform);
                 seedPacketsAnimator.Add(seedP.GetComponent<Animator>());
                 createdRewards.Add(seedP);
@@ -107,24 +108,6 @@ public class Pinata : MonoBehaviour
         SoundEffectsManager.instance.PlaySoundEffectNC("prize");
         UIManager.instance.pinataRewardText.text = "You got " + totalGivenSeeds + " seeds!";
         UIManager.instance.ActivatePinataContinueButton();
-
-        /*for (int i = 0; i < showPlants.Count; i++)
-            totalGivenSeeds += showPlants[i].gotSeeds;
-
-        for (int i = 0; i < showPlants.Count; i++)
-        {
-            SoundEffectsManager.instance.PlaySoundEffectNC("selectplant");
-            GameObject seedPacket = Resources.Load<GameObject>("Prefabs/UI/" + showPlants[i].plant.name);
-            GameObject prp = Instantiate(seedPacket, seedPacket.transform.position, Quaternion.identity, UIManager.instance.pinataGridPanel);
-            createdRewards.Add(prp);
-            prp.transform.GetChild(3).GetComponent<Text>().text = "x " + showPlants[i].gotSeeds.ToString();
-            prp.transform.localRotation = Quaternion.Euler(0f, 0f, 0f);
-            prp.transform.localPosition = new Vector3(prp.transform.position.x, prp.transform.position.y, 0f);
-            SeedDatabase.instance.BuyPlant(showPlants[i].plant, showPlants[i].gotSeeds);
-            yield return new WaitForSeconds(SoundEffectsManager.instance.GetSoundEffect("selectplant").length + .5f);
-        }
-
-        */
     }
 
     public void SetPinataSize(string size)
@@ -145,8 +128,6 @@ public class Pinata : MonoBehaviour
                 break;
             }
         }
-
-        //SetRewardPlants();
     }
 
     public void Squish()

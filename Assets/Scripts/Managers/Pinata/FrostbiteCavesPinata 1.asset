@@ -1,0 +1,53 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 055023d53e6f58c4e845685dc90ce865, type: 3}
+  m_Name: FrostbiteCavesPinata 1
+  m_EditorClassIdentifier: 
+  sizes:
+  - pinataPrice: 4101
+    pinataSize: 0
+    squishesRange: {x: 3, y: 5}
+  - pinataPrice: 6514
+    pinataSize: 1
+    squishesRange: {x: 5, y: 8}
+  - pinataPrice: 9384
+    pinataSize: 2
+    squishesRange: {x: 8, y: 10}
+  - pinataPrice: 14076
+    pinataSize: 3
+    squishesRange: {x: 11, y: 13}
+  pinataImage: {fileID: 2517310404103703493, guid: c06e8d560c8639b4ebea08043548e7bc, type: 3}
+  pinataName: Ancient Egypt Pinata
+  allPlantsFromPinata: []
+  setted: 0
+  pinataGameObject: {fileID: 7636636756824789020, guid: a5a9b79a226004b47a0f091cb09700c9, type: 3}
+  plantsThatCanAppear:
+  - quality: 0
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: a41aed3fb1b3ea74f8dc04554058da7f, type: 2}
+    - {fileID: 11400000, guid: f391a1d048a7df2489c1bf0e22a40b8d, type: 2}
+  - quality: 1
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 14dd33bec8e2e6941baf1531e71b8d4d, type: 2}
+    - {fileID: 11400000, guid: 7fa2e01e584bf4344a121c0d2bf7e8f5, type: 2}
+    - {fileID: 11400000, guid: 79f20522a93e1384dab6f1e16d9fec97, type: 2}
+    - {fileID: 11400000, guid: aa3614caf75f70e469e63714cb3bab1d, type: 2}
+  - quality: 2
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: e5b7918aea4488448a00d80d6c5ef1d8, type: 2}
+    - {fileID: 11400000, guid: 80b1756e1dd62b142b292426fd4f8344, type: 2}
+    - {fileID: 11400000, guid: 417b2f50617572640a88efc0c9e0cb59, type: 2}
+  - quality: 3
+    plantsOfThatQuality:
+    - {fileID: 11400000, guid: 5b326a7a80f470240882da8cbdc30d0c, type: 2}
+    - {fileID: 11400000, guid: 388a05edbefeb8c4892610226b50edf9, type: 2}
+    - {fileID: 11400000, guid: be97688bd16500f4aa0e800399faa1d1, type: 2}

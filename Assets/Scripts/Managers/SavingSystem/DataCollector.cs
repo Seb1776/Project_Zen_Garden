@@ -163,6 +163,7 @@ public class DataCollector : MonoBehaviour
             {
                 string json = reader.ReadToEnd();
                 SerializableData loadedData = JsonUtility.FromJson<SerializableData>(json);
+
                 worldTables = loadedData.savedTables;
                 seeds = loadedData.savedSeeds;
                 flowerPotsDatas = loadedData.flowerPotsDatas;
@@ -170,7 +171,7 @@ public class DataCollector : MonoBehaviour
                 GameManager.instance.spentTime = loadedData.spentTime;
                 MusicAsset ma = Resources.Load<MusicAsset>("Music/Datas/" + loadedData.playerLastWorld);
                 SetTutorialState(loadedData.isOnTutorial);
-
+                
                 RecreateData(loadedData);
                 MusicManager.instance.ChangeWithoutTransition(ma);
 
@@ -608,8 +609,10 @@ public class GardenTable
             if (DataCollector.instance.worldHolders[i].world == correspondingWorld)
             {
                 for (int j = 0; j < DataCollector.instance.worldHolders[i].holders.Length; j++)
+                {
                     if (DataCollector.instance.worldHolders[i].holders[j].holderIdx == idx)
                         return DataCollector.instance.worldHolders[i].holders[j];
+                }
             }
         }
 
