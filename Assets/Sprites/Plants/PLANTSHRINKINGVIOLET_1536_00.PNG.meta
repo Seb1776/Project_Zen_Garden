@@ -87,7 +87,7 @@ TextureImporter:
       213: -6995698779322444044
     second: PLANTSHRINKINGVIOLET_1536_00_27
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -104,10 +104,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -146,6 +148,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -157,6 +161,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -169,6 +174,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -181,6 +187,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -784,9 +791,37 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      PLANTSHRINKINGVIOLET_1536_00_0: 453433261783793471
+      PLANTSHRINKINGVIOLET_1536_00_1: 8502984067480288841
+      PLANTSHRINKINGVIOLET_1536_00_10: 7100323963561820848
+      PLANTSHRINKINGVIOLET_1536_00_11: -2606623465798206458
+      PLANTSHRINKINGVIOLET_1536_00_12: 7991889659380551163
+      PLANTSHRINKINGVIOLET_1536_00_13: -8114547088729069799
+      PLANTSHRINKINGVIOLET_1536_00_14: 6323394559451709069
+      PLANTSHRINKINGVIOLET_1536_00_15: -1653868125219199354
+      PLANTSHRINKINGVIOLET_1536_00_16: -6882913697200251360
+      PLANTSHRINKINGVIOLET_1536_00_17: 2340380439108059785
+      PLANTSHRINKINGVIOLET_1536_00_18: -2998843975337329770
+      PLANTSHRINKINGVIOLET_1536_00_19: -8976836742968956446
+      PLANTSHRINKINGVIOLET_1536_00_2: -8751757381910735423
+      PLANTSHRINKINGVIOLET_1536_00_20: 3230301701104425586
+      PLANTSHRINKINGVIOLET_1536_00_21: 2951188674176501946
+      PLANTSHRINKINGVIOLET_1536_00_22: 1598239529053665561
+      PLANTSHRINKINGVIOLET_1536_00_23: -4480653589201755249
+      PLANTSHRINKINGVIOLET_1536_00_24: -5240629656523956741
+      PLANTSHRINKINGVIOLET_1536_00_25: -1790294169725340575
+      PLANTSHRINKINGVIOLET_1536_00_26: -5259253445078303277
+      PLANTSHRINKINGVIOLET_1536_00_27: -6995698779322444044
+      PLANTSHRINKINGVIOLET_1536_00_3: -3993072772022709647
+      PLANTSHRINKINGVIOLET_1536_00_4: -454527120665854862
+      PLANTSHRINKINGVIOLET_1536_00_5: -3436864359281052142
+      PLANTSHRINKINGVIOLET_1536_00_6: 2523419468097842081
+      PLANTSHRINKINGVIOLET_1536_00_7: -8753466065401339065
+      PLANTSHRINKINGVIOLET_1536_00_8: 8568263081834691345
+      PLANTSHRINKINGVIOLET_1536_00_9: 3043529661226942875
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 

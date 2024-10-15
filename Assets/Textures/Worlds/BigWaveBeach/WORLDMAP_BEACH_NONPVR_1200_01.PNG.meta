@@ -54,7 +54,7 @@ TextureImporter:
       213: -5306770061617158508
     second: WORLDMAP_BEACH_NONPVR_1200_01_16
   externalObjects: {}
-  serializedVersion: 11
+  serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
@@ -71,10 +71,12 @@ TextureImporter:
     externalNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
   isReadable: 0
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMipmapLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -113,6 +115,8 @@ TextureImporter:
   textureFormatSet: 0
   ignorePngGamma: 0
   applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 1
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
@@ -124,6 +128,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -136,6 +141,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   - serializedVersion: 3
@@ -148,6 +154,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
@@ -520,9 +527,26 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-  spritePackingTag: 
+    nameFileIdTable:
+      WORLDMAP_BEACH_NONPVR_1200_01_0: 5892143616667277063
+      WORLDMAP_BEACH_NONPVR_1200_01_1: -8791632966942152482
+      WORLDMAP_BEACH_NONPVR_1200_01_10: 4936542408594968926
+      WORLDMAP_BEACH_NONPVR_1200_01_11: -2241702017977259969
+      WORLDMAP_BEACH_NONPVR_1200_01_12: -6745865095701218065
+      WORLDMAP_BEACH_NONPVR_1200_01_13: -814031016121518484
+      WORLDMAP_BEACH_NONPVR_1200_01_14: -191171591570065843
+      WORLDMAP_BEACH_NONPVR_1200_01_15: -4653058759878848593
+      WORLDMAP_BEACH_NONPVR_1200_01_16: -5306770061617158508
+      WORLDMAP_BEACH_NONPVR_1200_01_2: -1591215121256640916
+      WORLDMAP_BEACH_NONPVR_1200_01_3: -4699734132483274991
+      WORLDMAP_BEACH_NONPVR_1200_01_4: 6099982728441026606
+      WORLDMAP_BEACH_NONPVR_1200_01_5: 8873909120481762132
+      WORLDMAP_BEACH_NONPVR_1200_01_6: -4076946791839813941
+      WORLDMAP_BEACH_NONPVR_1200_01_7: -8454419712447163008
+      WORLDMAP_BEACH_NONPVR_1200_01_8: 3902203911407322847
+      WORLDMAP_BEACH_NONPVR_1200_01_9: 6048936530867714259
+  mipmapLimitGroupName: 
   pSDRemoveMatte: 0
-  pSDShowRemoveMatteOption: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
